@@ -10,19 +10,20 @@
 <html>
 
 <!-- Head section -->
+
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>OSSD Camps</title>
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-	
+
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300&display=swap" rel="stylesheet">
 
 	<!-- Bootstrap 4.5.2 -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+		integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 	<!-- Bootstrap 3.3.7 -->
 	<link rel="stylesheet"
 		href="<?php  echo base_url('assets/bower_components/bootstrap/dist/css/bootstrap.min.css'); ?>">
@@ -81,41 +82,42 @@
 		}
 
 		.login-box {
-			background-color: rgba(84, 91, 84, 0.5) !important; 
+			background-color: rgba(84, 91, 84, 0.5) !important;
 			padding: 20px !important;
 			width: 370px !important;
-			margin: 12% auto !important;
+			margin: 10% auto !important;
 		}
 
 		.login-box-msg {
 			padding: 0 20px 0px 20px !important;
 		}
 
-		
+
 		.login-logo {
 			margin-bottom: 10px !important;
 		}
 
 		body {
-			background-image: url(<?php echo base_url('assets/dist/img/background-ossd7-2.jpg'); ?>) !important;
-    		background-size: cover !important;
+			background-image: url(<?php echo base_url('assets/dist/img/background-ossd7-2.jpg');
+			?>) !important;
+			background-size: cover !important;
 		}
 
 		* {
 			font-family: 'Bai Jamjuree', sans-serif !important;
 		}
-
 	</style>
 </head>
 <!-- End head section -->
 
 <!-- Body section-->
+
 <body class="hold-transition login-page" style="">
 	<div class="login-box">
-		
+
 		<div class="text-center">
-			<img class="text-center img-circle" style="width: 100px;"
-			src="<?php echo base_url('assets/dist/img/logo.svg'); ?>" alt="SCM Logo">
+			<img class="text-center img-circle" style="width: 150px;"
+				src="<?php echo base_url('assets/dist/img/gamification.png'); ?>" alt="SCM Logo">
 		</div>
 
 		<div class="login-logo" style=" font-size: 36px; color: white;">
@@ -124,35 +126,38 @@
 		<!-- /.login-logo -->
 		<div class="login-box-body">
 
-			<h2 class="login-box-msg" style="font-size: large; font-weight: bold;">ลงชื่อเข้าสู่ระบบ</h2>
+			<h2 class="login-box-msg" style="font-size: large; font-weight: bold;">ลงชื่อเข้าสู่ระบบ </h2>
 
 			<!-- Form login -->
 			<form class="form-signin" method="post" id="loginForm" action="<?= site_url('login'); ?>">
-				
+
 				<input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>"
-						value="<?= $this->security->get_csrf_hash(); ?>">
+					value="<?= $this->security->get_csrf_hash(); ?>">
 				<?= isset($failed) && !empty($failed) ? "<p class='err'>{$failed}</p>" : ""; ?>
 				<?= $this->session->flashdata('success'); ?>
 
-				<div class="form-group">
+				<div class="form-group has-feedback">
 					<label for="username" class="sr-only">ชื่อผู้ใช้งาน</label>
 					<?= form_error('username', '<div class="err">', '</div>'); ?>
 					<input type="text" id="inputEmail" class="form-control" placeholder="ชื่อผู้ใช้งาน"
 						value="<?= set_value('username'); ?>" name="username" autofocus>
-					<i class="fa fa-fw fa-user"></i>
+					<span class="form-control-feedback"><img src="<?php echo base_url('assets/dist/img/user1.png'); ?>"
+							width="15" height="15"></span>
 				</div>
 
-				<div class="mt-1">
+				<div class="form-group has-feedback">
 					<label for="password" class="sr-only">รหัสผ่าน</label>
 					<?= form_error('password', '<div class="err">', '</div>'); ?>
 					<input type="password" id="inputPassword" class="form-control" placeholder="รหัสผ่าน"
 						value="<?= set_value('password'); ?>" name="password">
+					<span id="password-feedback" class="form-control-feedback"><img src="<?php echo base_url('assets/dist/img/key1.png');?>"
+							width="15" height="15"></span>
 				</div>
 				<button class="btn btn-lg btn-primary btn-block mt-2" type="submit">เข้าสู่ระบบ</button>
 			</form>
 			<!-- End form login -->
 			<div class="pl-4">
-				<a href="#">ลืมรหัสผ่าน</a>
+				<a data-toggle="modal" data-target="#modal-default" href="#">ลืมรหัสผ่าน</a>
 			</div>
 
 		</div>
@@ -160,13 +165,57 @@
 	</div>
 	<!-- /.login-box -->
 
+	<div class="modal fade" id="modal-default" style="display: none;">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header bg-info">
+					<h3 class="text-white">ลืมรหัสผ่าน</h3>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">x</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>ติดต่อ…</p>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+
+	
 	<!-- jQuery 3 -->
 	<script src="<?php echo base_url('assets/bower_components/jquery/dist/jquery.min.js'); ?>"></script>
 	<!-- Bootstrap 3.3.7 -->
 	<script src="<?php echo base_url('assets/bower_components/bootstrap/dist/js/bootstrap.min.js'); ?>"></script>
 	<!-- iCheck -->
 	<script src="<?php echo base_url('assets/plugins/iCheck/icheck.min.js'); ?>"></script>
+	<script type='text/javascript'>
+        $(document).ready(function(){
+            $('#check').click(function(){
+             	alert($(this).is(':checked'));
+                $(this).is(':checked') ? $('#test-input').attr('type', 'text') : $('#test-input').attr('type', 'password');
+			});
+		});
+	</script>
 	<script>
+
+		$(document).ready(function () {
+			$("#inputPassword").click(function() {
+				console.log("Yahooo");
+			
+				var input = $('#inputPassword');
+				if (input.attr("type") == "password") {
+					input.attr("type", "text");
+				} else {
+					input.attr("type", "password");
+				}
+			});
+			$('#password-feedback').click(function () { 
+				alert("Yahooo");
+			});
+		});
+
 		$(function () {
 			$('input').iCheck({
 				checkboxClass: 'icheckbox_square-blue',
