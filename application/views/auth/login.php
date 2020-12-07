@@ -107,6 +107,13 @@
                 background: none !important;
                 opacity: 0.6 !important;
             }
+            
+            .non-select {
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
         </style>
     </head>
     <!-- End head section -->
@@ -114,10 +121,10 @@
     <!-- Body section-->
 
     <body class="hold-transition login-page">
-        <div class="login-box">
+        <div class="login-box non-select">
 
             <div class="text-center">
-                <img class="text-center img-circle" style="width: 150px;" src="<?php echo base_url('assets/dist/img/gamification.png'); ?>" alt="SCM Logo">
+                <img class="text-center img-circle" style="width: 150px; pointer-events: none;" src="<?php echo base_url('assets/dist/img/gamification.png'); ?>" alt="SCM Logo">
             </div>
 
             <div class="login-logo" style=" font-size: 36px; color: white;">
@@ -126,7 +133,7 @@
             <!-- /.login-logo -->
             <div class="login-box-body">
 
-                <h2 class="login-box-msg" style="font-size: large; font-weight: bold;">ลงชื่อเข้าสู่ระบบ </h2>
+                <h2 class="login-box-msg" style="font-size: large; font-weight: bold;">ลงชื่อเข้าสู่ระบบ</h2>
 
                 <!-- Form login -->
                 <form class="form-signin" method="post" id="loginForm" action="<?= site_url('login'); ?>">
@@ -200,6 +207,7 @@
         </script>
         <script>
             $(document).ready(function() {
+
                 $(".eyeslash").on('click', function(event) {
                     event.preventDefault();
                     if ($('#inputPassword').attr("type") == "text") {

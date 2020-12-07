@@ -1,8 +1,9 @@
 <?php
 /**
- * @Author	Jiranuwat Jaiyen       
+ * @Author Jiranuwat Jaiyen       
  * @Create Date	22-03-2563
- *
+ * @Update by: Namchok Singhachai
+ * @Update date: 07-12-2563
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
@@ -23,10 +24,10 @@ class Login extends CI_Controller
         parent::__construct();
         $this->load->database();
         $this->load->library(['auth', 'form_validation']);
-    }
+    } // End construct
 
     /**
-     * handle the login.
+     * Handle the login.
 	 * @Author	Jiranuwat Jaiyen       
 	 * @Create Date	22-03-2563
      */
@@ -37,7 +38,7 @@ class Login extends CI_Controller
             $data = $this->auth->login($_POST);
         }
         return $this->auth->showLoginForm($data);
-    }
+    } // End index
 
     /**
      * Logout.
@@ -50,5 +51,5 @@ class Login extends CI_Controller
             return redirect('login');
 
         return false;
-    }
-}
+    } // End logout
+} // End Login
