@@ -41,6 +41,21 @@
             background: #3C8DBC !important;
             cursor: default !important;
         }
+        
+        .logout-menu {
+            color: black !important;
+            font-size: 25px;
+            text-align: center;
+            background-color: WHITE !important;
+            border: none;
+            margin-top: -1px;
+            margin-right: -8px;
+        }
+        
+        .logout-menu:hover {
+            color: black !important;
+            background-color: rgb(151, 151, 151);
+        }
     </style>
 
     <?php if (isset($css)){
@@ -204,14 +219,8 @@
                                 </li> -->
 
                                 <!-- Menu Footer-->
-                                <li>
-                                    <a style="color: WHITE !important;
-									font-size: 25px;
-									text-align: center;
-									background-color: #2c7ead;
-									border: none;
-									margin-top: -2px;
-									margin-right: -8px;" href="<?= site_url('login/logout')?>" class=""> ออกจากระบบ</a>
+                                <li class="logout-menu">
+                                    <a class="" href="<?= site_url('login/logout')?>" class=""> ออกจากระบบ</a>
                                     <!-- <div class="pull-left">
                                         <button type="button" class="btn btn-default btn-flat" data-toggle="modal" data-target="#modal-default">
 											เปลี่ยนบทบาท
