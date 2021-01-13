@@ -42,10 +42,6 @@
                     <i class="fa fa-thumbs-o-up"></i>
                     <span>User Individual Achievement</span></a>
             </li>
-            <!-- <li class="ScrumMaster">
-                <a id="Roles_users Manager" href="<?php. //echo site_url('Source_manager/index/Roles_users'); ?>">
-                    <i class="fa fa-tag"></i><span>Roles users</span></a>
-            </li> -->
             <li class="ScrumMaster">
                 <a id="Activity Manager" href="<?php echo site_url('Source_manager/index/Activity'); ?>">
                     <i class="fa fa-calendar"></i><span>Activity</span></a>
@@ -53,6 +49,10 @@
             <li class="ScrumMaster">
                 <a id="" href="">
                     <i class="fa fa-bell"></i><span>Request Item</span></a>
+            </li>
+            <li class="ScrumMaster">
+                <a id="" href="">
+                    <i class="fa fa-television"></i><span>Activity Report</span></a>
             </li>
 
             <li class="header ScrumMaster">MANAGER NAVIGATION</li>
