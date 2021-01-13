@@ -22,17 +22,19 @@ class Home extends BaseController
     public function __construct()
     {	
         parent::__construct();
-        date_default_timezone_set('asia/bangkok');
-		$this->load->library('auth');
+        // date_default_timezone_set('asia/bangkok');
+		// $this->load->library('auth');
 		//var_dump(can(['Editor', 'publish-posts']));
     } // End construct
 
     /**
      * Display a Dashboard.
      *
-	 * @Author	Jiranuwat Jaiyen       
+	 * @Author:	Jiranuwat Jaiyen       
 	 * @Create Date	22-03-2563
-     * @return mixed
+	 * @Update by: Namchok Singhachai
+ 	 * @Create Date	07-12-2563
+     * @return view
      */
     public function index()
     {
@@ -48,6 +50,9 @@ class Home extends BaseController
      * @return Json Data
      */
 	public function get_Activity($role_id=0){
+		echo "\n ------------- Test List Activity ------------- \n";
+		echo json_encode($this->User->Activity_by_count($role_id));
+		echo "\n ------------- End List Activity ------------- \n";
 		echo json_encode($this->User->Activity_by_count($role_id)); 
 	} // get_Activity
 	
