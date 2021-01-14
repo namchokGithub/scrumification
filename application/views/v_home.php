@@ -65,6 +65,7 @@
     }
 </style>
 
+<!-- Main panel -->
 <div class="panel panel-primary">
     <div class="panel-heading heading-targle" style=" font-size: 28px;display:flex; cursor:pointer " aria-hidden="true" data-toggle="collapse" data-target="#Panel_Challenger">Challenger
         <div style="margin-left: auto;"><i class="fa fa-chevron-down" id="collapse_icon"></i></div>
@@ -244,10 +245,14 @@
             $(this).closest('#card_reward').find('.info-box-number').html("0/0" + '<span style=" position: absolute; right: 20px; ">0%</span>')
             $(this).closest('#card_reward').find('.progress-bar').attr("style", "width:0%")
 		})
-		
-        console.log("<?php echo site_url("Home/get_Activity/"); ?>" + targle_id);
+
+		// Show URL of activity
+		// console.log("<?php echo site_url("Home/get_Activity/"); ?>" + targle_id);
+		// ------------- Get activity -----------------------
         $.get("<?php echo site_url("Home/get_Activity/"); ?>" + targle_id,
             function(data, status) {
+				console.log(data)
+				console.log(status)
                 $(".cluster_title").text(targle_id - 2)
                 var raw_data = JSON.parse(data);
                 var max_user = raw_data[0]['max_user'];
@@ -286,19 +291,20 @@
                     targle_jq.closest('#card_reward').find('.progress-bar').attr("style", "width:" + percent + "%;" + bar_css)
                 }
 			});
+		// End get activity
 			
+		// ------------ Get achievement -------------------------
         $.get("<?php echo site_url("Home/get_all_Achievement/"); ?>" + targle_id,
             function(data, status) {
                 var raw_data = JSON.parse(data);
-                console.log(raw_data)
+                // console.log(raw_data)
                 $("#Achievement_row").empty();
                 for (var i = 0; i < raw_data.length; i++) {
 
                     var star_text = "";
                     var count_time = parseInt(raw_data[i]["count_user"] / raw_data[i]["level"]);
                     if (count_time !== 0) {
-
-                        console.log(count_time)
+                        // console.log(count_time)
                         for (j = 1; j <= count_time; j++) {
                             star_text += '<i class="fa fa-star" style="font-size:30px"></i>';
                         }
@@ -324,6 +330,7 @@
                     );
                 }
 			})
+		// End get achievement
 		$('#panel-mainreward').show();
 		$('#panel-achievment').show();
     });

@@ -50,10 +50,10 @@ class Home extends BaseController
      * @return Json Data
      */
 	public function get_Activity($role_id=0){
-		echo "\n ------------- Test List Activity ------------- \n";
+		// echo "\n ------------- Test List Activity ------------- \n";
 		echo json_encode($this->User->Activity_by_count($role_id));
-		echo "\n ------------- End List Activity ------------- \n";
-		echo json_encode($this->User->Activity_by_count($role_id)); 
+		// echo "\n ------------- End List Activity ------------- \n";
+		// echo json_encode($this->User->Activity_by_count($role_id)); 
 	} // get_Activity
 	
 	/**
