@@ -66,24 +66,24 @@
 	?>
 
     <!-- jQuery 3 -->
-    <script src="<?php echo base_url('assets/bower_components/jquery/dist/jquery.min.js'); ?> "></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/bower_components/jquery/dist/jquery.min.js'); ?> "></script>
     <!-- Bootstrap 3.3.7 -->
-    <script src="<?php echo base_url('assets/bower_components/bootstrap/dist/js/bootstrap.min.js'); ?> "></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/bower_components/bootstrap/dist/js/bootstrap.min.js'); ?> "></script>
     <!-- SlimScroll -->
-    <script src="<?php echo base_url('assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js'); ?> "></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js'); ?> "></script>
     <!-- FastClick -->
-    <script src="<?php echo base_url('assets/bower_components/fastclick/lib/fastclick.js'); ?> "></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/bower_components/fastclick/lib/fastclick.js'); ?> "></script>
     <!-- AdminLTE App -->
-    <script src="<?php echo base_url('assets/dist/js/adminlte.min.js'); ?> "></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/dist/js/adminlte.min.js'); ?> "></script>
 
     <?php if (isset($scripts)){
 		foreach ($scripts as $script){
-			echo ' <script src="'.base_url($script).'"></script>'."\r\n";
+			echo ' <script type="text/javascript" src="'.base_url($script).'"></script>'."\r\n";
 		}
 	}
 	?>
 
-    <script>
+    <script type="text/javascript">
         /**
          * check cookie in the system
          *
@@ -136,6 +136,7 @@
             console.log("cookie", document.cookie)
         }
     </script>
+    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -294,7 +295,7 @@
         </div>
         <!-- End change role -->
 
-        <script>
+        <script type="text/javascript">
             /**
              * update point every 10 seconds 
              *

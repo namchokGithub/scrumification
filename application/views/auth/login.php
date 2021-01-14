@@ -114,6 +114,11 @@
                 -ms-user-select: none;
                 user-select: none;
             }
+
+            .modal-backdrop {
+                display: none !important;
+            }
+            
         </style>
     </head>
     <!-- End head section -->
@@ -175,14 +180,14 @@
         </div>
         <!-- /.login-box -->
 
-        <div class="modal fadeIn" tabindex="-1" role="dialog" id="modal-forgotpassword">
+        <div class="modal" tabindex="-1" role="dialog" id="modal-forgotpassword">
             <div class="modal-dialog" role="document">
-                <div class="modal-content ">
+                <div class="modal-content">
                     <div class="modal-header bg-info">
                         <h3 class="text-white">ลืมรหัสผ่าน</h3>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
+						    <span aria-hidden="true">&times;</span>
+					    </button>
                     </div>
                     <div class="modal-body">
                         <p>ติดต่อ…</p>
@@ -197,16 +202,13 @@
         <script src="<?php echo base_url('assets/bower_components/bootstrap/dist/js/bootstrap.min.js'); ?>"></script>
         <!-- iCheck -->
         <script src="<?php echo base_url('assets/plugins/iCheck/icheck.min.js'); ?>"></script>
-        <script type='text/javascript'>
+        <script>
             $(document).ready(function() {
+
                 $('#check').click(function() {
                     alert($(this).is(':checked'));
                     $(this).is(':checked') ? $('#test-input').attr('type', 'text') : $('#test-input').attr('type', 'password');
                 });
-            });
-        </script>
-        <script>
-            $(document).ready(function() {
 
                 $(".eyeslash").on('click', function(event) {
                     event.preventDefault();
@@ -221,12 +223,11 @@
                     }
                 });
 
-                $('#link-modal-forgotpassword').on('click', function(e) {
-                    e.preventDefault();
-                    $('#modal-forgotpassword').modal()
+                $('#link-modal-forgotpassword').click(function(e) {
+                    $('#modal-forgotpassword').modal("show")
                     console.log('modal')
                 });
-            });
+            }); // Document ready
 
             $(function() {
                 $('input').iCheck({

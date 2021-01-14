@@ -33,8 +33,7 @@ class Login extends CI_Controller
      */
     public function index()
     {
-        // echo "guest: \n";
-        // echo $this->auth->guest() . "\n";
+                // echo $this->auth->guest() . "\n";
         if(!$this->auth->guest()) {
             $this->auth->authenticate();
             $scripts['scripts'][0] = "";
