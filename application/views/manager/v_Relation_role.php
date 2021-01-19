@@ -35,8 +35,9 @@
 	 * @Author	Jiranuwat Jaiyen       
 	 * @Create Date	22-03-2563
      * @return mixed
+	 * @update by Namchok Singhachai
      */
-	function set_Data(){
+	function set_Data() {
 		var Options_roles = {};
 		$.ajax({
 			// a tipycal url would be /{id} with type='POST'
@@ -45,7 +46,7 @@
 			async:false,
 			success: function(a){
 				for(var i=0 ;i<a.length;i++){
-				Options_roles[a[i].id] = a[i].name;			
+					Options_roles[a[i].id] = a[i].name;			
 				}
 			},
 			error: function(){
@@ -63,7 +64,7 @@
 						}
 					},
 					{
-						data: "targle_role_id",
+						data: "target_role_id",
 						type : "select",
 						options : Options_roles,
 						select2 : { width: "100%"},

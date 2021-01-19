@@ -25,11 +25,10 @@ class BaseController extends CI_Controller
 		//var_dump(can(['Editor', 'publish-posts']));
     } // End construct
 
-    public function output($view) {
+    public function output($view, $header = "untitled") {
         $this->auth->authenticate();
-		$scripts['scripts'][0] = "";
-		$scripts['css'][0] = "";
-		$detail['header'] = "Home";
+
+		$detail['header'] = $header;
 		$scripts['Profile'][0] = $this->auth->user();
 		$scripts['Profile'][1] = $this->auth->userRoles();
 		$scripts['Profile'][2]= $this->auth->userName();

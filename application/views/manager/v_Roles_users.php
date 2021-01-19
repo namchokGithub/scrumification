@@ -17,18 +17,17 @@
 		</table>
 	</div>
 </div>
+
 <script>
 
-	  var myTable;
-	  var topic_name = "roles_users";
-	  // local URL's are not allowed
-	  var url_get = "<?php echo site_url("Source_manager/get_data/");?>"+topic_name;
-	  var url_add = "<?php echo site_url("Source_manager/add_data/");?>"+topic_name;
-	  var url_edit = "<?php echo site_url("Source_manager/edit_data/");?>"+topic_name;
-	  var url_delete = "<?php echo site_url("Source_manager/delete_data/");?>"+topic_name;
-	  var url_get_option_user = "<?php echo site_url("Source_manager/get_data/");?>users";
-	  var url_get_option_roles = "<?php echo site_url("Source_manager/get_data/");?>roles";
-	
+	var myTable;
+	var topic_name = "roles_users"; // local URL's are not allowed
+	var url_get = "<?php echo site_url("Source_manager/get_data/");?>"+topic_name;
+	var url_add = "<?php echo site_url("Source_manager/add_data/");?>"+topic_name;
+	var url_edit = "<?php echo site_url("Source_manager/edit_data/");?>"+topic_name;
+	var url_delete = "<?php echo site_url("Source_manager/delete_data/");?>"+topic_name;
+	var url_get_option_user = "<?php echo site_url("Source_manager/get_data/");?>users";
+	var url_get_option_roles = "<?php echo site_url("Source_manager/get_data/");?>roles";
 	
 	/**
      * Setup User Interface.
@@ -39,6 +38,7 @@
      */
 	function set_Data(){
 		
+		// ------------------------- Get data ----------------------------------------
 		var Options_user = {};
 		$.ajax({
 			// a tipycal url would be /{id} with type='POST'
@@ -53,6 +53,7 @@
 			error: function(){
 			}
 		})
+		
 		var Options_roles = {};
 		$.ajax({
 			// a tipycal url would be /{id} with type='POST'
@@ -67,105 +68,110 @@
 			error: function(){
 			}
 		})
+		console.log(Options_roles);
+		// ------------------------- End Get data ----------------------------------------
+
+		// ------------------------- Set column ----------------------------------------
 		var columnDefs = [
+			{
+				data: "user_id",
+				type : "select",
+				options : Options_user,
+				select2 : { width: "100%" },
+				render: function (data, type, row, meta) {
+					if (data == null || !(data in Options_user)) return null;
+					return Options_user[data];
+				}
+			},
+			{
+				data: "role_id",
+				type : "select",
+				options : Options_roles,
+				select2 : { width: "100%" },
+				render: function (data, type, row, meta) {
+					if (data == null || !(data in Options_roles)) return null;
+					return Options_roles[data];
+				}
+			},
+		];
+		// ------------------------- End Set column ----------------------------------------
+		
+		// ------------------------- Set datatable ----------------------------------------
+		myTable = $('#example').DataTable({
+			"sPaginationType": "full_numbers",
+				ajax: 
 					{
-						data: "user_id",
-						type : "select",
-						options : Options_user,
-						select2 : { width: "100%"},
-						render: function (data, type, row, meta) {
-							//console.log(data);//console.log("option",Options_user)
-							if (data == null || !(data in Options_user)) return null;
-							return Options_user[data];
-						}
-					},
-					{
-						data: "role_id",
-						type : "select",
-						options : Options_roles,
-						select2 : { width: "100%"},
-						render: function (data, type, row, meta) {
-							if (data == null || !(data in Options_roles)) return null;
-							return Options_roles[data];
-						}
-					},
-				];
-			  
-			  myTable = $('#example').DataTable({
-				"sPaginationType": "full_numbers",
-					ajax: 
-					 {
-						"url": url_get,
-						"dataSrc": ""
-					},
-				columns: columnDefs,  // columns from above
-				initComplete: function (settings, json) {
-					$(".btn").removeClass("dt-button");
+					"url": url_get,
+					"dataSrc": ""
 				},
-				rowId: 'id',
-				order:[],
-				dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
-				select: 'single',     // enable single row selection
-				responsive: true,     // enable responsiveness
-				altEditor: true,      // Enable altEditor ****
-				buttons: [{
-				  text: '<i class="fa fa-plus-square"></i> เพิ่มชุดข้อมูล',
-				  name: 'add',     // DO NOT change name
-				  "className": 'btn btn-info btn-lg' 
+			columns: columnDefs,  // columns from above
+			initComplete: function (settings, json) {
+				$(".btn").removeClass("dt-button");
+			},
+			rowId: 'id',
+			order:[],
+			dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
+			select: 'single',     // enable single row selection
+			responsive: true,     // enable responsiveness
+			altEditor: true,      // Enable altEditor ****
+			buttons: [{
+				text: '<i class="fa fa-plus-square"></i> เพิ่มชุดข้อมูล',
+				name: 'add',     // DO NOT change name
+				"className": 'btn btn-info btn-lg' 
+			},
+			{
+				extend: 'selected', // Bind to Selected row
+				text: '<i class="fa fa-edit"></i> แก้ไขชุดข้อมูล',
+				name: 'edit',        // DO NOT change name
+				"className": 'btn btn-warning btn-lg' 
+			},
+			{
+				extend: 'selected', // Bind to Selected row
+				text: '<i class="fa fa-trash"></i> ลบชุดข้อมูล',
+				name: 'delete',     // DO NOT change name
+				"className": 'btn btn-danger btn-lg' 
+			}],
+				onAddRow: function(datatable, rowdata, success, error) {
+					//console.log(datatable, rowdata, success, error)
+					$.ajax({
+						// a tipycal url would be / with type='PUT'
+						url: url_add,
+						type: 'POST',
+						async :false,
+						data: rowdata,
+						success:success,
+						error: error
+					});
+					datatable.s.dt.ajax.reload();
 				},
-				{
-				  extend: 'selected', // Bind to Selected row
-				  text: '<i class="fa fa-edit"></i> แก้ไขชุดข้อมูล',
-				  name: 'edit',        // DO NOT change name
-				  "className": 'btn btn-warning btn-lg' 
+				onEditRow: function(datatable, rowdata, success, error) {
+					rowdata['id'] = datatable.s.dt.rows( { selected: true } ).data()[0]['id']
+					$.ajax({
+						// a tipycal url would be /{id} with type='POST'
+						url: url_edit,
+						type: 'POST',
+						async :false,
+						data: rowdata,
+						success: success,
+						error: error
+					});
+					datatable.s.dt.ajax.reload();
 				},
-				{
-				  extend: 'selected', // Bind to Selected row
-				  text: '<i class="fa fa-trash"></i> ลบชุดข้อมูล',
-				  name: 'delete',     // DO NOT change name
-				  "className": 'btn btn-danger btn-lg' 
-			   }],
-					onAddRow: function(datatable, rowdata, success, error) {
-						//console.log(datatable, rowdata, success, error)
-						$.ajax({
-							// a tipycal url would be / with type='PUT'
-							url: url_add,
-							type: 'POST',
-							async :false,
-							data: rowdata,
-							success:success,
-							error: error
-						});
-						datatable.s.dt.ajax.reload();
-					},
-					onEditRow: function(datatable, rowdata, success, error) {
-						rowdata['id'] = datatable.s.dt.rows( { selected: true } ).data()[0]['id']
-						$.ajax({
-							// a tipycal url would be /{id} with type='POST'
-							url: url_edit,
-							type: 'POST',
-							async :false,
-							data: rowdata,
-							success: success,
-							error: error
-						});
-						datatable.s.dt.ajax.reload();
-					},
-					onDeleteRow: function(datatable, rowdata, success, error) {
-						rowdata['id'] = datatable.s.dt.rows( { selected: true } ).data()[0]['id']
-						$.ajax({
-							// a tipycal url would be /{id} with type='DELETE'
-							url: url_delete,
-							type: 'POST',
-							async :false,
-							data: rowdata,
-							success: success,
-							error: error
-						});
-						datatable.s.dt.ajax.reload();
-					}
-			  });
-	}
+				onDeleteRow: function(datatable, rowdata, success, error) {
+					rowdata['id'] = datatable.s.dt.rows( { selected: true } ).data()[0]['id']
+					$.ajax({
+						// a tipycal url would be /{id} with type='DELETE'
+						url: url_delete,
+						type: 'POST',
+						async :false,
+						data: rowdata,
+						success: success,
+						error: error
+					});
+					datatable.s.dt.ajax.reload();
+				}
+			});
+		} // End function set_data()
 	set_Data()
 </script>
 

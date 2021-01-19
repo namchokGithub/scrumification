@@ -283,7 +283,7 @@ class User extends CI_Model
     }
 	
 	/**
-     * Check relation_role between user_id and targle_role_id.
+     * Check relation_role between user_id and target_role_id.
      *
 	 * @Author	Jiranuwat Jaiyen       
 	 * @Create Date	22-03-2563
@@ -298,12 +298,12 @@ class User extends CI_Model
             ->join("roles_users", "roles.id = roles_users.role_id", "inner")
             ->join("users", "users.id = roles_users.user_id", "inner")
 			->join("relation_role", "roles.id = relation_role.role_id")
-            ->where(array("roles_users.user_id" => $user_id,"relation_role.targle_role_id" => $this->auth->roles[0]))
+            ->where(array("roles_users.user_id" => $user_id,"relation_role.target_role_id" => $this->auth->roles[0]))
             ->get()->num_rows();
     }
 	
 	/**
-     * Check relation_role between role_id and targle_role_id.
+     * Check relation_role between role_id and target_role_id.
      *
 	 * @Author	Jiranuwat Jaiyen       
 	 * @Create Date	22-03-2563
@@ -318,11 +318,11 @@ class User extends CI_Model
             ->join("roles_users", "roles.id = roles_users.role_id", "inner")
             ->join("users", "users.id = roles_users.user_id", "inner")
 			->join("relation_role", "roles.id = relation_role.role_id")
-            ->where(array("roles_users.role_id" => $role_id,"relation_role.targle_role_id" => $this->auth->roles[0]))
+            ->where(array("roles_users.role_id" => $role_id,"relation_role.target_role_id" => $this->auth->roles[0]))
             ->get()->num_rows();
     }
 	/**
-     * Check relation_role by targle_role_id.
+     * Check relation_role by target_role_id.
      *
 	 * @Author	Jiranuwat Jaiyen       
 	 * @Create Date	22-03-2563
@@ -337,7 +337,7 @@ class User extends CI_Model
             ->join("roles_users", "roles.id = roles_users.role_id", "inner")
             ->join("users", "users.id = roles_users.user_id", "inner")
 			->join("relation_role", "roles.id = relation_role.role_id")
-            ->where(array("relation_role.targle_role_id" => $this->auth->roles[0]))
+            ->where(array("relation_role.target_role_id" => $this->auth->roles[0]))
             ->get()->result_array();
     }
 	

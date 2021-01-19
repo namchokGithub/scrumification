@@ -22,9 +22,6 @@ class Home extends BaseController
     public function __construct()
     {	
         parent::__construct();
-        // date_default_timezone_set('asia/bangkok');
-		// $this->load->library('auth');
-		//var_dump(can(['Editor', 'publish-posts']));
     } // End construct
 
     /**
@@ -38,7 +35,7 @@ class Home extends BaseController
      */
     public function index()
     {
-    	$this->output('v_home');
+    	$this->output('v_home', "Home");
     } // End index
 	
 	/**

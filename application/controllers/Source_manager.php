@@ -53,7 +53,8 @@ class Source_manager extends CI_Controller
 		$scripts['css'][4] = "assets/bower_components/other/jquery.datetimepicker.css";
 		$scripts['css'][5] = "assets/bower_components/other/select2.css";
 		$scripts['css'][6] = "assets/bower_components/toastr/toastr.min.css";
-		$detail['header'] = $name." Manager";
+		$detail['header'] = $name." manager";
+		// $detail['header'] = $name." Manager";
 		$scripts['Profile'][0] = $this->auth->user();
 		$scripts['Profile'][1] = $this->auth->userRoles();
 		$scripts['Profile'][2]= $this->auth->userName();
@@ -69,7 +70,8 @@ class Source_manager extends CI_Controller
 		$this->load->view('includes/sidebar',$detail);
 		$this->load->view("manager/v_".$name,$data);
 		$this->load->view('includes/footer');
-    }
+	}
+	
 	/**
      * Display a ViewManager.
      *
@@ -80,6 +82,7 @@ class Source_manager extends CI_Controller
 	public function index($name){
 		$this->Setup_View($name);
 	}		
+	
 	/**
      * Select Data.
      *
@@ -87,7 +90,6 @@ class Source_manager extends CI_Controller
 	 * @Create Date	22-03-2563
      * @return Json Data
      */
-	
 	public function get_data($name_table)
     {
 		$data = $this->input->post();
@@ -110,7 +112,6 @@ class Source_manager extends CI_Controller
 		echo json_encode($data);
     }
 
-	
 	/**
      * Insert User.
      *
@@ -154,8 +155,6 @@ class Source_manager extends CI_Controller
 		$data = $this->input->post();
         return $this->DM->delete_data($name_table, $data);
     }
-
-
 
     /**
      * Edit Data.

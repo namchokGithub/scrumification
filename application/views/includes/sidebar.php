@@ -1,3 +1,4 @@
+
 <!-- Left side column. contains the sidebar -->
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
@@ -54,6 +55,10 @@
                 <a id="" href="">
                     <i class="fa fa-television"></i><span>Activity Report</span></a>
             </li>
+            <li class="ScrumMaster">
+                <a id="" href="<?php echo site_url('Source_manager/index/Roles_users'); ?>">
+                    <i class="fa fa-child"></i><span>Asign Role</span></a>
+            </li>
 
             <li class="header ScrumMaster">MANAGER NAVIGATION</li>
             <li class="ScrumMaster"><a id="Users Manager" href="<?php echo site_url('Source_manager/index/Users'); ?>"><i class="fa fa-user"></i>
@@ -64,7 +69,7 @@
                     <span>Group Manager</span></a>
             </li>
             <li class="ScrumMaster">
-                <a id="" href="">
+                <a id="" href="<?php echo site_url('Source_manager/index/RoleManager'); ?>">
                     <i class="fa fa-tag"></i>
                     <span>Role Manager</span></a>
             </li>
@@ -88,6 +93,7 @@
     </section>
     <!-- /.sidebar -->
 </aside>
+
 <script>
     /**
      * set role of user form cookie 
@@ -109,12 +115,13 @@
         $(".ScrumMaster").hide();
     }
     $(".Role_name").text(getCookie("Role"))
-    console.log("length", $("span:contains('<?php echo $header; ?>')").length, $("a[id='<?php echo $header; ?>']").length)
-    console.log("role", getCookie("Role"), "a[id='<?php echo $header; ?>']")
+    console.log(`<?php echo $detail; ?>`)
+    // console.log("length", $("span:contains('<?php echo $header; ?>')").length, $("a[id='<?php echo $header; ?>']").length)
+    // console.log("role", getCookie("Role"), "a[id='<?php echo $header; ?>']")
     if ($("a[id='<?php echo $header; ?>']").length) {
         $("a[id='<?php echo $header; ?>']").closest("li").addClass("active");
     } else {
-        console.log("length", $("span:contains('<?php echo $header; ?>')").length)
+        // console.log("length", $("span:contains('<?php echo $header; ?>')").length)
         $("span:contains('<?php echo $header; ?>')").closest("li").addClass("active");
     }
 </script>
@@ -124,7 +131,7 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <span style="  font-size:x-large;font-family: Prompt; ">
+        <span style="font-size:x-large;">
             <?php echo $header;?>
         </span>
         <ol class="breadcrumb">
