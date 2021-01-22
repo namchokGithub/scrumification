@@ -50,8 +50,8 @@ class Login extends CI_Controller
             /**
              *    กรณีลำดับไอดีตำแหน่งอยู่ไม่ได้อยู่ในช่วงมกุล จะถูกตรวจสอบ โดย ถ้าไอดีมากกว่า จะถูกนำไปลบระยะห่างของมกุล 
             */
-            if($data['userRoles'][0] >11){
-                $data['userRoles'][0] = $data['userRoles'][0] - 16;
+            if($data['userRoles'][0]>13){
+                $data['userRoles'][0] = $data['userRoles'][0] - 13;
             }
             /*$scripts['scripts'][0] = 'assets/js/plugins/highchart/highcharts.js';
             $scripts['scripts'][1] = 'assets/js/moment.js';

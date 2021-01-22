@@ -40,7 +40,9 @@ class BaseController extends CI_Controller
 		/**
 		 *    กรณีลำดับไอดีตำแหน่งอยู่ไม่ได้อยู่ในช่วงมกุล จะถูกตรวจสอบ โดย ถ้าไอดีมากกว่า จะถูกนำไปลบระยะห่างของมกุล 
 		 */
-		if($data['userRoles'][0] >11){
+		// var_dump($data['userRoles']); die;
+		// var_dump($detail); die;
+		if($data['userRoles'][0] >10){
 			$data['userRoles'][0] = $data['userRoles'][0] - 16;
 		}
 		/*$scripts['scripts'][0] = 'assets/js/plugins/highchart/highcharts.js';

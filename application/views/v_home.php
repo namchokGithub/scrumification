@@ -72,7 +72,7 @@
     </div>
     <div class="panel-body collapse in" id="Panel_Challenger">
         <?php for($i=0;$i<10;$i++){?>
-        <div class="<?php echo ((1==($i+1)%5)?" col-lg-offset-1 ":" "); ?>col-lg-2 col-md-4 col-sm-4 col-xs-6 card_group" id="<?php echo $i+2;?>">
+        <div class="<?php echo ((1==($i+1)%5)?" col-lg-offset-1 ":" "); ?>col-lg-2 col-md-4 col-sm-4 col-xs-6 card_group" id="<?php echo $i;?>">
             <div class="card">
                 <div class="box box-widget widget-user" style="border-radius: 5%;border: 5px solid #3282b8  !important;background-color:#3282b8">
                     <!-- Add the bg color to the header using any of the bg-* classes -->
@@ -84,10 +84,10 @@
                         <?php echo $i; ?>
                         <!-- /.row -->
                     </div>
-                    <div id="<?php echo $i+2;?>" class="box-footer bg-navy button_card mainreward card-button-font" style=" border-top: 0px !important;cursor: pointer;text-align: center;padding-top: 0px;display: inline-block; width: 50%;position: absolute; bottom: 0;">
+                    <div id="<?php echo $i;?>" class="box-footer bg-navy button_card mainreward card-button-font" style=" border-top: 0px !important;cursor: pointer;text-align: center;padding-top: 0px;display: inline-block; width: 50%;position: absolute; bottom: 0;">
                         <i class="fa fa-gamepad" style=" font-size: large; margin-top: 10px;"></i> <br>MainReward
                     </div>
-                    <div id="<?php echo $i+2;?>" class="box-footer bg-green-active button_card button_challenger card-button-font" style="border-top: 0px !important; cursor: pointer;text-align: center;padding-top: 0px;display: inline-block; width: 50%;position: absolute; bottom: 0;right:0">
+                    <div id="<?php echo $i;?>" class="box-footer bg-green-active button_card button_challenger card-button-font" style="border-top: 0px !important; cursor: pointer;text-align: center;padding-top: 0px;display: inline-block; width: 50%;position: absolute; bottom: 0;right:0">
                         <i class="fa fa-users" style=" font-size: large; margin-top: 10px;"></i> <br>Challenger
                     </div>
                 </div>
@@ -216,7 +216,7 @@
          * @Create Date	22-03-2563
          */
         $(".button_challenger").click(function() {
-            window.location.href = "<?php echo site_url("challenger/"); ?>index/" + $(this).attr("id");
+            window.location.href = "<?php echo site_url("challenger/"); ?>index/" + ($(this).attr("id"));
         });
     })
 
@@ -249,14 +249,23 @@
 		// Show URL of activity
 		// console.log("<?php echo site_url("Home/get_Activity/"); ?>" + targle_id);
 		// ------------- Get activity -----------------------
-        $.get("<?php echo site_url("Home/get_Activity/"); ?>" + targle_id,
+        $.get("<?php echo site_url("Home/get_Activity/"); ?>" + (parseInt(targle_id)+1),
             function(data, status) {
 				console.log(data)
-				console.log(status)
-                $(".cluster_title").text(targle_id - 2)
+				// console.log(status)
+                $(".cluster_title").text(targle_id)
                 var raw_data = JSON.parse(data);
-                var max_user = raw_data[0]['max_user'];
+                var max_user = 10
                 console.log(raw_data);
+                if (raw_data != '') {
+                    if(raw_data[0]['max_user']==null) {
+                        max_user = 1000;
+                    }else {
+                        max_user = raw_data[0]['max_user'];
+                    }
+                }
+                
+                // var max_user = raw_data[0]['max_user'];
                 $(".info-box-text").each(function() {
                     $(this).closest('#card_reward').attr('class', 'info-box bg-red');
                     $(this).closest('#card_reward').find('.info-box-number').html("0/" + max_user + '<span style=" position: absolute; right: 20px; ">0%</span>')
@@ -294,7 +303,7 @@
 		// End get activity
 			
 		// ------------ Get achievement -------------------------
-        $.get("<?php echo site_url("Home/get_all_Achievement/"); ?>" + targle_id,
+        $.get("<?php echo site_url("Home/get_all_Achievement/"); ?>" + (targle_id+1),
             function(data, status) {
                 var raw_data = JSON.parse(data);
                 // console.log(raw_data)
@@ -302,7 +311,7 @@
                 for (var i = 0; i < raw_data.length; i++) {
 
                     var star_text = "";
-                    var count_time = parseInt(raw_data[i]["count_user"] / raw_data[i]["level"]);
+                    var count_time = parseInt(raw_data[i]["count_user"]/raw_data[i]["level"]);
                     if (count_time !== 0) {
                         // console.log(count_time)
                         for (j = 1; j <= count_time; j++) {

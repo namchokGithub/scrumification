@@ -41,17 +41,24 @@ class MainReward extends CI_Controller
 		if($id=="") {
 			$id = $this->auth->roles();
 			$id = $id[0];
+			// echo $id; die;
+			// var_dump($this->auth->roles()); die;
+			
 			/**
 			 *    กรณีไอดีมกุลอยู่ไม่ได้อยู่ในช่วง จะถูกตรวจสอบ โดย ถ้าไอดีมากกว่า จะถูกนำไปลบระยะห่างของมกุล 
-			*/
-			if($id >11){
-				$id = $id - 16;
+			 */
+			if($id>13){
+				$id = $id - 13;
 			}
-			
-			if($id <2 || $id>11){// ถ้าid ไม่ได้อยู่ช่วง ให้กำหนดเป็นมกุล 0 โดยทันที
-				$id = 2;
+			if($id <1 || $id>11) // ถ้าid ไม่ได้อยู่ช่วง ให้กำหนดเป็นมกุล 0 โดยทันที
+			{ 
+				$id = 0;
 			}
 		}
+		if($id >= 10) {
+			$id = 0;	
+		}  // End set id
+
         $this->auth->authenticate();
 		$scripts['scripts'][0] = "assets/dist/js/countdown.js";
 		$scripts['scripts'][1] = 'assets/bower_components/moment/moment.js';
@@ -68,8 +75,8 @@ class MainReward extends CI_Controller
 		$detail['Profile'][1]= $this->auth->userRoles();
 		$detail['Profile'][2]= $this->auth->userName();
 		$data['Data_list'] = $this->User->all_Activity();
-		$data['User_list'] = $this->User->find_by_role($id);
-		$data['id'] = $id-2;
+		$data['User_list'] = $this->User->find_by_role($id+1);
+		$data['id'] = $id;
 		$data['targle'] = $targle;
 		/*$scripts['scripts'][0] = 'assets/js/plugins/highchart/highcharts.js';
 		

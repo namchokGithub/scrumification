@@ -42,13 +42,24 @@ class Achievement extends CI_Controller
 		if($id=="") {
 			$id = $this->auth->roles();
 			$id = $id[0];
+			// echo $id; die;
+			// var_dump($this->auth->roles()); die;
+			
 			/**
-			 *    กรณีไอดีมกุลอยู่ในช่วง 2 - 11 ให้กำหนดแบบนี้ 
-			*/
-			if($id <2 || $id>11){// ถ้าid ไม่ได้อยู่ช่วง ให้กำหนดเป็นมกุล 0 โดยทันที
-				$id = 2;
+			 *    กรณีไอดีมกุลอยู่ไม่ได้อยู่ในช่วง จะถูกตรวจสอบ โดย ถ้าไอดีมากกว่า จะถูกนำไปลบระยะห่างของมกุล 
+			 */
+			if($id>13){
+				$id = $id - 13;
+			}
+			if($id <1 || $id>11) // ถ้าid ไม่ได้อยู่ช่วง ให้กำหนดเป็นมกุล 0 โดยทันที
+			{ 
+				$id = 0;
 			}
 		}
+		if($id >= 10) {
+			$id = 0;	
+		}  // End set id
+		
         $this->auth->authenticate();
 		$scripts['scripts'][0] = "assets/dist/js/countdown.js";
 		$scripts['scripts'][1] = 'assets/bower_components/moment/moment.js';

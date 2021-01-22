@@ -1,4 +1,12 @@
 
+<?php
+/**
+ * @Author	Jiranuwat Jaiyen       
+ * @Create Date	22-03-2563
+ * @Update Namchok Singhchai
+ */
+?>
+
 <!-- Left side column. contains the sidebar -->
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
@@ -17,8 +25,9 @@
         </div>
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
-            <li class="header">MAIN NAVIGATION</li>
-            <li><a id="Home" href="<?php echo site_url('home'); ?>"><i class="fa fa-home"></i> <span>Home</span></a>
+        <li class="header">MAIN NAVIGATION</li>
+            <li>
+                <a id="Home" href="<?php echo site_url('home'); ?>"><i class="fa fa-home"></i> <span>Home</span></a>
             </li>
             <li>
                 <a id="Challenger" href="<?php echo site_url('challenger'); ?>"><i class="fa fa-users"></i>
@@ -31,20 +40,21 @@
                     <span>Shopping </span></a></li>
             <li>
                 <a id="LeaderBoard" href="<?php echo site_url('leaderboard'); ?>"><i class="fa fa-bar-chart-o "></i>
-                    <span>Leaderboard</span></a></li>
-
-            <li class="header ScrumMaster">SCRUM MASTER NAVIGATION</li>
+                    <span>Leaderboard</span></a>
+            </li>
+             <!-- end MAIN NAVIGATION -->
+        <li class="header ScrumMaster">SCRUM MASTER NAVIGATION</li>
             <li class="ScrumMaster">
-                <a id="User Achievement Manager" href="<?php echo site_url('Source_manager/index/UserAchievement'); ?>">
+                <a id="UserAchievementManager" href="<?php echo site_url('Source_manager/index/UserAchievement'); ?>">
                     <i class="fa fa-smile-o"></i><span>User Achievement</span></a>
             </li>
             <li class="ScrumMaster">
-                <a id="User Individual Manager" href="<?php echo site_url('Source_manager/index/UserIndividual');?>">
+                <a id="UserIndividualManager" href="<?php echo site_url('Source_manager/index/UserIndividual');?>">
                     <i class="fa fa-thumbs-o-up"></i>
                     <span>User Individual Achievement</span></a>
             </li>
             <li class="ScrumMaster">
-                <a id="Activity Manager" href="<?php echo site_url('Source_manager/index/Activity'); ?>">
+                <a id="ActivityManager" href="<?php echo site_url('Source_manager/index/Activity'); ?>">
                     <i class="fa fa-calendar"></i><span>Activity</span></a>
             </li>
             <li class="ScrumMaster">
@@ -59,36 +69,39 @@
                 <a id="" href="<?php echo site_url('Source_manager/index/Roles_users'); ?>">
                     <i class="fa fa-child"></i><span>Asign Role</span></a>
             </li>
-
-            <li class="header ScrumMaster">MANAGER NAVIGATION</li>
-            <li class="ScrumMaster"><a id="Users Manager" href="<?php echo site_url('Source_manager/index/Users'); ?>"><i class="fa fa-user"></i>
-                    <span>Users Manager</span></a></li>
+             <!-- end SCRUM MASTER NAVIGATION -->
+        <li class="header ScrumMaster">MANAGER NAVIGATION</li>
             <li class="ScrumMaster">
                 <a id="" href="">
                     <i class="fa fa-users"></i>
-                    <span>Group Manager</span></a>
+                    <span>Group Management</span></a>
+            </li>
+            <li class="ScrumMaster">
+                <a id="Users Manager" href="<?php echo site_url('Source_manager/index/Users'); ?>"><i class="fa fa-user"></i>
+                    <span>Users Management</span>
+                </a>
             </li>
             <li class="ScrumMaster">
                 <a id="" href="<?php echo site_url('Source_manager/index/RoleManager'); ?>">
                     <i class="fa fa-tag"></i>
-                    <span>Role Manager</span></a>
+                    <span>Role Management</span></a>
             </li>
             <li class="ScrumMaster">
-                <a id="Achievement Manager" href="<?php echo site_url('Source_manager/index/Achievement'); ?>">
+                <a id="AchievementManager" href="<?php echo site_url('Source_manager/index/Achievement'); ?>">
                     <i class="fa fa-star-half-empty"></i>
-                    <span>Achievement Manager</span></a>
+                    <span>Achievement Management</span></a>
             </li>
             <li class="ScrumMaster">
-                <a id="Individual Manager" href="<?php echo site_url('Source_manager/index/Individual'); ?>">
+                <a id="IndividualManager" href="<?php echo site_url('Source_manager/index/Individual'); ?>">
                     <i class="fa fa-gift"></i>
-                    <span>Individual Manager</span></a>
+                    <span>Individual Management</span></a>
             </li>
             <li class="ScrumMaster">
-                <a id="Shop Manager" href="<?php echo site_url('Source_manager/index/Shop'); ?>">
+                <a id="ShopManager" href="<?php echo site_url('Source_manager/index/Shop'); ?>">
                     <i class="fa fa-cart-plus"></i>
-                    <span>Shop Manager</span></a>
+                    <span>Shop Management</span></a>
             </li>
-
+            <!-- end MANAGER NAVIGATION -->
         </ul>
     </section>
     <!-- /.sidebar -->
@@ -108,14 +121,12 @@
     if (getCookie("Role") == "") {
         setCookie("Role", "<?php echo empty($Profile[1])? 'No Role ':$Profile[1][0]; ?>", 999);
     }
-
-    if (getCookie("Role") == "ScrumMaster") {
+    if (getCookie("Role") == "ScrumMaster" || getCookie("Role") == "Administrator") {
         $(".ScrumMaster").show();
     } else {
         $(".ScrumMaster").hide();
     }
     $(".Role_name").text(getCookie("Role"))
-    console.log(`<?php echo $detail; ?>`)
     // console.log("length", $("span:contains('<?php echo $header; ?>')").length, $("a[id='<?php echo $header; ?>']").length)
     // console.log("role", getCookie("Role"), "a[id='<?php echo $header; ?>']")
     if ($("a[id='<?php echo $header; ?>']").length) {
@@ -135,7 +146,7 @@
             <?php echo $header;?>
         </span>
         <ol class="breadcrumb">
-            <li><a href="<?php echo site_url(" home "); ?>"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="<?php echo site_url(" home "); ?>"><i class="fa fa-dashboard"></i> Home </a></li>
             <li class="active">
                 <?php echo $header;?>
             </li>

@@ -42,17 +42,24 @@ class Challenger extends CI_Controller
 		if($id=="") {
 			$id = $this->auth->roles();
 			$id = $id[0];
+			// echo $id; die;
+			// var_dump($this->auth->roles()); die;
+			
 			/**
 			 *    กรณีไอดีมกุลอยู่ไม่ได้อยู่ในช่วง จะถูกตรวจสอบ โดย ถ้าไอดีมากกว่า จะถูกนำไปลบระยะห่างของมกุล 
-			*/
-			if($id >11){
-				$id = $id - 16;
+			 */
+			if($id>13){
+				$id = $id - 13;
 			}
-			
-			if($id <2 || $id>11){// ถ้าid ไม่ได้อยู่ช่วง ให้กำหนดเป็นมกุล 0 โดยทันที
-				$id = 2;
+			if($id <1 || $id>11) // ถ้าid ไม่ได้อยู่ช่วง ให้กำหนดเป็นมกุล 0 โดยทันที
+			{ 
+				$id = 0;
 			}
 		}
+		if($id >= 10) {
+			$id = 0;	
+		}  // End set id
+
 		$scripts['scripts'][0] = "";
 		$scripts['css'][0] = "";
 		$detail['header'] = "Challenger";
@@ -62,12 +69,9 @@ class Challenger extends CI_Controller
 		$detail['Profile'][0]= $this->auth->user();
 		$detail['Profile'][1]= $this->auth->userRoles();
 		$detail['Profile'][2]= $this->auth->userName();
-		$data['User_list'] = $this->User->find_by_role($id);
-		$data['cluster_id'] = $id-2;
-		/*$scripts['scripts'][0] = 'assets/js/plugins/highchart/highcharts.js';
-		$scripts['scripts'][1] = 'assets/js/moment.js';
-		$scripts['scripts'][2] = 'assets/js/daterangepicker.js';
-		$scripts['css'][1] = 'assets/css/custom.css';*/
+		$data['User_list'] = $this->User->find_by_role($id+1);
+		$data['cluster_id'] = $id;
+
 		$this->load->view('includes/header',$scripts);
 		$this->load->view('includes/sidebar',$detail);
 		$this->load->view('v_challenger',$data);

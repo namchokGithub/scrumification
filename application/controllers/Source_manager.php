@@ -28,7 +28,8 @@ class Source_manager extends CI_Controller
 		if(!hasRole(['ScrumMaster'])){
 			redirect('home');
 		}
-    }
+	}
+	//-----------------------------------  End __contructor -----------------------------------
 	
 	/**
      * Display a Setup System.
@@ -53,7 +54,7 @@ class Source_manager extends CI_Controller
 		$scripts['css'][4] = "assets/bower_components/other/jquery.datetimepicker.css";
 		$scripts['css'][5] = "assets/bower_components/other/select2.css";
 		$scripts['css'][6] = "assets/bower_components/toastr/toastr.min.css";
-		$detail['header'] = $name." manager";
+		$detail['header'] = $name;
 		// $detail['header'] = $name." Manager";
 		$scripts['Profile'][0] = $this->auth->user();
 		$scripts['Profile'][1] = $this->auth->userRoles();
@@ -71,6 +72,7 @@ class Source_manager extends CI_Controller
 		$this->load->view("manager/v_".$name,$data);
 		$this->load->view('includes/footer');
 	}
+	//-----------------------------------  End Setup_View -----------------------------------
 	
 	/**
      * Display a ViewManager.
@@ -81,7 +83,8 @@ class Source_manager extends CI_Controller
      */
 	public function index($name){
 		$this->Setup_View($name);
-	}		
+	}
+	//-----------------------------------  End index -----------------------------------
 	
 	/**
      * Select Data.

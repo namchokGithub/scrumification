@@ -32,7 +32,8 @@ function numberWithCommas(x) {
 	var raw_number = parseInt(x);
 	return raw_number.toLocaleString();
 }
-  var columnDefs = [
+
+var columnDefs = [
 		{ data: "name"},
 		{ data: "username"},
 		{ data: "password"},
@@ -41,92 +42,91 @@ function numberWithCommas(x) {
 							return data;
 						}}
 	];
-  var myTable;
-  var topic_name = "users";
-  // local URL's are not allowed
-  var url_get = "<?php echo site_url("Source_manager/get_data/");?>"+topic_name;
-  var url_add = "<?php echo site_url("Source_manager/add_user/");?>"+topic_name;
-  var url_delete = "<?php echo site_url("Source_manager/delete_data/");?>"+topic_name;
+var myTable;
+var topic_name = "users";
+// local URL's are not allowed
+var url_get = "<?php echo site_url("Source_manager/get_data/");?>"+topic_name;
+var url_add = "<?php echo site_url("Source_manager/add_user/");?>"+topic_name;
+var url_delete = "<?php echo site_url("Source_manager/delete_data/");?>"+topic_name;
   
-	
 /**
- * Setup User Interface.
- *
- * @Author	Jiranuwat Jaiyen       
- * @Create Date	22-03-2563
- * @return mixed
- */
-  myTable = $('#example').DataTable({
-    "sPaginationType": "full_numbers",
-        ajax: 
-		 {
-            "url": url_get,
-            "dataSrc": ""
-        },
-    columns: columnDefs,  // columns from above
+* Setup User Interface.
+*
+* @Author	Jiranuwat Jaiyen       
+* @Create Date	22-03-2563
+* @return mixed
+*/
+myTable = $('#example').DataTable({
+	"sPaginationType": "full_numbers",
+		ajax: 
+			{
+			"url": url_get,
+			"dataSrc": ""
+		},
+	columns: columnDefs,  // columns from above
 	initComplete: function (settings, json) {
-        $(".btn").removeClass("dt-button");
-    },
-    rowId: 'id',
+		$(".btn").removeClass("dt-button");
+	},
+	rowId: 'id',
 	order:[],
-    dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
-    select: 'single',     // enable single row selection
-    responsive: true,     // enable responsiveness
-    altEditor: true,      // Enable altEditor ****
-    buttons: [{
-      text: '<i class="fa fa-plus-square"></i> เพิ่มชุดข้อมูล',
-      name: 'add',     // DO NOT change name
-	  "className": 'btn btn-info btn-lg' 
-    },
-    {
-      extend: 'selected', // Bind to Selected row
-      text: '<i class="fa fa-trash"></i> ลบชุดข้อมูล',
-      name: 'delete',     // DO NOT change name
-	  "className": 'btn btn-danger btn-lg' 
-   }],
-        onAddRow: function(datatable, rowdata, success, error) {
+	dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
+	select: 'single',     // enable single row selection
+	responsive: true,     // enable responsiveness
+	altEditor: true,      // Enable altEditor ****
+	buttons: [{
+		text: '<i class="fa fa-plus-square"></i> เพิ่มชุดข้อมูล',
+		name: 'add',     // DO NOT change name
+		"className": 'btn btn-info btn-lg' 
+	},
+	{
+		extend: 'selected', // Bind to Selected row
+		text: '<i class="fa fa-trash"></i> ลบชุดข้อมูล',
+		name: 'delete',     // DO NOT change name
+		"className": 'btn btn-danger btn-lg' 
+	}],
+		onAddRow: function(datatable, rowdata, success, error) {
 			if(rowdata['code']==''){
-				 delete rowdata['code']
+					delete rowdata['code']
 			}
 			console.log(datatable, rowdata, success, error)
-            $.ajax({
-                // a tipycal url would be / with type='PUT'
-                url: url_add,
-                type: 'POST',
+			$.ajax({
+				// a tipycal url would be / with type='PUT'
+				url: url_add,
+				type: 'POST',
 				async :false,
-                data: rowdata,
-                success:success,
-                error: error
-            });
+				data: rowdata,
+				success:success,
+				error: error
+			});
 			datatable.s.dt.ajax.reload();
-        },
-        onEditRow: function(datatable, rowdata, success, error) {
+		},
+		onEditRow: function(datatable, rowdata, success, error) {
 			rowdata['id'] = datatable.s.dt.rows( { selected: true } ).data()[0]['id']
-            $.ajax({
-                // a tipycal url would be /{id} with type='POST'
-                url: url_edit,
-                type: 'POST',
+			$.ajax({
+				// a tipycal url would be /{id} with type='POST'
+				url: url_edit,
+				type: 'POST',
 				async :false,
-                data: rowdata,
-                success: success,
-                error: error
-            });
+				data: rowdata,
+				success: success,
+				error: error
+			});
 			datatable.s.dt.ajax.reload();
-        },
-        onDeleteRow: function(datatable, rowdata, success, error) {
+		},
+		onDeleteRow: function(datatable, rowdata, success, error) {
 			rowdata['id'] = datatable.s.dt.rows( { selected: true } ).data()[0]['id']
-            $.ajax({
-                // a tipycal url would be /{id} with type='DELETE'
-                url: url_delete,
-                type: 'POST',
+			$.ajax({
+				// a tipycal url would be /{id} with type='DELETE'
+				url: url_delete,
+				type: 'POST',
 				async :false,
-                data: rowdata,
-                success: success,
-                error: error
-            });
+				data: rowdata,
+				success: success,
+				error: error
+			});
 			datatable.s.dt.ajax.reload();
-        }
-  });
+		}
+});
 </script>
 
 <style>

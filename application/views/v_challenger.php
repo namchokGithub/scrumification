@@ -31,8 +31,8 @@ $(document).ready(function(){
 	<div style="font-size: x-large;font-weight: 600; text-align: right;">
 		<select id="select-opt">
 		  <option value="">Select Cluster</option>
-		  <?php for($i=2;$i<12;$i++){?>
-		  <option value="<?php echo site_url('challenger/index/'.$i); ?>">Cluster <?php echo $i-2; ?></option>
+		  <?php for($i=0;$i<10;$i++){?>
+		  	<option value="<?php echo site_url('challenger/index/'.$i); ?>">Cluster <?php echo $i; ?></option>
 		  <?php } ?>
 		</select>
 	</div>
@@ -51,15 +51,14 @@ $(document).ready(function(){
 	<ul class="users-list clearfix">
 	<?php foreach($User_list as $row){?>
 		<li class="col-md-4 col-xs-6">
-		  <img src="<?php echo base_url('assets/dist/img/user/'.$row['username'].'.jpg');?>" alt="User Image" onerror="this.onerror=null;this.src='<?php echo base_url('assets/dist/img/user/unknown-who.jpg'); ?>';" style="object-fit: cover; object-position: center;margin: 7px 0px;width: 200px;height: 200px;">
-		  <span class="users-list-name" style="margin-top: 15px;font-size: 22px;"><?php echo $row["username"] ?></span>
-		  <span class="users-list-name" href="#<?php echo $row["user_name"] ?>" style="font-size: 17px;" ><?php echo $row["user_name"] ?></span>
-		  <?php if($row["secon_role"] !== null ){ ?>
-		  <span class="users-list-date" style="font-size: 17px;"><?php echo $row["secon_role"]; ?></span>
-		  <?php }else{ ?>
-		  <span class="users-list-date" style="font-size: 17px;"><?php echo $row["role_name"]; ?></span>
-		  <?php } ?>
-		  
+			<img src="<?php echo base_url('assets/dist/img/user/'.$row['username'].'.jpg');?>" alt="User Image" onerror="this.onerror=null;this.src='<?php echo base_url('assets/dist/img/user/unknown-who.jpg'); ?>';" style="object-fit: cover; object-position: center;margin: 7px 0px;width: 200px;height: 200px;">
+			<span class="users-list-name" style="margin-top: 15px;font-size: 22px;"><?php echo $row["username"] ?></span>
+			<span class="users-list-name" href="#<?php echo $row["user_name"] ?>" style="font-size: 17px;" ><?php echo $row["user_name"] ?></span>
+			<?php if($row["secon_role"] !== null ){ ?>
+			<span class="users-list-date" style="font-size: 17px;"><?php echo $row["secon_role"]; ?></span>
+			<?php }else{ ?>
+			<span class="users-list-date" style="font-size: 17px;"><?php echo $row["role_name"]; ?></span>
+			<?php } ?>
 		</li>
 	<?php } ?>
      </ul>
