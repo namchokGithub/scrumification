@@ -47,29 +47,51 @@ class User extends CI_Model
      *
 	 * @Author	Jiranuwat Jaiyen       
 	 * @Create Date	22-03-2563
+     * Update: Namchok Singhachai
      * @param $role_id
      * @return mixed
      */
 	public function get_all_Achievement($role_id)
     {
-		$sql="SELECT achievement.id ,achievement.detail , roles_users.role_id,ceil(Max_user_table.count_user_role) as level,achievement.name ,point,count(*) as count_user FROM `achievement`
-			INNER JOIN activity_checkin on activity_checkin.activity_id =achievement.targle_activity
+		$sql="SELECT achievement.id 
+                    ,achievement.detail 
+                    ,roles_users.role_id
+                    ,ceil(Max_user_table.count_user_role) as level
+                    ,achievement.name 
+                    ,point
+                    ,count(*) as count_user 
+            
+            FROM `achievement`
+			INNER JOIN activity_checkin on activity_checkin.activity_id =achievement.target_activity
 			LEFT JOIN users on users.id = activity_checkin.user_id
 			LEFT JOIN roles_users on users.id = roles_users.user_id
-			LEFT JOIN (SELECT role_id,COUNT(*) as count_user_role
-							FROM `roles_users`
-							GROUP BY role_id) as Max_user_table on Max_user_table.role_id = roles_users.role_id
-			
-			WHERE achievement.targle_activity != 0  AND roles_users.role_id = $role_id
-			GROUP BY achievement.id,roles_users.role_id
+			LEFT JOIN (
+                        SELECT role_id,COUNT(*) as count_user_role
+						FROM `roles_users`
+						GROUP BY role_id 
+                       ) as Max_user_table on Max_user_table.role_id = roles_users.role_id
+			WHERE achievement.target_activity != 0  AND roles_users.role_id = $role_id
+			GROUP BY achievement.id, roles_users.role_id
+
 			UNION
-			SELECT achievement.id  ,achievement.detail, log_achievement.role_id,1 as level,achievement.name ,point,count(*) as count_user  FROM `achievement`
+
+			SELECT achievement.id  
+                   ,achievement.detail 
+                   ,log_achievement.role_id
+                   ,1 as level
+                   ,achievement.name 
+                   ,point
+                   ,count(*) as count_user  
+            
+            FROM `achievement`
 			LEFT JOIN log_achievement on log_achievement.achievement_id =achievement.id
-			LEFT JOIN (SELECT role_id,COUNT(*) as count_user_role
-							FROM `roles_users`
-							GROUP BY role_id) as Max_user_table on Max_user_table.role_id = log_achievement.role_id
-			WHERE achievement.targle_activity = 0 AND log_achievement.role_id = $role_id
-			GROUP BY achievement.id,log_achievement.role_id";
+			LEFT JOIN (
+                        SELECT role_id,COUNT(*) as count_user_role
+						FROM `roles_users`
+						GROUP BY role_id
+                       ) as Max_user_table on Max_user_table.role_id = log_achievement.role_id
+			WHERE achievement.target_activity = 0 AND log_achievement.role_id = $role_id
+			GROUP BY achievement.id, log_achievement.role_id";
 		return $this->db->query($sql)->result_array();	
     }
 	
@@ -82,25 +104,51 @@ class User extends CI_Model
      */
 	public function calulate_point()
     {
-		$sql="SELECT *, SUM(raw_data.TotalPoint) as Last_TotalPoint FROM (
-			SELECT achievement.id ,achievement.detail , roles_users.role_id,achievement.name ,point,count(*) as count_user ,((count(*)/ceil(Max_user_table.count_user_role) )*point) as TotalPoint FROM `achievement`
-						INNER JOIN activity_checkin on activity_checkin.activity_id =achievement.targle_activity
-						LEFT JOIN users on users.id = activity_checkin.user_id
-						LEFT JOIN roles_users on users.id = roles_users.user_id
-						LEFT JOIN (SELECT role_id,COUNT(*) as count_user_role
-                                        FROM `roles_users`
-                                        GROUP BY role_id) as Max_user_table on Max_user_table.role_id = roles_users.role_id
-						WHERE achievement.targle_activity != 0 
-						GROUP BY achievement.id,roles_users.role_id
-						UNION
-						SELECT achievement.id  ,achievement.detail, log_achievement.role_id,achievement.name ,point,count(*) as count_user ,((count(*)/1)*point) as TotalPoint FROM `achievement`
-						LEFT JOIN log_achievement on log_achievement.achievement_id =achievement.id
-						LEFT JOIN (SELECT role_id,COUNT(*) as count_user_role
-                                        FROM `roles_users`
-                                        GROUP BY role_id) as Max_user_table on Max_user_table.role_id = log_achievement.role_id
-						WHERE achievement.targle_activity = 0 
-						GROUP BY achievement.id,log_achievement.role_id) as raw_data
-			GROUP BY raw_data.role_id";
+		$sql="SELECT * 
+                    ,SUM(raw_data.TotalPoint) as Last_TotalPoint 
+            FROM (
+                    SELECT achievement.id 
+                        ,achievement.detail 
+                        ,roles_users.role_id 
+                        ,achievement.name 
+                        ,point 
+                        ,count(*) as count_user 
+                        ,((count(*)/ceil(Max_user_table.count_user_role) )*point) as TotalPoint 
+                    FROM `achievement`
+                    INNER JOIN activity_checkin on activity_checkin.activity_id =achievement.target_activity
+                    LEFT JOIN users on users.id = activity_checkin.user_id
+                    LEFT JOIN roles_users on users.id = roles_users.user_id
+                    LEFT JOIN (
+                                SELECT role_id,COUNT(*) as count_user_role
+                                FROM `roles_users`
+                                GROUP BY role_id
+                            ) as Max_user_table on Max_user_table.role_id = roles_users.role_id
+                                
+                    WHERE achievement.target_activity != 0 
+                    GROUP BY achievement.id,roles_users.role_id
+                    
+                    UNION
+                    
+                    SELECT achievement.id  
+                        ,achievement.detail 
+                        ,log_achievement.role_id
+                        ,achievement.name 
+                        ,point
+                        ,count(*) as count_user 
+                        ,((count(*)/1)*point) as TotalPoint 
+                    FROM `achievement`
+                    LEFT JOIN log_achievement on log_achievement.achievement_id =achievement.id
+                    LEFT JOIN (
+                                SELECT role_id,COUNT(*) as count_user_role
+                                FROM `roles_users`
+                                GROUP BY role_id
+                            ) as Max_user_table on Max_user_table.role_id = log_achievement.role_id
+
+                    WHERE achievement.target_activity = 0 
+                    GROUP BY achievement.id ,log_achievement.role_id
+                ) as raw_data
+            GROUP BY raw_data.role_id";
+            
 		$raw_data = $this->db->query($sql)->result_array();
 		
 		foreach($raw_data as $row_data){

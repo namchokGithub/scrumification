@@ -76,7 +76,7 @@ function numberWithCommas(x) {
 						}
 					},
 					{
-						data: "targle_activity",
+						data: "target_activity",
 						type : "select",
 						options : Options,
 						select2 : { width: "100%"},

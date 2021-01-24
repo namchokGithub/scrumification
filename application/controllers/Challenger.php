@@ -57,8 +57,8 @@ class Challenger extends CI_Controller
 			}
 		}
 		if($id >= 10) {
-			$id = 0;	
-		}  // End set id
+			$id = 0;
+		} // End set id
 
 		$scripts['scripts'][0] = "";
 		$scripts['css'][0] = "";

@@ -60,7 +60,7 @@
 			// a tipycal url would be /{id} with type='POST'
 			url: url_get_option_achievement,
 			type: 'POST',
-			data: {targle_activity:0},
+			data: {target_activity:0},
 			dataType: "json",
 			async:false,
 			success: function(a){

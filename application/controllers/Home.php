@@ -24,6 +24,40 @@ class Home extends BaseController
         parent::__construct();
     } // End construct
 
+
+	/**
+	 * Output for view
+	 * Name: Namchok Singhchai
+	 * Date: 2020-01-24
+	 * Paremeter: $view, $header
+	 */
+    public function output($view, $header = "untitled") {
+        $this->auth->authenticate();
+
+		$detail['header'] = $header;
+		$scripts['Profile'][0] = $this->auth->user();
+		$scripts['Profile'][1] = $this->auth->userRoles();
+		$scripts['Profile'][2]= $this->auth->userName();
+		$detail['Profile'][0]= $this->auth->user();
+		$detail['Profile'][1]= $this->auth->userRoles();
+		$detail['Profile'][2]= $this->auth->userName();
+
+		$data['Data_list'] = $this->User->all_Activity();
+		$data['userRoles'] = $this->auth->userWiseRoles();
+		/**
+		 *    กรณีลำดับไอดีตำแหน่งอยู่ไม่ได้อยู่ในช่วงมกุล จะถูกตรวจสอบ โดย ถ้าไอดีมากกว่า จะถูกนำไปลบระยะห่างของมกุล 
+		 */
+		if($data['userRoles'][0] >13){
+			$data['userRoles'][0] = $data['userRoles'][0] - 11;
+		}
+
+		$this->load->view('includes/header',$scripts);
+		$this->load->view('includes/sidebar',$detail);
+		$this->load->view($view, $data);
+		$this->load->view('includes/footer');
+	}
+	// ------------------------------------------------- End Output ----------------------------------------- //
+
     /**
      * Display a Dashboard.
      *
@@ -91,14 +125,15 @@ class Home extends BaseController
 
 		/* Valid Extensions */
 		$valid_extensions = array("jpg");
+
 		/* Check file extension */
-		if( !in_array(strtolower($imageFileType),$valid_extensions) ) {
+		if( !in_array(strtolower($imageFileType), $valid_extensions) ) {
 		   $uploadOk = 0;
 		}
 
 		if($uploadOk == 0){
 		   echo 1;
-		}else{
+		} else {
 		   /* Upload file */
 		   if(move_uploaded_file($_FILES['file']['tmp_name'],$location)){
 			  echo $location;

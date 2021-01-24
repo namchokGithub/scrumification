@@ -129,7 +129,8 @@ class Source_manager extends CI_Controller
 		unset($data['undefined']);
 		$this->User->add($data);
 		echo json_encode($data);
-    }
+	}
+	
     /**
      * Edit Data.
      *

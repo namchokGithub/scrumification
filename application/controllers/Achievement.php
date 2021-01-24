@@ -58,9 +58,10 @@ class Achievement extends CI_Controller
 		}
 		if($id >= 10) {
 			$id = 0;	
-		}  // End set id
+		} // End set id
 		
-        $this->auth->authenticate();
+		$this->auth->authenticate();
+		
 		$scripts['scripts'][0] = "assets/dist/js/countdown.js";
 		$scripts['scripts'][1] = 'assets/bower_components/moment/moment.js';
 		$scripts['scripts'][2] = 'assets/bower_components/OwlCarousel2/dist/owl.carousel.min.js';
@@ -68,6 +69,7 @@ class Achievement extends CI_Controller
 		$scripts['css'][0] = "assets/bower_components/OwlCarousel2/dist/assets/owl.carousel.min.css";
 		$scripts['css'][1] = "assets/bower_components/OwlCarousel2/dist/assets/owl.theme.default.min.css";
 		$scripts['css'][2] = "assets/bower_components/toastr/toastr.min.css";
+
 		$detail['header'] = "Shopping";
 		$scripts['Profile'][0] = $this->auth->user();
 		$scripts['Profile'][1] = $this->auth->userRoles();
@@ -75,15 +77,14 @@ class Achievement extends CI_Controller
 		$detail['Profile'][0]= $this->auth->user();
 		$detail['Profile'][1]= $this->auth->userRoles();
 		$detail['Profile'][2]= $this->auth->userName();
+		
 		$data['point_list'] = $this->User->get_all_point();
 		$data['individual_list'] = $this->User->get_all_individual();
 		$data['Profile']= $this->auth->userRoles();
 		$data['Secon_targle']= $this->User->can_Activity();
 		$data['Role_can'] = $this->User->find_by_username($this->auth->userName());
-		$data['id'] = $id-2;
-		/*$scripts['scripts'][0] = 'assets/js/plugins/highchart/highcharts.js';
-		$scripts['scripts'][2] = 'assets/js/daterangepicker.js';
-		$scripts['css'][1] = 'assets/css/custom.css';*/
+		$data['id'] = $id;
+
 		$this->load->view('includes/header',$scripts);
 		$this->load->view('includes/sidebar',$detail);
 		$this->load->view('v_achievement',$data);

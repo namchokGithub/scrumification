@@ -71,17 +71,17 @@
         <div style="margin-left: auto;"><i class="fa fa-chevron-down" id="collapse_icon"></i></div>
     </div>
     <div class="panel-body collapse in" id="Panel_Challenger">
-        <?php for($i=0;$i<10;$i++){?>
-        <div class="<?php echo ((1==($i+1)%5)?" col-lg-offset-1 ":" "); ?>col-lg-2 col-md-4 col-sm-4 col-xs-6 card_group" id="<?php echo $i;?>">
+        <?php for($i=1;$i<11;$i++){?>
+        <div class="<?php echo ((1==($i)%5)?" col-lg-offset-1 ":" "); ?>col-lg-2 col-md-4 col-sm-4 col-xs-6 card_group" id="<?php echo $i;?>">
             <div class="card">
                 <div class="box box-widget widget-user" style="border-radius: 5%;border: 5px solid #3282b8  !important;background-color:#3282b8">
                     <!-- Add the bg color to the header using any of the bg-* classes -->
-                    <div class="widget-user-header " style="border-radius: 5px 5px 0px 0px;background: url('<?php echo base_url('assets/dist/img/cluster/cluster'.$i.'.png'); ?>') center center;background-color: #bbe1fa ;height: 180px;background-size: contain;background-origin: content-box;background-repeat: no-repeat;">
+                    <div class="widget-user-header " style="border-radius: 5px 5px 0px 0px;background: url('<?php echo base_url('assets/dist/img/cluster/cluster'.($i-1).'.png'); ?>') center center;background-color: #bbe1fa ;height: 180px;background-size: contain;background-origin: content-box;background-repeat: no-repeat;">
                     </div>
 
                     <div class="box-footer bg-maroon card-header-font" style="background-color:#3282b8  !important;text-align: center;padding-top: 0px;border-top: 0px !important">
                         Cluster
-                        <?php echo $i; ?>
+                        <?php echo ($i-1); ?>
                         <!-- /.row -->
                     </div>
                     <div id="<?php echo $i;?>" class="box-footer bg-navy button_card mainreward card-button-font" style=" border-top: 0px !important;cursor: pointer;text-align: center;padding-top: 0px;display: inline-block; width: 50%;position: absolute; bottom: 0;">
@@ -246,17 +246,20 @@
             $(this).closest('#card_reward').find('.progress-bar').attr("style", "width:0%")
 		})
 
+        // For cluster in SE BUU
+        let cluster_se_buu = targle_id-1;
+        $(".cluster_title").text(targle_id-1);
 		// Show URL of activity
-		// console.log("<?php echo site_url("Home/get_Activity/"); ?>" + targle_id);
 		// ------------- Get activity -----------------------
-        $.get("<?php echo site_url("Home/get_Activity/"); ?>" + (parseInt(targle_id)+1),
+        $.get("<?php echo site_url("Home/get_Activity/"); ?>" + (parseInt(targle_id)),
             function(data, status) {
-				console.log(data)
-				// console.log(status)
-                $(".cluster_title").text(targle_id)
+                console.log('-------- Get activity (Group: '+cluster_se_buu+') -------- ')
+				console.log(' -- Status: ' + status + ' -- \n')
+                console.log(JSON.parse(data))
+
                 var raw_data = JSON.parse(data);
                 var max_user = 10
-                console.log(raw_data);
+
                 if (raw_data != '') {
                     if(raw_data[0]['max_user']==null) {
                         max_user = 1000;
@@ -264,13 +267,13 @@
                         max_user = raw_data[0]['max_user'];
                     }
                 }
-                
-                // var max_user = raw_data[0]['max_user'];
+
                 $(".info-box-text").each(function() {
                     $(this).closest('#card_reward').attr('class', 'info-box bg-red');
                     $(this).closest('#card_reward').find('.info-box-number').html("0/" + max_user + '<span style=" position: absolute; right: 20px; ">0%</span>')
                     $(this).closest('#card_reward').find('.progress-bar').attr("style", "width:0%")
                 })
+
                 for (var i = 0; i < raw_data.length; i++) {
                     var targle_text = raw_data[i]["name"]
                     var user_now = raw_data[i]["count_user"];
@@ -303,38 +306,43 @@
 		// End get activity
 			
 		// ------------ Get achievement -------------------------
-        $.get("<?php echo site_url("Home/get_all_Achievement/"); ?>" + (targle_id+1),
+        $.get("<?php echo site_url("Home/get_all_Achievement/"); ?>" + (targle_id),
             function(data, status) {
+                console.log('-------- Get achievement (Group: '+cluster_se_buu+') -------- ')
+                console.log(' -- Status: ' + status + ' -- \n')
+                console.log(JSON.parse(data))
+                
                 var raw_data = JSON.parse(data);
-                // console.log(raw_data)
                 $("#Achievement_row").empty();
+
                 for (var i = 0; i < raw_data.length; i++) {
 
                     var star_text = "";
                     var count_time = parseInt(raw_data[i]["count_user"]/raw_data[i]["level"]);
+
                     if (count_time !== 0) {
-                        // console.log(count_time)
                         for (j = 1; j <= count_time; j++) {
                             star_text += '<i class="fa fa-star" style="font-size:30px"></i>';
                         }
                     } else {
                         star_text += '<i class="fa fa-star-o" style="font-size:30px"></i>';
                     }
+
                     $("#Achievement_row").append(
                         '<div class="col-md-6 col-xs-12 Achievement">' +
-                        '<div id="Achievement" class="info-box bg-green-active " style="border: 4px solid #2b918d;">' +
-                        `<span class="info-box-icon"><div style="background: url('<?php echo base_url('assets/dist/img/achi_icon.png'); ?>'); center center;height: 75%; margin-top: 25%; background-size: contain; background-origin: content-box; background-repeat: no-repeat;"></div></span>` +
-                        '<div class="info-box-content" style="background-color:white;color:black">' +
-                        '<span class="info-box-number">' + raw_data[i]['name'] + '</span>' +
-                        '<span class="info-box-text">' + raw_data[i]['detail'] + '</span>' +
-                        '<div class="progress" style=" height: 3px; ">' +
-                        '<div class="progress-bar" style="width: 100%;background: #36b5b0;"></div>' +
-                        '</div>' +
-                        '<span class="progress-description">' +
-                        star_text +
-                        '</span>' +
-                        '</div>' +
-                        '</div>' +
+                            '<div id="Achievement" class="info-box bg-green-active " style="border: 4px solid #2b918d;">' +
+                                `<span class="info-box-icon"><div style="background: url('<?php echo base_url('assets/dist/img/achi_icon.png'); ?>'); margin: 10px 10px 10px 10px;height: 75%; background-size: contain; background-origin: content-box; background-repeat: no-repeat;"></div></span>` +
+                                '<div class="info-box-content" style="background-color:white;color:black">' +
+                                    '<span class="info-box-number">' + raw_data[i]['name'] + '</span>' +
+                                    '<span class="info-box-text">' + raw_data[i]['detail'] + '</span>' +
+                                    '<div class="progress" style=" height: 3px; ">' +
+                                        '<div class="progress-bar" style="width: 100%;background: #36b5b0;"></div>' +
+                                    '</div>' +
+                                    '<span class="progress-description">' +
+                                        star_text +
+                                    '</span>' +
+                                '</div>' +
+                            '</div>' +
                         '</div>'
                     );
                 }
