@@ -30,7 +30,7 @@ class BaseController extends CI_Controller
 	 * Date: 2020-01-24
 	 * Paremeter: $view, $header
 	 */
-    public function output($view, $header = "untitled") {
+    public function output($view, $header = "untitled", $data) {
         $this->auth->authenticate();
 
 		$detail['header'] = $header;

@@ -246,9 +246,10 @@
             $(this).closest('#card_reward').find('.progress-bar').attr("style", "width:0%")
 		})
 
-        // For cluster in SE BUU
+        //----------------- For cluster in SE BUU -----------------
         let cluster_se_buu = targle_id-1;
         $(".cluster_title").text(targle_id-1);
+
 		// Show URL of activity
 		// ------------- Get activity -----------------------
         $.get("<?php echo site_url("Home/get_Activity/"); ?>" + (parseInt(targle_id)),
@@ -274,7 +275,8 @@
                     $(this).closest('#card_reward').find('.progress-bar').attr("style", "width:0%")
                 })
 
-                for (var i = 0; i < raw_data.length; i++) {
+                for (var i = 0; i < raw_data.length; i++) 
+                {
                     var targle_text = raw_data[i]["name"]
                     var user_now = raw_data[i]["count_user"];
                     var percent = user_now / max_user * 100

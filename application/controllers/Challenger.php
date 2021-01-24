@@ -2,11 +2,11 @@
 /**
  * @Author	Jiranuwat Jaiyen       
  * @Create Date	22-03-2563
- *
+ * Update: Namchok Singhachai
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Challenger extends CI_Controller
+require_once(dirname(__FILE__) . "/BaseController.php");
+class Challenger extends BaseController
 {
     /*
     |--------------------------------------------------------------------------
@@ -21,11 +21,7 @@ class Challenger extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        date_default_timezone_set('asia/bangkok');
-		$this->load->library('auth');
-        $this->auth->authenticate();
-		//var_dump(can(['Editor', 'publish-posts']));
-    }
+    } // End construct
 
     /**
      * Display a Challenger.
@@ -51,31 +47,21 @@ class Challenger extends CI_Controller
 			if($id>13){
 				$id = $id - 13;
 			}
-			if($id <1 || $id>11) // ถ้าid ไม่ได้อยู่ช่วง ให้กำหนดเป็นมกุล 0 โดยทันที
+			if($id <1 || $id>11) // ถ้า id ไม่ได้อยู่ช่วง ให้กำหนดเป็นมกุล 0 โดยทันที
 			{ 
-				$id = 0;
+				$id = 1;
 			}
 		}
-		if($id >= 10) {
-			$id = 0;
+
+		if($id > 10) {
+			$id = 1;
 		} // End set id
 
-		$scripts['scripts'][0] = "";
-		$scripts['css'][0] = "";
-		$detail['header'] = "Challenger";
-		$scripts['Profile'][0] = $this->auth->user();
-		$scripts['Profile'][1] = $this->auth->userRoles();
-		$scripts['Profile'][2]= $this->auth->userName();
-		$detail['Profile'][0]= $this->auth->user();
-		$detail['Profile'][1]= $this->auth->userRoles();
-		$detail['Profile'][2]= $this->auth->userName();
-		$data['User_list'] = $this->User->find_by_role($id+1);
+		// +1 For Cluster SE BUU
+		$data['User_list'] = $this->User->find_by_role($id);
 		$data['cluster_id'] = $id;
 
-		$this->load->view('includes/header',$scripts);
-		$this->load->view('includes/sidebar',$detail);
-		$this->load->view('v_challenger',$data);
-		$this->load->view('includes/footer');
+		$this->output('v_challenger', "Challenger", $data);
     }
 	
 }
