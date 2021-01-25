@@ -3,8 +3,19 @@
  -
  - @Author	Jiranuwat Jaiyen 
  - @Create Date 22-03-2563
+ - Update: Namchok Singhachai
 -->
 <style>
+
+    .time_out {
+        text-decoration: none; 
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+
+    th {
+        text-align: center !important;
+    }
     #clock {
         font-family: kanit;
         font-size: 60px;
@@ -36,17 +47,19 @@
         }
     }
 </style>
+<!-- End Style -->
+
 <div class="panel panel-primary">
-    <div class="panel-heading" style=" font-size: 28px; ">Activity Cluster
-        <?php echo $id; ?>
+    <div class="panel-heading" style=" font-size: 28px; ">Activities of Group
+        <?php echo $id-1; ?>
     </div>
     <div class="panel-body">
         <div>
             <div style="font-size: x-large;font-weight: 600; text-align: right;">
                 <select id="select-opt">
-					<option value="">Select Cluster</option>
-					<?php for($i=0;$i<10;$i++){?>
-					<option value="<?php echo site_url('mainreward/index/'.$i); ?>">Cluster <?php echo $i; ?>
+					<option value="" disabled selected>Select Cluster</option>
+					<?php for($i=1;$i<11;$i++){?>
+					<option value="<?php echo site_url('mainreward/index/'.$i); ?>">Cluster <?php echo $i-1; ?>
 					</option>
 					<?php } ?>
 				</select>
@@ -54,7 +67,7 @@
             <div id="clock"></div>
 			<div id="clock" style="width: 360px;margin-right: auto;	margin-left: auto;font-size: 42px;margin-top:-25px;	position: relative;	height: 70px;">
 				<span style="left: 0px;	position: absolute;	">ชั่วโมง</span>
-				<span style="left: 135px;	position: absolute;">นาที</span>
+				<span style="left: 135px; position: absolute;">นาที</span>
 				<span style="left: 235px;position: absolute;">วินาที</span></div>
 
             <!-- Set up your HTML -->
@@ -70,10 +83,8 @@
                                 <?php echo $row["name"] ?>
                             </h3>
 
-                            <p style="color: black !important;font-size:20px" id="time">
-                                <?php echo $row["time_start"] ?> -
-                                <?php echo $row["time_end"] ?>
-                            </p>
+                            <!-- ห้ามเว้นวรรคตอนแสดงเวลา -->
+                            <p style="color: black !important;font-size:20px; font-family: 'Prompt', sans-serif !important;" id="time"><?php echo $row["time_start"] ?> - <?php echo $row["time_end"] ?></p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-clipboard"></i>
@@ -85,10 +96,10 @@
             <div style=" color: #C73523;font-size:18px ">
                 หมายเหตุ : สามารถคลิกค้างที่ Card เพื่อทำการเลื่อนไปทางซ้ายหรือขวาได้
             </div>
-            <div id="time_now" style="text-align: center;font-size:32px"></div>
+            <div id="time_now" style="margin: 10px 0px 10px 0px; text-align: center;font-size:32px"></div>
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title" style="font-family:prompt;font-weight:700">ตารางแสดงตำแหน่งหน้าที่ในทีม</h3>
+                    <h3 class="box-title" style="font-family:prompt;font-weight:700">ตารางแสดงรายชื่อสมาชิกในมกุล</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body no-padding" style=" overflow-x: auto; overflow-y: hidden; ">
@@ -96,14 +107,20 @@
                         <tbody>
 
                             <tr style="border-bottom: solid red;">
-                                <th style="width: 80px">ID</th>
+                                <th style="width: 40px">ลำดับ</th>
+                                <th style="width: 120px">รหัสประจำตัว</th>
                                 <th>ชื่อ - นามสกุล</th>
                                 <th>ตำแหน่ง</th>
                                 <th style="width: 40px">สถานะ</th>
                             </tr>
 
-                            <?php foreach($User_list as $row ){ ?>
+                            <?php 
+                            $i = 1;
+                            foreach($User_list as $row ){ ?>
                             <tr style="border-bottom: solid skyblue;" class="row_data">
+                                <td class="text-center">
+                                    <?php echo $i++; ?>
+                                </td>
                                 <td>
                                     <?php echo $row["username"] ?>
                                 </td>
@@ -113,11 +130,10 @@
                                 <td>
                                     <?php if($row["secon_role"] !== null ){  echo $row["secon_role"]; } else{ echo substr($row["role_name"], 0, -1); } ?>
                                 </td>
-                                <td onclick="checkin(<?php echo $row['id']; ?>)" style="cursor: pointer;">
+                                <td onclick="checkin(<?php echo $row['id']; ?>)">
                                     <small class="label label-warning"><i class="fa fa-clock-o"></i> Wait </small>
                                 </td>
                             </tr>
-
                             <?php } ?>
                         </tbody>
                     </table>
@@ -131,9 +147,7 @@
         </div>
     </div>
 </div>
-
-
-
+<!-- End Activities of Group -->
 
 <script>
     $(document).ready(function() {
@@ -149,7 +163,7 @@
             items: 2,
             loop: false,
             margin: 10,
-            startPosition: <?php echo $targle; ?> ,
+            startPosition: <?php echo $target; ?> ,
             responsive : {
                 0: {
                     items: 1
@@ -194,7 +208,7 @@
      * @Create Date	22-03-2563
      */
     function checkin($user_id) {
-        $.get("<?php echo site_url("mainreward/add_Activity/"); ?>" + targle_input + "/" + $user_id,
+        $.get("<?php echo site_url("mainreward/add_Activity/"); ?>" + target_input + "/" + $user_id,
                function(data, status) {
 				   console.log('Successfully')
 			   }
@@ -210,6 +224,7 @@
                 toastr["error"]("Something Wrong!!<br> Please contact the developer.")
             })
     }
+
     /**
      * Reset Data and setup again
      *
@@ -218,19 +233,46 @@
      * @return mixed
      */
     function clear_get_data() {
-        $.get("<?php echo site_url("mainreward/get_Activity/"); ?>" + targle_input + "/<?php echo $id+1;?>",
+        $.get("<?php echo site_url("mainreward/get_Activity/"); ?>" + target_input + "/<?php echo $id;?>",
             function(data, status) {
-                $("table").find("tr[class=row_data]").each(function() {
-                    $(this).find("td").eq(3).html('<small class="label label-warning"><i class="fa fa-clock-o"></i> Wait </small>')
-                })
+
+                let new_time = $(".owl-item.center").find("#time").text().split(" ");
+                target_input = $(".owl-item.center").find("#ac_id").val();
+                
+                // console.log(new_time)
+                let start_time = new_time[0].split(":")
+                let end_time = new_time[2].split(":")
+                target = new Date(today.getFullYear(), today.getMonth(), today.getDate(), start_time[0], start_time[1], start_time[2])
+                target_intime = new Date(today.getFullYear(), today.getMonth(), today.getDate(), end_time[0], end_time[1], end_time[2])
+
+                if (today <= target) {
+                    // $("#time_now").css("font-family", "kanit").text("กิจกรรมจะเปิดในอีก " + countdown(target).toString())
+                    $("table").find("tr[class=row_data]").each(function() {
+                        $(this).find("td").last().removeAttr("onclick").html(`
+                            <small class="label bg-gray color-palette time_out"><i class="fa fa-clock-o"></i> Time Out </small>
+                        `);
+                    })
+                } else if (today <= target_intime) {
+                    $("table").find("tr[class=row_data]").each(function() {
+                        $(this).find("td").eq(4).html('<small style="cursor: pointer;" class="label label-warning"><i class="fa fa-clock-o"></i> Wait </small>')
+                    })
+                } else {
+                    // $("#time_now").css("font-family", "kanit").text("กิจกรรมได้ผ่านไปแล้ว " + countdown(target_intime).toString())
+                    $("table").find("tr[class=row_data]").each(function() {
+                        $(this).find("td").last().removeAttr("onclick").html(`
+                            <small class="label bg-gray color-palette time_out"><i class="fa fa-clock-o"></i> Time Out </small>
+                        `);
+                    })
+                }
+
 				// console.log(data)
                 var raw_data = JSON.parse(data);
                 for (var i = 0; i < raw_data.length; i++) {
                     var test_text = raw_data[i]["name"]
                         // console.log(raw_data[i]["name"])
                     $("table").find("tr[class=row_data]").each(function() {
-                        if ($(this).find("td").eq(1).text().replace(/\s/g, '') == test_text.replace(/\s/g, '')) {
-                            $(this).find("td").eq(3).html('<small class="label label-success"><i class="fa fa-clock-o"></i> Done </small>')
+                        if ($(this).find("td").eq(2).text().replace(/\s/g, '') == test_text.replace(/\s/g, '')) {
+                            $(this).find("td").eq(4).html('<small style="cursor: pointer;" class="label label-success"><i class="fa fa-clock-o"></i> Done </small>')
                         }
                     })
                 }
@@ -278,11 +320,10 @@
     countdown.setLabels(' มิลวินาที| วินาที| นาที| ชั่วโมง| วัน| สัปดาห์| เดือน| ปี| ศตวรรษ| ทศวรรษ| พันปี',  ' มิลวินาที| วินาที| นาที| ชั่วโมง| วัน| สัปดาห์| เดือน| ปี| ศตวรรษ| ทศวรรษ| พันปี',' ',
         ' ',
         '0 วินาที');
-    var today, targle, targle_intime, targle_input;
+    var today, target, target_intime, target_input;
     today = new Date()
-    targle = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 1, 58, 0)
-    targle_intime = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 2, 0, 0)
-
+    target = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 1, 58, 0)
+    target_intime = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 2, 0, 0)
 
     /**
      * setInterval to reload ui
@@ -294,42 +335,43 @@
     setInterval(function() {
         today = new Date()
         $(".owl-item").find(".small-box").each(function() {
-                $(this).attr("class", "small-box bg-gray")
-            })
-            /*$(".owl-item:not(.center)").find(".small-box").each(function(){
-            	today = new Date()
-            	var new_time = $(this).find("#time").text().split(" ");
-            	var start_time = new_time[0].split(":")
-            	var end_time = new_time[2].split(":")
-            	targle = new Date(today.getFullYear(), today.getMonth(), today.getDate(), start_time[0],start_time[1],start_time[2])
-            	targle_intime = new Date(today.getFullYear(), today.getMonth(), today.getDate(), end_time[0],end_time[1],end_time[2])
-            	if(today <= targle_intime){
-            		//$("#time_now").css("font-family","kanit").text("เหลือเวลาในการทำกิจกรรม  "+countdown( targle_intime ).toString())
-            		$(this).attr("class","small-box bg-green")
-            	 }
-            	else{
-            		//$("#time_now").css("font-family","kanit").text("กิจกรรมได้ผ่านไปแล้ว "+countdown( targle_intime ).toString())
-            		$(this).attr("class","small-box bg-gray")
-            	}
-            })*/
+                                                $(this).attr("class", "small-box bg-gray")
+                                            });
+    
+        // $(".owl-item:not(.center)").find(".small-box").each(function(){
+        //     today = new Date()
+        //     var new_time = $(this).find("#time").text().split(" ");
+        //     var start_time = new_time[0].split(":")
+        //     var end_time = new_time[2].split(":")
+        //     target = new Date(today.getFullYear(), today.getMonth(), today.getDate(), start_time[0],start_time[1],start_time[2])
+        //     target_intime = new Date(today.getFullYear(), today.getMonth(), today.getDate(), end_time[0],end_time[1],end_time[2])
+        //     if(today <= target_intime){
+        //         $("#time_now").css("font-family","kanit").text("เหลือเวลาในการทำกิจกรรม  "+countdown( target_intime ).toString())
+        //         $(this).attr("class","small-box bg-green")
+        //         }
+        //     else{
+        //         $("#time_now").css("font-family","kanit").text("กิจกรรมได้ผ่านไปแล้ว "+countdown( target_intime ).toString())
+        //         $(this).attr("class","small-box bg-gray")
+        //     }
+        // })
 
-        $(".owl-item.center").find(".small-box").attr("class", "small-box bg-aqua2")
+        $(".owl-item.center").find(".small-box").attr("class", "small-box bg-aqua2");
         var new_time = $(".owl-item.center").find("#time").text().split(" ");
-        targle_input = $(".owl-item.center").find("#ac_id").val()
-		// console.log(targle_input)
+        target_input = $(".owl-item.center").find("#ac_id").val();
+        
+        // console.log(new_time)
         var start_time = new_time[0].split(":")
         var end_time = new_time[2].split(":")
-        targle = new Date(today.getFullYear(), today.getMonth(), today.getDate(), start_time[0], start_time[1], start_time[2])
-        targle_intime = new Date(today.getFullYear(), today.getMonth(), today.getDate(), end_time[0], end_time[1], end_time[2])
-        if (today <= targle) {
-            $("#time_now").css("font-family", "kanit").text("กิจกรรมจะเปิดในอีก " + countdown(targle).toString())
-            $(".btn-primary").addClass("disabled")
-        } else if (today <= targle_intime) {
-            $("#time_now").css("font-family", "kanit").text("เหลือเวลาในการทำกิจกรรม  " + countdown(targle_intime).toString())
-            $(".btn-primary").removeClass("disabled")
+        target = new Date(today.getFullYear(), today.getMonth(), today.getDate(), start_time[0], start_time[1], start_time[2])
+        target_intime = new Date(today.getFullYear(), today.getMonth(), today.getDate(), end_time[0], end_time[1], end_time[2])
+
+        if (today <= target) {
+            $("#time_now").css("font-family", "kanit").text("กิจกรรมจะเปิดในอีก " + countdown(target).toString())
+        } else if (today <= target_intime) {
+            $("#time_now").css("font-family", "kanit").text("เหลือเวลาในการทำกิจกรรม  " + countdown(target_intime).toString())
         } else {
-            $("#time_now").css("font-family", "kanit").text("กิจกรรมได้ผ่านไปแล้ว " + countdown(targle_intime).toString())
-            $(".btn-primary").addClass("disabled")
+            $("#time_now").css("font-family", "kanit").html("<u><b>กิจกรรมได้ผ่านไปแล้ว " + countdown(target_intime).toString() + "</b></u>")
         }
+
     }, 100);
 </script>

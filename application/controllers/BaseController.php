@@ -28,9 +28,9 @@ class BaseController extends CI_Controller
 	 * Output for view
 	 * Name: Namchok Singhchai
 	 * Date: 2020-01-24
-	 * Paremeter: $view, $header
+	 * Paremeter: $view, $header, $scripts="", $detail=""
 	 */
-    public function output($view, $header = "untitled", $data) {
+    public function output($view, $header = "untitled", $data, $scripts, $detail) {
         $this->auth->authenticate();
 
 		$detail['header'] = $header;

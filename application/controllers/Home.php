@@ -43,7 +43,10 @@ class Home extends BaseController
 		if($data['userRoles'][0] >13){
 			$data['userRoles'][0] = $data['userRoles'][0] - 11;
 		}
-    	$this->output('v_home', "Home", $data);
+
+		$scripts['temp_scripts'] = '';
+		$detail['temp_detail'] = '';
+    	$this->output('v_home', "Home", $data, $scripts, $detail);
     } // End index
 	
 	/**

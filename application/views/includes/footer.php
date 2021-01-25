@@ -4,7 +4,7 @@
 <!-- /.content-wrapper -->
 <footer class="main-footer">
     <div class="pull-right hidden-xs">
-        <b>Version</b> 3.0.0
+        <b>Version</b> 3.0.1
     </div>
     <strong>Copyright &copy; 2019-2020 <a href="#">Software Engineer</a>.</strong> All rights reserved.
 </footer>

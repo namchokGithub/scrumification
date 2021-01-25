@@ -61,7 +61,9 @@ class Challenger extends BaseController
 		$data['User_list'] = $this->User->find_by_role($id);
 		$data['cluster_id'] = $id;
 
-		$this->output('v_challenger', "Challenger", $data);
+		$scripts['temp_scripts'] = '';
+		$detail['temp_detail'] = '';
+		$this->output('v_challenger', "Challenger", $data, $scripts, $detail);
     }
 	
 }
