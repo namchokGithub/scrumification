@@ -62,8 +62,8 @@ class Challenger extends BaseController
 		$data['cluster_id'] = $id;
 
 		$scripts['temp_scripts'] = '';
-		$detail['temp_detail'] = '';
-		$this->output('v_challenger', "Challenger", $data, $scripts, $detail);
+		$detail['header'] = "Challenger";
+		$this->output('v_challenger', $data, $scripts, $detail);
     }
 	
 }

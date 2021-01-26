@@ -72,8 +72,8 @@ class MainReward extends BaseController
 		$data['target'] = $target;
 
 		$scripts['temp_scripts'] = '';
-		$detail['temp_detail'] = '';
-    	$this->output('v_mainreward', "Main Reward", $data, $scripts, $detail);
+		$detail['header'] = "Main Reward";
+    	$this->output('v_mainreward', $data, $scripts, $detail);
     }
 	
 	/**

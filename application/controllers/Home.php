@@ -45,8 +45,8 @@ class Home extends BaseController
 		}
 
 		$scripts['temp_scripts'] = '';
-		$detail['temp_detail'] = '';
-    	$this->output('v_home', "Home", $data, $scripts, $detail);
+		$detail['header'] = "Home";
+    	$this->output('v_home', $data, $scripts, $detail);
     } // End index
 	
 	/**

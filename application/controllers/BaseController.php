@@ -30,10 +30,9 @@ class BaseController extends CI_Controller
 	 * Date: 2020-01-24
 	 * Paremeter: $view, $header, $scripts="", $detail=""
 	 */
-    public function output($view, $header = "untitled", $data, $scripts, $detail) {
+    public function output($view, $data, $scripts, $detail) {
         $this->auth->authenticate();
 
-		$detail['header'] = $header;
 		$scripts['Profile'][0] = $this->auth->user();
 		$scripts['Profile'][1] = $this->auth->userRoles();
 		$scripts['Profile'][2]= $this->auth->userName();

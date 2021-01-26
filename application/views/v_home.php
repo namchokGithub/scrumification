@@ -67,7 +67,7 @@
 
 <!-- Main panel -->
 <div class="panel panel-primary">
-    <div class="panel-heading heading-targle" style=" font-size: 28px;display:flex; cursor:pointer " aria-hidden="true" data-toggle="collapse" data-target="#Panel_Challenger">Challenger
+    <div class="panel-heading heading-target" style=" font-size: 28px;display:flex; cursor:pointer " aria-hidden="true" data-toggle="collapse" data-target="#Panel_Challenger">Challenger
         <div style="margin-left: auto;"><i class="fa fa-chevron-down" id="collapse_icon"></i></div>
     </div>
     <div class="panel-body collapse in" id="Panel_Challenger">
@@ -194,7 +194,7 @@
          * @Author	Jiranuwat Jaiyen       
          * @Create Date	22-03-2563
          */
-        $(".heading-targle").click(function() {
+        $(".heading-target").click(function() {
             $("#collapse_icon").attr("class") == "fa fa-chevron-down" ? $("#collapse_icon").attr("class", "fa fa-chevron-up") : $("#collapse_icon").attr("class", "fa fa-chevron-down")
         })
         $(".box-footer:contains('Cluster <?php echo $userRoles[0]-2 ?>')").click()
@@ -229,9 +229,9 @@
      */
     $(".mainreward").click(function() {
 
-        var targle_id = $(this).attr("id");
+        var target_id = $(this).attr("id");
         $(".card_reward").each(function(a, b) {
-            $(this).attr("id", targle_id + "/" + a)
+            $(this).attr("id", target_id + "/" + a)
         })
 
         if (action) {
@@ -247,12 +247,12 @@
 		})
 
         //----------------- For cluster in SE BUU -----------------
-        let cluster_se_buu = targle_id-1;
-        $(".cluster_title").text(targle_id-1);
+        let cluster_se_buu = target_id-1;
+        $(".cluster_title").text(target_id-1);
 
 		// Show URL of activity
 		// ------------- Get activity -----------------------
-        $.get("<?php echo site_url("Home/get_Activity/"); ?>" + (parseInt(targle_id)),
+        $.get("<?php echo site_url("Home/get_Activity/"); ?>" + (parseInt(target_id)),
             function(data, status) {
                 console.log('-------- Get activity (Group: '+cluster_se_buu+') -------- ')
 				console.log(' -- Status: ' + status + ' -- \n')
@@ -277,11 +277,11 @@
 
                 for (var i = 0; i < raw_data.length; i++) 
                 {
-                    var targle_text = raw_data[i]["name"]
+                    var target_text = raw_data[i]["name"]
                     var user_now = raw_data[i]["count_user"];
                     var percent = user_now / max_user * 100
                     var class_div = "";
-                    var targle_jq = $(".info-box-text:contains('" + targle_text + "')")
+                    var target_jq = $(".info-box-text:contains('" + target_text + "')")
                     if (percent >= 0 && percent < 30) {
                         class_div = 'info-box bg-red';
                         css_div = "cursor: pointer;"
@@ -299,16 +299,16 @@
                         css_div = "border: 0.5px solid gray;cursor: pointer;";
                         bar_css = "background-color:gray";
                     }
-                    targle_jq.closest('#card_reward').attr('class', 'info-box ' + class_div);
-                    targle_jq.closest('#card_reward').attr('style', css_div);
-                    targle_jq.closest('#card_reward').find('.info-box-number').html(user_now + "/" + max_user + '<span style=" position: absolute; right: 20px; ">' + parseInt(percent) + '%</span>')
-                    targle_jq.closest('#card_reward').find('.progress-bar').attr("style", "width:" + percent + "%;" + bar_css)
+                    target_jq.closest('#card_reward').attr('class', 'info-box ' + class_div);
+                    target_jq.closest('#card_reward').attr('style', css_div);
+                    target_jq.closest('#card_reward').find('.info-box-number').html(user_now + "/" + max_user + '<span style=" position: absolute; right: 20px; ">' + parseInt(percent) + '%</span>')
+                    target_jq.closest('#card_reward').find('.progress-bar').attr("style", "width:" + percent + "%;" + bar_css)
                 }
 			});
 		// End get activity
 			
 		// ------------ Get achievement -------------------------
-        $.get("<?php echo site_url("Home/get_all_Achievement/"); ?>" + (targle_id),
+        $.get("<?php echo site_url("Home/get_all_Achievement/"); ?>" + (target_id),
             function(data, status) {
                 console.log('-------- Get achievement (Group: '+cluster_se_buu+') -------- ')
                 console.log(' -- Status: ' + status + ' -- \n')

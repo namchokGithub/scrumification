@@ -5,8 +5,8 @@
  *
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Achievement extends CI_Controller
+require_once(dirname(__FILE__) . "/BaseController.php");
+class Achievement extends BaseController
 {
     /*
     |--------------------------------------------------------------------------
@@ -14,17 +14,14 @@ class Achievement extends CI_Controller
     |--------------------------------------------------------------------------
     |
     | This controller handles Achievement.
-	| @Author	Jiranuwat Jaiyen       
+	| @Author Jiranuwat Jaiyen       
 	| @Create Date	22-03-2563
     |
     */
     public function __construct()
     {
         parent::__construct();
-        date_default_timezone_set('asia/bangkok');
-		$this->load->library('auth');
         $this->auth->authenticate();
-		//var_dump(can(['Editor', 'publish-posts']));
     }
 
     /**
@@ -38,7 +35,7 @@ class Achievement extends CI_Controller
     {
 		/**
 		 *    กำหนดค่า id สำหรับมกุล ว่าอยู่ในช่วงใด เผื่อที่จะเลือกrole ที่ถูกต้องในการแสดง
-		*/
+		 */
 		if($id=="") {
 			$id = $this->auth->roles();
 			$id = $id[0];
@@ -53,14 +50,12 @@ class Achievement extends CI_Controller
 			}
 			if($id <1 || $id>11) // ถ้าid ไม่ได้อยู่ช่วง ให้กำหนดเป็นมกุล 0 โดยทันที
 			{ 
-				$id = 0;
+				$id = 1;
 			}
 		}
-		if($id >= 10) {
-			$id = 0;	
+		if($id >= 11) {
+			$id = 1;	
 		} // End set id
-		
-		$this->auth->authenticate();
 		
 		$scripts['scripts'][0] = "assets/dist/js/countdown.js";
 		$scripts['scripts'][1] = 'assets/bower_components/moment/moment.js';
@@ -69,26 +64,17 @@ class Achievement extends CI_Controller
 		$scripts['css'][0] = "assets/bower_components/OwlCarousel2/dist/assets/owl.carousel.min.css";
 		$scripts['css'][1] = "assets/bower_components/OwlCarousel2/dist/assets/owl.theme.default.min.css";
 		$scripts['css'][2] = "assets/bower_components/toastr/toastr.min.css";
-
-		$detail['header'] = "Shopping";
-		$scripts['Profile'][0] = $this->auth->user();
-		$scripts['Profile'][1] = $this->auth->userRoles();
-		$scripts['Profile'][2]= $this->auth->userName();
-		$detail['Profile'][0]= $this->auth->user();
-		$detail['Profile'][1]= $this->auth->userRoles();
-		$detail['Profile'][2]= $this->auth->userName();
 		
+		$data['Profile_role']= $this->auth->userRoles();
 		$data['point_list'] = $this->User->get_all_point();
 		$data['individual_list'] = $this->User->get_all_individual();
-		$data['Profile']= $this->auth->userRoles();
-		$data['Secon_targle']= $this->User->can_Activity();
+		$data['Secon_target']= $this->User->can_Activity();
 		$data['Role_can'] = $this->User->find_by_username($this->auth->userName());
 		$data['id'] = $id;
 
-		$this->load->view('includes/header',$scripts);
-		$this->load->view('includes/sidebar',$detail);
-		$this->load->view('v_achievement',$data);
-		$this->load->view('includes/footer');
+		$scripts['temp_scripts'] = '';
+		$detail['header'] = "Shopping";
+    	$this->output('v_achievement', $data, $scripts, $detail);
     }
 	
 	/**
@@ -96,19 +82,20 @@ class Achievement extends CI_Controller
      *
      * @return Json Data
      */
-	public function BuyItem($item,$count,$targle_id = 9999){
+	public function BuyItem($item,$count,$target_id = 9999){
 		if($count<=0){
 			$data['type']="Count";
 			echo json_encode($data);
 			return ;
 		}
 		if(hasRole(['ScrumMaster'])){
-			$targle = $targle_id;
+			$target = $target_id;
 		}
-		else{
-			$targle = $this->auth->roles[0];
+		else
+		{
+			$target = $this->auth->roles[0];
 		}
-		echo json_encode($this->User->Buyitem([ 'item_id' => $item, 'count' => $count, 'targle'=>$targle])); 
+		echo json_encode($this->User->Buyitem(['item_id' => $item, 'count' => $count, 'target'=>$target])); 
 	}
 	
 	/**
@@ -116,15 +103,15 @@ class Achievement extends CI_Controller
      *
      * @return Json Data
      */
-	public function UseItem($item,$targle_id = 9999){
+	public function UseItem($item, $target_id = 9999){
 		if(hasRole(['ScrumMaster'])){
-			$targle = $targle_id;
+			$target = $target_id;
 		}
 		else{
 			$data['type']="Error";
 			return $data;
 		}
-		echo json_encode($this->User->Useitem([ 'item_id' => $item, 'targle'=>$targle])); 
+		echo json_encode($this->User->Useitem([ 'item_id' => $item, 'target'=>$target])); 
 	}
 	/**
      * Get List Item.
@@ -140,18 +127,18 @@ class Achievement extends CI_Controller
      *
      * @return Json Data
      */
-	public function get_Point($targle_id = 9999){
+	public function get_Point($target_id = 9999){
 		$Secon_role = $this->User->can_Activity();
 		if(hasRole(['ScrumMaster'])){
-			$targle = $targle_id;
+			$target = $target_id;
 		}
-		else if($this->User->can_add_Activity_by_role_id($targle_id)){
-			$targle = $targle_id;
+		else if($this->User->can_add_Activity_by_role_id($target_id)){
+			$target = $target_id;
 		}
 		else{
-			$targle = $this->auth->roles[0];
+			$target = $this->auth->roles[0];
 		}
-		echo json_encode($this->User->get_Point($targle)); 
+		echo json_encode($this->User->get_Point($target)); 
 	}
 	
 	/**
@@ -159,16 +146,16 @@ class Achievement extends CI_Controller
      *
      * @return Json Data
      */
-	public function get_Inventory($targle_id = 9999){
+	public function get_Inventory($target_id = 9999){
 		if(hasRole(['ScrumMaster'])){
-			$targle = $targle_id;
+			$target = $target_id;
 		}
-		else if($this->User->can_add_Activity_by_role_id($targle_id)){
-			$targle = $targle_id;
+		else if($this->User->can_add_Activity_by_role_id($target_id)){
+			$target = $target_id;
 		}
 		else{
-			$targle = $this->auth->roles[0];
+			$target = $this->auth->roles[0];
 		}
-		echo json_encode($this->User->get_Inventory($targle)); 
+		echo json_encode($this->User->get_Inventory($target)); 
 	}
 }

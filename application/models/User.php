@@ -37,9 +37,9 @@ class User extends CI_Model
 	 * @Create Date	22-03-2563
      * @return mixed
      */
-    public function get_Point($targle)
+    public function get_Point($target)
     {
-        return $this->db->get_where("roles_point", array("role_id"=>  $targle))->result_array();
+        return $this->db->get_where("roles_point", array("role_id"=>  $target))->result_array();
     }
 	
     /**
@@ -169,12 +169,12 @@ class User extends CI_Model
 	 * @Create Date	22-03-2563
      * @return mixed
      */
-	public function get_Inventory($targle){
+	public function get_Inventory($target){
 		 return $this->db
             ->select("shop.id,shop.name,log_shop.total,shop.type" ,FALSE)
             ->from("log_shop")
 			->join("shop", "shop.id = log_shop.shop_id", "LEFT")
-            ->where(array("log_shop.role_id" => $targle	))->where('shop.id IS NOT NULL', null)
+            ->where(array("log_shop.role_id" => $target	))->where('shop.id IS NOT NULL', null)
             ->get()->result_array();
 	}
 
@@ -189,7 +189,7 @@ class User extends CI_Model
 	public function Useitem($data)
     {
         $raw_data = $this->db->get_where("log_shop",array("shop_id"=>  $data['item_id']))->row();
-		$update_sql="update log_shop set total = total-1 where shop_id = ".$data['item_id']." AND role_id = ".$data['targle'];
+		$update_sql="update log_shop set total = total-1 where shop_id = ".$data['item_id']." AND role_id = ".$data['target'];
 		if($raw_data->total - 1 >= 0){
 			$this->db->query($update_sql);
 			$data['type']="Comple";
@@ -216,13 +216,16 @@ class User extends CI_Model
 	public function BuyItem($data)
     {
         $raw_data = $this->db->get_where("shop",array("id"=>  $data['item_id']))->row();
-		$raw_point = $this->db->get_where("roles_point", array("role_id"=>  $data['targle']))->row();
+		$raw_point = $this->db->get_where("roles_point", array("role_id"=>  $data['target']))->row();
 		$point = $raw_point->raw_point-$raw_point->used_point;
 		$date = new DateTime("now");
 		$PostQopen = new DateTime($raw_data->time_start);
-		$PostQClose = new DateTime($raw_data->time_end);
-		$sql="INSERT INTO `log_shop` (`role_id`, `shop_id`, `total`) VALUES ('".$data['targle']."', '".$data['item_id']."', '".$data['count']."')ON DUPLICATE KEY UPDATE total=total+".$data['count'];
-		$update_sql="update shop set total = total-".$data['count']." where id = ".$data['item_id'];
+        $PostQClose = new DateTime($raw_data->time_end);
+        
+        $sql="INSERT INTO `log_shop` (`role_id`, `shop_id`, `total`) VALUES ('".$data['target']."', '".$data['item_id']."', '".$data['count']."')ON DUPLICATE KEY UPDATE total=total+".$data['count'];
+        
+        $update_sql="update shop set total = total-".$data['count']." where id = ".$data['item_id'];
+        
 		if($raw_data->type == 3){
 			if($raw_data->total - $data['count'] < 0){
 				$data['type']="Item";
@@ -230,7 +233,7 @@ class User extends CI_Model
 			}			
 			if($point-($raw_data->point*$data['count']) >=0){
 				$this->db->set('used_point', 'used_point+'.($raw_data->point*$data['count']), FALSE);
-				$this->db->where('role_id', $data['targle']);
+				$this->db->where('role_id', $data['target']);
 				$this->db->update('roles_point');
 				$this->db->query($sql);
 				$this->db->query($update_sql);
@@ -253,7 +256,7 @@ class User extends CI_Model
 			}			
 			if($point-($raw_data->point*$data['count']) >=0){
 				$this->db->set('used_point', 'used_point+'.($raw_data->point*$data['count']), FALSE);
-				$this->db->where('role_id', $data['targle']);
+				$this->db->where('role_id', $data['target']);
 				$this->db->update('roles_point');
 				$this->db->query($sql);
 				$data['type']="Comple";
@@ -266,7 +269,7 @@ class User extends CI_Model
 		}
 		if($point-($raw_data->point*$data['count']) >=0){		
 			$this->db->set('used_point', 'used_point+'.($raw_data->point*$data['count']), FALSE);
-			$this->db->where('role_id', $data['targle']);
+			$this->db->where('role_id', $data['target']);
 			$this->db->update('roles_point');
 			$this->db->query($sql);
 			$data['type']="Comple";
