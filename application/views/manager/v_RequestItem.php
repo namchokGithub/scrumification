@@ -1,11 +1,11 @@
 <!--
- - User Individual Editor  
+ - Request items 
  -
- - @Author	Jiranuwat Jaiyen 
- - @Create Date 22-03-2563
+ - @Author	Namchok Singhachai
+ - @Create Date 27-01-2564
 -->
 <div class="panel panel-primary">
-    <div  class="panel-heading" style=" font-size: 28px; "> <i class="fa fa-thumbs-o-up"></i> User Individual Editor</div>
+    <div  class="panel-heading" style=" font-size: 28px; "><i class="fa fa-bell"></i> Request Lists</div>
     <div class="panel-body">	
 		<table id="example" class="table table-striped table-bordered no-footer dataTable" style="width:100%">
 			<thead>
@@ -18,6 +18,7 @@
 		</table>
 	</div>
 </div>
+
 <script>
 
 	  var myTable;

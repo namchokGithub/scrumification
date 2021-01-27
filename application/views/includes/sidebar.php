@@ -52,18 +52,21 @@
             <li class="ScrumMaster">
                 <a id="UserIndividualManager" href="<?php echo site_url('Source_manager/index/UserIndividual');?>">
                     <i class="fa fa-thumbs-o-up"></i>
-                    <span>User Individual Achievement</span></a>
+                    <span>User Individual Achievement</span>
+                </a>
             </li>
             <li class="ScrumMaster">
                 <a id="ActivityManager" href="<?php echo site_url('Source_manager/index/Activity'); ?>">
-                    <i class="fa fa-calendar"></i><span>Activity</span></a>
+                    <i class="fa fa-calendar"></i><span>Activity</span>
+                </a>
             </li>
             <li class="ScrumMaster">
-                <a id="" href="">
-                    <i class="fa fa-bell"></i><span>Request Item</span></a>
+                <a id="RequestItem" href="<?php echo site_url('Source_manager/index/RequestItem'); ?>">
+                    <i class="fa fa-bell"></i><span>Request Item</span>
+                </a>
             </li>
             <li class="ScrumMaster">
-                <a id="" href="">
+                <a id="ActivityReport" href="<?php echo site_url('Source_manager/index/ActivityReport'); ?>">
                     <i class="fa fa-television"></i><span>Activity Report</span></a>
             </li>
             <li class="ScrumMaster">
