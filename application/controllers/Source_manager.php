@@ -73,6 +73,10 @@ class Source_manager extends BaseController
 		{
 			$detail['header'] = "Request Item";
 		} 
+		else if($name == "ActivityReport")
+		{
+			$detail['header'] = "Activity Report";
+		} 
 		else 
 		{
 			$detail['header'] = $name;
