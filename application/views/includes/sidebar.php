@@ -46,7 +46,8 @@
         <li class="header ScrumMaster">SCRUM MASTER NAVIGATION</li>
             <li class="ScrumMaster">
                 <a id="UserAchievementManager" href="<?php echo site_url('Source_manager/index/UserAchievement'); ?>">
-                    <i class="fa fa-smile-o"></i><span>User Achievement</span></a>
+                    <i class="fa fa-smile-o"></i><span>User Achievement</span>
+                </a>
             </li>
             <li class="ScrumMaster">
                 <a id="UserIndividualManager" href="<?php echo site_url('Source_manager/index/UserIndividual');?>">
@@ -142,7 +143,7 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <span style="font-size:x-large;">
+        <span style="font-size: medium;">
             <?php echo $header;?>
         </span>
         <ol class="breadcrumb">

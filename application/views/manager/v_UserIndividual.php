@@ -5,13 +5,14 @@
  - @Create Date 22-03-2563
 -->
 <div class="panel panel-primary">
-    <div  class="panel-heading" style=" font-size: 28px; ">User Individual Editor</div>
+    <div  class="panel-heading" style=" font-size: 28px; "> <i class="fa fa-thumbs-o-up"></i> User Individual Editor</div>
     <div class="panel-body">	
 		<table id="example" class="table table-striped table-bordered no-footer dataTable" style="width:100%">
 			<thead>
 				<tr>
-					<th>ชื่อ</th>
-					<th>Individual</th>
+					<th></th>
+					<th></th>
+					<th></th>
 				</tr>
 			</thead>
 		</table>
@@ -56,6 +57,7 @@
 			error: function(){
 			}
 		})
+
 		var Options_individual = {};
 		$.ajax({
 			// a tipycal url would be /{id} with type='POST'
@@ -70,19 +72,35 @@
 			error: function(){
 			}
 		})
+
+		// Define column 
 		var columnDefs = [
 					{
+						title: "ลำดับ",
+						data: 1,
+						type:"hidden",
+						disabled:"true",
+						render: function (data, type, row, meta) {
+							if (data == null || !(data in Options_role)) return null;
+							return 2;
+						},
+						width: "10%",
+						className: "text-center"
+					},
+					{
+						title: "ชื่อ",
 						data: "user_id",
 						type : "select",
 						options : Options_user,
 						select2 : { width: "100%"},
 						render: function (data, type, row, meta) {
-							console.log(data);console.log("option",Options_user)
+							// console.log(data);console.log("option",Options_user)
 							if (data == null || !(data in Options_user)) return null;
 							return Options_user[data];
 						}
 					},
 					{
+						title: "รางวัล",
 						data: "individual_id",
 						type : "select",
 						options : Options_individual,
@@ -129,7 +147,7 @@
 				  "className": 'btn btn-danger btn-lg' 
 			   }],
 					onAddRow: function(datatable, rowdata, success, error) {
-						console.log(datatable, rowdata, success, error)
+						// console.log(datatable, rowdata, success, error)
 						$.ajax({
 							// a tipycal url would be / with type='PUT'
 							url: url_add,
@@ -168,6 +186,11 @@
 						datatable.s.dt.ajax.reload();
 					}
 			  });
+			 	 myTable.on( 'order.dt search.dt', function () {
+					myTable.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+						cell.innerHTML = i+1;
+					});
+				}).draw();
 	}
 	set_Data()
 </script>

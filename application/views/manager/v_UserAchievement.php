@@ -78,9 +78,8 @@
 					{
 						title: "ลำดับ",
 						data: 1,
-						type : "select",
-						options : 1,
-						select2 : { width: "100%"},
+						type:"hidden",
+						disabled:"true",
 						render: function (data, type, row, meta) {
 							if (data == null || !(data in Options_role)) return null;
 							return 2;
