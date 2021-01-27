@@ -76,12 +76,13 @@
              <!-- end SCRUM MASTER NAVIGATION -->
         <li class="header ScrumMaster">MANAGER NAVIGATION</li>
             <li class="ScrumMaster">
-                <a id="" href="">
+                <a id="Groups" href="<?php echo site_url('Source_manager/index/Groups'); ?>">
                     <i class="fa fa-users"></i>
-                    <span>Group Management</span></a>
+                    <span>Group Management</span>
+                </a>
             </li>
             <li class="ScrumMaster">
-                <a id="Users Manager" href="<?php echo site_url('Source_manager/index/Users'); ?>"><i class="fa fa-user"></i>
+                <a id="UsersManager" href="<?php echo site_url('Source_manager/index/Users'); ?>"><i class="fa fa-user"></i>
                     <span>Users Management</span>
                 </a>
             </li>
