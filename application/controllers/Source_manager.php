@@ -5,8 +5,8 @@
  *
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Source_manager extends CI_Controller
+require_once(dirname(__FILE__) . "/BaseController.php");
+class Source_manager extends BaseController
 {
     /*
     |--------------------------------------------------------------------------
@@ -21,10 +21,8 @@ class Source_manager extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        date_default_timezone_set('asia/bangkok');
+	
 		$this->load->model("Data_manager","DM");
-		$this->load->library('auth');
-		
 		if(!hasRole(['ScrumMaster'])){
 			redirect('home');
 		}
@@ -54,23 +52,32 @@ class Source_manager extends CI_Controller
 		$scripts['css'][4] = "assets/bower_components/other/jquery.datetimepicker.css";
 		$scripts['css'][5] = "assets/bower_components/other/select2.css";
 		$scripts['css'][6] = "assets/bower_components/toastr/toastr.min.css";
-		$detail['header'] = $name;
-		// $detail['header'] = $name." Manager";
-		$scripts['Profile'][0] = $this->auth->user();
-		$scripts['Profile'][1] = $this->auth->userRoles();
-		$scripts['Profile'][2]= $this->auth->userName();
-		$detail['Profile'][0]= $this->auth->user();
-		$detail['Profile'][1]= $this->auth->userRoles();
-		$detail['Profile'][2]= $this->auth->userName();
+		
+		if($name == "UserAchievement")
+		{
+			$detail['header'] = "User Achievement";
+		} 
+		else if($name == "UserIndividual")
+		{
+			$detail['header'] = "User Individual";
+		}
+		else if($name == "Roles_users")
+		{
+			$detail['header'] = "Roles";
+		} 
+		else if($name == "RoleManager")
+		{
+			$detail['header'] = "Roles";
+		} 
+		else 
+		{
+			$detail['header'] = $name;
+		}
+		
 		$data="";
-		/*$scripts['scripts'][0] = 'assets/js/plugins/highchart/highcharts.js';
-		$scripts['scripts'][1] = 'assets/js/moment.js';
-		$scripts['scripts'][2] = 'assets/js/daterangepicker.js';
-		$scripts['css'][1] = 'assets/css/custom.css';*/
-		$this->load->view('includes/header',$scripts);
-		$this->load->view('includes/sidebar',$detail);
-		$this->load->view("manager/v_".$name,$data);
-		$this->load->view('includes/footer');
+
+		$scripts['temp_scripts'] = '';
+		$this->output("manager/v_".$name, $data, $scripts, $detail);
 	}
 	//-----------------------------------  End Setup_View -----------------------------------
 	

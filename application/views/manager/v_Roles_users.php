@@ -5,7 +5,7 @@
  - @Create Date 22-03-2563
 -->
 <div class="panel panel-primary">
-    <div  class="panel-heading" style=" font-size: 28px; ">Roles Users Editor</div>
+    <div  class="panel-heading" style=" font-size: 28px; ">Roles users management</div>
     <div class="panel-body">	
 		<table id="example" class="table table-striped table-bordered no-footer dataTable" style="width:100%">
 			<thead>
