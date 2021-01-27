@@ -70,8 +70,8 @@
                     <i class="fa fa-television"></i><span>Activity Report</span></a>
             </li>
             <li class="ScrumMaster">
-                <a id="" href="<?php echo site_url('Source_manager/index/Roles_users'); ?>">
-                    <i class="fa fa-child"></i><span>Asign Role</span></a>
+                <a id="AssignRole" href="<?php echo site_url('Source_manager/index/AssignRole'); ?>">
+                    <i class="fa fa-child"></i><span>Assign Role</span></a>
             </li>
              <!-- end SCRUM MASTER NAVIGATION -->
         <li class="header ScrumMaster">MANAGER NAVIGATION</li>
