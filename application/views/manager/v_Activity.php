@@ -5,7 +5,7 @@
  - @Create Date 22-03-2563
 -->
 <div class="panel panel-primary">
-    <div  class="panel-heading" style=" font-size: 28px; ">Activity Lists</div>
+    <div  class="panel-heading" style=" font-size: 28px; "><i class="fa fa-calendar"></i> Activity Lists</div>
     <div class="panel-body">	
 		<table id="example" class="table table-striped table-bordered no-footer dataTable" style="width:100%">
 		</table>
@@ -112,21 +112,21 @@
 		responsive: true,     // enable responsiveness
 		altEditor: true,      // Enable altEditor ****
 		buttons: [{
-		text: '<i class="fa fa-plus-square"></i> เพิ่มชุดข้อมูล',
-		name: 'add',     // DO NOT change name
-			"className": 'btn btn-info btn-lg' 
-		},
-		{
-			extend: 'selected', // Bind to Selected row
-			text: '<i class="fa fa-edit"></i> แก้ไขชุดข้อมูล',
-			name: 'edit',        // DO NOT change name
-			"className": 'btn btn-warning btn-lg' 
-		},
-		{
-			extend: 'selected', // Bind to Selected row
-			text: '<i class="fa fa-trash"></i> ลบชุดข้อมูล',
-			name: 'delete',     // DO NOT change name
-			"className": 'btn btn-danger btn-lg' 
+			text: '<i class="fa fa-plus-square"></i> เพิ่มชุดข้อมูล',
+			name: 'add',     // DO NOT change name
+				"className": 'btn btn-info btn-lg' 
+			},
+			{
+				extend: 'selected', // Bind to Selected row
+				text: '<i class="fa fa-edit"></i> แก้ไขชุดข้อมูล',
+				name: 'edit',        // DO NOT change name
+				"className": 'btn btn-warning btn-lg' 
+			},
+			{
+				extend: 'selected', // Bind to Selected row
+				text: '<i class="fa fa-trash"></i> ลบชุดข้อมูล',
+				name: 'delete',     // DO NOT change name
+				"className": 'btn btn-danger btn-lg' 
 		}],
 		onAddRow: function(datatable, rowdata, success, error) {
 			console.log(datatable, rowdata, success, error)
@@ -167,12 +167,14 @@
 			});
 			datatable.s.dt.ajax.reload();
 		}
-	});
+	}); // End create datatables
+
+	// Set index of column
 	myTable.on( 'order.dt search.dt', function () {
 		myTable.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
 			cell.innerHTML = i+1;
 		});
-	}).draw();
+	}).draw(); 
 	// End datatables
 </script>
 

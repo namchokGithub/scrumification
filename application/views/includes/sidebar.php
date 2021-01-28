@@ -70,7 +70,8 @@
                     <i class="fa fa-television"></i><span>Activity Report</span></a>
             </li>
             <li class="ScrumMaster">
-                <a id="AssignRole" href="<?php echo site_url('Source_manager/index/AssignRole'); ?>">
+                <!-- ตามจริงต้อง Source_manager/index/roles_users -->
+                <a id="AssignRole" href="<?php echo site_url('Source_manager/index/AssignRole'); ?>"> 
                     <i class="fa fa-child"></i><span>Assign Role</span></a>
             </li>
              <!-- end SCRUM MASTER NAVIGATION -->
@@ -132,13 +133,13 @@
         $(".ScrumMaster").hide();
     }
     $(".Role_name").text(getCookie("Role"))
-    console.log("length", $("span:contains('<?php echo $header; ?>')").length, $("a[id='<?php echo $header; ?>']").length)
-    console.log("role", getCookie("Role"), "a[id='<?php echo $header; ?>']")
+    // console.log("length", $("span:contains('<?php echo $header; ?>')").length, $("a[id='<?php echo $header; ?>']").length)
+    // console.log("role", getCookie("Role"), "a[id='<?php echo $header; ?>']")
     if ($("a[id='<?php echo $header; ?>']").length) {
         $("a[id='<?php echo $header; ?>']").closest("li").addClass("active");
     } else {
         console.log("length", $("span:contains('<?php echo $header; ?>')").length)
-        $("span:contains('<?php echo $header; ?>')").closest("li").addClass("active");
+        // $("span:contains('<?php echo $header; ?>')").closest("li").addClass("active");
     }
 </script>
 <!-- =============================================== -->

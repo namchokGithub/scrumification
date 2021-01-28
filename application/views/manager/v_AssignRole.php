@@ -5,7 +5,7 @@
  - @Create Date 27-01-2564
 -->
 <div class="panel panel-primary">
-    <div  class="panel-heading" style=" font-size: 28px; ">Roles users management</div>
+    <div  class="panel-heading" style=" font-size: 28px; "><i class="fa fa-child"></i> Roles users assignment</div>
     <div class="panel-body">	
 		<table id="example" class="table table-striped table-bordered no-footer dataTable" style="width:100%">
 			<thead>
@@ -36,6 +36,7 @@
 	function set_Data(){
 		var myTable;
 		var Options = { "1" : "Common Item", "2" : "Daily Item" , "3" : "Special Item" };
+		// ตามจริงชื่อไฟล์ต้องเป็น v_roles_users
 		var topic_name = "roles_users"; // local URL's are not allowed
 		var url_get = "<?php echo site_url("Source_manager/get_data/");?>"+topic_name;
 		var url_add = "<?php echo site_url("Source_manager/add_data/");?>"+topic_name;
@@ -113,11 +114,11 @@
 		// --------------------------- Set datatables -------------------------------------------------
 		myTable = $('#example').DataTable({
 			"sPaginationType": "full_numbers",
-				ajax: 
-					{
-					"url": url_get,
-					"dataSrc": ""
-				},
+			ajax: 
+			{
+				"url": url_get,
+				"dataSrc": ""
+			},
 			columns: columnDefs,  // columns from above
 			initComplete: function (settings, json) {
 				$(".btn").removeClass("dt-button");
