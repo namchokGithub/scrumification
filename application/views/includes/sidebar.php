@@ -19,8 +19,9 @@
             <div class="pull-left info">
                 <p style="white-space: nowrap; width: 155px; overflow: hidden; text-overflow: ellipsis;">
                     <?php echo $Profile[0]; ?> </p>
-                <a href="#"><i class="fa fa-user text-info"></i><span
-                        class="Role_name"><?php echo empty($Profile[1])? "No Role": implode(" , ",$Profile[1]); ?></span></a>
+                <a href="#"><i class="fa fa-user text-info"></i>
+                    <span class="Role_name"><?php echo empty($Profile[1])? "No Role": implode(" , ",$Profile[1]); ?>
+                    </span></a>
             </div>
         </div>
         <!-- sidebar menu: : style can be found in sidebar.less -->
@@ -98,7 +99,7 @@
                     <span>Achievement Management</span></a>
             </li>
             <li class="ScrumMaster">
-                <a id="Individual" href="<?php echo site_url('Source_manager/index/Individual'); ?>">
+                <a id="Individual Achievement" href="<?php echo site_url('Source_manager/index/Individual'); ?>">
                     <i class="fa fa-gift"></i>
                     <span>Individual Management</span></a>
             </li>

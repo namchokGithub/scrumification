@@ -10,6 +10,7 @@
 		<table id="example" class="table table-striped table-bordered no-footer dataTable" style="width:100%">
 			<thead>
 				<tr>
+					<th></th>
 					<th>ชื่อ</th>
 					<th>คะแนน</th>
 					<th>ประเภท</th>
@@ -36,6 +37,18 @@ function numberWithCommas(x) {
 }
  var Options = { "1" : "Common Item", "2" : "Daily Item" , "3" : "Special Item" };
   var columnDefs = [
+		{
+			title: "ลำดับ",
+			data: 1,
+			type:"hidden",
+			disabled:"true",
+			render: function (data, type, row, meta) {
+				if (data == null || !(data in Options_role)) return null;
+				return 2;
+			},
+			width: "5%",
+			className: "text-center"
+		},
 		{ data: "name"},
 		{ data: "point", 
 			className: "number_formatter", 
@@ -85,7 +98,12 @@ function numberWithCommas(x) {
         $(".btn").removeClass("dt-button");
     },
     rowId: 'id',
-	order:[],
+	"columnDefs": [ {
+				"searchable": false,
+				"orderable": false,
+				"targets": 0
+			} ],
+	"order": [[ 1, 'asc' ]],
     dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
     select: 'single',     // enable single row selection
     responsive: true,     // enable responsiveness
@@ -146,7 +164,14 @@ function numberWithCommas(x) {
             });
 			datatable.s.dt.ajax.reload();
         }
-  });
+  }); // End Create datatables
+
+  	// Set index of column
+	myTable.on( 'order.dt search.dt', function () {
+		myTable.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+			cell.innerHTML = i+1;
+		});
+	}).draw(); 
 </script>
 
 <style>
@@ -183,11 +208,11 @@ th {
 	background: #3498db; 
 	color: white; 
 	font-weight: bold; 
+	text-align: center !important; 
 	}
 
 td, th { 
 	padding: 10px; 
-	text-align: left; 
 	font-size: 18px;
 	}
 
