@@ -61,7 +61,7 @@
                 </a>
             </li>
             <li class="ScrumMaster">
-                <a id="RequestItem" href="<?php echo site_url('Source_manager/index/RequestItem'); ?>">
+                <a id="Request_Item" href="<?php echo site_url('Source_manager/index/Request_Item'); ?>">
                     <i class="fa fa-bell"></i><span>Request Item</span>
                 </a>
             </li>
@@ -87,22 +87,22 @@
                 </a>
             </li>
             <li class="ScrumMaster">
-                <a id="" href="<?php echo site_url('Source_manager/index/RoleManager'); ?>">
+                <a id="Roles" href="<?php echo site_url('Source_manager/index/Roles'); ?>">
                     <i class="fa fa-tag"></i>
                     <span>Role Management</span></a>
             </li>
             <li class="ScrumMaster">
-                <a id="AchievementManager" href="<?php echo site_url('Source_manager/index/Achievement'); ?>">
+                <a id="Achievement" href="<?php echo site_url('Source_manager/index/Achievement'); ?>">
                     <i class="fa fa-star-half-empty"></i>
                     <span>Achievement Management</span></a>
             </li>
             <li class="ScrumMaster">
-                <a id="IndividualManager" href="<?php echo site_url('Source_manager/index/Individual'); ?>">
+                <a id="Individual" href="<?php echo site_url('Source_manager/index/Individual'); ?>">
                     <i class="fa fa-gift"></i>
                     <span>Individual Management</span></a>
             </li>
             <li class="ScrumMaster">
-                <a id="ShopManager" href="<?php echo site_url('Source_manager/index/Shop'); ?>">
+                <a id="Shop" href="<?php echo site_url('Source_manager/index/Shop'); ?>">
                     <i class="fa fa-cart-plus"></i>
                     <span>Shop Management</span></a>
             </li>
@@ -132,12 +132,12 @@
         $(".ScrumMaster").hide();
     }
     $(".Role_name").text(getCookie("Role"))
-    // console.log("length", $("span:contains('<?php echo $header; ?>')").length, $("a[id='<?php echo $header; ?>']").length)
-    // console.log("role", getCookie("Role"), "a[id='<?php echo $header; ?>']")
+    console.log("length", $("span:contains('<?php echo $header; ?>')").length, $("a[id='<?php echo $header; ?>']").length)
+    console.log("role", getCookie("Role"), "a[id='<?php echo $header; ?>']")
     if ($("a[id='<?php echo $header; ?>']").length) {
         $("a[id='<?php echo $header; ?>']").closest("li").addClass("active");
     } else {
-        // console.log("length", $("span:contains('<?php echo $header; ?>')").length)
+        console.log("length", $("span:contains('<?php echo $header; ?>')").length)
         $("span:contains('<?php echo $header; ?>')").closest("li").addClass("active");
     }
 </script>

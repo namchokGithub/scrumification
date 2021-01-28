@@ -68,7 +68,7 @@
 			error: function(){
 			}
 		})
-		console.log(Options_roles);
+		// console.log(Options_roles);
 		// ------------------------- End Get data ----------------------------------------
 
 		// ------------------------- Set column ----------------------------------------

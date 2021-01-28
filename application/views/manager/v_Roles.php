@@ -16,6 +16,7 @@
 		</table>
 	</div>
 </div>
+
 <script>
  var Options = { "1" : "Common Item", "2" : "Daily Item" , "3" : "Special Item" };
   var columnDefs = [
