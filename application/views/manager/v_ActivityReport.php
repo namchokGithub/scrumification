@@ -11,8 +11,19 @@
 <script src="<?php echo base_url('assets/dist/js/accessibility.js'); ?>"></script>
 
 <div class="panel panel-primary">
-    <div  class="panel-heading" style=" font-size: 28px; "><i class="fa fa-television"></i> Activity Report</div>
-    <div class="panel-body">	
+    <div  class="panel-heading" style=" font-size: 28px; ">
+		<i class="fa fa-television"></i> Activity Report
+	</div>
+	
+    <div class="panel-body">
+		<div class="pull-right" style="font-size: x-large;font-weight: 200;">
+			<select id="select-opt" style=" margin-bottom: 5px;">
+				<option value="1">เลือกปี</option>
+				<?php for($i=2555;$i<2570;$i++){?>
+				<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+				<?php } ?>
+			</select>
+		</div>
 		<figure class="highcharts-figure">
 			<div id="container"></div>
 			<p class="highcharts-description">

@@ -43,6 +43,10 @@
                 <a id="LeaderBoard" href="<?php echo site_url('leaderboard'); ?>"><i class="fa fa-bar-chart-o "></i>
                     <span>Leaderboard</span></a>
             </li>
+            <li>
+                <a id="Kanban board" href="<?php echo site_url('kanban'); ?>"><i class="fa fa-clipboard "></i>
+                    <span>Kanban board</span></a>
+            </li>
              <!-- end MAIN NAVIGATION -->
         <li class="header ScrumMaster">SCRUM MASTER NAVIGATION</li>
             <li class="ScrumMaster">
