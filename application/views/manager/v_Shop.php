@@ -169,7 +169,7 @@ function numberWithCommas(x) {
   	// Set index of column
 	myTable.on( 'order.dt search.dt', function () {
 		myTable.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-			cell.innerHTML = i+1;
+			cell.innerHTML = `${i+1}.`;
 		});
 	}).draw(); 
 </script>

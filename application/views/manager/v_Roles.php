@@ -5,13 +5,14 @@
  - @Create Date 22-03-2563
 -->
 <div class="panel panel-primary">
-    <div  class="panel-heading" style=" font-size: 28px; "> <i class="fa fa-tag"></i> Roles Editor</div>
+    <div  class="panel-heading" style=" font-size: 28px; "> <i class="fa fa-tag"></i> Roles Management</div>
     <div class="panel-body">	
 		<table id="example" class="table table-striped table-bordered no-footer dataTable" style="width:100%">
 			<thead>
 				<tr>
 					<th>ลำดับ</th>
 					<th>บทบาท</th>
+					<th>คำอธิบาย</th>
 				</tr>
 			</thead>
 		</table>
@@ -19,7 +20,7 @@
 </div> 
 <!-- End editor -->
 
-<div class="panel panel-primary">
+<!-- <div class="panel panel-primary">
     <div  class="panel-heading" style=" font-size: 28px; "> <i class="fa fa-tag"></i> Relation role management</div>
     <div class="panel-body">	
 		<table id="example2" class="table table-striped table-bordered no-footer dataTable" style="width:100%">
@@ -32,10 +33,10 @@
 			</thead>
 		</table>
 	</div>
-</div>
+</div> -->
 <!-- End relation roles -->
 
-<div class="modal fade" id="altDelete" tabindex="-1" role="dialog">
+<!-- <div class="modal fade" id="altDelete" tabindex="-1" role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header bg-blue">
@@ -50,13 +51,13 @@
 		<div class="modal-footer"></div>
 		</div>
 	</div>
-</div>
+</div> -->
 
 <script>
 
 	$(document).ready(function () {
 		Set_Roles()
-		Set_Roles_Relations()
+		// Set_Roles_Relations()
 
 		$("#deleteRowBtn").on("click",()=>{
 			console.log('delete')
@@ -68,8 +69,8 @@
 	var topic_name = "roles";
 	// local URL's are not allowed
 	var url_get = "<?php echo site_url("Source_manager/get_data/");?>"+topic_name;
-	var url_add = "<?php echo site_url("Source_manager/add_data/");?>"+topic_name;
-	var url_edit = "<?php echo site_url("Source_manager/edit_data/");?>"+topic_name;
+	var url_add = "<?php echo site_url("Source_manager/add_no1_data/");?>"+topic_name;
+	var url_edit = "<?php echo site_url("Source_manager/edit_no1_data/");?>"+topic_name;
 	var url_delete = "<?php echo site_url("Source_manager/delete_data/");?>"+topic_name;
 	var url_get_option_roles = "<?php echo site_url("Source_manager/get_data/");?>roles";
 
@@ -99,13 +100,20 @@
 				type:"hidden",
 				disabled:"true",
 				render: function (data, type, row, meta) {
-					if (data == null || !(data in Options_role)) return null;
+					if (data == null) return null;
 					return 2;
 				},
 				width: "10%",
 				className: "text-center"
 			},
-			{ data: "name"}
+			{ data: "name"},
+			{ 
+				data: "description",
+				render: function (data, type, row, meta) {
+					if (data == null || data == "") return "ไม่มีคำอธิบาย";
+					return data;
+				}
+			}
 		]; // End set columndefs
 
 		myTable = $('#example').DataTable({
@@ -148,16 +156,17 @@
 				"className": 'btn btn-danger btn-lg' 
 			}],
 			onAddRow: function(datatable, rowdata, success, error) {
-				console.log(datatable, rowdata, success, error)
+				// console.log(datatable, rowdata, success, error)
+				console.log(rowdata)
 				$.ajax({
 					// a tipycal url would be / with type='PUT'
 					url: url_add,
 					type: 'POST',
 					async :false,
 					data: rowdata,
-					success:success,
-					error: error
-				});
+					success: success,
+					error: (e)=>{console.log(e)}
+				})
 				datatable.s.dt.ajax.reload();
 			},
 			onEditRow: function(datatable, rowdata, success, error) {
@@ -191,7 +200,7 @@
 		// Set index of column
 		myTable.on( 'order.dt search.dt', function () {
 			myTable.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-				cell.innerHTML = i+1;
+				cell.innerHTML = `${i+1}.`;
 			});
 		}).draw(); 
 	} // End Set_Roles
@@ -211,16 +220,19 @@
 			dataType: "json",
 			async:false,
 			success: function(a){
+				// console.log(a)
 				for(var i=0 ;i<a.length;i++){
 					Options_roles[a[i].id] = a[i].name;			
-					Options_roles_data[a[i].id] = a[i];			
+					Options_roles_data[a[i].id] = a[i];	
+					// console.log(Options_roles_data[i])		
 				}
+				let k=1;
+				console.log(Options_roles_data[k].name)		
 			},
 			error: function(err){
 				console.log(err)
 			}
 		})
-
 		var columnDefs = [
 			{
 				title: "ลำดับ",
@@ -228,7 +240,7 @@
 				type:"hidden",
 				disabled:"true",
 				render: function (data, type, row, meta) {
-					if (data == null || !(data in Options_role)) return null;
+					if (data == null) return null;
 					return 2;
 				},
 				width: "10%",
@@ -251,10 +263,15 @@
 				select2 : { width: "100%" },
 				render: function (data, type, row, meta) {
 					let html = `<div class="text-center"> <select name="cars" id="cars">`;
-						for(i=1;i<=Object.size(Options_roles);i++)
+					let tempName = "";
+						for(let id in Options_roles_data)
 						{
-							html += `<option value="${Options_roles_data[i].name}">${Options_roles_data[i].name}</option>`;
+							html += `<option value="`+Options_roles_data[id].id+`">${Options_roles_data[id].name}</option>`;
 						}
+						// for(i=1;i<=Object.size(Options_roles_data);i++)
+						// {
+						// 	html += `<option value="`+Options_roles_data.id+`">${Options_roles_data.name}</option>`;
+						// }
 						html += `</select></div>`;
 					return html;
 				}
@@ -314,7 +331,7 @@
 		// Set index of column
 		myTableRolesRelation.on( 'order.dt search.dt', function () {
 			myTableRolesRelation.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-				cell.innerHTML = i+1;
+				cell.innerHTML = `${i+1}.`;
 			});
 		}).draw(); 
 	} // End Set_Roles

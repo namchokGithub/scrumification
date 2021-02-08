@@ -49,8 +49,8 @@ class Leaderboard extends BaseController
 	/**
      * Get All Point.
      *
-	 * @Author	Jiranuwat Jaiyen       
-	 * @Create Date	22-03-2563
+    * @Author	Jiranuwat Jaiyen       
+    * @Create Date	22-03-2563
      **@Update Namchok Singhachai
      * @return Json Data
      */

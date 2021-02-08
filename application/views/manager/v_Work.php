@@ -28,13 +28,12 @@
 	});
 
 	var myTable;
-	var topic_name = "roles";
+	var topic_name = "work";
 	// local URL's are not allowed
 	var url_get = "<?php echo site_url("Source_manager/get_data/");?>"+topic_name;
-	var url_add = "<?php echo site_url("Source_manager/add_data/");?>"+topic_name;
-	var url_edit = "<?php echo site_url("Source_manager/edit_data/");?>"+topic_name;
+	var url_add = "<?php echo site_url("Source_manager/add_no1_data/");?>"+topic_name;
+	var url_edit = "<?php echo site_url("Source_manager/edit_no1_data/");?>"+topic_name;
 	var url_delete = "<?php echo site_url("Source_manager/delete_data/");?>"+topic_name;
-	var url_get_option_roles = "<?php echo site_url("Source_manager/get_data/");?>roles";
 
 
 	/**
@@ -45,14 +44,6 @@
      */
 	function Set_Roles() {
 
-        // let dataTemp = [
-        //     {"name": "ระบบจัดการผู้ใช้งาน"},
-        //     {"name": "ระบบทำข้อสอบออนไลน์"},
-        //     {"name": "ระบบจัดการคิว"},
-        //     {"name": "ระบบการคลัง"},
-        //     {"name": "ระบบสมัครเรียน"}
-        // ];
-        // console.log(dataTemp)
 		var columnDefs = [
 			{
 				title: "ลำดับ",
@@ -70,13 +61,11 @@
 		]; // End set columndefs
 
 		myTable = $('#example').DataTable({
-            data: [
-                {"name": "ระบบจัดการผู้ใช้งาน"},
-                {"name": "ระบบทำข้อสอบออนไลน์"},
-                {"name": "ระบบจัดการคิว"},
-                {"name": "ระบบการคลัง"},
-                {"name": "ระบบสมัครเรียน"}
-            ],
+            ajax: 
+				{
+					"url": url_get,
+					"dataSrc": ""
+				},
             "sPaginationType": "full_numbers",
 			columns: columnDefs,  // columns from above
 			initComplete: function (settings, json) {
@@ -111,20 +100,49 @@
 				"className": 'btn btn-danger btn-lg' 
 			}],
 			onAddRow: function(datatable, rowdata, success, error) {
-				
+				$.ajax({
+					// a tipycal url would be / with type='PUT'
+					url: url_add,
+					type: 'POST',
+					async :false,
+					data: rowdata,
+					success: success,
+					error: (e)=>{console.log(e)}
+				})
+				datatable.s.dt.ajax.reload();
 			},
 			onEditRow: function(datatable, rowdata, success, error) {
-
+				rowdata['id'] = datatable.s.dt.rows( { selected: true } ).data()[0]['id']
+				$.ajax({
+					// a tipycal url would be /{id} with type='POST'
+					url: url_edit,
+					type: 'POST',
+					async :false,
+					data: rowdata,
+					success: success,
+					error: error
+				});
+				datatable.s.dt.ajax.reload();
 			},
 			onDeleteRow: function(datatable, rowdata, success, error) {
-
+				rowdata['id'] = datatable.s.dt.rows( { selected: true } ).data()[0]['id']
+				$.ajax({
+					// a tipycal url would be /{id} with type='DELETE'
+					url: url_delete,
+					type: 'POST',
+					async :false,
+					data: rowdata,
+					success: success,
+					error: error
+				});
+				datatable.s.dt.ajax.reload();
 			}
 		}); // End create table
 
 		// Set index of column
 		myTable.on( 'order.dt search.dt', function () {
 			myTable.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-				cell.innerHTML = i+1;
+				cell.innerHTML = `${i+1}.`;
 			});
 		}).draw(); 
 	} // End Set_Roles

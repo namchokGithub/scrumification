@@ -139,6 +139,78 @@ class Source_manager extends BaseController
     }
 
 	/**
+     * Insert Role Data.
+     *
+	 * @Author	Jiranuwat Jaiyen       
+	 * @Create Date	22-03-2563
+	 **@Update Namchok Singhachai
+	 * @return mixed
+     */
+    public function add_role_data($name_table)
+    {
+		$data = $this->input->post();
+		unset($data['1']);
+		unset($data['addRowBtn']);
+		unset($data['undefined']);
+        $this->DM->add_data($name_table,$data);
+		echo json_encode($data);
+    } // End add_role_data
+
+	/**
+     * Update Role Data.
+     *
+	 * @Author	Jiranuwat Jaiyen       
+	 * @Create Date	22-03-2563
+	 **@Update Namchok Singhachai
+	 * @return mixed
+     */
+    public function edit_role_data($name_table)
+    {
+		$data = $this->input->post();
+		unset($data['1']);
+		unset($data['editRowBtn']);
+		unset($data['undefined']);
+        $this->DM->edit_data($name_table,$data);
+		echo json_encode($data);
+    } // End edit_role_data
+
+	/**
+     * Insert Data (No1).
+     *
+	 * @Author	Jiranuwat Jaiyen       
+	 * @Create Date	22-03-2563
+	 **@Update Namchok Singhachai
+	 * @return mixed
+     */
+    public function add_no1_data($name_table)
+    {
+		$data = $this->input->post();
+		unset($data['1']);
+		unset($data['addRowBtn']);
+		unset($data['undefined']);
+        $this->DM->add_data($name_table,$data);
+		echo json_encode($data);
+    } // End add_role_data
+
+	/**
+     * Update Data (No1).
+     *
+	 * @Author	Jiranuwat Jaiyen       
+	 * @Create Date	22-03-2563
+	 **@Update Namchok Singhachai
+	 * @return mixed
+     */
+    public function edit_no1_data($name_table)
+    {
+		$data = $this->input->post();
+		unset($data['1']);
+		unset($data['editRowBtn']);
+		unset($data['undefined']);
+        $this->DM->edit_data($name_table,$data);
+		echo json_encode($data);
+    } // End edit_role_data
+
+	/**
      * Insert User.
      *
 	 * @Author	Jiranuwat Jaiyen       
@@ -164,6 +236,7 @@ class Source_manager extends BaseController
     public function edit_data($name_table)
     {
 		$data = $this->input->post();
+		unset($data['editRowBtn']);
 		unset($data['editRowBtn']);
 		unset($data['undefined']);
         $this->DM->edit_data($name_table, $data);
