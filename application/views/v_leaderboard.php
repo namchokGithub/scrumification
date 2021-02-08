@@ -6,12 +6,28 @@
  - Update: Namchok Singhachai
 -->
 
-<script src="<?php echo base_url('assets/dist/js/highcharts.js'); ?>"></script>
-<script src="<?php echo base_url('assets/dist/js/exporting.js'); ?>"></script>
-<script src="<?php echo base_url('assets/dist/js/export-data.js'); ?>"></script>
-<script src="<?php echo base_url('assets/dist/js/accessibility.js'); ?>"></script>
-
 <style>
+	.kanban ::-webkit-scrollbar {
+        width: 15px !important;
+    }
+    /* Track */
+    
+    .kanban::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px #c0c0c0 !important;
+        /* border-radius: 5px; */
+    }
+    /* Handle */
+    
+    .kanban::-webkit-scrollbar-thumb {
+        background: #acacac !important;
+        border-radius: 20px !important;
+    }
+    /* Handle on hover */
+    
+    .kanban ::-webkit-scrollbar-thumb:hover {
+        background: #686868 !important;
+    }
+
 	.switch {
 		position: relative;
 		display: inline-block;
@@ -130,6 +146,7 @@
 	.highcharts-subtitle tspan{
 		font-size:20px
 	}
+	
 	@media only screen and (max-width: 800px) {
 		.mobile-table {
 			font-size:2.5vw;
@@ -153,6 +170,7 @@
 
 		}
 	}
+
 	@media only screen and (max-width: 450px) {
 		.mobile-table {
 			font-size:4vw;
@@ -186,14 +204,14 @@
 
 <div class="panel panel-primary">
     <div  class="panel-heading" style=" font-size: 28px; ">OSSD</div>
-    <div class="panel-body">
+    <div class="panel-body ">
 		<div id="container"></div>
     </div>
 </div>
 <!-- End Panel Leaderboard -->
 
 <?php if($is_show[0]->status || $Profile[0] == "ScrumMaster"){ ?>
-<div class="panel panel-primary">
+<div class="panel panel-primary kanban">
     <div  class="panel-heading" style=" font-size: 28px; ">Camp Leader		
 		<?php if($Profile[0] == "ScrumMaster"){ ?>
 		<div style=" display: inline-flex; position: absolute; right: 30px; ">
@@ -210,21 +228,20 @@
 	<!-- end panel heading -->
 
     <div class="panel-body" style="padding:0px !important">
-		<div style=" min-height: 400px; height: 50vh; overflow-y: scroll; background-color: white; ">
-			<table style=" width: 100%; background-color: white; " class="mobile-table">
+		<div style=" min-height: 400px; height: 50vh; overflow-y: scroll; background-color: white; " class="kanban">
+			<table style=" width: 100%; background-color: white; " class="mobile-table ">
 			<?php foreach($individual_list as $i => $row){ ?>
 			<tr style="border-bottom: 0.5px solid gray;">
 				<td style="width:15%;">
 					<img src="<?php echo base_url('assets/dist/img/user/'.$row['username'].'.jpg');?>" alt="User Image" onerror="this.onerror=null;this.src='<?php echo base_url('assets/dist/img/user/unknown-who.jpg'); ?>';" style="object-fit: cover; object-position: center;margin: 7px 30px;width: 100px;height: 100px;border-radius: 50%;">
-					<div class="widget-user-header " >
-					</div>
+					<div class="widget-user-header" ></div>
 				</td>
 				<td style="width:50%;">
 					<span style="margin-left:20px"><?php echo $row['users_name']; ?></span>
 				</td>
 				<td style="text-align: -webkit-center;width:30%;">
 					<div style="display: flex; flex-direction: row;">
-						<div class="widget-user-header " style="width: 50px;background: url('<?php echo base_url('assets/dist/img/trop.png'); ?>') center center;background-position-x: center;height: 70px;    background-size: contain; background-repeat: no-repeat;">
+						<div class="widget-user-header " style="width: 50px;background: url('<?php echo base_url('assets/dist/img/trop.png'); ?>') center center;background-position-x: center;height: 70px; background-size: contain; background-repeat: no-repeat;">
 						</div>
 						<div style="align-self: center;margin-left:15px"><?php echo $row['name_indi']; ?></div>
 					</div>
@@ -238,6 +255,11 @@
 </div>
 <?php } ?>
 <!-- End panel Leader -->
+
+<script src="<?php echo base_url('assets/dist/js/highcharts.js'); ?>"></script>
+<script src="<?php echo base_url('assets/dist/js/exporting.js'); ?>"></script>
+<script src="<?php echo base_url('assets/dist/js/export-data.js'); ?>"></script>
+<script src="<?php echo base_url('assets/dist/js/accessibility.js'); ?>"></script>
 
 <script>
 
@@ -285,7 +307,7 @@ var default_formatter = {
 		  formatter: function () {
 			return '<div style="text-align: center;" class="tooltip-title-font"><br>'+Highcharts.numberFormat(this.y,2)+'</div>'
 		  }
-		}
+}
 var gold_formatter = {
 			  enabled: true,
 			  useHTML: true,
@@ -293,7 +315,7 @@ var gold_formatter = {
 			  formatter: function () {
 				return '<div style="text-align: center;" class="tooltip-title-font"><img width="45px"  src="'+gold_url+'"></img><br>'+Highcharts.numberFormat(this.y,2)+'</div>'
 			  }
-			}
+}
 var sliver_formatter =  {
 			  enabled: true,
 			  useHTML: true,
@@ -301,7 +323,7 @@ var sliver_formatter =  {
 			  formatter: function () {
 				return '<div style="text-align: center;" class="tooltip-title-font"><img width="45px"  src="'+sliver_url+'"></img><br>'+Highcharts.numberFormat(this.y,2)+'</div>'
 			  }
-			}
+}
 var bronze_formatter =  {
 			  enabled: true,
 			  useHTML: true,
@@ -309,23 +331,26 @@ var bronze_formatter =  {
 			  formatter: function () {
 				return '<div style="text-align: center;" class="tooltip-title-font"><img width="45px"  src="'+bronze_url+'"></img><br>'+Highcharts.numberFormat(this.y,2)+'</div>'
 			  }
-			}
+}
+// Set data bar chart
 var data_bar_chart = [{
-		name: "จำนวนเงิน",
-		showInLegend: false, 
-		dataLabels: default_formatter,
-        data: [{
-           y: 0,          
-			dataLabels:  gold_formatter
-        },{
-           y: 0,         
-			dataLabels:  sliver_formatter
-        },{
-           y: 0,         
-			dataLabels:  bronze_formatter
-        }, { y: 0 }, { y: 0 }, { y: 0 }, { y: 0 }, { y: 0 }, { y: 0 }, { y: 0 }]
-		}
-    ]
+	name: "จำนวนเงิน",
+	showInLegend: false, 
+	dataLabels: default_formatter,
+	data: [{
+		y: 0,          
+		dataLabels:  gold_formatter
+	},{
+		y: 0,         
+		dataLabels:  sliver_formatter
+	},{
+		y: 0,         
+		dataLabels:  bronze_formatter
+	}, { y: 0 }, { y: 0 }, { y: 0 }, { y: 0 }, { y: 0 }, { y: 0 }, { y: 0 }]
+	}
+];
+
+// Set bar char
 var bar_chart = Highcharts.chart('container', {
     chart: {
         type: 'column'
@@ -377,11 +402,6 @@ var bar_chart = Highcharts.chart('container', {
             borderWidth: 0
         }
     },
-    
-	// legend: {
-    //   align: 'center',
-    //   verticalAlign: 'top'
-    // },
     series: data_bar_chart
 });
 
@@ -397,22 +417,35 @@ function findIndicesOfMax(inp, count) {
     for (var i = 0; i < inp.length; i++) {
         outp.push(i);
         if (outp.length > count) {
-			
             outp.sort(function(a, b) { return inp[b].y - inp[a].y; });
             outp.pop();
         }
     }
     return outp;
-}
+} // End findIndicesOfMax
 
 /**
  * Setup Data to Chart
  *
  * @Author	Jiranuwat Jaiyen       
  * @Create Date	22-03-2563
+ * @Update Namchok Singhachai
  * @return mixed
  */
 function set_data_chart(){
+	let colorTeam = [
+		{"id":1,"color":"#00bffe"},
+		{"id":2,"color":"#00ff01"},
+		{"id":3,"color":"#191971"},
+		{"id":4,"color":"#9282c9"},
+		{"id":5,"color":"#ff4500"},
+		{"id":6,"color":"#6796b4"},
+		{"id":7,"color":"#ff841a"},
+		{"id":8,"color":"#bf1441"},
+		{"id":9,"color":"#ffc59d"},
+		{"id":10,"color":"#ef3536"},
+	]; // For set team color
+
 	$.get("<?php echo site_url("Leaderboard/get_all_point/"); ?>", function(data, status){
 		raw_data = JSON.parse(data);
 		function compare( a, b ) {
@@ -437,17 +470,17 @@ function set_data_chart(){
 			// console.log('y',data_bar_chart[0].data[i].y)
 		}
 
-		data_bar_chart[0].data[0].color = "#00ff01";
-		data_bar_chart[0].data[1].color = "#00bffe";
-		data_bar_chart[0].data[2].color = "#ef3536";
-		data_bar_chart[0].data[3].color = "#191971";
-		data_bar_chart[0].data[4].color = "#ff4500";
-		data_bar_chart[0].data[5].color = "#9282c9";
-		data_bar_chart[0].data[6].color = "#6796b4";
-		data_bar_chart[0].data[7].color = "#ff841a";
-		data_bar_chart[0].data[8].color = "#bf1441";
-		data_bar_chart[0].data[9].color = "#ffc59d";
-		console.log(data_bar_chart);
+		data_bar_chart[0].data[0].color = colorTeam[0]["color"];
+		data_bar_chart[0].data[1].color = colorTeam[1]["color"];
+		data_bar_chart[0].data[2].color = colorTeam[2]["color"];
+		data_bar_chart[0].data[3].color = colorTeam[3]["color"];
+		data_bar_chart[0].data[4].color = colorTeam[4]["color"];
+		data_bar_chart[0].data[5].color = colorTeam[5]["color"];
+		data_bar_chart[0].data[6].color = colorTeam[6]["color"];
+		data_bar_chart[0].data[7].color = colorTeam[7]["color"];
+		data_bar_chart[0].data[8].color = colorTeam[8]["color"];
+		data_bar_chart[0].data[9].color = colorTeam[9]["color"];
+		console.log(data_bar_chart)
 		
 		var indices = findIndicesOfMax(data_bar_chart[0].data, 3);
 
@@ -466,7 +499,8 @@ function set_data_chart(){
 			series: data_bar_chart
 		})
 	});
-}
+} // End set_data_chart
+
 set_data_chart();
 setInterval(function(){ set_data_chart(); }, 5000);
 

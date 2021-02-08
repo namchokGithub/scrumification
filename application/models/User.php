@@ -286,6 +286,7 @@ class User extends CI_Model
      *
 	 * @Author	Jiranuwat Jaiyen       
 	 * @Create Date	22-03-2563
+     **@Update Namchok Singhachai
      * @return mixed
      */
     public function get_all_point(){
@@ -294,7 +295,7 @@ class User extends CI_Model
             ->from("roles_point")
 			->order_by("point DESC")
             ->get()->result_array();
-	}
+	} // End get_all_point
 	
 	/**
      * Get All individual.
