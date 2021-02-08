@@ -11,6 +11,10 @@
 		</table>
 	</div>
 </div>
+
+<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+
 <script>
 
 	var myTable;
@@ -77,6 +81,21 @@
 				lang:"th",
 				format : "Y/m/d"
 			} 
+		}
+		,
+		{ 
+			data: "status",
+			title: "การดำเนินการ",
+			disabled:"true",
+			render: function (data, type, row, meta) {
+				return `<div class="btn-group" id="status" data-toggle="buttons">
+              <label class="btn btn-default btn-on active">
+              <input type="radio" value="1" name="multifeatured_module[module_id][status]" checked="checked">ON</label>
+              <label class="btn btn-default btn-off">
+              <input type="radio" value="0" name="multifeatured_module[module_id][status]">OFF</label>
+            </div>`
+			},
+			className: "text-center"
 		}
 	];
 	// End Define columnDefs
@@ -179,7 +198,8 @@
 </script>
 
 <style>
-
+	.btn-default.btn-on.active{background-color: #5BB75B;color: white;}
+	.btn-default.btn-off.active{background-color: #DA4F49;color: white;}
 	div,h3,span{
 		font-family: prompt !important
 	}

@@ -108,6 +108,11 @@
                     <i class="fa fa-cart-plus"></i>
                     <span>Shop Management</span></a>
             </li>
+            <li class="ScrumMaster">
+                <a id="Work" href="<?php echo site_url('Source_manager/index/Work'); ?>">
+                    <i class="fa fa-cart-plus"></i>
+                    <span>Work Management</span></a>
+            </li>
             <!-- end MANAGER NAVIGATION -->
         </ul>
     </section>

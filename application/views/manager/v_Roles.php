@@ -20,7 +20,7 @@
 <!-- End editor -->
 
 <div class="panel panel-primary">
-    <div  class="panel-heading" style=" font-size: 28px; "> <i class="fa fa-tag"></i> Relation management</div>
+    <div  class="panel-heading" style=" font-size: 28px; "> <i class="fa fa-tag"></i> Relation role management</div>
     <div class="panel-body">	
 		<table id="example2" class="table table-striped table-bordered no-footer dataTable" style="width:100%">
 			<thead>
@@ -34,7 +34,6 @@
 	</div>
 </div>
 <!-- End relation roles -->
-
 
 <div class="modal fade" id="altDelete" tabindex="-1" role="dialog">
 	<div class="modal-dialog">
@@ -52,6 +51,7 @@
 		</div>
 	</div>
 </div>
+
 <script>
 
 	$(document).ready(function () {
