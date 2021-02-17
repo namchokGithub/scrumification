@@ -100,5 +100,40 @@ class Data_manager extends CI_Model
     {
         return $this->db->delete($name_table, $data);
     }
+
+    /**
+     * Get activity report
+     *
+	 * @Author	Namchok Singhachai
+	 * @Create Date	12-02-2564
+     * @return mixed
+     */
+	public function get_activity($activityId = "2", $groupId = "1", $dateStart = "2021-01-01", $dateEnd = "2021-12-31")
+	{
+		$sql = "SELECT Count(activity_checkin.user_id) as group$groupId
+                FROM `activity_checkin`
+                JOIN activity ON activity_checkin.activity_id = activity.id
+                JOIN users ON users.id = activity_checkin.user_id
+                JOIN roles_users on roles_users.user_id = users.id
+                WHERE `time` BETWEEN '$dateStart' AND  '$dateEnd'
+                    AND 
+                        activity_checkin.activity_id = '$activityId'
+                    AND roles_users.role_id = '$groupId'
+            ";
+        return $this->db->query($sql)->result_array();
+	} // End get_rp_SprintPlanning
+
+    /**
+     * Toggle id of actitvity
+     * 
+     * @Author: Namchok Singhachai
+     * @Crate: 14-02-2564
+     */
+    public function toggle_activity($id){
+        $sql = "UPDATE `activity` SET\n"
+            . "activity.status = CASE WHEN activity.status = 1 THEN 0 ELSE 1 END\n"
+            . "WHERE activity.id = $id";
+        return $this->db->query($sql);
+    }
 }
 ?>

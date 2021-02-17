@@ -14,7 +14,7 @@
 
 <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
-
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
 
 	var myTable;
@@ -81,19 +81,29 @@
 				lang:"th",
 				format : "Y/m/d"
 			} 
-		}
-		,
+		},
 		{ 
-			data: "status",
+			data: "id",
 			title: "การดำเนินการ",
-			disabled:"true",
+			disabled: "true",
 			render: function (data, type, row, meta) {
-				return `<div class="btn-group" id="status" data-toggle="buttons">
-              <label class="btn btn-default btn-on active">
-              <input type="radio" value="1" name="multifeatured_module[module_id][status]" checked="checked">ON</label>
-              <label class="btn btn-default btn-off">
-              <input type="radio" value="0" name="multifeatured_module[module_id][status]">OFF</label>
-            </div>`
+				let text = `<div class="btn-group" id="status${data}" data-toggle="buttons">`
+				if(row.status==1)
+				{
+					text += `<label class="btn btn-default btn-on active">
+					<input type="radio" value="1" name="multifeatured_module[module_id][status]" checked="checked">ON</label>
+					<label onclick="toggleStatus('off', '${data}')" class="btn btn-default btn-off">
+					<input type="radio" value="0" name="multifeatured_module[module_id][status]">OFF</label>`
+				}
+				else 
+				{
+					text += `<label onclick="toggleStatus('on', '${data}')" class="btn btn-default btn-on">
+					<input type="radio" value="1" name="multifeatured_module[module_id][status]">ON</label>
+					<label class="btn btn-default btn-off active">
+					<input type="radio" value="0" name="multifeatured_module[module_id][status]" checked="checked">OFF</label>`
+				}
+				text += `</div>`
+				return text
 			},
 			className: "text-center"
 		}
@@ -195,9 +205,106 @@
 		});
 	}).draw(); 
 	// End datatables
+
+	function toggleStatus(status, id)
+	{
+		console.log(status)
+		let textStatus;
+		if(status!='on'){
+			textStatus = 'คุณต้องปิดการใช้งานกิจกรรมหรือไม่ ?'
+		} else {
+			textStatus = 'คุณต้องการเปิดการใช้งานกิจกรรมหรือไม่ ?'
+		}
+		const swalWithBootstrapButtons = Swal.mixin({
+			customClass: {
+				confirmButton: 'btn btn-success',
+				cancelButton: 'btn btn-danger'
+			},
+			buttonsStyling: false
+		})
+
+		swalWithBootstrapButtons.fire({
+			title: textStatus,
+			// text: "You won't be able to revert this!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonText: 'ใช่',
+			cancelButtonText: 'ยกเลิก',
+			reverseButtons: true
+		}).then((result) => {
+			if (result.isConfirmed) {
+				$.ajax({
+					type: "GET",
+					url: "<?php echo site_url("Source_manager/toggle_activity");?>" + "/" + id,
+					dataType: "JSON",
+					success: function (res) {
+						console.log(res)
+					}
+				});
+				if(status!="on")
+				{
+					$(`#status${id}`).html(`
+					<label onclick="toggleStatus('on', '${id}')" class="btn btn-default btn-on">
+					<input type="radio" value="1" name="multifeatured_module[module_id][status]">ON</label>
+					<label class="btn btn-default btn-off active">
+					<input type="radio" value="0" name="multifeatured_module[module_id][status]" checked="checked">OFF</label>
+					`);
+				}
+				else 
+				{
+					$(`#status${id}`).html(`
+					<label class="btn btn-default btn-on active">
+					<input type="radio" value="1" name="multifeatured_module[module_id][status]" checked="checked">ON</label>
+					<label onclick="toggleStatus('off', '${id}')" class="btn btn-default btn-off">
+					<input type="radio" value="0" name="multifeatured_module[module_id][status]">OFF</label>
+					`);
+				}
+				swalWithBootstrapButtons.fire(
+					{
+						title:'เปลี่ยนสถานะสำเร็จ',
+						icon:'success',
+						confirmButtonText: 'ตกลง'
+					}
+				)
+			} else if ( result.dismiss === Swal.DismissReason.cancel ) {
+				if(status=="on")
+				{
+					$(`#status${id}`).html(`
+					<label onclick="toggleStatus('on', '${id}')" class="btn btn-default btn-on">
+					<input type="radio" value="1" name="multifeatured_module[module_id][status]">ON</label>
+					<label class="btn btn-default btn-off active">
+					<input type="radio" value="0" name="multifeatured_module[module_id][status]" checked="checked">OFF</label>
+					`);
+				}
+				else 
+				{
+					$(`#status${id}`).html(`
+					<label class="btn btn-default btn-on active">
+					<input type="radio" value="1" name="multifeatured_module[module_id][status]" checked="checked">ON</label>
+					<label onclick="toggleStatus('off', '${id}')" class="btn btn-default btn-off">
+					<input type="radio" value="0" name="multifeatured_module[module_id][status]">OFF</label>
+					`);
+				}
+				swalWithBootstrapButtons.fire(
+					{
+						title:'ยกเลิกสำเร็จ',
+						icon:'error',
+						confirmButtonText: 'ตกลง'
+					}
+				)
+			}
+		})
+	} // end toggleStatus
+
+	$(document).ready(function () {
+		
+	});
 </script>
 
 <style>
+	.swal2-cancel {
+		margin-right: 10px !important;
+	}
 	.btn-default.btn-on.active{background-color: #5BB75B;color: white;}
 	.btn-default.btn-off.active{background-color: #DA4F49;color: white;}
 	div,h3,span{
@@ -213,84 +320,84 @@
 	.number_formatter{
 		text-align: right;
 	}
-table , td ,tr ,th {
-	border: 0.5px solid #979595 !important;
-	border-collapse: collapse; 
-}
-table { 
-	width: 750px; 
-	border-collapse: collapse; 
-	margin:50px auto;
+	table , td ,tr ,th {
+		border: 0.5px solid #979595 !important;
+		border-collapse: collapse; 
 	}
-
-/* Zebra striping */
-tr:nth-of-type(odd) { 
-	background: #eee; 
-	}
-
-th { 
-	background: #3498db; 
-	color: white; 
-	text-align: center; 
-	font-weight: bold; 
-	}
-
-td, th { 
-	padding: 10px; 
-	font-size: 18px;
-	}
-
-/* 
-Max width before this PARTICULAR table gets nasty
-This query will take effect for any screen smaller than 760px
-and also iPads specifically.
-*/
-@media 
-only screen and (max-width: 760px),
-(min-device-width: 768px) and (max-device-width: 1024px)  {
-
 	table { 
-	  	width: 100%; 
-	}
+		width: 750px; 
+		border-collapse: collapse; 
+		margin:50px auto;
+		}
 
-	/* Force table to not be like tables anymore */
-	table, thead, tbody, th, td, tr { 
-		display: block; 
-	}
-	
-	/* Hide table headers (but not display: none;, for accessibility) */
-	thead tr { 
-		position: absolute;
-		top: -9999px;
-		left: -9999px;
-	}
-	
-	tr { border: 1px solid #ccc; }
-	
-	td { 
-		/* Behave  like a "row" */
-		border: none;
-		border-bottom: 1px solid #eee; 
-		position: relative;
-		padding-left: 50%; 
-	}
+	/* Zebra striping */
+	tr:nth-of-type(odd) { 
+		background: #eee; 
+		}
 
-	td:before { 
-		/* Now like a table header */
-		position: absolute;
-		/* Top/left values mimic padding */
-		top: 6px;
-		left: 6px;
-		width: 45%; 
-		padding-right: 10px; 
-		white-space: nowrap;
-		/* Label the data */
-		content: attr(data-column);
+	th { 
+		background: #3498db; 
+		color: white; 
+		text-align: center; 
+		font-weight: bold; 
+		}
 
-		color: #000;
-		font-weight: bold;
+	td, th { 
+		padding: 10px; 
+		font-size: 18px;
+		}
+
+	/* 
+	Max width before this PARTICULAR table gets nasty
+	This query will take effect for any screen smaller than 760px
+	and also iPads specifically.
+	*/
+	@media 
+	only screen and (max-width: 760px),
+	(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+		table { 
+			width: 100%; 
+		}
+
+		/* Force table to not be like tables anymore */
+		table, thead, tbody, th, td, tr { 
+			display: block; 
+		}
+		
+		/* Hide table headers (but not display: none;, for accessibility) */
+		thead tr { 
+			position: absolute;
+			top: -9999px;
+			left: -9999px;
+		}
+		
+		tr { border: 1px solid #ccc; }
+		
+		td { 
+			/* Behave  like a "row" */
+			border: none;
+			border-bottom: 1px solid #eee; 
+			position: relative;
+			padding-left: 50%; 
+		}
+
+		td:before { 
+			/* Now like a table header */
+			position: absolute;
+			/* Top/left values mimic padding */
+			top: 6px;
+			left: 6px;
+			width: 45%; 
+			padding-right: 10px; 
+			white-space: nowrap;
+			/* Label the data */
+			content: attr(data-column);
+
+			color: #000;
+			font-weight: bold;
+		}
+
 	}
-
-}
-#alteditor-row-type { margin-bottom: 35px; }
+	#alteditor-row-type { margin-bottom: 35px; }
 </style>

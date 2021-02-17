@@ -72,7 +72,8 @@
             </li>
             <li class="ScrumMaster">
                 <a id="ActivityReport" href="<?php echo site_url('Source_manager/index/ActivityReport'); ?>">
-                    <i class="fa fa-television"></i><span>Activity Report</span></a>
+                    <i class="fa fa-television"></i><span>Activity Report</span>
+                </a>
             </li>
             <li class="ScrumMaster">
                 <!-- ตามจริงต้อง Source_manager/index/roles_users -->

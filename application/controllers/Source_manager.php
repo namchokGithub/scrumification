@@ -75,7 +75,7 @@ class Source_manager extends BaseController
 		} 
 		else if($name == "ActivityReport")
 		{
-			$detail['header'] = "Activity Report";
+			$detail['header'] = "Report";
 		} 
 		else if($name == "AssignRole")
 		{
@@ -84,7 +84,7 @@ class Source_manager extends BaseController
 		else if($name == "Individual")
 		{
 			$detail['header'] = "Individual Achievement";
-		} 
+		}
 		else 
 		{
 			$detail['header'] = $name;
@@ -176,8 +176,8 @@ class Source_manager extends BaseController
 
 	/**
      * Insert Data (No1).
-     *
-	 * @Author	Jiranuwat Jaiyen       
+     * No1 for datatable with role order number
+	 * @Author	Namchok 
 	 * @Create Date	22-03-2563
 	 **@Update Namchok Singhachai
 	 * @return mixed
@@ -194,7 +194,7 @@ class Source_manager extends BaseController
 
 	/**
      * Update Data (No1).
-     *
+     * No1 for datatable with role order number
 	 * @Author	Jiranuwat Jaiyen       
 	 * @Create Date	22-03-2563
 	 **@Update Namchok Singhachai
@@ -287,5 +287,76 @@ class Source_manager extends BaseController
 		unset($data['undefined']);
         return $this->DM->delete_data_with_twoid($name_table, $data);
     }
+
+
+	/**
+     * Get activity report
+     *
+	 * @Author	Namchok Singhachai
+	 * @Create Date	12-02-2564
+     * @return mixed
+     */
+	public function get_activity($dateStart = "2021-01-01", $dateEnd = "2021-12-31")
+	{	
+		$data["SprintPlanning"] = array(
+			$this->DM->get_activity("2", "1", $dateStart, $dateEnd),
+			$this->DM->get_activity("2", "2", $dateStart, $dateEnd),
+			$this->DM->get_activity("2", "3", $dateStart, $dateEnd),
+			$this->DM->get_activity("2", "4", $dateStart, $dateEnd),
+			$this->DM->get_activity("2", "5", $dateStart, $dateEnd),
+			$this->DM->get_activity("2", "6", $dateStart, $dateEnd),
+			$this->DM->get_activity("2", "7", $dateStart, $dateEnd),
+			$this->DM->get_activity("2", "8", $dateStart, $dateEnd),
+			$this->DM->get_activity("2", "9", $dateStart, $dateEnd),
+			$this->DM->get_activity("2", "10", $dateStart, $dateEnd)
+		);
+		$data["SprintReview"] = array(
+			$this->DM->get_activity("3", "1", $dateStart, $dateEnd),
+			$this->DM->get_activity("3", "2", $dateStart, $dateEnd),
+			$this->DM->get_activity("3", "3", $dateStart, $dateEnd),
+			$this->DM->get_activity("3", "4", $dateStart, $dateEnd),
+			$this->DM->get_activity("3", "5", $dateStart, $dateEnd),
+			$this->DM->get_activity("3", "6", $dateStart, $dateEnd),
+			$this->DM->get_activity("3", "7", $dateStart, $dateEnd),
+			$this->DM->get_activity("3", "8", $dateStart, $dateEnd),
+			$this->DM->get_activity("3", "9", $dateStart, $dateEnd),
+			$this->DM->get_activity("3", "10", $dateStart, $dateEnd)
+		); 	
+		$data["SprintRetrospect"] = array(
+			$this->DM->get_activity("4", "1", $dateStart, $dateEnd),
+			$this->DM->get_activity("4", "2", $dateStart, $dateEnd),
+			$this->DM->get_activity("4", "3", $dateStart, $dateEnd),
+			$this->DM->get_activity("4", "4", $dateStart, $dateEnd),
+			$this->DM->get_activity("4", "5", $dateStart, $dateEnd),
+			$this->DM->get_activity("4", "6", $dateStart, $dateEnd),
+			$this->DM->get_activity("4", "7", $dateStart, $dateEnd),
+			$this->DM->get_activity("4", "8", $dateStart, $dateEnd),
+			$this->DM->get_activity("4", "9", $dateStart, $dateEnd),
+			$this->DM->get_activity("4", "10", $dateStart, $dateEnd)
+		); 	
+		$data["DailyScrum"] = array(
+			$this->DM->get_activity("17", "1", $dateStart, $dateEnd),
+			$this->DM->get_activity("17", "2", $dateStart, $dateEnd),
+			$this->DM->get_activity("17", "3", $dateStart, $dateEnd),
+			$this->DM->get_activity("17", "4", $dateStart, $dateEnd),
+			$this->DM->get_activity("17", "5", $dateStart, $dateEnd),
+			$this->DM->get_activity("17", "6", $dateStart, $dateEnd),
+			$this->DM->get_activity("17", "7", $dateStart, $dateEnd),
+			$this->DM->get_activity("17", "8", $dateStart, $dateEnd),
+			$this->DM->get_activity("17", "9", $dateStart, $dateEnd),
+			$this->DM->get_activity("17", "10", $dateStart, $dateEnd)
+		); 	
+		echo json_encode($data);
+	} // End get_activity
+
+	 /**
+     * Toggle id of actitvity
+     * 
+     * @Author: Namchok Singhachai
+     * @Crate: 14-02-2564
+     */
+    public function toggle_activity($id){
+		$this->DM->toggle_activity($id);
+    } // End toggle activity
 }
 ?>
