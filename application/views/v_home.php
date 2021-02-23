@@ -65,6 +65,19 @@
     }
 </style>
 
+
+<?php
+    if($checkItem != null) {
+?>
+    <div class="alert alert-success alert-dismissible">
+        <!-- <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button> -->
+        <h4><i class="icon fa fa-bell"></i> แจ้งเตือน </h4>
+        คุณกำลังใช้งานไอเทมพิเศษ <?php echo $checkItem[0]->item_name;?>
+    </div>
+<?php
+    }
+?>
+
 <!-- Main panel -->
 <div class="panel panel-primary">
     <div class="panel-heading heading-target" style=" font-size: 28px;display:flex; cursor:pointer " aria-hidden="true" data-toggle="collapse" data-target="#Panel_Challenger">Challenger

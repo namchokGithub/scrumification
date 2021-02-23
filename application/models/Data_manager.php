@@ -148,5 +148,19 @@ class Data_manager extends CI_Model
                 JOIN roles on roles.id = log_shop.role_id";
         return $this->db->query($sql)->result_array();
     } // End get_log_shop
+
+    /**
+     * Log shop with roles
+     * 
+     * @Author: Namchok Singhachai
+     * @Crate: 15-02-2564
+     */
+    public function get_log_shop_request(){
+		$sql = "SELECT log_shop.role_id, log_shop.shop_id, log_shop.total, log_shop.status, shop.name as item_name,shop.point, shop.type, shop.type, roles.name as roles_name FROM `log_shop`
+                JOIN shop on shop.id = log_shop.shop_id
+                JOIN roles on roles.id = log_shop.role_id
+                WHERE log_shop.status = 2";
+        return $this->db->query($sql)->result_array();
+    } // End get_log_shop
 }
 ?>

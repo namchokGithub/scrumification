@@ -115,7 +115,7 @@
             </li>
             <li class="ScrumMaster">
                 <a id="Work" href="<?php echo site_url('Source_manager/index/Work'); ?>">
-                    <i class="fa fa-cart-plus"></i>
+                    <i class="fa fa-folder-open"></i>
                     <span>Work Management</span></a>
             </li>
             <!-- end MANAGER NAVIGATION -->

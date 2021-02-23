@@ -71,6 +71,7 @@ class Source_manager extends BaseController
 		} 
 		else if($name == "Request_Item")
 		{
+			$data['Secon_target']= $this->User->can_Activity();
 			$detail['header'] = "Request Item";
 		} 
 		else if($name == "ActivityReport")
@@ -90,7 +91,7 @@ class Source_manager extends BaseController
 			$detail['header'] = $name;
 		}
 		
-		$data="";
+		$data['temp_data404']= "404";
 
 		$scripts['temp_scripts'] = '';
 		$this->output("manager/v_".$name, $data, $scripts, $detail);
@@ -281,7 +282,6 @@ class Source_manager extends BaseController
      */
     public function delete_data_with_twoid($name_table)
     {
-		
 		$data = $this->input->post();
 		unset($data['deleteRowBtn']);
 		unset($data['undefined']);
@@ -367,6 +367,16 @@ class Source_manager extends BaseController
      */
     public function get_log_shop(){
 		echo json_encode($this->DM->get_log_shop());
+    } // End get_log_shop
+	
+	/**
+     * Log shop with roles
+     * 
+     * @Author: Namchok Singhachai
+     * @Crate: 15-02-2564
+     */
+    public function get_log_shop_request(){
+		echo json_encode($this->DM->get_log_shop_request());
     } // End get_log_shop
 }
 ?>

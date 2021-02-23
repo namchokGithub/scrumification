@@ -19,13 +19,14 @@
 		</table>
 	</div>
 </div>
-
+<script src="<?php echo base_url('assets/dist/js/sweetalert2@9.js'); ?>"></script>
 <script>
 
-	  var myTable;
-	  var topic_name = "roles_point";
-	  var url_get = "<?php echo site_url("Source_manager/get_log_shop");?>";
-	  var url_get_option_roles = "<?php echo site_url("Source_manager/get_data/");?>roles";
+	var myTable;
+	var topic_name = "roles_point";
+	var url_get = "<?php echo site_url("Source_manager/get_log_shop_request");?>";
+	var url_get_option_roles = "<?php echo site_url("Source_manager/get_data/");?>roles";
+
 	/**
      * Setup User Interface.
      *
@@ -77,7 +78,7 @@
 				title: "การดำเนินการ",
 				data: 2,
 				render: function (data, type, row, meta) {
-					return `<button class="btn btn-info">อนุมัติ</button>`
+					return `<button onclick="confirm('${row.role_id}','${row.shop_id}')" class="btn btn-info">อนุมัติ</button>`
 				},
 				className: "text-center"
 			}
@@ -107,102 +108,147 @@
 			});
 		}).draw();
 	}
+
+	/**
+	 * Confirm for use Item
+	 * Author: Namchok Singhachai
+	 */
+	function confirm(role_id, shop_id){
+		Swal.fire({
+			title: 'ต้องการยืนยันการใช้งานหรือไม่',
+			imageUrl:  `<?php echo base_url('assets/dist/img/item/UseItem.png'); ?>`,
+			imageWidth: 100,
+			imageHeight: 100,
+			imageAlt: 'Use Item image',
+			showCancelButton: true,
+			confirmButtonText: 'ยืนยัน',
+			cancelButtonText: 'ยกเลิก',
+			showLoaderOnConfirm: true,
+			preConfirm: (count) => {
+				return fetch(`<?php echo site_url("achievement/confirmItem"); ?>/${role_id}/${shop_id}`)
+				.then(response => {
+				  if (!response.ok) {
+					throw new Error(response.statusText)
+				  }
+				  return response.json()
+				})
+				.catch(error => {
+				  Swal.showValidationMessage(
+					`Request failed: ${error}`
+				  )
+				})
+			},
+			allowOutsideClick: () => !Swal.isLoading()
+		  }).then((result) => {
+			if (result.value) {
+				console.log(result)
+				Swal.fire({
+					icon: 'success',
+					title: 'ยืนยันการใช้งานเสร็จสิ้น',
+					showConfirmButton: false,
+					timer: 1500
+				})
+				location.reload();
+			}
+		  })
+	}
+
 	set_Data()
 </script>
 
 <style>
 
-div,h3,span{
-	font-family: prompt !important
-}
-.btn-info {
-	background-color: #245dc1 !important;
-	border-color: #245dc1 !important;
-}
-.dt-buttons{
-	margin-bottom : 10px
-}
-.number_formatter{
-	text-align: right;
-}
-table , td ,tr ,th {
-	border: 0.5px solid #979595 !important;
-	border-collapse: collapse; 
-}
-table { 
-	width: 750px; 
-	border-collapse: collapse; 
-	margin:50px auto;
+	div,h3,span{
+		font-family: prompt !important
 	}
-
-/* Zebra striping */
-tr:nth-of-type(odd) { 
-	background: #eee; 
+	.btn-info {
+		background-color: #245dc1 !important;
+		border-color: #245dc1 !important;
 	}
-
-th { 
-	background: #3498db; 
-	color: white; 
-	font-weight: bold;
-	text-align: center; 
+	.dt-buttons{
+		margin-bottom : 10px
 	}
-
-td, th { 
-	padding: 10px; 
-	font-size: 18px;
+	.number_formatter{
+		text-align: right;
 	}
-
-/* 
-Max width before this PARTICULAR table gets nasty
-This query will take effect for any screen smaller than 760px
-and also iPads specifically.
-*/
-@media 
-only screen and (max-width: 760px),
-(min-device-width: 768px) and (max-device-width: 1024px)  {
-
+	table , td ,tr ,th {
+		border: 0.5px solid #979595 !important;
+		border-collapse: collapse; 
+	}
 	table { 
-	  	width: 100%; 
-	}
+		width: 750px; 
+		border-collapse: collapse; 
+		margin:50px auto;
+		}
 
-	/* Force table to not be like tables anymore */
-	table, thead, tbody, th, td, tr { 
-		display: block; 
-	}
-	
-	/* Hide table headers (but not display: none;, for accessibility) */
-	thead tr { 
-		position: absolute;
-		top: -9999px;
-		left: -9999px;
-	}
-	
-	tr { border: 1px solid #ccc; }
-	
-	td { 
-		/* Behave  like a "row" */
-		border: none;
-		border-bottom: 1px solid #eee; 
-		position: relative;
-		padding-left: 50%; 
-	}
+	/* Zebra striping */
+	tr:nth-of-type(odd) { 
+		background: #eee; 
+		}
 
-	td:before { 
-		/* Now like a table header */
-		position: absolute;
-		/* Top/left values mimic padding */
-		top: 6px;
-		left: 6px;
-		width: 45%; 
-		padding-right: 10px; 
-		white-space: nowrap;
-		/* Label the data */
-		content: attr(data-column);
-
-		color: #000;
+	th { 
+		background: #3498db; 
+		color: white; 
 		font-weight: bold;
-	}
+		text-align: center; 
+		}
 
-}
-#alteditor-row-type { margin-bottom: 35px; }
+	td, th { 
+		padding: 10px; 
+		font-size: 18px;
+		}
+
+	/* 
+	Max width before this PARTICULAR table gets nasty
+	This query will take effect for any screen smaller than 760px
+	and also iPads specifically.
+	*/
+	@media 
+	only screen and (max-width: 760px),
+	(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+		table { 
+			width: 100%; 
+		}
+
+		/* Force table to not be like tables anymore */
+		table, thead, tbody, th, td, tr { 
+			display: block; 
+		}
+		
+		/* Hide table headers (but not display: none;, for accessibility) */
+		thead tr { 
+			position: absolute;
+			top: -9999px;
+			left: -9999px;
+		}
+		
+		tr { border: 1px solid #ccc; }
+		
+		td { 
+			/* Behave  like a "row" */
+			border: none;
+			border-bottom: 1px solid #eee; 
+			position: relative;
+			padding-left: 50%; 
+		}
+
+		td:before { 
+			/* Now like a table header */
+			position: absolute;
+			/* Top/left values mimic padding */
+			top: 6px;
+			left: 6px;
+			width: 45%; 
+			padding-right: 10px; 
+			white-space: nowrap;
+			/* Label the data */
+			content: attr(data-column);
+
+			color: #000;
+			font-weight: bold;
+		}
+
+	}
+	#alteditor-row-type { margin-bottom: 35px; }
 </style>

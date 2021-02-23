@@ -104,13 +104,14 @@ class Achievement extends BaseController
      * @return Json Data
      */
 	public function UseItem($item, $target_id = 9999){
-		if(hasRole(['ScrumMaster'])){
-			$target = $target_id;
-		}
-		else{
-			$data['type']="Error";
-			return $data;
-		}
+		// if(hasRole(['ScrumMaster'])){
+		// 	$target = $target_id;
+		// }
+		// else{
+		// 	$data['type']="Error";
+		// 	return $data;
+		// }
+		$target = $target_id;
 		echo json_encode($this->User->Useitem([ 'item_id' => $item, 'target'=>$target])); 
 	}
 	/**
@@ -157,5 +158,24 @@ class Achievement extends BaseController
 			$target = $this->auth->roles[0];
 		}
 		echo json_encode($this->User->get_Inventory($target)); 
+	}
+	
+	/**
+     * Confirm item
+     *
+	 * @Author Namchok Singhachai
+     * @return Json Data
+     */
+	public function confirmItem($rold_id, $shop_id){
+		echo json_encode($this->User->confirmItem($rold_id, $shop_id)); 
+	}
+	/**
+     * Used item
+     *
+	 * @Author Namchok Singhachai
+     * @return Json Data
+     */
+	public function usedItem($rold_id, $shop_id){
+		echo json_encode($this->User->usedItem($rold_id, $shop_id)); 
 	}
 }

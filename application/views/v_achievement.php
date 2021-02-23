@@ -121,7 +121,6 @@
 </div>
 
 <script src="<?php echo base_url('assets/dist/js/sweetalert2@9.js'); ?>"></script>
-
 <script>
 countdown.resetLabels();
 countdown.setLabels(
@@ -299,6 +298,7 @@ countdown.setLabels(
 			}
 		});
 	}
+	//* ----------------------------------------- End Set_inventory -------------------------------------------------------
 	
 	/**
      * for onclick to group item.
@@ -316,6 +316,7 @@ countdown.setLabels(
 			$("[class*='item_type']").show()
 		}
 	}
+	//* ----------------------------------------- End group_item -------------------------------------------------------
 	
 	/**
      * for onclick to group inventory.
@@ -333,17 +334,18 @@ countdown.setLabels(
 			$("[class*='inventory_type']").show()
 		}
 	}
+	//* ----------------------------------------- End group_inventory -------------------------------------------------------
 
 <?php if(!isset($Secon_target[0])&&( $Role_can[0]["secon_role"] == "ประธานมกุล" || $Profile_role[0] == "ScrumMaster")){ ?>
 
-/**
- * function to submit buy item.
- *
- * @Author	Jiranuwat Jaiyen       
- * @Create Date	22-03-2563
- * @return mixed
- */
-function BuyItem(item,item_name){
+	/**
+	* function to submit buy item.
+	*
+	* @Author	Jiranuwat Jaiyen       
+	* @Create Date	22-03-2563
+	* @return mixed
+	*/
+	function BuyItem(item,item_name){
 		  Swal.fire({
 			title: 'ระบุจำนวนสินค้าที่ต้องการ<br>"'+item_name+'"',
 			imageUrl:  `<?php echo base_url('assets/dist/img/shopping-cart.png'); ?>`,
@@ -427,75 +429,77 @@ function BuyItem(item,item_name){
 			Setup_ui()
 		  })
 	}
+	//* ----------------------------------------- End BuyItem -------------------------------------------------------
+
 
 <?php }?>
 
-<?php if($Profile_role[0] == "ScrumMaster"){ ?> 
-/**
- * function submit to use item
- *
- * @Author	Jiranuwat Jaiyen       
- * @Create Date	22-03-2563
- * @return mixed
- */
-function UseItem(item,item_name){
-		  Swal.fire({
-			title: 'คุณต้องการใช้งาน <br>"'+item_name+'"?',
-			imageUrl: '<?php echo base_url('assets/dist/img/item/UseItem.png'); ?>',
-			imageWidth: 100,
-			imageHeight: 100,
-			imageAlt: 'Custom image',
-			showCancelButton: true,
-			confirmButtonText: 'ยืนยัน',
-			cancelButtonText: 'ยกเลิก',
-			showLoaderOnConfirm: true,
-			preConfirm: (count) => {
-			  return fetch('<?php echo site_url("achievement/useitem"); ?>/'+item+'/'+target_id)
-				.then(response => {
-				  if (!response.ok) {
-					throw new Error(response.statusText)
-				  }
-				  return response.json()
-				})
-				.catch(error => {
-				  Swal.showValidationMessage(
-					`Request failed: ${error}`
-				  )
-				})
-			},
-			allowOutsideClick: () => !Swal.isLoading()
-		  }).then((result) => {
-			if (result.value) {
-				console.log(result)
-				if(result.value['type'] == "Comple"){
-				  console.log(result.value)
-				  Swal.fire({
-					icon: 'success',
-					title: 'ใช้งานสินค้าเสร็จสิ้น',
-					showConfirmButton: false,
-					timer: 1500
-				  })
+	/**
+	* function submit to use item
+	*
+	* @Author	Jiranuwat Jaiyen       
+	* @Create Date	22-03-2563
+	* @return mixed
+	* @Update Namchok Singhachai
+	*/
+	function UseItem(item,item_name){
+			Swal.fire({
+				title: 'คุณต้องการใช้งาน <br>"'+item_name+'"?',
+				imageUrl: '<?php echo base_url('assets/dist/img/item/UseItem.png'); ?>',
+				imageWidth: 100,
+				imageHeight: 100,
+				imageAlt: 'Custom image',
+				showCancelButton: true,
+				confirmButtonText: 'ยืนยัน',
+				cancelButtonText: 'ยกเลิก',
+				showLoaderOnConfirm: true,
+				preConfirm: (count) => {
+				return fetch('<?php echo site_url("achievement/useitem"); ?>/'+item+'/'+target_id)
+					.then(response => {
+					if (!response.ok) {
+						throw new Error(response.statusText)
+					}
+					return response.json()
+					})
+					.catch(error => {
+						Swal.showValidationMessage(
+							`Request failed: ${error}`
+						)
+					})
+				},
+				allowOutsideClick: () => !Swal.isLoading()
+			}).then((result) => {
+				if (result.value) {
+					console.log(result)
+					if(result.value['type'] == "Comple"){
+					console.log(result.value)
+					Swal.fire({
+						icon: 'success',
+						title: 'ส่งคำขอใช้งานสินค้าเสร็จสิ้น',
+						showConfirmButton: false,
+						timer: 1500
+					})
+					}
+					else if(result.value['type'] == "Item"){
+					Swal.fire({
+						icon: 'error',
+						title: 'จำนวนสินค้าที่ต้องการใช้งานไม่เพียงพอ',
+						showConfirmButton: false,
+						timer: 1500
+					})
+					}
+					else{
+					Swal.fire({
+						icon: 'error',
+						title: 'เกิดข้อผิดพลาดในการใช้งาน',
+						showConfirmButton: false,
+						timer: 1500
+					})
+					}
 				}
-				else if(result.value['type'] == "Item"){
-				  Swal.fire({
-					icon: 'error',
-					title: 'จำนวนสินค้าที่ต้องการใช้งานไม่เพียงพอ',
-					showConfirmButton: false,
-					timer: 1500
-				  })
-				}
-				else{
-				  Swal.fire({
-					icon: 'error',
-					title: 'เกิดข้อผิดพลาดในการใช้งาน',
-					showConfirmButton: false,
-					timer: 1500
-				  })
-				}
-			}
-			Setup_ui()
-		  })
-}
-<?php } ?>
+				Setup_ui()
+			})
+	}
+	//* ----------------------------------------- End UseItem -------------------------------------------------------
 
 </script>

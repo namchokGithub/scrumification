@@ -168,6 +168,7 @@ class User extends CI_Model
 	 * @Author	Jiranuwat Jaiyen       
 	 * @Create Date	22-03-2563
      * @return mixed
+     * Update: Namchok Singhachai
      */
 	public function get_Inventory($target){
 		 return $this->db
@@ -175,6 +176,7 @@ class User extends CI_Model
             ->from("log_shop")
 			->join("shop", "shop.id = log_shop.shop_id", "LEFT")
             ->where(array("log_shop.role_id" => $target	))->where('shop.id IS NOT NULL', null)
+            ->where('log_shop.total <> 0', null)
             ->get()->result_array();
 	}
 
@@ -185,24 +187,27 @@ class User extends CI_Model
 	 * @Create Date	22-03-2563
      * @param $data consisting item_id and count
      * @return mixed
+     * Update: Namchok Singhachai
      */
 	public function Useitem($data)
     {
         $raw_data = $this->db->get_where("log_shop",array("shop_id"=>  $data['item_id']))->row();
 		$update_sql="update log_shop set total = total-1 where shop_id = ".$data['item_id']." AND role_id = ".$data['target'];
+		$update_sql_status="update log_shop set status = 2 where shop_id = ".$data['item_id']." AND role_id = ".$data['target'];
 		if($raw_data->total - 1 >= 0){
 			$this->db->query($update_sql);
+			$this->db->query($update_sql_status);
 			$data['type']="Comple";
 			return $data;
 		}
-		else{
+		else
+        {
 			$data['type']="Item";
 			return $data;
 		}
 
 		$data['type']="Error";
 		return $data;
-		
 	}
 	
 	/**
@@ -705,4 +710,40 @@ class User extends CI_Model
     {
         return $this->db->get_where("roles", array("id" => $id, "deleted_at" => null))->row(0);
     }
+
+    /**
+     * Confirm item
+     *
+	 * @Author Namchok Singhachai
+     * @return Json Data
+     */
+	public function confirmItem($rold_id, $shop_id){
+		$update_sql_status="update log_shop set status = 1 where shop_id = ".$shop_id." AND role_id = ".$rold_id;
+		return $this->db->query($update_sql_status);;
+	}
+
+    /**
+     * Used item
+     *
+	 * @Author Namchok Singhachai
+     * @return Json Data
+     */
+	public function usedItem($rold_id, $shop_id){
+		$update_sql_status="update log_shop set status = 0 where shop_id = ".$shop_id." AND role_id = ".$rold_id;
+		return $this->db->query($update_sql_status);;
+	}
+
+    /**
+     * Find item confirmed
+     *
+	 * @Author Namchok Singhachai
+     * @return Json Data
+     */
+	public function findItemConfirmed($id){
+		$sql="  SELECT role_id, shop_id, log_shop.status, name as item_name
+                FROM `log_shop`
+                LEFT JOIN `shop` ON log_shop.shop_id = shop.id
+                WHERE role_id = $id AND log_shop.status = 1";
+		return $this->db->query($sql)->result();
+	}
 }

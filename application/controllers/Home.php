@@ -37,6 +37,8 @@ class Home extends BaseController
     {
 		$data['Data_list'] = $this->User->all_Activity();
 		$data['userRoles'] = $this->auth->userWiseRoles();
+		$data['checkItem'] = $this->User->findItemConfirmed($data['userRoles'][0]);
+		// print_r($data['checkItem']); die;
 		/**
 		 *    กรณีลำดับไอดีตำแหน่งอยู่ไม่ได้อยู่ในช่วงมกุล จะถูกตรวจสอบ โดย ถ้าไอดีมากกว่า จะถูกนำไปลบระยะห่างของมกุล 
 		 */
