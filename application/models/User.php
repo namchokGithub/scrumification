@@ -329,7 +329,7 @@ class User extends CI_Model
         return $this->db
             ->select("*" ,FALSE)
             ->from("activity")
-			->where('DATEDIFF(CURDATE(), date_start) >=0 AND DATEDIFF(CURDATE(), date_end) <=0 ')
+			->where('DATEDIFF(CURDATE(), date_start) >=0 AND DATEDIFF(CURDATE(), date_end) <=0 AND status')
 			->order_by("activity.time_start ASC")
             ->get()->result_array();
     }

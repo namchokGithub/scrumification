@@ -24,7 +24,7 @@
 
 	  var myTable;
 	  var topic_name = "roles_point";
-	  var url_get = "<?php echo site_url("Source_manager/get_data/");?>shop";
+	  var url_get = "<?php echo site_url("Source_manager/get_log_shop");?>";
 	  var url_get_option_roles = "<?php echo site_url("Source_manager/get_data/");?>roles";
 	/**
      * Setup User Interface.
@@ -60,28 +60,22 @@
 				type:"hidden",
 				disabled:"true",
 				render: function (data, type, row, meta) {
-					if (data == null || !(data in Options_role)) return null;
-					return 2;
+					return 1;
 				},
 				width: "10%",
 				className: "text-center"
 			},
 			{
 				title: "ชื่อไอเทมพิเศษ",
-				data: "name"
+				data: "item_name"
 			},
 			{
 				title: "บทบาทที่ร้องขอ",
-				data: "id",
-				render: function (data, type, row, meta) {
-					if (data == null || !(data in Options_roles)) return "-";
-					return Options_roles[data];
-				},
-				className: "text-center"
+				data: "roles_name"
 			},
 			{
 				title: "การดำเนินการ",
-				data: "1",
+				data: 2,
 				render: function (data, type, row, meta) {
 					return `<button class="btn btn-info">อนุมัติ</button>`
 				},

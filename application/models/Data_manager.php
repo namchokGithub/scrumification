@@ -135,5 +135,18 @@ class Data_manager extends CI_Model
             . "WHERE activity.id = $id";
         return $this->db->query($sql);
     }
+
+    /**
+     * Log shop with roles
+     * 
+     * @Author: Namchok Singhachai
+     * @Crate: 15-02-2564
+     */
+    public function get_log_shop(){
+		$sql = "SELECT log_shop.role_id, log_shop.shop_id, log_shop.total, log_shop.status, shop.name as item_name,shop.point, shop.type, shop.type, roles.name as roles_name FROM `log_shop`
+                JOIN shop on shop.id = log_shop.shop_id
+                JOIN roles on roles.id = log_shop.role_id";
+        return $this->db->query($sql)->result_array();
+    } // End get_log_shop
 }
 ?>

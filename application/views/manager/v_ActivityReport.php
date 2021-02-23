@@ -42,7 +42,7 @@
 	 * Author: Namchok Singhachai
 	 * Date: 12/02/2020
 	 */
-	async function loadChart(date = "2021-01-01/2021-12-31")
+	async function loadChart(date = "2020-01-01/2020-12-31")
 	{
 		var SprintPlanning;
 		var dataSP = [];
@@ -93,7 +93,7 @@
 				text: 'การเข้าร่วมกิจกรรม'
 			},
 			subtitle: {
-				text: 'กิจกรรมของรูปแบบการพัฒนาแบบ Scrum'
+				text: 'กิจกรรมของรูปแบบการพัฒนาแบบ Scrum ปีการศึกษา ' + (parseInt(date.substr(0, date.indexOf('-', 0)))+543)
 			},
 			xAxis: {
 				categories: [
@@ -160,7 +160,7 @@
 		loadChart()
 
 		$("#select-opt").change(function() {
-			let year = parseInt($(this).find(':selected').val())-544;
+			let year = parseInt($(this).find(':selected').val())-543;
 			let date = `${year}-01-01/${year+1}-12-31`
 			if (date != "") 
 			{

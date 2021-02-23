@@ -68,11 +68,14 @@
 			<div id="clock" style="width: 360px;margin-right: auto;	margin-left: auto;font-size: 42px;margin-top:-25px;	position: relative;	height: 70px;">
 				<span style="left: 0px;	position: absolute;	">ชั่วโมง</span>
 				<span style="left: 135px; position: absolute;">นาที</span>
-				<span style="left: 235px;position: absolute;">วินาที</span></div>
-
+				<span style="left: 235px;position: absolute;">วินาที</span>
+            </div>
             <!-- Set up your HTML -->
             <div class="owl-carousel  owl-theme ">
-                <?php foreach($Data_list as $row ){ ?>
+                <?php foreach($Data_list as $row ){ 
+                        if($row['status'] == 1) {
+
+                ?>
 
                 <div style="padding: 0px 30px 0px 30px;">
                     <!-- small box -->
@@ -91,7 +94,27 @@
                         </div>
                     </div>
                 </div>
-                <?php } ?>
+
+                <?php }else if($row['status'] == 0){ ?>
+                    <div style="padding: 0px 30px 0px 30px;">
+                        <!-- small box -->
+                        <div class="small-box bg-gray" style=" padding: 15px; border-radius: 25px; ">
+                            <div class="inner">
+                                <input value="<?php echo $row["id"] ?>" id="ac_id" hidden>
+                                <h3 style="color: black !important;width: 100%;overflow: hidden;text-overflow: ellipsis;font-family:prompt" id="name">
+                                    <?php echo $row["name"] ?>
+                                </h3>
+
+                                <!-- ห้ามเว้นวรรคตอนแสดงเวลา -->
+                                <p style="color: black !important;font-size:20px; font-family: 'Prompt', sans-serif !important;" id="time"><?php echo $row["time_start"] ?> - <?php echo $row["time_end"] ?></p>
+                            </div>
+                            <div class="icon">
+                                <i class="fa fa-times-circle"></i>
+                            </div>
+                        </div>
+                    </div>
+                <?php }// end if 
+                } ?>
             </div>
             <div style=" color: #C73523;font-size:18px ">
                 หมายเหตุ : สามารถคลิกค้างที่ Card เพื่อทำการเลื่อนไปทางซ้ายหรือขวาได้
@@ -142,8 +165,10 @@
                         หมายเหตุ : สามารถกดที่ปุ่มสถานะ เพื่อทำการเปลี่ยนเป็นสถานะตรงข้าม โดยสามารถใช้งานได้เฉพาะผู้ที่ได้รับอนุญาต
                     </div>
                 </div>
+                <!-- ตารางแสดงรายชื่อสมาชิกในมกุล -->
                 <!-- /.box-body -->
             </div>
+            <!-- End box -->
         </div>
     </div>
 </div>

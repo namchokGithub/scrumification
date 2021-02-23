@@ -358,5 +358,15 @@ class Source_manager extends BaseController
     public function toggle_activity($id){
 		$this->DM->toggle_activity($id);
     } // End toggle activity
+
+	/**
+     * Log shop with roles
+     * 
+     * @Author: Namchok Singhachai
+     * @Crate: 15-02-2564
+     */
+    public function get_log_shop(){
+		echo json_encode($this->DM->get_log_shop());
+    } // End get_log_shop
 }
 ?>
