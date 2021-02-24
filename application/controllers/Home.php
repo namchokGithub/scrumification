@@ -37,7 +37,27 @@ class Home extends BaseController
     {
 		$data['Data_list'] = $this->User->all_Activity();
 		$data['userRoles'] = $this->auth->userWiseRoles();
-		$data['checkItem'] = $this->User->findItemConfirmed($data['userRoles'][0]);
+		$dataConfirm = $this->User->findItemConfirmed($data['userRoles'][0]);
+
+		if($dataConfirm != null) {
+			$date = substr($dataConfirm[0]->updated_at, 0, strpos($dataConfirm[0]->updated_at, " ",0));
+			$dteStart = new DateTime($dataConfirm[0]->updated_at);
+			$dteEnd   = new DateTime();
+			$dteDiff = $dteStart->diff($dteEnd);
+			// print $dteDiff->format("%I");
+			// print $dteDiff->format("%H");
+			// print_r($dataConfirm);
+
+			if(($dteDiff->format("%I") < 15 && $dteDiff->format("%H") < 1) || $dteDiff->format("%H") >= 1) {
+				$data['checkItem'] = $dataConfirm;
+			} else {
+				$data['checkItem'] = null;
+				$this->User->usedItem($dataConfirm[0]->role_id, $dataConfirm[0]->shop_id);
+			}
+		} else {
+			$data['checkItem'] = null;
+		}
+
 		// print_r($data['checkItem']); die;
 		/**
 		 *    กรณีลำดับไอดีตำแหน่งอยู่ไม่ได้อยู่ในช่วงมกุล จะถูกตรวจสอบ โดย ถ้าไอดีมากกว่า จะถูกนำไปลบระยะห่างของมกุล 

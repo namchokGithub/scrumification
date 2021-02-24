@@ -167,6 +167,9 @@ class Achievement extends BaseController
      * @return Json Data
      */
 	public function confirmItem($rold_id, $shop_id){
+		$this->session->set_userdata('notification', '$shop_id');
+		// $_SESSION['notification'] = $shop_id;
+		// $this->session->set_tempdata('notification', $shop_id, 300);
 		echo json_encode($this->User->confirmItem($rold_id, $shop_id)); 
 	}
 	/**

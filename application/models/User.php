@@ -193,7 +193,7 @@ class User extends CI_Model
     {
         $raw_data = $this->db->get_where("log_shop",array("shop_id"=>  $data['item_id']))->row();
 		$update_sql="update log_shop set total = total-1 where shop_id = ".$data['item_id']." AND role_id = ".$data['target'];
-		$update_sql_status="update log_shop set status = 2 where shop_id = ".$data['item_id']." AND role_id = ".$data['target'];
+		$update_sql_status="update log_shop set status = 2, updated_at = NOW() where shop_id = ".$data['item_id']." AND role_id = ".$data['target'];
 		if($raw_data->total - 1 >= 0){
 			$this->db->query($update_sql);
 			$this->db->query($update_sql_status);
@@ -227,7 +227,7 @@ class User extends CI_Model
 		$PostQopen = new DateTime($raw_data->time_start);
         $PostQClose = new DateTime($raw_data->time_end);
                               
-        $sql="INSERT INTO `log_shop` (`role_id`, `shop_id`, `total`) VALUES ('".$data['target']."', '".$data['item_id']."', '".$data['count']."')ON DUPLICATE KEY UPDATE total=total+".$data['count'];
+        $sql="INSERT INTO `log_shop` (`role_id`, `shop_id`, `total`, `created_at`) VALUES ('".$data['target']."', '".$data['item_id']."', '".$data['count']."', NOW())ON DUPLICATE KEY UPDATE created_at = NOW(), total=total+".$data['count'];
         
         $update_sql="update shop set total = total-".$data['count']." where id = ".$data['item_id'];
         
@@ -718,7 +718,7 @@ class User extends CI_Model
      * @return Json Data
      */
 	public function confirmItem($rold_id, $shop_id){
-		$update_sql_status="update log_shop set status = 1 where shop_id = ".$shop_id." AND role_id = ".$rold_id;
+		$update_sql_status="update log_shop set status = 1, updated_at = NOW() where shop_id = ".$shop_id." AND role_id = ".$rold_id;
 		return $this->db->query($update_sql_status);;
 	}
 
@@ -729,7 +729,7 @@ class User extends CI_Model
      * @return Json Data
      */
 	public function usedItem($rold_id, $shop_id){
-		$update_sql_status="update log_shop set status = 0 where shop_id = ".$shop_id." AND role_id = ".$rold_id;
+		$update_sql_status="update log_shop set status = 0, updated_at = NOW() where shop_id = ".$shop_id." AND role_id = ".$rold_id;
 		return $this->db->query($update_sql_status);;
 	}
 
@@ -739,8 +739,8 @@ class User extends CI_Model
 	 * @Author Namchok Singhachai
      * @return Json Data
      */
-	public function findItemConfirmed($id){
-		$sql="  SELECT role_id, shop_id, log_shop.status, name as item_name
+	public function findItemConfirmed($id=12){
+		$sql="  SELECT role_id, shop_id, log_shop.status, name as item_name, updated_at
                 FROM `log_shop`
                 LEFT JOIN `shop` ON log_shop.shop_id = shop.id
                 WHERE role_id = $id AND log_shop.status = 1";
