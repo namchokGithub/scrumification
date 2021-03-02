@@ -7,216 +7,71 @@
 
 <div class="drag-container"></div>
 
-<div class="panel panel-primary">
+<div class="panel panel-primary" style="position: relative !important;width: 100% !important;">
     <div class="panel-heading " style=" font-size: 28px; ">
         <div class="">
             <i class="fa fa-television"></i> Kanban
         </div>
     </div>
     <div class="panel-body">
-        <div class="kanban base">
-            <div class="kanban board">
-                <div class="kanban board-header">
-                    <div class="kanban left">
-                        <div class="kanban board-header-text">Cluster 0</div>
+        <div class="drag-container"></div>
+        <div class="board">
+            <div class="board-column todo">
+                <div class="board-column-container">
+                    <div class="board-column-header">Todo</div>
+                    <div class="board-column-content-wrapper">
+                        <div class="board-column-content" id="todo">
+                            
+                        </div>
                     </div>
                 </div>
-                <div class="kanban board-lists">
-                    <div class="kanban board-list">
-                        <div class="kanban list-title text-center">
-                            <b>To Do</b>
-                        </div>
-                        <div class="kanban card">
-                            <div class="kanban card-header row">
-                                <div class="col-md-10">
-                                    ID: D-101
-                                    <span class="label todo" style="margin-left: 10px">Plan</span>
-                                </div>
-                                <div class="col-md-1">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                            <i class="fa fa-bars"></i>
-                                        </button>
-                                        <ul class="dropdown-menu pull-right" role="menu">
-                                            <li><a href="#">Add new event</a></li>
-                                            <li><a href="#">Clear events</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="#">View calendar</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+            </div>
+            <div class="board-column working">
+                <div class="board-column-container">
+                    <div class="board-column-header">Doing</div>
+                    <div class="board-column-content-wrapper">
+                        <div class="board-column-content">
+                            <div class="board-item">
+                                <div class="board-item-content"><span>Item #</span>6</div>
                             </div>
-                            <div class="kanban card-body">
-                                <h4 class="card-title">เอกสารบทที่ 1</h4>
+                            <div class="board-item">
+                                <div class="board-item-content"><span>Item #</span>7</div>
                             </div>
-                            <div class="kanban card-footer text-muted">
-                                นายนำโชค สิงหะชัย
+                            <div class="board-item">
+                                <div class="board-item-content"><span>Item #</span>8</div>
                             </div>
-                        </div>
-                        <!-- End card -->
-                        <div class="kanban card">
-                            <div class="kanban card-header row">
-                                <div class="col-md-10">
-                                    ID: D-102
-                                    <span class="label todo" style="margin-left: 10px">Plan</span>
-                                </div>
-                                <div class="col-md-1">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                            <i class="fa fa-bars"></i>
-                                        </button>
-                                        <ul class="dropdown-menu pull-right" role="menu">
-                                            <li><a href="#">Add new event</a></li>
-                                            <li><a href="#">Clear events</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="#">View calendar</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+                            <div class="board-item">
+                                <div class="board-item-content"><span>Item #</span>9</div>
                             </div>
-                            <div class="kanban card-body">
-                                <h4 class="card-title">ออกแบบหน้าจอ Kanban</h4>
+                            <div class="board-item">
+                                <div class="board-item-content"><span>Item #</span>10</div>
                             </div>
-                            <div class="kanban card-footer text-muted">
-                                นางสาววาทินี แตงทอง
-                            </div>
-                        </div>
-                        <!-- End card -->
-                        <div class="kanban add-card">
-                            <a href="#">+ Add another card</a>
                         </div>
                     </div>
-                    <!-- End To Do -->
-                    <div class="kanban board-list">
-                        <div class="kanban list-title text-center">
-                            <b>Doing</b>
-                        </div>
-                        <div class="kanban card ">
-                            <div class="kanban card-header row">
-                                <div class="col-md-10">
-                                    ID: D-103
-                                    <span class="label doing" style="margin-left: 10px">Doing</span>
-                                </div>
-                                <div class="col-md-1">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                            <i class="fa fa-bars"></i>
-                                        </button>
-                                        <ul class="dropdown-menu pull-right" role="menu">
-                                            <li><a href="#">Add new event</a></li>
-                                            <li><a href="#">Clear events</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="#">View calendar</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+                </div>
+            </div>
+            <div class="board-column done">
+                <div class="board-column-container">
+                    <div class="board-column-header">Done</div>
+                    <div class="board-column-content-wrapper">
+                        <div class="board-column-content">
+                            <div class="board-item">
+                                <div class="board-item-content"><span>Item #</span>11</div>
                             </div>
-                            <div class="kanban card-body">
-                                <h4 class="card-title">เอกสารบทที่ 2</h4>
+                            <div class="board-item">
+                                <div class="board-item-content"><span>Item #</span>12</div>
                             </div>
-                            <div class="kanban card-footer text-muted">
-                                นางสาวกาญจนพิชชา มีสุข
+                            <div class="board-item">
+                                <div class="board-item-content"><span>Item #</span>13</div>
                             </div>
-                        </div>
-                        <!-- End card -->
-                        <div class="kanban card">
-                            <div class="kanban card-header row">
-                                <div class="col-md-10">
-                                    ID: D-104
-                                    <span class="label doing" style="margin-left: 10px">Doing</span>
-                                </div>
-                                <div class="col-md-1">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                            <i class="fa fa-bars"></i>
-                                        </button>
-                                        <ul class="dropdown-menu pull-right" role="menu">
-                                            <li><a href="#">Add new event</a></li>
-                                            <li><a href="#">Clear events</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="#">View calendar</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+                            <div class="board-item">
+                                <div class="board-item-content"><span>Item #</span>14</div>
                             </div>
-                            <div class="kanban card-body">
-                                <h4 class="card-title">เอกสารบทที่ 4</h4>
+                            <div class="board-item">
+                                <div class="board-item-content"><span>Item #</span>15</div>
                             </div>
-                            <div class="kanban card-footer text-muted">
-                                นายฉัตรเฉลิม วสุอนันต์กุล
-                            </div>
-                        </div>
-                        <!-- End card -->
-                        <div class="kanban card">
-                            <div class="kanban card-header row">
-                                <div class="col-md-10">
-                                    ID: D-105
-                                    <span class="label doing" style="margin-left: 10px">Doing</span>
-                                </div>
-                                <div class="col-md-1">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                            <i class="fa fa-bars"></i>
-                                        </button>
-                                        <ul class="dropdown-menu pull-right" role="menu">
-                                            <li><a href="#">Add new event</a></li>
-                                            <li><a href="#">Clear events</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="#">View calendar</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="kanban card-body">
-                                <h4 class="card-title">เอกสารบทที่ 5</h4>
-                            </div>
-                            <div class="kanban card-footer text-muted">
-                                นายนำโชค สิงหะชัย
-                            </div>
-                        </div>
-                        <!-- End card -->
-                        <div class="kanban add-card">
-                            <a href="#">+ Add another card</a>
                         </div>
                     </div>
-                    <!-- End Doing -->
-                    <div class="kanban board-list">
-                        <div class="kanban list-title text-center">
-                            <b>Done</b>
-                        </div>
-                        <div class="kanban card">
-                            <div class="kanban card-header row">
-                                <div class="col-md-10">
-                                    ID: D-106
-                                    <span class="label done" style="margin-left: 10px">Success</span>
-                                </div>
-                                <div class="col-md-1">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                            <i class="fa fa-bars"></i>
-                                        </button>
-                                        <ul class="dropdown-menu pull-right" role="menu">
-                                            <li><a href="#">Add new event</a></li>
-                                            <li><a href="#">Clear events</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="#">View calendar</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="kanban card-body">
-                                <h4 class="card-title">การทดสอบ</h4>
-                            </div>
-                            <div class="kanban card-footer text-muted">
-                                นางสาวรชุดา เสนีวงษ์
-                            </div>
-                        </div>
-                        <!-- End card -->
-                        <div class="kanban add-card">
-                            <a href="#">+ Add another card</a>
-                        </div>
-                    </div>
-                    <!-- End Done -->
                 </div>
             </div>
         </div>
@@ -225,222 +80,202 @@
 </div>
 <!-- End panel -->
 
+<script src="https://cdn.jsdelivr.net/npm/muuri@0.9.3/dist/muuri.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/web-animations-js@2.3.2/web-animations.min.js"></script>
 <script>
-    var dragContainer = document.querySelector('.drag-container');
-    var itemContainers = [].slice.call(document.querySelectorAll('.board-column-content'));
-    var columnGrids = [];
-    var boardGrid;
+        $(document).ready(function() {
+            $('#todo').html(`<div class="board-item">
+                                <div class="board-item-content"><span>Item #</span>1</div>
+                            </div>
+                            <div class="board-item">
+                                <div class="board-item-content"><span>Item #</span>2</div>
+                            </div>
+                            <div class="board-item">
+                                <div class="board-item-content"><span>Item #</span>3</div>
+                            </div>
+                            <div class="board-item">
+                                <div class="board-item-content"><span>Item #</span>4</div>
+                            </div>
+                            <div class="board-item">
+                                <div class="board-item-content"><span>Item #</span>5</div>
+                            </div>`);
+                            
+            var dragContainer = document.querySelector('.drag-container');
+            var itemContainers = [].slice.call(document.querySelectorAll('.board-column-content'));
+            var columnGrids = [];
+            var boardGrid;
 
-    // Init the column grids so we can drag those items around.
-    itemContainers.forEach(function(container) {
-        var grid = new Muuri(container, {
-                items: '.board-item',
-                dragEnabled: true,
-                dragSort: function() {
-                    return columnGrids;
-                },
-                dragContainer: dragContainer,
-                dragAutoScroll: {
-                    targets: (item) => {
-                        return [{
-                            element: window,
-                            priority: 0
-                        }, {
-                            element: item.getGrid().getElement().parentNode,
-                            priority: 1
-                        }, ];
-                    }
-                },
-            })
-            .on('dragInit', function(item) {
-                item.getElement().style.width = item.getWidth() + 'px';
-                item.getElement().style.height = item.getHeight() + 'px';
-            })
-            .on('dragReleaseEnd', function(item) {
-                item.getElement().style.width = '';
-                item.getElement().style.height = '';
-                item.getGrid().refreshItems([item]);
-            })
-            .on('layoutStart', function() {
-                boardGrid.refreshItems().layout();
+            // Init the column grids so we can drag those items around.
+            itemContainers.forEach(function(container) {
+                var grid = new Muuri(container, {
+                        items: '.board-item',
+                        dragEnabled: true,
+                        dragSort: function() {
+                            return columnGrids;
+                        },
+                        dragContainer: dragContainer,
+                        dragAutoScroll: {
+                            targets: (item) => {
+                                return [{
+                                    element: window,
+                                    priority: 0
+                                }, {
+                                    element: item.getGrid().getElement().parentNode,
+                                    priority: 1
+                                }, ];
+                            }
+                        },
+                    })
+                    .on('dragInit', function(item) {
+                        console.log('ยก')
+                        item.getElement().style.width = item.getWidth() + 'px';
+                        item.getElement().style.height = item.getHeight() + 'px';
+                    })
+                    .on('dragReleaseEnd', function(item) {
+                        console.log('ปล่อย')
+                        console.log(item)
+                        item.getElement().style.width = '';
+                        item.getElement().style.height = '';
+                        item.getGrid().refreshItems([item]);
+                    })
+                    .on('layoutStart', function() {
+                        boardGrid.refreshItems().layout();
+                    });
+
+                columnGrids.push(grid);
             });
 
-        columnGrids.push(grid);
-    });
-
-    // Init board grid so we can drag those columns around.
-    boardGrid = new Muuri('.board', {
-        dragEnabled: true,
-        dragHandle: '.board-column-header'
+            // Init board grid so we can drag those columns around.
+            boardGrid = new Muuri('.board', {
+                dragEnabled: false,
+                dragHandle: '.board-column-header'
+            });
     });
 </script>
 
 <style>
+    * {
+        box-sizing: border-box;
+    }
+    
     .drag-container {
         position: fixed;
         left: 0;
         top: 0;
         z-index: 1000;
     }
-    /* width */
     
-    .kanban ::-webkit-scrollbar {
-        width: 15px;
-    }
-    /* Track */
-    
-    .kanban::-webkit-scrollbar-track {
-        box-shadow: inset 0 0 5px #e4e4e4;
-        /* border-radius: 5px; */
-    }
-    /* Handle */
-    
-    .kanban::-webkit-scrollbar-thumb {
-        background: #acacac;
-        border-radius: 20px;
-    }
-    /* Handle on hover */
-    
-    .kanban ::-webkit-scrollbar-thumb:hover {
-        background: #686868;
+    .board {
+        position: relative;
     }
     
-    .kanban .card-footer {
-        text-align: right;
+    .board-column {
+        position: absolute;
+        left: 0;
+        top: 0;
+        padding: 0 10px;
+        width: calc(100% / 3);
+        z-index: 1;
     }
     
-    .kanban .base {
-        background-color: rgb(0, 121, 191);
-        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
-        font-size: 14px;
-        display: grid;
-        grid-template-rows: max-content auto;
-        grid-gap: 10px;
+    .board-column.muuri-item-releasing {
+        z-index: 2;
+    }
+    
+    .board-column.muuri-item-dragging {
+        z-index: 3;
+        cursor: move;
+    }
+    
+    .board-column-container {
+        position: relative;
+        width: 100%;
         height: 100%;
-        padding: 5px;
     }
     
-    .kanban .header {
-        display: grid;
-        grid-template-columns: 2fr 1fr 2fr;
-    }
-    
-    .kanban .header .left-aligned {
-        display: grid;
-        grid-template-columns: repeat(3, auto);
-        grid-gap: 5px;
-        justify-self: flex-start;
-    }
-    
-    .kanban .header .right-aligned {
-        display: grid;
-        grid-template-columns: repeat(5, auto);
-        grid-gap: 5px;
-        justify-self: flex-start;
-    }
-    
-    .kanban .header .logo {
-        background-color: rgba(255, 255, 255, 0.3);
-        justify-self: center;
-    }
-    
-    .kanban .header .right-aligned {
-        justify-self: flex-end;
-    }
-    
-    .kanban .board {
-        display: grid;
-        grid-gap: 10px;
-        grid-template-rows: max-content auto;
-        /* justify-items: center; */
-    }
-    
-    .kanban .board-header {
-        color: black;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .kanban .board-header-text {
+    .board-column-header {
+        position: relative;
+        height: 50px;
+        line-height: 50px;
+        overflow: hidden;
+        padding: 0 20px;
+        text-align: center;
+        background: #333;
+        color: #fff;
+        border-radius: 5px 5px 0 0;
         font-weight: bold;
-        padding: 5px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
     }
     
-    .kanban .board-header .left {
-        display: grid;
-        grid-template-columns: repeat(4, max-content);
-        grid-gap: 10px;
-        justify-self: left;
+    @media (max-width: 600px) {
+        .board-column-header {
+            text-indent: -1000px;
+        }
     }
     
-    .kanban .board-header .right {
-        display: grid;
-        grid-template-columns: repeat(2, max-content);
-        grid-gap: 10px;
-        justify-self: right;
+    .board-column.todo .board-column-header {
+        background: #4A9FF9;
     }
     
-    .kanban .button {
-        color: white;
-        background-color: rgba(255, 255, 255, 0.3);
-        border-radius: 5px;
-        padding: 5px;
+    .board-column.working .board-column-header {
+        background: #f9944a;
     }
     
-    .kanban .board-lists {
-        display: grid;
-        grid-auto-columns: auto;
-        grid-auto-flow: column;
-        grid-gap: 8px;
-        height: 550px;
-        overflow: scroll;
+    .board-column.done .board-column-header {
+        background: #2ac06d;
     }
     
-    .kanban .board-list {
-        background-color: rgb(235, 236, 240);
-        border-radius: 3px;
-        display: grid;
-        grid-auto-rows: max-content;
-        grid-gap: 10px;
-        height: max-content;
-        padding: 10px;
-    }
-    
-    .kanban .list-title {
-        font-weight: bold;
-        font-size: 20px;
-    }
-    
-    .kanban .card {
-        background-color: white !important;
-        border-radius: 3px !important;
-        box-shadow: 0 1px 0 rgba(9, 30, 66, .25) !important;
-        padding: 10px !important;
-    }
-    
-    .kanban .add-card {
-        padding-top: 10px;
-        padding-bottom: 5px;
-    }
-    
-    .label {
-        color: white;
+    .board-column-content-wrapper {
+        position: relative;
         padding: 8px;
+        background: #f0f0f0;
+        height: calc(100vh - 90px);
+        overflow-y: auto;
+        border-radius: 0 0 5px 5px;
     }
     
-    .done {
-        background-color: #4CAF50;
+    .board-column-content {
+        position: relative;
+        min-height: 100%;
     }
-    /* Green */
     
-    .doing {
-        background-color: #ff9800;
+    .board-item {
+        position: absolute;
+        width: calc(100% - 16px);
+        margin: 8px;
     }
-    /* Orange */
     
-    .todo {
-        background-color: #e7e7e7;
-        color: black;
+    .board-item.muuri-item-releasing {
+        z-index: 9998;
     }
-    /* Gray */
+    
+    .board-item.muuri-item-dragging {
+        z-index: 9999;
+        cursor: move;
+    }
+    
+    .board-item.muuri-item-hidden {
+        z-index: 0;
+    }
+    
+    .board-item-content {
+        position: relative;
+        padding: 20px;
+        background: #fff;
+        border-radius: 10px;
+        font-size: 17px;
+        cursor: pointer;
+        -webkit-box-shadow: 0px 1px 3px 0 rgba(0, 0, 0, 0.2);
+        box-shadow: 0px 1px 3px 0 rgba(0, 0, 0, 0.2);
+    }
+    
+    @media (max-width: 600px) {
+        .board-item-content {
+            text-align: center;
+        }
+        .board-item-content span {
+            display: none;
+        }
+    }
 </style>

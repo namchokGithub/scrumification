@@ -13,9 +13,9 @@ class Kanban extends BaseController
     | Kanban board Controller
     |--------------------------------------------------------------------------
     |
-    | This controller handles Leaderboard.
-	| @Author	Jiranuwat Jaiyen       
-	| @Create Date	22-03-2563
+    | This controller handles Kanban board.
+	| * @Author	Namchok Singhachai
+	| * @Create Date	22-02-2564
     |
     */
     public function __construct()
@@ -25,10 +25,10 @@ class Kanban extends BaseController
     } // End construct
 
     /**
-     * Display a Leaderboard.
+     * Display a Kanban.
      *
-	 * @Author	Jiranuwat Jaiyen       
-	 * @Create Date	22-03-2563
+	 * @Author	Namchok Singhachai
+	 * @Create Date	22-02-2564
      * @return mixed
      */
     public function index()
@@ -37,38 +37,5 @@ class Kanban extends BaseController
 		$scripts['temp_scripts'] = '';
 		$detail['header'] = "Kanban board";
     	$this->output('v_Kanban', $data, $scripts, $detail);
-    }
-	
-	/**
-     * Get All Point.
-     *
-	 * @Author	Jiranuwat Jaiyen       
-	 * @Create Date	22-03-2563
-     * @return Json Data
-     */
-	public function get_all_point(){
-		echo json_encode($this->User->get_all_point()); 
-	}
-
-    /**
-     * Edit Data.
-     *
-	 * @Author	Jiranuwat Jaiyen       
-	 * @Create Date	22-03-2563
-     * @return mixed
-     */
-    public function update_status_show()
-    {	
-		if(!hasRole(['ScrumMaster'])){
-			redirect('home');
-		}
-		$data = $this->input->post();
-		var_dump($data);
-		if($data['is_checked'] =="true"){
-        $this->DM->edit_data("show_topic", array("id"=>"1","page"=>"LeaderBoard","status"=>"1"));
-		}
-		else{
-        $this->DM->edit_data("show_topic", array("id"=>"1","page"=>"LeaderBoard","status"=>"0"));
-		}
     }
 }
