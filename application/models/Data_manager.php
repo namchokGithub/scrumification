@@ -121,7 +121,7 @@ class Data_manager extends CI_Model
                     AND roles_users.role_id = '$groupId'
             ";
         return $this->db->query($sql)->result_array();
-	} // End get_rp_SprintPlanning
+	} // End get_activity
 
     /**
      * Toggle id of actitvity
@@ -162,5 +162,27 @@ class Data_manager extends CI_Model
                 WHERE log_shop.status = 2";
         return $this->db->query($sql)->result_array();
     } // End get_log_shop
+
+    /**
+     * Get activity report
+     *
+	 * @Author	Namchok Singhachai
+	 * @Create Date	12-02-2564
+     * @return mixed
+     */
+	public function get_activity_by_group($activityId = "2", $groupId = "1", $dateStart = "2021-01-01", $dateEnd = "2021-12-31")
+	{
+		$sql = "SELECT Count(activity_checkin.user_id) as numberOfCheckin, users.id
+                FROM `users`
+                LEFT JOIN activity_checkin ON activity_checkin.user_id = users.id
+                LEFT JOIN activity ON activity_checkin.activity_id = activity.id
+                LEFT JOIN roles_users on roles_users.user_id = users.id
+                WHERE `time` BETWEEN '$dateStart' AND  '$dateEnd'
+                    AND activity_checkin.activity_id = '$activityId'
+                    AND roles_users.role_id = '$groupId'
+                GROUP BY users.id
+            ";
+        return $this->db->query($sql)->result_array();
+	} // End get_activity
 }
 ?>

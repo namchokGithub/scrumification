@@ -79,6 +79,7 @@
 				title: "การดำเนินการ",
 				data: 2,
 				render: function (data, type, row, meta) {
+					// console.log(row)
 					return `<button onclick="confirm('${row.role_id}','${row.shop_id}')" class="btn btn-info">อนุมัติ</button>`
 				},
 				className: "text-center"

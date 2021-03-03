@@ -10,7 +10,7 @@
 	<div class="panel-body">
 		<div style="font-size: x-large; font-weight: 600; text-align: right;">
 			<select id="select-opt">
-				<option value="" disabled selected>Select Cluster</option>
+				<option value="" disabled selected>เลือกกลุ่ม</option>
 				<?php for($i=1;$i<11;$i++){?> <!-- ควรแก้ให้ลูปตามจำนวนกลุ่มในฐานข้อมูล -->
 					<option value="<?php echo site_url('challenger/index/'.($i)); ?>">Cluster <?php echo $i-1; ?></option>
 				<?php } ?>
