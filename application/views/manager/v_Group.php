@@ -1,8 +1,8 @@
 <!--
- - Group Editor  
+ - Groups Editor  
  -
  - @Author	Thutsaneeya Chanrong 
- - @Create Date 22-03-2563
+ - @Create Date 27-01-2564
 -->
 <div class="panel panel-primary">
     <div  class="panel-heading" style=" font-size: 28px; ">Group Editor</div>
@@ -10,131 +10,229 @@
 		<table id="example" class="table table-striped table-bordered no-footer dataTable" style="width:100%">
 			<thead>
 				<tr>
+					<th>ลำดับ</th>
 					<th>Group</th>
-					<th>Color</th>
 				</tr>
 			</thead>
 		</table>
 	</div>
 </div>
-<script>
-	
-/**
- *  add Commma to string number.
- *
- * @Author	Jiranuwat Jaiyen       
- * @Create Date	22-03-2563
- * @return mixed
- * @Update Thutsaneeya Chanrong
- * @Create Date 13-01-2563
- */
-function numberWithCommas(x) {
-	var raw_number = parseInt(x);
-	return raw_number.toLocaleString();
-}
-  var columnDefs = [
-		{ data: "name"}
-	];
-  var myTable;
-  var topic_name = "roles";
-  // local URL's are not allowed
-  var url_get = "<?php echo site_url("Source_manager/get_data/");?>"+topic_name;
-  var url_add = "<?php echo site_url("Source_manager/add_user/");?>"+topic_name;
-  var url_edit = "<?php echo site_url("Source_manager/edit_data/");?>"+topic_name;
-  var url_delete = "<?php echo site_url("Source_manager/delete_data/");?>"+topic_name;
-  
-	
-/**
- * Setup User Interface.
- *
- * @Author	Jiranuwat Jaiyen       
- * @Create Date	22-03-2563
- * @return mixed
- */
-  myTable = $('#example').DataTable({
-    "sPaginationType": "full_numbers",
-        /*ajax: 
-		 {
-            "url": url_get,
-			"dataSrc": ""
-		},*/
-    rowId: 'id',
-	order:[],
-    dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
-    select: 'single',     // enable single row selection
-    responsive: true,     // enable responsiveness
-    altEditor: true,      // Enable altEditor ****
-    buttons: [{
-      text: '<i class="fa fa-plus-square"></i> เพิ่มชุดข้อมูล',
-      name: 'add',     // DO NOT change name
-	  "className": 'btn btn-info btn-lg' 
-    },  
-	{
-	  extend: 'selected', // Bind to Selected row
-	  text: '<i class="fa fa-edit"></i> แก้ไขชุดข้อมูล',
-	  name: 'edit',        // DO NOT change name
-	  "className": 'btn btn-warning btn-lg' 
-   },
-    {
-      extend: 'selected', // Bind to Selected row
-      text: '<i class="fa fa-trash"></i> ลบชุดข้อมูล',
-      name: 'delete',     // DO NOT change name
-	  "className": 'btn btn-danger btn-lg' 
-   },
-   {
-	  extend: 'selected', 
-	  text: '<i class="fa fa-user-o"></i> สมาชิก',
-      name: 'member',     // DO NOT change name
-	  "className": 'btn btn-info btn-lg' 
-   }],
-        onAddRow: function(datatable, rowdata, success, error) {
-			if(rowdata['code']==''){
-				 delete rowdata['code']
-			}
-			console.log(datatable, rowdata, success, error)
-            $.ajax({
-                // a tipycal url would be / with type='PUT'
-                url: url_add,
-                type: 'POST',
-				async :false,
-                data: rowdata,
-                success:success,
-                error: error
-            });
-			datatable.s.dt.ajax.reload();
-        },
-        onEditRow: function(datatable, rowdata, success, error) {
-			rowdata['id'] = datatable.s.dt.rows( { selected: true } ).data()[0]['id']
-            $.ajax({
-                // a tipycal url would be /{id} with type='POST'
-                url: url_edit,
-                type: 'POST',
-				async :false,
-                data: rowdata,
-                success: success,
-                error: error
-            });
-			datatable.s.dt.ajax.reload();
-        },
-        onDeleteRow: function(datatable, rowdata, success, error) {
-			rowdata['id'] = datatable.s.dt.rows( { selected: true } ).data()[0]['id']
-            $.ajax({
-                // a tipycal url would be /{id} with type='DELETE'
-                url: url_delete,
-                type: 'POST',
-				async :false,
-                data: rowdata,
-                success: success,
-                error: error
-            });
-			datatable.s.dt.ajax.reload();
-        }
-  });
+<!-- edit -->
+<!-- <div id="modal_edit" class="modal fade in" tabindex="-1" role="dialog" style=" display: none;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header bg-blue">
+				<h3 style="padding-top: 1rem;padding-left: 1rem;display: inline" class="modal-title">หน้าลบข้อมูล</h3>
+				<button style="margin: initial;opacity:0.75" type="button" class="close" data-dismiss="modal" aria-label="ยกเลิก">
+					<span aria-hidden="true" style=" font-size: 34px; font-weight: 700; ">×</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form name="altEditor-edit-form" id="altEditor-edit-form" role="form">
+					<div style="margin-left: initial;margin-right: initial;" class="form-group row" id="alteditor-row-name_edit">
+							<div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding-top:4px;">
+								<label for="name_edit">กลุ่ม: </label>
+							</div>
+							<div class="col-sm-8 col-md-8 col-lg-8">
+								<input type="text" id="group_name" pattern=".*" title="" name="กลุ่ม" placeholder="กลุ่ม" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="Cluster 0" disabled="">
+									 <label id="namelabel_edit" class="errorLabel"></label> -->
+							</div>
+							<div style="clear:both;"></div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" data-content="remove" class="btn btn-danger " data-dismiss="modal" style="margin-right: 75%;">ยกเลิก</button>
+				<button type="submit" form="altEditor-delete" data-content="remove" class="btn btn-success" id="DelRowBtn">บันทึก</button>
+			</div>
+		</div>
+	</div>
+</div> -->
+<!-- member -->
+<div id="modal_member" class="modal fade in"  tabindex="-1" role="dialog" style="display: none;">
+	<div class="modal-dialog" id="edit_dialog">
+			<div class="modal-content">
+				<div class="modal-header bg-blue">
+					<h3 style="padding-top: 1rem;padding-left: 1rem;display: inline" class="modal-title">หน้าแสดงสมาชิก</h3>
+					<button style="margin: initial;opacity:0.75" type="button" class="close" data-dismiss="modal" aria-label="ยกเลิก">
+						<span aria-hidden="true" style=" font-size: 34px; font-weight: 700; ">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
 
+					<table id="example1" class="table table-striped table-bordered no-footer dataTable" style="width:100%">
+					<tr>
+								<th>ลำดับ</th>
+								<th>ชื่อ-นามสกุล</th>
+								<th>Username</th>
+								<th>หน้าที่</th>
+							</tr>
+					</table>
+				</div>
+				<div class="modal-footer">
+					<!-- <button type="button" data-content="remove" class="btn btn-danger " data-dismiss="modal" style="margin-right: 75%;">ยกเลิก</button>
+					<button type="submit" form="altEditor-add-form" data-content="remove" class="btn btn-success" id="addRowBtn">บันทึก</button> -->
+				</div>
+			</div>
+	</div>
+</div>
+
+<script>
+
+	function numberWithCommas(x) {
+		var raw_number = parseInt(x);
+		return raw_number.toLocaleString();
+	}
+	var columnDefs = [
+		{  title: "ลำดับ",
+                data: 1,
+                type:"hidden",
+                disabled:"true",
+                render: function (data, type, row, meta) {
+                    if (data == null || !(data in Options_role)) return null;
+                    return 2;
+                },
+                width: "10%",
+				className: "text-center"
+		},
+		{ data: "group_name"}
+	];
+	var myTable;
+	// local URL's are not allowed
+	var url_get = "<?php echo site_url("Source_manager/get_name_group/");?>"
+
+	/**
+	 * Setup User Interface.
+	 *
+	 * @Author	Thutsaneeya Chanrong       
+	 * @Create Date	11-02-2564
+	 */
+	myTable = $('#example').DataTable({
+		"sPaginationType": "full_numbers",
+		ajax: {
+			"url": url_get,
+			"dataSrc": ""
+		},
+		columns: columnDefs, // columns from above
+
+		initComplete: function(settings, json) {
+			$(".btn").removeClass("dt-button");
+		},
+		rowId: 'id',
+		"columnDefs": [ {
+				"searchable": false,
+				"orderable": false,
+				"targets": 0
+			} ],
+		"order": [[ 1, 'asc' ]],
+		dom: 'Bfrtip', // element order: NEEDS BUTTON CONTAINER (B) ****
+		select: 'single', // enable single row selection
+		responsive: true, // enable responsiveness
+		altEditor: false, // Enable altEditor ****
+		buttons: [{
+				extend: 'selected', // Bind to Selected row
+				text: '<i class="fa fa-user"></i> สมาชิก',
+				name: 'edit', // DO NOT change name
+				"className": 'btn btn-info btn-lg',
+				action: function ( e, dt, node, config ) {
+					$("#modal_member").modal();
+				}
+			}
+			// {
+			// 	extend: 'selected', // Bind to Selected row
+			// 	text: '<i class="fa fa-trash"></i> ลบชุดข้อมูล',
+			// 	name: 'delete', // DO NOT change names
+			// 	"className": 'btn btn-danger btn-lg',
+			// 	action: function (e, dt, node, config){
+			// 		$('#modal_del').modal();
+			// 	}
+			// }
+		]
+	});
+	myTable.on( 'order.dt search.dt', function () {
+		myTable.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+			cell.innerHTML = `${i+1}.`;
+		});
+		}).draw();
+	
+	let group_id;
+	$('#example tbody').on('click','tr', function(){
+		group_id = myTable.row(this).id();
+		// console.log(group_id);
+	});
+	
+	var myTb;
+	var columnDefs = [
+		{  title: "ลำดับ",
+			data: 1,
+			type:"hidden",
+			disabled:"true",
+			render: function (data, type, row, meta) {
+				if (data == null) return null;
+					return 2;
+				},
+			width: "10%",
+			className: "text-center"
+		},
+		{ title: "ชื่อ-นามสกุล",
+			data: "name" 
+		},
+		{ title: "Username",
+			data: "username" 
+		},
+		{ title: "หน้าที่",
+			data: "role" 
+		}
+		// { title: "ดำเนินการ",
+		// 	targets: -1,
+        //     data: null,
+        //     defaultContent: "<button class='btn btn-danger'>ลบ</button>",
+		// 	className: "text-center"
+		// }
+	];	
+	/**
+	 * Setup Modal Interface.
+	 *
+	 * @Author	Thutsaneeya Chanrong       
+	 * @Create Date	12-02-2564
+	 */
+	$('#example_wrapper > div.dt-buttons > button').on('click', function (){
+
+		var url_get_member = '<?php echo site_url("Source_manager/get_member_by_group/");?>'+ `${group_id.toString()}`
+
+		console.log(group_id);
+		myTb = $('#example1').DataTable({
+			"sPaginationType": "full_numbers",
+			"destroy": true,
+			ajax: {
+				"url": url_get_member,
+				"dataSrc": ""
+			},
+			columns: columnDefs, // columns from above
+			initComplete: function(settings, json) {
+				$(".btn").removeClass("dt-button");
+			},
+			rowId: 'id',
+			"columnDefs": [ {
+						"searchable": false,
+						"orderable": false,
+						"targets": 0
+					} ],
+				"order": [[ 1, 'asc' ]],
+			select: 'single', // enable single row selection
+			responsive: true, // enable responsiveness
+			altEditor: false, // Enable altEditor ****
+			lengthChange: false 
+		});
+		myTb.on( 'order.dt search.dt', function () {
+			myTb.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+				cell.innerHTML = `${i+1}.`;
+			});
+		}).draw();
+	});
 </script>
 
 <style>
-
 div,h3,span{
 	font-family: prompt !important
 }
@@ -166,15 +264,15 @@ tr:nth-of-type(odd) {
 th { 
 	background: #3498db; 
 	color: white; 
+	text-align: center; 
 	font-weight: bold; 
 	}
 
 td, th { 
 	padding: 10px; 
-	text-align: left; 
 	font-size: 18px;
 	}
-
+	
 /* 
 Max width before this PARTICULAR table gets nasty
 This query will take effect for any screen smaller than 760px

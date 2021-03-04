@@ -38,7 +38,14 @@ class Home extends BaseController
     {
     	$this->output('v_home');
     } // End index
+
+	public function test()
+    {
+    	$this->output('test');
+    } // End index
+
 	
+
 	/**
      * Get List Activity.
      *

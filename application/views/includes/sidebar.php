@@ -58,9 +58,7 @@
             <li class="header ScrumMaster">MANAGER NAVIGATION</li>
             <li class="ScrumMaster"><a id="Users Manager" href="<?php echo site_url('Source_manager/index/Users'); ?>"><i class="fa fa-user"></i>
                     <span>Users Manager</span></a></li>
-            <li class="ScrumMaster">
-                <a id="" href="">
-                    <i class="fa fa-users"></i>
+            <li class="ScrumMaster"><a id="Group Manager" href="<?php echo site_url('Source_manager/index/Group'); ?>"><i class="fa fa-user"></i>
                     <span>Group Manager</span></a>
             </li>
             <li class="ScrumMaster">

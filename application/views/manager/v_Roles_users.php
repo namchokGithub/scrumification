@@ -126,7 +126,7 @@
 				  "className": 'btn btn-danger btn-lg' 
 			   }],
 					onAddRow: function(datatable, rowdata, success, error) {
-						//console.log(datatable, rowdata, success, error)
+						// console.log(datatable, rowdata, success, error)
 						$.ajax({
 							// a tipycal url would be / with type='PUT'
 							url: url_add,
