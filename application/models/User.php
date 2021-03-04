@@ -325,6 +325,7 @@ class User extends CI_Model
      * Get All Activity.
      *
 	 * @Author	Jiranuwat Jaiyen       
+	 * @Update	Namchok Singhachai
 	 * @Create Date	22-03-2563
      * @return mixed
      */
@@ -334,7 +335,7 @@ class User extends CI_Model
         return $this->db
             ->select("*" ,FALSE)
             ->from("activity")
-			->where('DATEDIFF(CURDATE(), date_start) >=0 AND DATEDIFF(CURDATE(), date_end) <=0 AND status')
+			->where('DATEDIFF(CURDATE(), date_start) >=0 AND DATEDIFF(CURDATE(), date_end) <=0')
 			->order_by("activity.time_start ASC")
             ->get()->result_array();
     }
@@ -445,9 +446,10 @@ class User extends CI_Model
 	public function Activity_by_role($id,$role_id)
     {
         return $this->db
-            ->select("activity_checkin.*,users.name ")
+            ->select("activity_checkin.*,users.name, activity.status ")
             ->from("activity_checkin")
             ->join("users", "users.id = activity_checkin.user_id", "inner")
+            ->join("activity", "activity.id = activity_checkin.activity_id", "inner")
             ->join("roles_users", "users.id = roles_users.user_id", "inner")
             ->where("activity_checkin.activity_id Like '$id' And roles_users.role_id Like '$role_id' And DATE(activity_checkin.time) = CURDATE() ")
             ->get()->result_array();

@@ -3,7 +3,9 @@
  -
  - @Author	Jiranuwat Jaiyen 
  - @Create Date 22-03-2563
+ - @Update Namchok Singhachai
 -->
+
 <style>
     .fa-star,
     .fa-star-o,
@@ -76,6 +78,7 @@
 <?php
     }
 ?>
+<!-- End noti item used -->
 
 <!-- Main panel -->
 <div class="panel panel-primary">
@@ -108,6 +111,7 @@
         <?php } ?>
     </div>
 </div>
+<!-- End main panel -->
 
 <div class="panel panel-primary" id="panel-mainreward">
     <div class="panel-heading" style=" font-size: 28px; ">Main Reward of Cluster <span class="cluster_title">0</span>
@@ -146,13 +150,14 @@
         </div>
     </div>
 </div>
+<!-- End main reward -->
 
 <div class="panel panel-primary" id="panel-achievment">
     <div class="panel-heading" style=" font-size: 28px; ">Achievement of Cluster <span class="cluster_title">0</span>
     </div>
     <div class="panel-body">
         <div class="row" id="Achievement_row">
-            <div class="col-md-6 col-xs-12 Achievement" id="<?php echo " 2/ ".$key;?>">
+            <div class="col-md-6 col-xs-12 Achievement" id="<?php echo "2/".$key;?>">
                 <div id="Achievement" class="info-box bg-green-active " style="border: 4px solid #2b918d;">
                     <span class="info-box-icon">
 						<div
@@ -176,6 +181,7 @@
         </div>
     </div>
 </div>
+<!-- End Achievement panel -->
 
 <script type="text/javascript">
     var action = 0;
@@ -231,6 +237,7 @@
             window.location.href = "<?php echo site_url("challenger/"); ?>index/" + ($(this).attr("id"));
         });
     })
+    // ----------------------------- End Jq Doc ready -----------------------------
 
 
     /**
@@ -324,7 +331,7 @@
             function(data, status) {
                 console.log('-------- Get achievement (Group: '+cluster_se_buu+') -------- ')
                 console.log(' -- Status: ' + status + ' -- \n')
-                console.log(JSON.parse(data))
+                // console.log(JSON.parse(data))
                 
                 var raw_data = JSON.parse(data);
                 $("#Achievement_row").empty();

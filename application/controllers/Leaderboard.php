@@ -14,14 +14,14 @@ class Leaderboard extends BaseController
     |--------------------------------------------------------------------------
     |
     | This controller handles Leaderboard.
-	| @Author	Jiranuwat Jaiyen       
-	| @Create Date	22-03-2563
+    | @Author	Jiranuwat Jaiyen       
+    | @Create Date	22-03-2563
     |
     */
     public function __construct()
     {
         parent::__construct();
-		$this->load->model("Data_manager","DM");
+		  $this->load->model("Data_manager","DM");
     } // End construct
 
     /**

@@ -29,12 +29,11 @@
   	var columnDefs = [
 		{
 			title: "ลำดับ",
-			data: 1,
+			data: 'x',
 			type:"hidden",
 			disabled:"true",
 			render: function (data, type, row, meta) {
-				if (data == null || !(data in Options_role)) return null;
-				return 2;
+				return 1;
 			},
 			width: "10%",
 			className: "text-center"
@@ -86,7 +85,9 @@
 			data: "id",
 			title: "การดำเนินการ",
 			disabled: "true",
+			type:"hidden",
 			render: function (data, type, row, meta) {
+				console.log(row)
 				let text = `<div class="btn-group" id="status${data}" data-toggle="buttons">`
 				if(row.status==1)
 				{

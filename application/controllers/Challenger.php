@@ -38,8 +38,6 @@ class Challenger extends BaseController
 		if($id=="") {
 			$id = $this->auth->roles();
 			$id = $id[0];
-			// echo $id; die;
-			// var_dump($this->auth->roles()); die;
 			
 			/**
 			 *    กรณีไอดีมกุลอยู่ไม่ได้อยู่ในช่วง จะถูกตรวจสอบ โดย ถ้าไอดีมากกว่า จะถูกนำไปลบระยะห่างของมกุล 
@@ -57,7 +55,6 @@ class Challenger extends BaseController
 			$id = 1;
 		} // End set id
 
-		// +1 For Cluster SE BUU
 		$data['User_list'] = $this->User->find_by_role($id);
 		$data['cluster_id'] = $id;
 

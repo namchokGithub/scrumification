@@ -39,8 +39,6 @@ class MainReward extends BaseController
 		if($id=="") {
 			$id = $this->auth->roles();
 			$id = $id[0];
-			// echo $id; die;
-			// var_dump($this->auth->roles()); die;
 			
 			/**
 			 *    กรณีไอดีมกุลอยู่ไม่ได้อยู่ในช่วง จะถูกตรวจสอบ โดย ถ้าไอดีมากกว่า จะถูกนำไปลบระยะห่างของมกุล 
@@ -98,7 +96,7 @@ class MainReward extends BaseController
 			return ;
 		}
 		echo $this->User->add_Activity([ 'activity_id' => $id, 'user_id' => $user_id,'time' => date("Y-m-d H:i:s")]); 
-	}
+	} // End add activity
 	
 	/**
      * Get List Activity .
@@ -111,5 +109,5 @@ class MainReward extends BaseController
      */
 	public function get_Activity($id=0,$role_id=0){
 		echo json_encode($this->User->Activity_by_role($id,$role_id)); 
-	}
+	} // End get activity
 }

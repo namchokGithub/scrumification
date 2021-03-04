@@ -169,6 +169,7 @@ class Source_manager extends BaseController
     public function edit_role_data($name_table)
     {
 		$data = $this->input->post();
+		unset($data['x']);
 		unset($data['1']);
 		unset($data['editRowBtn']);
 		unset($data['undefined']);
@@ -238,6 +239,7 @@ class Source_manager extends BaseController
     public function edit_data($name_table)
     {
 		$data = $this->input->post();
+		unset($data['x']);
 		unset($data['editRowBtn']);
 		unset($data['editRowBtn']);
 		unset($data['undefined']);

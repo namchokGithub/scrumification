@@ -2,6 +2,7 @@
  - Shop and inventory  
  -
  - @Author	Jiranuwat Jaiyen 
+ - @Update	Namchok Singhachai
  - @Create Date 22-03-2563
 -->
 

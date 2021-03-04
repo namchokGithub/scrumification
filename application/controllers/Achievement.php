@@ -1,6 +1,7 @@
 <?php
 /**
  * @Author	Jiranuwat Jaiyen       
+ * @Update	Namchok Singhachai
  * @Create Date	22-03-2563
  *
  */
@@ -75,7 +76,7 @@ class Achievement extends BaseController
 		$scripts['temp_scripts'] = '';
 		$detail['header'] = "Shopping";
     	$this->output('v_achievement', $data, $scripts, $detail);
-    }
+    } // End index
 	
 	/**
      * Buy Item With User Point
@@ -96,7 +97,7 @@ class Achievement extends BaseController
 			$target = $this->auth->roles[0];
 		}
 		echo json_encode($this->User->Buyitem(['item_id' => $item, 'count' => $count, 'target'=>$target])); 
-	}
+	} // End BuyItem
 	
 	/**
      * Buy Item With User Point
@@ -113,7 +114,8 @@ class Achievement extends BaseController
 		// }
 		$target = $target_id;
 		echo json_encode($this->User->Useitem([ 'item_id' => $item, 'target'=>$target])); 
-	}
+	} // End UseItem
+
 	/**
      * Get List Item.
      *
@@ -121,7 +123,7 @@ class Achievement extends BaseController
      */
 	public function get_Item(){
 		echo json_encode($this->User->get_Item()); 
-	}
+	} // End get_Item
 	
 	/**
      * Get All User Point.
@@ -140,7 +142,7 @@ class Achievement extends BaseController
 			$target = $this->auth->roles[0];
 		}
 		echo json_encode($this->User->get_Point($target)); 
-	}
+	} // End get_Point
 	
 	/**
      * Get All Inventory.
@@ -158,7 +160,7 @@ class Achievement extends BaseController
 			$target = $this->auth->roles[0];
 		}
 		echo json_encode($this->User->get_Inventory($target)); 
-	}
+	} // End get_Inventory
 	
 	/**
      * Confirm item
@@ -171,7 +173,8 @@ class Achievement extends BaseController
 		// $_SESSION['notification'] = $shop_id;
 		// $this->session->set_tempdata('notification', $shop_id, 300);
 		echo json_encode($this->User->confirmItem($rold_id, $shop_id)); 
-	}
+	} // End confirmItem
+
 	/**
      * Used item
      *
@@ -180,5 +183,5 @@ class Achievement extends BaseController
      */
 	public function usedItem($rold_id, $shop_id){
 		echo json_encode($this->User->usedItem($rold_id, $shop_id)); 
-	}
+	} // End usedItem
 }

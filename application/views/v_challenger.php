@@ -3,10 +3,11 @@
  - v_challenger
  - @Author	Jiranuwat Jaiyen 
  - @Create Date 22-03-2563
+ - @Update Namchok Singhachai
 -->
+
 <div class="panel panel-primary">
 	<div  class="panel-heading" style=" font-size: 28px; ">Cluster Profile</div>
-	
 	<div class="panel-body">
 		<div style="font-size: x-large; font-weight: 600; text-align: right;">
 			<select id="select-opt">
@@ -44,28 +45,29 @@
 		<?php } ?>
 		</ul>
   	</div>
+	<!-- End panel body -->
 </div>
 <!-- End Cluster Profile -->
 
 <script>
 
-$(document).ready(function(){
-/**
- * for onclick to change cluster 
- *
- * @Author	Jiranuwat Jaiyen       
- * @Create Date	22-03-2563
- */
-  $("#select-opt").change(function() {
-    var $option = $(this).find(':selected');
-    var url = $option.val();
-	if (url != "") 
-	{
-      window.location.href = url;
-    } else {
-		alert("Incorrent!");
-	}
-  });
-});
+	$(document).ready(function(){
+		/**
+		* for onclick to change cluster 
+		*
+		* @Author	Jiranuwat Jaiyen       
+		* @Create Date	22-03-2563
+		*/
+		$("#select-opt").change(function() {
+			var $option = $(this).find(':selected');
+			var url = $option.val();
+			if (url != "") 
+			{
+				window.location.href = url;
+			} else {
+				alert("Incorrent!");
+			}
+		});
+	});
 
 </script>
