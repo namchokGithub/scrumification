@@ -19,8 +19,6 @@
 </div> 
 <!-- End editor -->
 
-</div>
-
 <script>
 
 	$(document).ready(function () {

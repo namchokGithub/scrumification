@@ -76,6 +76,11 @@
                 </a>
             </li>
             <li class="ScrumMaster">
+                <a id="Achievement Report" href="<?php echo site_url('Source_manager/AchievementReport'); ?>">
+                    <i class="fa fa-trophy" style="color: #fff"></i><span>Achievement Report</span>
+                </a>
+            </li>
+            <li class="ScrumMaster">
                 <!-- ตามจริงต้อง Source_manager/index/roles_users -->
                 <a id="AssignRole" href="<?php echo site_url('Source_manager/index/AssignRole'); ?>"> 
                     <i class="fa fa-child"></i><span>Assign Role</span></a>
@@ -115,7 +120,7 @@
             </li>
             <li class="ScrumMaster">
                 <a id="Work" href="<?php echo site_url('Source_manager/index/Work'); ?>">
-                    <i class="fa fa-folder-open"></i>
+                    <i class="fa fa-cart-plus"></i>
                     <span>Work Management</span></a>
             </li>
             <!-- end MANAGER NAVIGATION -->

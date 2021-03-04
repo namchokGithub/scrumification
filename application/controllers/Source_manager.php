@@ -87,6 +87,10 @@ class Source_manager extends BaseController
 		{
 			$detail['header'] = "Individual Achievement";
 		}
+		else if($name == "AchievementReport")
+		{
+			$detail['header'] = "Achievement Report";
+		}
 		else 
 		{
 			$detail['header'] = $name;
@@ -398,5 +402,104 @@ class Source_manager extends BaseController
 		$data["Member"] = $this->User->find_by_role($group);
 		echo json_encode($data);
 	} // End get_activity_with_member
+
+	//**-------------------------------------------------------------------------------------- */
+
+	/**
+     * Get achievement by group.
+     *
+	 * @Author	  Thutsaneeya Chanrong
+	 * @Create Date 10-02-2564
+     * @return Json Data
+     */
+	public function get_achievement_by_group($role_id)
+    {
+        echo json_encode($this->DM->get_achievement_by_group($role_id));
+    }
+
+	/**
+     * Get name group.
+     *
+	 * @Author	 Thutsaneeya Chanrong
+	 * @Create Date 10-02-2564
+     * @return Json Data
+     */
+	public function get_name_group()
+    {
+        echo json_encode($this->DM->get_name_group());
+    }
+
+	/**
+     * Get member by group.
+     *
+	 * @Author   Thutsaneeya Chanrong
+	 * @Create Date 11-02-2564
+     * @return Json Data
+     */
+	public function get_member_by_group($roles_user_id)
+    {
+        echo json_encode($this->DM->get_member_by_group($roles_user_id));
+    }
+
+	/**
+     * Import file.
+     *
+	 * @Author   Thutsaneeya Chanrong
+	 * @Create Date 1-03-2564
+     * @return Json Data
+     */
+	function loadStudent() {
+
+		if ($_FILES["csv_file"]["name"])
+		{
+			$count=0;
+			$data = array();
+			$fp = fopen($_FILES['csv_file']['tmp_name'],'r') or die("can't open file");
+
+			while($csv_line = fgetcsv($fp,1024))
+			{
+				$count++;
+				if($count == 1)
+				{
+					continue;
+				} // keep this if condition if you want to remove the first row
+				array_push($data, array('name' => $csv_line[0] , 'username' => $csv_line[1], 'password' => $csv_line[2], 'code' => $csv_line[3]));
+			}
+			fclose($fp) or die("can't close file");
+		} else {
+			$data = "Fails";
+		}
+		echo json_encode($data);
+	}
+
+	public function AchievementReport($id="1") {
+		$scripts['scripts'][0] = "assets/bower_components/datatables/js/jquery.dataTables.min.js";
+		$scripts['scripts'][1] = "assets/bower_components/datatables/js/dataTables.altEditor.free.js";
+		$scripts['scripts'][2] = "assets/bower_components/datatables/js/dataTables.buttons.min.js";
+		$scripts['scripts'][3] = "assets/bower_components/datatables/js/dataTables.select.min.js";
+		$scripts['scripts'][4] = "assets/bower_components/other/jquery.datetimepicker.full.js";
+		$scripts['scripts'][5] = "assets/bower_components/other/select2.js";
+		$scripts['scripts'][6] = 'assets/bower_components/toastr/toastr.min.js';
+		$scripts['css'][0] = "assets/bower_components/datatables/css/jquery.dataTables.min.css";
+		$scripts['css'][1] = "assets/bower_components/datatables/css/editor.dataTables.min.css";
+		$scripts['css'][2] = "assets/bower_components/datatables/css/buttons.dataTables.min.css";
+		$scripts['css'][3] = "assets/bower_components/datatables/css/select.dataTables.min.css";
+		$scripts['css'][4] = "assets/bower_components/other/jquery.datetimepicker.css";
+		$scripts['css'][5] = "assets/bower_components/other/select2.css";
+		$scripts['css'][6] = "assets/bower_components/toastr/toastr.min.css";
+		$detail['header'] = " Achievement Report";
+		$scripts['Profile'][0] = $this->auth->user();
+		$scripts['Profile'][1] = $this->auth->userRoles();
+		$scripts['Profile'][2]= $this->auth->userName();
+		$detail['Profile'][0]= $this->auth->user();
+		$detail['Profile'][1]= $this->auth->userRoles();
+		$detail['Profile'][2]= $this->auth->userName();
+
+		$data['group'] = $id;
+		$this->load->view('includes/header',$scripts);
+		$this->load->view('includes/sidebar',$detail);
+		$this->load->view("manager/v_Achievement_Report",$data);
+		$this->load->view('includes/footer');
+	}
 }
 ?>
