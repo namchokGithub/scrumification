@@ -39,7 +39,7 @@ class BaseController extends CI_Controller
 		$detail['Profile'][0]= $this->auth->user();
 		$detail['Profile'][1]= $this->auth->userRoles();
 		$detail['Profile'][2]= $this->auth->userName();
-
+		
 		$this->load->view('includes/header',$scripts);
 		$this->load->view('includes/sidebar',$detail);
 		$this->load->view($view, $data);

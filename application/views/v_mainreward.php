@@ -146,6 +146,7 @@
                                 </td>
                                 <td>
                                     <?php echo $row["username"] ?>
+                                    <input type="hidden" id="id" value="<?php echo $row['id']; ?>">
                                 </td>
                                 <td>
                                     <?php echo $row["user_name"] ?>
@@ -176,6 +177,7 @@
 
 <script>
     $(document).ready(function() {
+        // console.log(`<?php //var_dump($User_list);?>`)
         $('[data-toggle="tooltip"]').tooltip();
         /**
          * Setup scroll panel
@@ -276,7 +278,7 @@
 
                 var raw_data = JSON.parse(data);
                 let statusActivity = 1;
-                // console.log(raw_data)    
+                console.log(raw_data)    
 
 				if(raw_data != ''){
                     statusActivity = raw_data[0]['status']
@@ -286,19 +288,23 @@
                         checkStatus = "time_out"
                     }else {
                         statusActivity = 1
-                        $("table").find("tr[class=row_data]").find("td").on('click',function (e) { 
-                            e.preventDefault();
-                            var attr = $(this).eq(4).attr('onclick');
-                            console.log(attr)
-                            if (typeof attr === typeof undefined) {
-                                setTimeout(toastr["warning"]('เกิดข้อผิดพลาด โหลดหน้าอีกครั้ง'), 1000);
-                            }
-                        });
+                        // $("table").find("tr[class=row_data]").find("td").on('click',function (e) { 
+                        //     e.preventDefault();
+                        //     var attr = $(this).eq(4).attr('onclick');
+                        //     console.log(attr)
+                        //     if (typeof attr === typeof undefined) {
+                        //         setTimeout(toastr["warning"]('เกิดข้อผิดพลาด โหลดหน้าอีกครั้ง'), 1000);
+                        //     }
+                        // });
                         labelWarning = " label label-warning"
                         labelSuccess = " label label-success"
                         style = `style="cursor: pointer;"`
                     }
+                } else {
+                    labelWarning = " label label-warning"
+                    labelSuccess = " label label-success"
                 }
+
 
                 // console.log(statusActivity)
                 // console.log(raw_data[0].status)
@@ -317,13 +323,14 @@
                         `);
                     })
                 } else if (today <= target_intime) {
+                    console.log(statusActivity)
                     if(statusActivity == 0){
                         $("table").find("tr[class=row_data]").each(function() {
-                            $(this).find("td").eq(4).removeAttr("onclick").html(`<small style="cursor: pointer;" class="${checkStatus} ${labelWarning}"><i class="fa fa-clock-o"></i> Wait </small>`)
+                            $(this).find("td").eq(4).removeAttr("onclick").html(`<small style="cursor: pointer;" class="label bg-gray color-palette time_out"><i class="fa fa-clock-o"></i> Wait </small>`)
                         })
                     }else{
                         $("table").find("tr[class=row_data]").each(function() {
-                            $(this).find("td").eq(4).html(`<small style="cursor: pointer;" class="${checkStatus} ${labelWarning}"><i class="fa fa-clock-o"></i> Wait </small>`)
+                            $(this).find("td").eq(4).attr("onclick", `checkin(${$(this).find("td").eq(1).find("input").val()})`).html(`<small style="cursor: pointer;" class="${checkStatus} ${labelWarning}"><i class="fa fa-clock-o"></i> Wait </small>`)
                         })
                     }
                 } else {
@@ -340,7 +347,7 @@
                         // console.log(raw_data[i]["name"])
                     $("table").find("tr[class=row_data]").each(function() {
                         if ($(this).find("td").eq(2).text().replace(/\s/g, '') == test_text.replace(/\s/g, '')) {
-                            $(this).find("td").eq(4).html(`<small style="cursor: pointer;" class="${checkStatus} label ${labelSuccess}"><i class="fa fa-clock-o"></i> Done </small>`)
+                            $(this).find("td").eq(4).attr("onclick", `checkin(${$(this).find("td").eq(1).find("input").val()})`).html(`<small style="cursor: pointer;" class="${checkStatus} label ${labelSuccess}"><i class="fa fa-clock-o"></i> Done </small>`)
                         }
                     })
                 }

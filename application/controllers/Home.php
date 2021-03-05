@@ -37,7 +37,9 @@ class Home extends BaseController
     {
 		$data['Data_list'] = $this->User->all_Activity();
 		$data['userRoles'] = $this->auth->userWiseRoles();
-		$dataConfirm = $this->User->findItemConfirmed($data['userRoles'][0]);
+		
+		if($data['userRoles'][0] != null)
+			$dataConfirm = $this->User->findItemConfirmed($data['userRoles'][0]);
 
 		// Check noti item confirm
 		if($dataConfirm != null) {
@@ -45,8 +47,9 @@ class Home extends BaseController
 			$dteStart = new DateTime($dataConfirm[0]->updated_at);
 			$dteEnd   = new DateTime();
 			$dteDiff = $dteStart->diff($dteEnd);
-
-			if(($dteDiff->format("%I") < 15 && $dteDiff->format("%H") < 1) || $dteDiff->format("%H") >= 1) {
+			// echo $dteDiff->format("%I");
+			// echo $dteDiff->format("%H");
+			if(($dteDiff->format("%I") < 15 && $dteDiff->format("%H") < 1)) {
 				$data['checkItem'] = $dataConfirm;
 			} else {
 				$data['checkItem'] = null;

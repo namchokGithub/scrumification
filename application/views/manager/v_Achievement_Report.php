@@ -79,7 +79,10 @@
 			data: "created_at",
 			render: function(data, type, row, meta) {
 				if (data == null) return "ไม่มีข้อมูล";
-				else return data;
+				else {
+					let dateThai = DateThai(data)
+					return dateThai
+				};
 			}
 		}
 	];
@@ -118,6 +121,24 @@
             cell.innerHTML = `${i+1}.`;
         });
     }).draw();
+
+	function DateThai($strDate)
+	{
+		let dateStr = new Date($strDate);
+
+		strYear = dateStr.getFullYear()+543;
+		strMonth= dateStr.getMonth()+1;
+		strDate= dateStr.getDate();
+		strHour= dateStr.getHours();
+		strMinute= dateStr.getMinutes();
+		strSeconds= dateStr.getSeconds();
+		strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
+		strMonthThai=strMonthCut[strMonth];
+		console.log(strHour)
+		if(strHour<10) strHour = '0'+strHour;
+		if(strMinute<10) strMinute = '0'+strMinute;
+		return `วันที่ ${strDate} ${strMonthThai} ${strYear} เวลา ${strHour}:${strMinute} นาที`;
+	}
 </script>
 
 <style>

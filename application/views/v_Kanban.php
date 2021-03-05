@@ -32,19 +32,143 @@
                     <div class="board-column-content-wrapper">
                         <div class="board-column-content">
                             <div class="board-item">
-                                <div class="board-item-content"><span>Item #</span>6</div>
+                                <div class="box box-warning">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title"><span>Item #</span>6</h3>
+
+                                        <div id="barMenu" class="box-tools pull-right">
+                                            <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                <i class="fa fa-bars"></i>
+                                            </button>
+                                            <ul class="dropdown-menu pull-right" role="menu">
+                                                <li><a href="#">Add new event</a></li>
+                                                <li><a href="#">Clear events</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">View calendar</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                    content
+                                    </div>
+                                    <!-- /.box-body -->
+                                    <div class="box-footer">
+                                        <span>นายนำโชค สิงหะชัย</span>
+                                    </div>
+                                    <!-- /.box-footer-->
+                                </div>
                             </div>
                             <div class="board-item">
-                                <div class="board-item-content"><span>Item #</span>7</div>
+                                <div class="box box-warning">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title"><span>Item #</span>7</h3>
+
+                                        <div class="box-tools pull-right">
+                                            <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                <i class="fa fa-bars"></i>
+                                            </button>
+                                            <ul class="dropdown-menu pull-right" role="menu">
+                                                <li><a href="#">Add new event</a></li>
+                                                <li><a href="#">Clear events</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">View calendar</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                    </div>
+                                    <!-- /.box-body -->
+                                    <div class="box-footer">
+                                        <span>นายนำโชค สิงหะชัย</span>
+                                    </div>
+                                    <!-- /.box-footer-->
+                                </div>
                             </div>
                             <div class="board-item">
-                                <div class="board-item-content"><span>Item #</span>8</div>
+                                <div class="box box-warning ">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title"><span>Item #</span>8</h3>
+
+                                        <div class="box-tools pull-right">
+                                            <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                <i class="fa fa-bars"></i>
+                                            </button>
+                                            <ul class="dropdown-menu pull-right" role="menu">
+                                                <li><a href="#">Add new event</a></li>
+                                                <li><a href="#">Clear events</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">View calendar</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                    content
+                                    </div>
+                                    <!-- /.box-body -->
+                                    <div class="box-footer">
+                                        <span>นายนำโชค สิงหะชัย</span>
+                                    </div>
+                                    <!-- /.box-footer-->
+                                </div>
                             </div>
                             <div class="board-item">
-                                <div class="board-item-content"><span>Item #</span>9</div>
+                                <div class="box box-warning ">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title"><span>Item #</span>9</h3>
+
+                                        <div class="box-tools pull-right">
+                                            <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                <i class="fa fa-bars"></i>
+                                            </button>
+                                            <ul class="dropdown-menu pull-right" role="menu">
+                                                <li><a href="#">Add new event</a></li>
+                                                <li><a href="#">Clear events</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">View calendar</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                    content
+                                    </div>
+                                    <!-- /.box-body -->
+                                    <div class="box-footer">
+                                        <span>นายนำโชค สิงหะชัย</span>
+                                    </div>
+                                    <!-- /.box-footer-->
+                                </div>
                             </div>
                             <div class="board-item">
-                                <div class="board-item-content"><span>Item #</span>10</div>
+                                <div class="box box-warning ">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title"><span>Item #</span>10</h3>
+
+                                        <div class="box-tools pull-right">
+                                            <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                <i class="fa fa-bars"></i>
+                                            </button>
+                                            <ul class="dropdown-menu pull-right" role="menu">
+                                                <li><a href="#">Add new event</a></li>
+                                                <li><a href="#">Clear events</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">View calendar</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                    content
+                                    </div>
+                                    <!-- /.box-body -->
+                                    <div class="box-footer">
+                                        <span>นายนำโชค สิงหะชัย</span>
+                                    </div>
+                                    <!-- /.box-footer-->
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -56,19 +180,144 @@
                     <div class="board-column-content-wrapper">
                         <div class="board-column-content">
                             <div class="board-item">
-                                <div class="board-item-content"><span>Item #</span>11</div>
+                                <div class="box box-success">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title"><span>Item #</span>11</h3>
+
+                                        <div class="box-tools pull-right">
+                                            <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                <i class="fa fa-bars"></i>
+                                            </button>
+                                            <ul class="dropdown-menu pull-right" role="menu">
+                                                <li><a href="#">Add new event</a></li>
+                                                <li><a href="#">Clear events</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">View calendar</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                    content
+                                    </div>
+                                    <!-- /.box-body -->
+                                    <div class="box-footer">
+                                        <span>นายนำโชค สิงหะชัย</span>
+                                    </div>
+                                    <!-- /.box-footer-->
+                                </div>
                             </div>
                             <div class="board-item">
-                                <div class="board-item-content"><span>Item #</span>12</div>
+                                <div class="box box-success">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title"><span>Item #</span>12</h3>
+
+                                        <div class="box-tools pull-right">
+                                            <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                <i class="fa fa-bars"></i>
+                                            </button>
+                                            <ul class="dropdown-menu pull-right" role="menu">
+                                                <li><a href="#">Add new event</a></li>
+                                                <li><a href="#">Clear events</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">View calendar</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                    content
+                                    </div>
+                                    <!-- /.box-body -->
+                                    <div class="box-footer">
+                                        <span>นายนำโชค สิงหะชัย</span>
+                                    </div>
+                                    <!-- /.box-footer-->
+                                </div>
                             </div>
                             <div class="board-item">
-                                <div class="board-item-content"><span>Item #</span>13</div>
+                                <div class="box box-success">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title"><span>Item #</span>13</h3>
+
+                                        <div class="box-tools pull-right">
+                                            <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                <i class="fa fa-bars"></i>
+                                            </button>
+                                            <ul class="dropdown-menu pull-right" role="menu">
+                                                <li><a href="#">Add new event</a></li>
+                                                <li><a href="#">Clear events</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">View calendar</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                    content
+                                    </div>
+                                    <!-- /.box-body -->
+                                    <div class="box-footer">
+                                        <span>นายนำโชค สิงหะชัย</span>
+                                    </div>
+                                    <!-- /.box-footer-->
+                                </div>
                             </div>
                             <div class="board-item">
-                                <div class="board-item-content"><span>Item #</span>14</div>
+                                <div class="box box-success">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title"><span>Item #</span>14</h3>
+
+                                        <div class="box-tools pull-right">
+                                            <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                <i class="fa fa-bars"></i>
+                                            </button>
+                                            <ul class="dropdown-menu pull-right" role="menu">
+                                                <li><a href="#">Add new event</a></li>
+                                                <li><a href="#">Clear events</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">View calendar</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                    content
+                                    </div>
+                                    <!-- /.box-body -->
+                                    <div class="box-footer">
+                                        <span>นายนำโชค สิงหะชัย</span>
+                                    </div>
+                                    <!-- /.box-footer-->
+                                </div>
                             </div>
                             <div class="board-item">
-                                <div class="board-item-content"><span>Item #</span>15</div>
+                             <div class="box box-success">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title"><span>Item #</span>15</h3>
+
+                                        <div class="box-tools pull-right">
+                                            <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                <i class="fa fa-bars"></i>
+                                            </button>
+                                            <ul class="dropdown-menu pull-right" role="menu">
+                                                <li><a href="#">Add new event</a></li>
+                                                <li><a href="#">Clear events</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">View calendar</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        content
+                                    </div>
+                                    <!-- /.box-body -->
+                                    <div class="box-footer">
+                                        <span>นายนำโชค สิงหะชัย</span>
+                                    </div>
+                                    <!-- /.box-footer-->
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -84,21 +333,125 @@
 <script src="https://cdn.jsdelivr.net/npm/web-animations-js@2.3.2/web-animations.min.js"></script>
 <script>
         $(document).ready(function() {
+
+            $('#barMenu').on('click', function () {
+                console.log('barMenu')
+                alert('barMenu')
+            });
+
             $('#todo').html(`<div class="board-item">
-                                <div class="board-item-content"><span>Item #</span>1</div>
+                                <div class="box box-info ">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title"><span>Item #</span>1</h3>
+
+                                        <div class="box-tools pull-right">
+                                            <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                <i class="fa fa-bars"></i>
+                                            </button>
+                                            <ul class="dropdown-menu pull-right" role="menu">
+                                                <li><a href="#">Add new event</a></li>
+                                                <li><a href="#">Clear events</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">View calendar</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                    content
+                                    </div>
+                                    <!-- /.box-body -->
+                                    <div class="box-footer">
+                                        <span>นายนำโชค สิงหะชัย</span>
+                                    </div>
+                                    <!-- /.box-footer-->
+                                </div>
                             </div>
                             <div class="board-item">
-                                <div class="board-item-content"><span>Item #</span>2</div>
+                                <div class="box box-info ">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title"><span>Item #</span>2</h3>
+
+                                        <div class="box-tools pull-right">
+                                            <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                <i class="fa fa-bars"></i>
+                                            </button>
+                                            <ul class="dropdown-menu pull-right" role="menu">
+                                                <li><a href="#">Add new event</a></li>
+                                                <li><a href="#">Clear events</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">View calendar</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                    content
+                                    </div>
+                                    <!-- /.box-body -->
+                                    <div class="box-footer">
+                                        <span>นายนำโชค สิงหะชัย</span>
+                                    </div>
+                                    <!-- /.box-footer-->
+                                </div>
                             </div>
                             <div class="board-item">
-                                <div class="board-item-content"><span>Item #</span>3</div>
+                                <div class="box box-info ">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title"><span>Item #</span>3</h3>
+
+                                        <div class="box-tools pull-right">
+                                            <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                <i class="fa fa-bars"></i>
+                                            </button>
+                                            <ul class="dropdown-menu pull-right" role="menu">
+                                                <li><a href="#">Add new event</a></li>
+                                                <li><a href="#">Clear events</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">View calendar</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                    content
+                                    </div>
+                                    <!-- /.box-body -->
+                                    <div class="box-footer">
+                                        <span>นายนำโชค สิงหะชัย</span>
+                                    </div>
+                                    <!-- /.box-footer-->
+                                </div>
                             </div>
                             <div class="board-item">
-                                <div class="board-item-content"><span>Item #</span>4</div>
+                                <div class="box box-info ">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title"><span>Item #</span>4</h3>
+
+                                        <div class="box-tools pull-right">
+                                            <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                <i class="fa fa-bars"></i>
+                                            </button>
+                                            <ul class="dropdown-menu pull-right" role="menu">
+                                                <li><a href="#">Add new event</a></li>
+                                                <li><a href="#">Clear events</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">View calendar</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                    content
+                                    </div>
+                                    <!-- /.box-body -->
+                                    <div class="box-footer">
+                                        <span>นายนำโชค สิงหะชัย</span>
+                                    </div>
+                                    <!-- /.box-footer-->
+                                </div>
                             </div>
-                            <div class="board-item">
-                                <div class="board-item-content"><span>Item #</span>5</div>
-                            </div>`);
+                            `);
                             
             var dragContainer = document.querySelector('.drag-container');
             var itemContainers = [].slice.call(document.querySelectorAll('.board-column-content'));
@@ -126,6 +479,7 @@
                             }
                         },
                     })
+                    .on('mouseOver', ()=>{console.log('test')})
                     .on('dragInit', function(item) {
                         console.log('ยก')
                         item.getElement().style.width = item.getWidth() + 'px';
@@ -154,6 +508,10 @@
 </script>
 
 <style>
+    .box {
+        margin-bottom: 3px;
+    }
+
     * {
         box-sizing: border-box;
     }

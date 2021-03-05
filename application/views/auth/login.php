@@ -77,7 +77,7 @@
                 background-color: rgba(84, 91, 84, 0.5) !important;
                 padding: 20px !important;
                 width: 370px !important;
-                margin: 10% auto !important;
+                margin: 5% auto !important;
             }
             
             .login-box-msg {
@@ -190,7 +190,7 @@
 					    </button>
                     </div>
                     <div class="modal-body">
-                        <p>ติดต่อ…</p>
+                        <p>ติดต่อ Scrum master</p>
                     </div>
                 </div>
             </div>

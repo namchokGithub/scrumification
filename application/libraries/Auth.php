@@ -286,14 +286,22 @@ class Auth
      */
     public function userRoles()
     {
-        return array_map(function ($item) {
-            return $item["name"];
-        }, $this->CI->db
-            ->select("roles.*")
-            ->from("roles")
-            ->join("roles_users", "roles.id = roles_users.role_id", "inner")
-            ->where(array("roles_users.user_id" => $this->userID(),"roles.status" => 1, "deleted_at" => null))
-            ->get()->result_array());
+        return $this->CI->db
+                ->select("roles.*, code as secon_role")
+                ->from("roles")
+                ->join("roles_users", "roles.id = roles_users.role_id", "inner")
+                ->join("users", "users.id = roles_users.user_id", "inner")
+                ->where(array("roles_users.user_id" => $this->userID(),"roles.status" => 1, "roles.deleted_at" => null))
+                ->get()->result_array();
+        // return array_map(function ($item) {
+        //     return array($item["name"], $item["secon_role"]);
+        // }, $this->CI->db
+        //     ->select("roles.*, code as secon_role")
+        //     ->from("roles")
+        //     ->join("roles_users", "roles.id = roles_users.role_id", "inner")
+        //     ->join("users", "users.id = roles_users.user_id", "inner")
+        //     ->where(array("roles_users.user_id" => $this->userID(),"roles.status" => 1, "roles.deleted_at" => null))
+        //     ->get()->result_array());
     }
 
     /**

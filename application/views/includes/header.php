@@ -43,13 +43,14 @@
         }
         
         .logout-menu {
-            color: black !important;
             font-size: 25px;
             text-align: center;
             background-color: WHITE !important;
-            border: none;
+            /* border: none; */
             margin-top: -1px;
             margin-right: -8px;
+            color: black !important;
+            border: 1px solid black;
         }
         
         .logout-menu:hover {

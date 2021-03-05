@@ -82,9 +82,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-</div>
+
 <!-- Del -->
 <div id="modal_del" class="modal fade in" tabindex="-1" role="dialog" style=" display: none;">
 	<div class="modal-dialog">
@@ -250,25 +248,26 @@
 					</div>
 					<div class="content">
 					<button id="btn_add_user_to_table"type="button" class="btn btn-info" style="float:right;">เพิ่ม</button>
-				</div><br>
-				</form>	
-				<table id="example1" class="table table-striped table-bordered no-footer dataTable" style="width:100%">
-					<thead id="header">
-						<tr>
-							<th>ลำดับ</th>
-							<th>ชื่อ-นามสกุล</th>
-							<th>Username</th>
-							<th>Password</th>
-							<th>หน้าที่</th>
-							<th>ดำเนินการ</th>
-						</tr>
-					</thead>
-					<tbody id="tbody_01"></tbody>
-				</table>
-			</div>
-			<div class="modal-footer">
-				<button id="btn_close_add_2"type="button" data-content="remove" class="btn btn-danger " data-dismiss="modal" style="margin-right: 75%;">ยกเลิก</button>
-				<button type="submit" form="altEditor-add-form" data-content="remove" class="btn btn-success" id="addRowBtn" >บันทึก</button>
+					</div><br>
+					</form>	
+					<table id="example1" class="table table-striped table-bordered no-footer dataTable" style="width:100%">
+						<thead id="header">
+							<tr>
+								<th>ลำดับ</th>
+								<th>ชื่อ-นามสกุล</th>
+								<th>Username</th>
+								<th>Password</th>
+								<th>หน้าที่</th>
+								<th>ดำเนินการ</th>
+							</tr>
+						</thead>
+						<tbody id="tbody_01"></tbody>
+					</table>
+				</div>
+				<div class="modal-footer">
+					<button id="btn_close_add_2"type="button" data-content="remove" class="btn btn-danger " data-dismiss="modal" style="margin-right: 75%;">ยกเลิก</button>
+					<button type="submit" form="altEditor-add-form" data-content="remove" class="btn btn-success" id="addRowBtn" >บันทึก</button>
+				</div>
 			</div>
 		</div>
 	</div>

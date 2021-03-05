@@ -7,6 +7,15 @@
  */
 ?>
 
+<style>
+    .imageProfile {
+        object-fit: cover; 
+        object-position: center;
+        min-width: 30px !important; 
+        min-height: 30px !important; 
+    }
+</style>
+
 <!-- Left side column. contains the sidebar -->
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
@@ -14,14 +23,18 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="<?php echo base_url('assets/dist/img/user/'.$Profile[2].'.jpg'); ?>" class="img-circle" alt="User Image" style="object-fit: cover; object-position: center;min-width: 30px !important; min-height: 35px !important; " onerror="this.onerror=null;this.src='<?php echo base_url('assets/dist/img/user/unknown-who.jpg'); ?>';">
+                <img src="<?php echo base_url('assets/dist/img/user/'.$Profile[2].'.jpg'); ?>" class="img-circle imageProfile" alt="User Image" style="" onerror="this.onerror=null;this.src='<?php echo base_url('assets/dist/img/user/unknown-who.jpg'); ?>';">
             </div>
             <div class="pull-left info">
-                <p style="white-space: nowrap; width: 155px; overflow: hidden; text-overflow: ellipsis;">
-                    <?php echo $Profile[0]; ?> </p>
-                <a href="#"><i class="fa fa-user text-info"></i>
-                    <span class="Role_name"><?php echo empty($Profile[1])? "No Role": implode(" , ",$Profile[1]); ?>
-                    </span></a>
+                <p id="Player_name" style="white-space: nowrap; width: 155px; overflow: hidden; text-overflow: ellipsis; margin-bottom: 3px !important;">
+                    <?php echo $Profile[0]; ?> 
+                </p>
+                <a>
+                    <i class="fa fa-user text-info"></i>
+                    <span class="Role_name">
+                        <!-- <?php //echo empty($Profile[1]["name"])? "No Role": implode(" , ",$Profile[1]["name"]); ?> -->
+                    </span>
+                </a>
             </div>
         </div>
         <!-- sidebar menu: : style can be found in sidebar.less -->
@@ -120,7 +133,7 @@
             </li>
             <li class="ScrumMaster">
                 <a id="Work" href="<?php echo site_url('Source_manager/index/Work'); ?>">
-                    <i class="fa fa-cart-plus"></i>
+                    <i class="fa fa-folder"></i>
                     <span>Work Management</span></a>
             </li>
             <!-- end MANAGER NAVIGATION -->
@@ -136,12 +149,12 @@
      * @Author	Jiranuwat Jaiyen       
      * @Create Date	22-03-2563
      */
-    if (getCookie("User") !== "<?php echo empty($Profile[2])? 'No User ':$Profile[1][0]; ?>") {
-        setCookie("User", "<?php echo empty($Profile[1])? 'No User ':$Profile[1][0]; ?>", 999);
-        setCookie("Role", "<?php echo empty($Profile[1])? 'No Role ':$Profile[1][0]; ?>", 999);
+    if (getCookie("User") !== "<?php echo empty($Profile[2])? 'No User ':$Profile[1][0]["name"]; ?>") {
+        setCookie("User", "<?php echo empty($Profile[1][0]["name"])? 'No User ':$Profile[1][0]["name"]; ?>", 999);
+        setCookie("Role", "<?php echo empty($Profile[1][0]["name"])? 'No Role ':$Profile[1][0]["name"]; ?>", 999);
     }
     if (getCookie("Role") == "") {
-        setCookie("Role", "<?php echo empty($Profile[1])? 'No Role ':$Profile[1][0]; ?>", 999);
+        setCookie("Role", "<?php echo empty($Profile[1][0]["name"])? 'No Role ':$Profile[1][0]["name"]; ?>", 999);
     }
     if (getCookie("Role") == "ScrumMaster" || getCookie("Role") == "Administrator") {
         $(".ScrumMaster").show();
@@ -154,9 +167,30 @@
     if ($("a[id='<?php echo $header; ?>']").length) {
         $("a[id='<?php echo $header; ?>']").closest("li").addClass("active");
     } else {
-        console.log("length", $("span:contains('<?php echo $header; ?>')").length)
+        // console.log("length", $("span:contains('<?php echo $header; ?>')").length)
         // $("span:contains('<?php echo $header; ?>')").closest("li").addClass("active");
     }
+
+    $(document).ready(function () {
+        let checkLeader = `<?php echo $Profile[1][0]["secon_role"] ;?>`;
+        if(checkLeader != '') {
+            $('.Role_name').text(`<?php echo $Profile[1][0]["secon_role"] ; ?>`);
+        } else {
+            $('.Role_name').text(`<?php echo $Profile[1][0]["name"] ; ?>`);
+        }
+
+        // console.log($('#Player_name').text().replace(/\s/g, ''));
+        let namePlayer = `<?php echo $Profile[0];?>`;
+        let nai = "นาย"
+        let nangsaew = "นางสาว"
+
+        if(!namePlayer.search('นาย')) {
+            $('#Player_name').text(namePlayer.substring(namePlayer.search('นาย') + nai.length, namePlayer.indexOf('(', 0)));
+        } if (!namePlayer.search('นางสาว')) {
+            $('#Player_name').text(namePlayer.substring(namePlayer.search('นางสาว') + nangsaew.length, namePlayer.indexOf('(', 0)));
+            // console.log(namePlayer.substring(namePlayer.search('นางสาว') + nangsaew.length, namePlayer.indexOf('(', 0)))
+        }
+    });
 </script>
 <!-- =============================================== -->
 
