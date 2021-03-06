@@ -110,4 +110,9 @@ class MainReward extends BaseController
 	public function get_Activity($id=0,$role_id=0){
 		echo json_encode($this->User->Activity_by_role($id,$role_id)); 
 	} // End get activity
+
+	public function get_status_activity($id=1){
+		// echo json_encode($id); 
+		echo json_encode($this->User->get_status_activity($id)); 
+	}
 }

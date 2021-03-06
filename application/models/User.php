@@ -750,4 +750,11 @@ class User extends CI_Model
                 WHERE role_id = $id AND log_shop.status = 1";
 		return $this->db->query($sql)->result();
 	}
+
+    public function get_status_activity($id){
+		$sql="  SELECT activity.status
+                FROM `activity`
+                WHERE activity.id = $id";
+		return $this->db->query($sql)->row();
+	}
 }

@@ -176,7 +176,57 @@
 <!-- End Activities of Group -->
 
 <script>
+    var statusActivity = 0;
+    currentTime();
+    countdown.resetLabels();
+    countdown.setLabels(' มิลวินาที| วินาที| นาที| ชั่วโมง| วัน| สัปดาห์| เดือน| ปี| ศตวรรษ| ทศวรรษ| พันปี',  ' มิลวินาที| วินาที| นาที| ชั่วโมง| วัน| สัปดาห์| เดือน| ปี| ศตวรรษ| ทศวรรษ| พันปี',' ',
+        ' ',
+        '0 วินาที');
+    var today, target, target_intime, target_input;
+    today = new Date()
+    target = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 1, 58, 0)
+    target_intime = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 2, 0, 0)
+
     $(document).ready(function() {
+
+        /**
+         * setInterval to reload ui
+         *
+         * @Author	Jiranuwat Jaiyen       
+         * @Create Date	22-03-2563
+         * @return mixed
+         */
+        setInterval(function() {
+            today = new Date()
+            $(".owl-item").find(".small-box").each(function() {
+                                                    $(this).attr("class", "small-box bg-gray")
+                                                });
+        
+            $(".owl-item.center").find(".small-box").attr("class", "small-box bg-aqua2");
+            var new_time = $(".owl-item.center").find("#time").text().split(" ");
+            target_input = $(".owl-item.center").find("#ac_id").val();
+            
+            if(statusActivity!=0) {
+                // console.log(new_time)
+                var start_time = new_time[0].split(":")
+                var end_time = new_time[2].split(":")
+                target = new Date(today.getFullYear(), today.getMonth(), today.getDate(), start_time[0], start_time[1], start_time[2])
+                target_intime = new Date(today.getFullYear(), today.getMonth(), today.getDate(), end_time[0], end_time[1], end_time[2])
+    
+                if (today <= target) {
+                    $("#time_now").css("font-family", "kanit").text("กิจกรรมจะเปิดในอีก " + countdown(target).toString())
+                } else if (today <= target_intime) {
+                    $("#time_now").css("font-family", "kanit").text("เหลือเวลาในการทำกิจกรรม  " + countdown(target_intime).toString())
+                } else {
+                    $("#time_now").css("font-family", "kanit").html("<u><b>กิจกรรมได้ผ่านไปแล้ว " + countdown(target_intime).toString() + "</b></u>")
+                }
+            } else {
+                $("#time_now").css("font-family", "kanit").html("กิจกรรมปิดการใช้งานชั่วคราว");
+            }
+            
+
+        }, 100);
+
         // console.log(`<?php //var_dump($User_list);?>`)
         $('[data-toggle="tooltip"]').tooltip();
         /**
@@ -260,8 +310,21 @@
      * @Create Date	22-03-2563
      * @return mixed
      */
-    function clear_get_data() {
-        $.get("<?php echo site_url("mainreward/get_Activity/"); ?>" + target_input + "/<?php echo $id;?>",
+    async function clear_get_data() {
+        // console.log('Target input: ' + target_input)
+        activityID = target_input?target_input:1;
+        await $.ajax({
+            type: "GET",
+            url: "<?php echo site_url("mainreward/get_status_activity/"); ?>"+activityID,
+            dataType: "TEXT",
+            success: function (data) {
+                let raw_data = JSON.parse(data);
+                statusActivity = raw_data.status;
+                // console.log("Data Loaded: " + raw_data.status);
+            }
+        });
+        // console.log("Status: "+ statusActivity) 
+        await $.get("<?php echo site_url("mainreward/get_Activity/"); ?>" + target_input + "/<?php echo $id;?>",
             function(data, status) {
                 let style = ``
                 let checkStatus = ""
@@ -277,37 +340,28 @@
                 }
 
                 var raw_data = JSON.parse(data);
-                let statusActivity = 1;
-                console.log(raw_data)    
-
-				if(raw_data != ''){
-                    statusActivity = raw_data[0]['status']
-                    if(statusActivity == 0){
-                        labelWarning = "label bg-gray color-palette "
-                        labelSuccess = "label bg-gray color-palette "
-                        checkStatus = "time_out"
-                    }else {
-                        statusActivity = 1
-                        // $("table").find("tr[class=row_data]").find("td").on('click',function (e) { 
-                        //     e.preventDefault();
-                        //     var attr = $(this).eq(4).attr('onclick');
-                        //     console.log(attr)
-                        //     if (typeof attr === typeof undefined) {
-                        //         setTimeout(toastr["warning"]('เกิดข้อผิดพลาด โหลดหน้าอีกครั้ง'), 1000);
-                        //     }
-                        // });
-                        labelWarning = " label label-warning"
-                        labelSuccess = " label label-success"
-                        style = `style="cursor: pointer;"`
-                    }
+                // console.log(raw_data)    
+                // console.log("Status (2): "+ statusActivity) 
+                if(statusActivity == 0){
+                    labelWarning = "label bg-gray color-palette "
+                    labelSuccess = "label bg-gray color-palette "
+                    checkStatus = "time_out"
                 } else {
+                    // $("table").find("tr[class=row_data]").find("td").on('click',function (e) { 
+                    //     e.preventDefault();
+                    //     var attr = $(this).eq(4).attr('onclick');
+                    //     console.log(attr)
+                    //     if (typeof attr === typeof undefined) {
+                    //         setTimeout(toastr["warning"]('เกิดข้อผิดพลาด โหลดหน้าอีกครั้ง'), 1000);
+                    //     }
+                    // });
                     labelWarning = " label label-warning"
                     labelSuccess = " label label-success"
+                    style = `style="cursor: pointer;"`
                 }
-
-
-                // console.log(statusActivity)
-                // console.log(raw_data[0].status)
+				// if(raw_data != ''){
+                    
+                // }
                 
                 // console.log(new_time)
                 let start_time = new_time[0].split(":")
@@ -323,7 +377,6 @@
                         `);
                     })
                 } else if (today <= target_intime) {
-                    console.log(statusActivity)
                     if(statusActivity == 0){
                         $("table").find("tr[class=row_data]").each(function() {
                             $(this).find("td").eq(4).removeAttr("onclick").html(`<small style="cursor: pointer;" class="label bg-gray color-palette time_out"><i class="fa fa-clock-o"></i> Wait </small>`)
@@ -347,7 +400,11 @@
                         // console.log(raw_data[i]["name"])
                     $("table").find("tr[class=row_data]").each(function() {
                         if ($(this).find("td").eq(2).text().replace(/\s/g, '') == test_text.replace(/\s/g, '')) {
-                            $(this).find("td").eq(4).attr("onclick", `checkin(${$(this).find("td").eq(1).find("input").val()})`).html(`<small style="cursor: pointer;" class="${checkStatus} label ${labelSuccess}"><i class="fa fa-clock-o"></i> Done </small>`)
+                            if(statusActivity == 0){
+                                $(this).find("td").eq(4).removeAttr("onclick").html(`<small style="cursor: pointer;" class="${checkStatus} label ${labelSuccess}"><i class="fa fa-clock-o"></i> Done </small>`)
+                            } else {
+                                $(this).find("td").eq(4).attr("onclick", `checkin(${$(this).find("td").eq(1).find("input").val()})`).html(`<small style="cursor: pointer;" class="${checkStatus} label ${labelSuccess}"><i class="fa fa-clock-o"></i> Done </small>`)
+                            }
                         }
                     })
                 }
@@ -389,47 +446,4 @@
             return k;
         }
     } // End updateTime
-
-    currentTime();
-    countdown.resetLabels();
-    countdown.setLabels(' มิลวินาที| วินาที| นาที| ชั่วโมง| วัน| สัปดาห์| เดือน| ปี| ศตวรรษ| ทศวรรษ| พันปี',  ' มิลวินาที| วินาที| นาที| ชั่วโมง| วัน| สัปดาห์| เดือน| ปี| ศตวรรษ| ทศวรรษ| พันปี',' ',
-        ' ',
-        '0 วินาที');
-    var today, target, target_intime, target_input;
-    today = new Date()
-    target = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 1, 58, 0)
-    target_intime = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 2, 0, 0)
-
-    /**
-     * setInterval to reload ui
-     *
-     * @Author	Jiranuwat Jaiyen       
-     * @Create Date	22-03-2563
-     * @return mixed
-     */
-    setInterval(function() {
-        today = new Date()
-        $(".owl-item").find(".small-box").each(function() {
-                                                $(this).attr("class", "small-box bg-gray")
-                                            });
-    
-        $(".owl-item.center").find(".small-box").attr("class", "small-box bg-aqua2");
-        var new_time = $(".owl-item.center").find("#time").text().split(" ");
-        target_input = $(".owl-item.center").find("#ac_id").val();
-        
-        // console.log(new_time)
-        var start_time = new_time[0].split(":")
-        var end_time = new_time[2].split(":")
-        target = new Date(today.getFullYear(), today.getMonth(), today.getDate(), start_time[0], start_time[1], start_time[2])
-        target_intime = new Date(today.getFullYear(), today.getMonth(), today.getDate(), end_time[0], end_time[1], end_time[2])
-
-        if (today <= target) {
-            $("#time_now").css("font-family", "kanit").text("กิจกรรมจะเปิดในอีก " + countdown(target).toString())
-        } else if (today <= target_intime) {
-            $("#time_now").css("font-family", "kanit").text("เหลือเวลาในการทำกิจกรรม  " + countdown(target_intime).toString())
-        } else {
-            $("#time_now").css("font-family", "kanit").html("<u><b>กิจกรรมได้ผ่านไปแล้ว " + countdown(target_intime).toString() + "</b></u>")
-        }
-
-    }, 100);
 </script>
