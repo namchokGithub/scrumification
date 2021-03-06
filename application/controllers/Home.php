@@ -37,7 +37,7 @@ class Home extends BaseController
     {
 		$data['Data_list'] = $this->User->all_Activity();
 		$data['userRoles'] = $this->auth->userWiseRoles();
-		
+		$data['checkItem'] = "";
 		if($data['userRoles'][0] != null)
 			$dataConfirm = $this->User->findItemConfirmed($data['userRoles'][0]);
 
@@ -53,7 +53,14 @@ class Home extends BaseController
 				$data['checkItem'] = $dataConfirm;
 			} else {
 				$data['checkItem'] = null;
-				$this->User->usedItem($dataConfirm[0]->role_id, $dataConfirm[0]->shop_id);
+				$raw_data = $this->db->get_where("log_shop",array("shop_id"=> $dataConfirm[0]->shop_id,"role_id"=> $dataConfirm[0]->role_id))->row();
+				if($raw_data->total - 1 >= 0){
+					$this->User->usedItem($dataConfirm[0]->role_id, $dataConfirm[0]->shop_id, 0);
+				}
+				else
+				{
+					$this->User->usedItem($dataConfirm[0]->role_id, $dataConfirm[0]->shop_id, -1);
+				}
 			}
 		} else {
 			$data['checkItem'] = null;

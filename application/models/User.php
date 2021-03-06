@@ -172,11 +172,11 @@ class User extends CI_Model
      */
 	public function get_Inventory($target){
 		 return $this->db
-            ->select("shop.id,shop.name,log_shop.total,shop.type" ,FALSE)
+            ->select("shop.id,shop.name,log_shop.total,shop.type, log_shop.status" ,FALSE)
             ->from("log_shop")
 			->join("shop", "shop.id = log_shop.shop_id", "LEFT")
             ->where(array("log_shop.role_id" => $target	))->where('shop.id IS NOT NULL', null)
-            ->where('log_shop.total <> 0', null)
+            ->where('(log_shop.status <> -1)')
             ->get()->result_array();
 	}
 
@@ -191,10 +191,12 @@ class User extends CI_Model
      */
 	public function Useitem($data)
     {
-        $raw_data = $this->db->get_where("log_shop",array("shop_id"=>  $data['item_id']))->row();
+		// var_dump($data);
+        $raw_data = $this->db->get_where("log_shop",array("shop_id"=>  $data['item_id'],"role_id"=>  $data['target']))->row();
 		$update_sql="update log_shop set total = total-1 where shop_id = ".$data['item_id']." AND role_id = ".$data['target'];
 		$update_sql_status="update log_shop set status = 2, updated_at = NOW() where shop_id = ".$data['item_id']." AND role_id = ".$data['target'];
-		if($raw_data->total - 1 >= 0){
+		// var_dump($raw_data);
+        if($raw_data->total - 1 >= 0){
 			$this->db->query($update_sql);
 			$this->db->query($update_sql_status);
 			$data['type']="Comple";
@@ -227,7 +229,7 @@ class User extends CI_Model
 		$PostQopen = new DateTime($raw_data->time_start);
         $PostQClose = new DateTime($raw_data->time_end);
                               
-        $sql="INSERT INTO `log_shop` (`role_id`, `shop_id`, `total`, `created_at`) VALUES ('".$data['target']."', '".$data['item_id']."', '".$data['count']."', NOW())ON DUPLICATE KEY UPDATE created_at = NOW(), total=total+".$data['count'];
+        $sql="INSERT INTO `log_shop` (`role_id`, `shop_id`, `total`, `created_at`, `updated_at`) VALUES ('".$data['target']."', '".$data['item_id']."', '".$data['count']."', NOW(), NOW())ON DUPLICATE KEY UPDATE updated_at = NOW(), total=total+".$data['count'];
         
         $update_sql="update shop set total = total-".$data['count']." where id = ".$data['item_id'];
         
@@ -730,8 +732,8 @@ class User extends CI_Model
 	 * @Author Namchok Singhachai
      * @return Json Data
      */
-	public function usedItem($rold_id, $shop_id){
-		$update_sql_status="update log_shop set status = 0, updated_at = NOW() where shop_id = ".$shop_id." AND role_id = ".$rold_id;
+	public function usedItem($rold_id, $shop_id, $status=0){
+		$update_sql_status="update log_shop set status = ".$status.", updated_at = NOW() where shop_id = ".$shop_id." AND role_id = ".$rold_id;
 		return $this->db->query($update_sql_status);;
 	}
 

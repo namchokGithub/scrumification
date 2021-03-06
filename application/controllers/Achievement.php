@@ -72,7 +72,6 @@ class Achievement extends BaseController
 		$data['Secon_target']= $this->User->can_Activity();
 		$data['Role_can'] = $this->User->find_by_username($this->auth->userName());
 		$data['id'] = $id;
-
 		$scripts['temp_scripts'] = '';
 		$detail['header'] = "Shopping";
     	$this->output('v_achievement', $data, $scripts, $detail);
@@ -112,8 +111,9 @@ class Achievement extends BaseController
 		// 	$data['type']="Error";
 		// 	return $data;
 		// }
-		$target = $target_id;
-		echo json_encode($this->User->Useitem([ 'item_id' => $item, 'target'=>$target])); 
+		// $target = $target_id;
+		// echo $target_id;
+		echo json_encode($this->User->Useitem([ 'item_id' => $item, 'target'=>$target_id])); 
 	} // End UseItem
 
 	/**

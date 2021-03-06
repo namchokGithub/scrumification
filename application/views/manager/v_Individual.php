@@ -38,8 +38,8 @@
 	var topic_name = "individual";
 	// local URL's are not allowed
 	var url_get = "<?php echo site_url("Source_manager/get_data/");?>"+topic_name;
-	var url_add = "<?php echo site_url("Source_manager/add_data/");?>"+topic_name;
-	var url_edit = "<?php echo site_url("Source_manager/edit_data/");?>"+topic_name;
+	var url_add = "<?php echo site_url("Source_manager/add_role_data/");?>"+topic_name;
+	var url_edit = "<?php echo site_url("Source_manager/edit_no1_data/");?>"+topic_name;
 	var url_delete = "<?php echo site_url("Source_manager/delete_data/");?>"+topic_name;
 
 	/**

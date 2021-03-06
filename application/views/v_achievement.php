@@ -8,6 +8,10 @@
 
 <style>
 
+	.imgOpacity {
+		opacity: 0.2;
+	}
+
 	table , tr ,td {
 		border: 0px !important
 	}
@@ -38,6 +42,7 @@
 		text-align: right;
 		font-weight: 700;
 	}
+
 	.detail_item{
 		vertical-align: middle !important; 
 		color: red;
@@ -45,6 +50,11 @@
 		text-align: right;
 		font-weight: 700;
 	}
+
+	.requestItemColor {
+		color: #ddd !important;
+	}
+
 	.min-align {
 		text-align:right
 	}
@@ -55,10 +65,13 @@
 	}
 </style>
 
+<!-- <?php //var_dump($Profile_role[0][0]); ?> -->
+<!-- <?php //var_dump($Profile[1][0]["name"]); ?> -->
+
 <div class="panel panel-primary">
     <div  class="panel-heading" style=" font-size: 28px; ">Trade Zone</div>
     <div class="panel-body">
-		<?php if($Profile[1][0] == "ScrumMaster"){ ?>
+		<?php if($Profile[1][0]["name"] == "ScrumMaster"){ ?>
 			<div class="col-md-9 col-sm-12  col-xs-12"style="font-size: x-large;font-weight: 700;" id="user_point">ยอดเงินทั้งหมด $$$$$ $E</div>
 			<div class="col-md-3 col-sm-12  col-xs-12 min-align" style="font-size: x-large;font-weight: 600; ">
 				<select id="select-opt" style=" margin-bottom: 5px; ">
@@ -103,7 +116,7 @@
 					<div style=" min-height: 400px; height: 50vh; overflow-y: scroll; overflow-x: hidden; border: 3px solid #7fadd5; ">
 						<table id="example1" class="table table-bordered table-striped">
 							<tbody id="theinventory">
-							<?php for($i=0;$i<=10;$i++){?>
+							<?php for($i=0;$i<1;$i++){?>
 								<tr class="row_inventory">
 									<td style="width: 20%; !important">
 										<img src="<?php echo base_url('assets/dist/img/item/Common.png'); ?>" class="img-circle img-table"alt="User Image" onerror="this.onerror=null;this.src='<?php echo base_url('assets/dist/img/item/unknow_item.png'); ?>';">
@@ -139,13 +152,13 @@ countdown.setLabels(
 					else{
 						echo ($id)."\n";
 					} ?>
+	// console.log(target_id)
 
 	$(document).ready(function(){
 		$("#select-opt").change(function() {
 			var option = $(this).find(':selected');
 			let target = option.val();
 			target_id = target;
-			// console.log(target_id)
 			// console.log(target)
 			Setup_ui();
 			});
@@ -189,6 +202,8 @@ countdown.setLabels(
      */
 	function Set_point(){
 		$.get(`<?php echo site_url("Achievement/get_Point/"); ?>`+target_id, function(data, status){
+			// console.log('targetID: ' + target_id)
+			// console.log(data)
 			raw_data = JSON.parse(data);
 			if(raw_data.length !=0){
 				$("#user_point").text("ยอดเงินทั้งหมด "+numberWithCommas(raw_data[0]["raw_point"]-raw_data[0]["used_point"])+" $E")   
@@ -274,30 +289,55 @@ countdown.setLabels(
      */
 	function Set_inventory(){
 		$.get(`<?php echo site_url("Achievement/get_Inventory/"); ?>`+target_id, function(data, status){
-			raw_data = JSON.parse(data);		
+			raw_data = JSON.parse(data);	
+			console.log(raw_data)
 			$("#theinventory").empty()
+
+			let imgOpacity = ""
+
 			for(var i=0;i<raw_data.length;i++){
 				
-				set_html='<tr onclick="UseItem('+raw_data[i]['id']+',\''+raw_data[i]['name']+'\')" class="row_inventory inventory_type_'+raw_data[i]['type']+'">'+
-							'<td>';
-								if(raw_data[i]['type'] == 3)
-								{
-									set_html+='<img src="<?php echo base_url('assets/dist/img/item/'); ?>'+'Special.png" class="img-circle img-table"alt="User Image" onerror="this.onerror=null;this.src=\'<?php echo base_url('assets/dist/img/item/unknow_item.png'); ?>\';">';
-								}
-								else if(raw_data[i]['type'] == 2)
-								{
-									set_html+='<img src="<?php echo base_url('assets/dist/img/item/'); ?>'+'Daliy.png" class="img-circle img-table"alt="User Image" onerror="this.onerror=null;this.src=\'<?php echo base_url('assets/dist/img/item/unknow_item.png'); ?>\';">';
-								}
-								else if(raw_data[i]['type'] == 1)
-								{
-									set_html+='<img src="<?php echo base_url('assets/dist/img/item/'); ?>'+'Common.png" class="img-circle img-table"alt="User Image" onerror="this.onerror=null;this.src=\'<?php echo base_url('assets/dist/img/item/unknow_item.png'); ?>\';">';
-								}
-					set_html+='</td>'+
-								'<td class="item_name">'+raw_data[i]['name']+'</td>'+
-								'<td class="detail_item">จำนวนที่มี  '+raw_data[i]['total']+'</td></tr>'
+				if(raw_data[i]['status']=='2') {
+					imgOpacity = "imgOpacity"
+					set_html='<tr onclick="alertRequest()" class="row_inventory inventory_type_'+raw_data[i]['type']+'">'+'<td>';
+					// console.log('request')
+				}else{
+					imgOpacity = ""
+					set_html='<tr onclick="UseItem('+raw_data[i]['id']+',\''+raw_data[i]['name']+'\')" class="row_inventory inventory_type_'+raw_data[i]['type']+'">'+'<td>';
+				}
+				if(raw_data[i]['type'] == 3)
+				{
+					set_html+='<img src="<?php echo base_url('assets/dist/img/item/'); ?>'+'Special.png" class="img-circle '+imgOpacity+' img-table"alt="User Image" onerror="this.onerror=null;this.src=\'<?php echo base_url('assets/dist/img/item/unknow_item.png'); ?>\';">';
+				}
+				else if(raw_data[i]['type'] == 2)
+				{
+					set_html+='<img src="<?php echo base_url('assets/dist/img/item/'); ?>'+'Daliy.png" class="img-circle '+imgOpacity+' img-table"alt="User Image" onerror="this.onerror=null;this.src=\'<?php echo base_url('assets/dist/img/item/unknow_item.png'); ?>\';">';
+				}
+				else if(raw_data[i]['type'] == 1)
+				{
+					set_html+='<img src="<?php echo base_url('assets/dist/img/item/'); ?>'+'Common.png" class="img-circle '+imgOpacity+' img-table"alt="User Image" onerror="this.onerror=null;this.src=\'<?php echo base_url('assets/dist/img/item/unknow_item.png'); ?>\';">';
+				}
+				set_html+='</td>';
+
+				if(raw_data[i]['status']=='2') {
+					set_html+='<td class="item_name requestItemColor">'+raw_data[i]['name']+'</td>';
+					set_html+='<td class="detail_item requestItemColor">รอการยืนยัน</td></tr>';
+				}else{
+					set_html+='<td class="item_name">'+raw_data[i]['name']+'</td>';
+				set_html+='<td class="detail_item">จำนวนที่มี '+raw_data[i]['total']+'</td></tr>';
+				}
 				$("#theinventory").append(set_html)
 			}
 		});
+	}
+
+	function alertRequest() {
+		Swal.fire({
+			title: 'รอการยืนยันการใช้งานไอเทมพิเศษ',
+			confirmButtonText: 'ยืนยัน',
+			icon: 'info',
+			allowOutsideClick: () => !Swal.isLoading()
+		})
 	}
 	//* ----------------------------------------- End Set_inventory -------------------------------------------------------
 	
@@ -444,6 +484,8 @@ countdown.setLabels(
 	* @Update Namchok Singhachai
 	*/
 	function UseItem(item,item_name){
+		console.log('targetID: ' + target_id)
+		console.log('targetID: ' + $("#select-opt").val())
 			Swal.fire({
 				title: 'คุณต้องการใช้งาน <br>"'+item_name+'"?',
 				imageUrl: '<?php echo base_url('assets/dist/img/item/UseItem.png'); ?>',
@@ -455,7 +497,7 @@ countdown.setLabels(
 				cancelButtonText: 'ยกเลิก',
 				showLoaderOnConfirm: true,
 				preConfirm: (count) => {
-				return fetch('<?php echo site_url("achievement/useitem"); ?>/'+item+'/'+target_id)
+				return fetch('<?php echo site_url("achievement/UseItem"); ?>/'+item+'/'+ $("#select-opt").val())
 					.then(response => {
 					if (!response.ok) {
 						throw new Error(response.statusText)
