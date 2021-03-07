@@ -224,7 +224,6 @@
                 $("#time_now").css("font-family", "kanit").html("กิจกรรมปิดการใช้งานชั่วคราว");
             }
             
-
         }, 100);
 
         // console.log(`<?php //var_dump($User_list);?>`)
@@ -359,15 +358,17 @@
                     labelSuccess = " label label-success"
                     style = `style="cursor: pointer;"`
                 }
-				// if(raw_data != ''){
                     
-                // }
                 
                 // console.log(new_time)
                 let start_time = new_time[0].split(":")
                 let end_time = new_time[2].split(":")
                 target = new Date(today.getFullYear(), today.getMonth(), today.getDate(), start_time[0], start_time[1], start_time[2])
                 target_intime = new Date(today.getFullYear(), today.getMonth(), today.getDate(), end_time[0], end_time[1], end_time[2])
+
+                // console.log(new_time[0])
+                // console.log(new_time[2])
+                // console.log(end_time[0])
 
                 if (today <= target) {
                     // $("#time_now").css("font-family", "kanit").text("กิจกรรมจะเปิดในอีก " + countdown(target).toString())

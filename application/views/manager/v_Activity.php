@@ -4,6 +4,12 @@
  - @Author	Jiranuwat Jaiyen 
  - @Create Date 22-03-2563
 -->
+<div class="panel">
+	<div class="panel-body">
+		<span id="testtime"></span>
+	</div>
+</div>
+
 <div class="panel panel-primary">
     <div  class="panel-heading" style=" font-size: 28px; "><i class="fa fa-calendar"></i> Activity Lists</div>
     <div class="panel-body">	
@@ -87,18 +93,18 @@
 			disabled: "true",
 			type:"hidden",
 			render: function (data, type, row, meta) {
-				console.log(row)
+				// console.log(row)
 				let text = `<div class="btn-group" id="status${data}" data-toggle="buttons">`
 				if(row.status==1)
 				{
 					text += `<label class="btn btn-default btn-on active">
 					<input type="radio" value="1" name="multifeatured_module[module_id][status]" checked="checked">ON</label>
-					<label onclick="toggleStatus('off', '${data}')" class="btn btn-default btn-off">
+					<label onclick="toggleStatus('off', '${data}', '${row.time_start}', '${row.time_end}', '${row.date_start}', '${row.date_end}')" class="btn btn-default btn-off">
 					<input type="radio" value="0" name="multifeatured_module[module_id][status]">OFF</label>`
 				}
 				else 
 				{
-					text += `<label onclick="toggleStatus('on', '${data}')" class="btn btn-default btn-on">
+					text += `<label onclick="toggleStatus('on', '${data}', '${row.time_start}', '${row.time_end}', '${row.date_start}', '${row.date_end}')" class="btn btn-default btn-on">
 					<input type="radio" value="1" name="multifeatured_module[module_id][status]">ON</label>
 					<label class="btn btn-default btn-off active">
 					<input type="radio" value="0" name="multifeatured_module[module_id][status]" checked="checked">OFF</label>`
@@ -207,15 +213,8 @@
 	}).draw(); 
 	// End datatables
 
-	function toggleStatus(status, id)
+	function toggleStatus(status, id, ts, tn, ds, dn)
 	{
-		console.log(status)
-		let textStatus;
-		if(status!='on'){
-			textStatus = 'คุณต้องปิดการใช้งานกิจกรรมหรือไม่ ?'
-		} else {
-			textStatus = 'คุณต้องการเปิดการใช้งานกิจกรรมหรือไม่ ?'
-		}
 		const swalWithBootstrapButtons = Swal.mixin({
 			customClass: {
 				confirmButton: 'btn btn-success',
@@ -223,78 +222,243 @@
 			},
 			buttonsStyling: false
 		})
+		// console.log(ts + " " + ds)
+		// console.log(tn + " " + dn)
+		today = new Date()
+		let start_time = ts.split(":");
+		let end_time = tn.split(":");
+		// console.log(start_time)
+		// console.log(end_time)
 
-		swalWithBootstrapButtons.fire({
-			title: textStatus,
-			// text: "You won't be able to revert this!",
-			icon: 'warning',
-			showCancelButton: true,
-			confirmButtonText: 'ใช่',
-			cancelButtonText: 'ยกเลิก',
-			reverseButtons: true
-		}).then((result) => {
-			if (result.isConfirmed) {
-				$.ajax({
-					type: "GET",
-					url: "<?php echo site_url("Source_manager/toggle_activity");?>" + "/" + id,
-					dataType: "JSON",
-					success: function (res) {
-						console.log(res)
-					}
-				});
-				if(status!="on")
-				{
-					$(`#status${id}`).html(`
-					<label onclick="toggleStatus('on', '${id}')" class="btn btn-default btn-on">
-					<input type="radio" value="1" name="multifeatured_module[module_id][status]">ON</label>
-					<label class="btn btn-default btn-off active">
-					<input type="radio" value="0" name="multifeatured_module[module_id][status]" checked="checked">OFF</label>
-					`);
-				}
-				else 
-				{
-					$(`#status${id}`).html(`
-					<label class="btn btn-default btn-on active">
-					<input type="radio" value="1" name="multifeatured_module[module_id][status]" checked="checked">ON</label>
-					<label onclick="toggleStatus('off', '${id}')" class="btn btn-default btn-off">
-					<input type="radio" value="0" name="multifeatured_module[module_id][status]">OFF</label>
-					`);
-				}
-				swalWithBootstrapButtons.fire(
-					{
-						title:'เปลี่ยนสถานะสำเร็จ',
-						icon:'success',
-						confirmButtonText: 'ตกลง'
-					}
-				)
-			} else if ( result.dismiss === Swal.DismissReason.cancel ) {
-				if(status=="on")
-				{
-					$(`#status${id}`).html(`
-					<label onclick="toggleStatus('on', '${id}')" class="btn btn-default btn-on">
-					<input type="radio" value="1" name="multifeatured_module[module_id][status]">ON</label>
-					<label class="btn btn-default btn-off active">
-					<input type="radio" value="0" name="multifeatured_module[module_id][status]" checked="checked">OFF</label>
-					`);
-				}
-				else 
-				{
-					$(`#status${id}`).html(`
-					<label class="btn btn-default btn-on active">
-					<input type="radio" value="1" name="multifeatured_module[module_id][status]" checked="checked">ON</label>
-					<label onclick="toggleStatus('off', '${id}')" class="btn btn-default btn-off">
-					<input type="radio" value="0" name="multifeatured_module[module_id][status]">OFF</label>
-					`);
-				}
-				swalWithBootstrapButtons.fire(
-					{
-						title:'ยกเลิกสำเร็จ',
-						icon:'error',
-						confirmButtonText: 'ตกลง'
-					}
-				)
+		target = new Date(today.getFullYear(), today.getMonth(), today.getDate()
+							, start_time[0], start_time[1], start_time[2])
+		target_intime = new Date(today.getFullYear(), today.getMonth(), today.getDate()
+							, end_time[0], end_time[1], end_time[2])
+		let textCheckTime = "";
+		if (today <= target) { // ยังไม่ถึงเวลา
+			textCheckTime = "ยังไม่ถึงเวลากิจกรรม โปรดกำหนดเวลาใหม่"
+		} else if (today <= target_intime) { // ตรงเวลา
+			textCheckTime = ""
+		} else { // ผ่านไปแล้ว
+			textCheckTime = "เวลากิจกรรมได้หมดลง โปรดกำหนดเวลาใหม่"
+		} // End check time
+
+		if (today <= target_intime || status=="off") { // ตรงเวลา
+			let textStatus;
+			if(status!='on'){
+				textStatus = 'คุณต้องปิดการใช้งานกิจกรรมหรือไม่ ?'
+			} else {
+				textStatus = 'คุณต้องการเปิดการใช้งานกิจกรรมหรือไม่ ?'
 			}
-		})
+
+			swalWithBootstrapButtons.fire({
+				title: textStatus,
+				// text: "You won't be able to revert this!",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonText: 'ใช่',
+				cancelButtonText: 'ยกเลิก',
+				reverseButtons: true
+			}).then((result) => {
+				if (result.isConfirmed) {
+					$.ajax({
+						type: "GET",
+						url: "<?php echo site_url("Source_manager/toggle_activity");?>" + "/" + id,
+						dataType: "JSON",
+						success: function (res) {
+							console.log(res)
+						}
+					});
+					if(status!="on")
+					{
+						$(`#status${id}`).html(`
+						<label onclick="toggleStatus('on', '${id}', '${ts}', '${tn}', '${ds}', '${dn}')" class="btn btn-default btn-on">
+						<input type="radio" value="1" name="multifeatured_module[module_id][status]">ON</label>
+						<label class="btn btn-default btn-off active">
+						<input type="radio" value="0" name="multifeatured_module[module_id][status]" checked="checked">OFF</label>
+						`);
+					}
+					else 
+					{
+						$(`#status${id}`).html(`
+						<label class="btn btn-default btn-on active">
+						<input type="radio" value="1" name="multifeatured_module[module_id][status]" checked="checked">ON</label>
+						<label onclick="toggleStatus('off', '${id}', '${ts}', '${tn}', '${ds}', '${dn}')" class="btn btn-default btn-off">
+						<input type="radio" value="0" name="multifeatured_module[module_id][status]">OFF</label>
+						`);
+					}
+					swalWithBootstrapButtons.fire(
+						{
+							title:'เปลี่ยนสถานะสำเร็จ',
+							icon:'success',
+							confirmButtonText: 'ตกลง'
+						}
+					)
+				} else if ( result.dismiss === Swal.DismissReason.cancel ) {
+					if(status=="on")
+					{
+						$(`#status${id}`).html(`
+						<label onclick="toggleStatus('on', '${id}', '${ts}', '${tn}', '${ds}', '${dn}')" class="btn btn-default btn-on">
+						<input type="radio" value="1" name="multifeatured_module[module_id][status]">ON</label>
+						<label class="btn btn-default btn-off active">
+						<input type="radio" value="0" name="multifeatured_module[module_id][status]" checked="checked">OFF</label>
+						`);
+					}
+					else 
+					{
+						$(`#status${id}`).html(`
+						<label class="btn btn-default btn-on active">
+						<input type="radio" value="1" name="multifeatured_module[module_id][status]" checked="checked">ON</label>
+						<label onclick="toggleStatus('off', '${id}', '${ts}', '${tn}', '${ds}', '${dn}')" class="btn btn-default btn-off">
+						<input type="radio" value="0" name="multifeatured_module[module_id][status]">OFF</label>
+						`);
+					}
+					swalWithBootstrapButtons.fire(
+						{
+							title:'ยกเลิกสำเร็จ',
+							icon:'error',
+							confirmButtonText: 'ตกลง'
+						}
+					)
+				} // end cancel
+			})
+		} else {
+			Swal.mixin({
+				html: textCheckTime + '<br><input data-toggle="datepicker" autocomplete="off" type="text" id="#swal-input" class="swal2-input" placeholder="กำหนดเวลา">',
+				confirmButtonText: 'ถัดไป',
+				showCancelButton: true,
+				cancelButtonText: 'ยกเลิก',
+				onOpen: function() {
+					// $('#datepicker').datetimepicker({});
+                    $('[data-toggle="datepicker"]').datetimepicker({
+						pickDate: false,
+						minuteStep: 15,
+						pickerPosition: 'right',
+					});
+                },
+				preConfirm: function() {
+					return new Promise((resolve, reject) => {
+						resolve({
+							Time: $('[data-toggle="datepicker"]').val()
+						});
+					});
+        		},
+				progressSteps: ['1', '2']
+			}).queue([
+			{
+				title: 'กำหนดเวลาเริ่มต้น'
+			},{
+				title: 'กำหนดเวลาสิ้นสุด'
+			}
+			]).then((result) => {
+				if (result.value) {
+					// console.log(result)
+
+					let dateStart = new Date(result.value[0].Time)
+					let dateEnd = new Date(result.value[1].Time)
+
+					if(dateEnd < Date.now() || (dateStart > dateEnd)) {
+						console.log('cannot change')
+						Swal.fire({
+							icon: 'error',
+							title: 'เกิดข้อผิดพลาด',
+							text: 'กรุณาเลือกวันที่ให้ถูกต้อง',
+						})
+						$(`#status${id}`).html(`
+						<label onclick="toggleStatus('on', '${id}', '${ts}', '${tn}', '${ds}', '${dn}')" class="btn btn-default btn-on">
+						<input type="radio" value="1" name="multifeatured_module[module_id][status]">ON</label>
+						<label class="btn btn-default btn-off active">
+						<input type="radio" value="0" name="multifeatured_module[module_id][status]" checked="checked">OFF</label>
+						`);
+					} else {
+
+						// console.log(result.value[0].Time.split(" ")[1])
+						// console.log(result.value[1].Time.split(" ")[1])
+						// console.log(result.value[0].Time.split(" ")[0])
+						// console.log(result.value[1].Time.split(" ")[0])
+
+						$.ajax({
+							type: "POST",
+							url: "<?php echo site_url("Source_manager/updateTimeActity");?>",
+							data: {
+								"id": id,
+								"timeStart": result.value[0].Time.split(" ")[1],
+								"timeEnd": result.value[1].Time.split(" ")[1],
+								"dateStart": result.value[0].Time.split(" ")[0],
+								"dateEnd": result.value[1].Time.split(" ")[0]
+							},
+							dataType: "JSON",
+							success: function (res) {
+								console.log(res)
+								swalWithBootstrapButtons.fire(
+									{
+										title:'เปลี่ยนสถานะสำเร็จ',
+										icon:'success',
+										confirmButtonText: 'ตกลง'
+									}
+								)
+							}
+						}).done(()=>{
+							if(status!="on")
+							{
+								$(`#status${id}`).html(`
+								<label onclick="toggleStatus('on', '${id}', '${ts}', '${tn}', '${ds}', '${dn}')" class="btn btn-default btn-on">
+								<input type="radio" value="1" name="multifeatured_module[module_id][status]">ON</label>
+								<label class="btn btn-default btn-off active">
+								<input type="radio" value="0" name="multifeatured_module[module_id][status]" checked="checked">OFF</label>
+								`);
+							}
+							else 
+							{
+								$(`#status${id}`).html(`
+								<label class="btn btn-default btn-on active">
+								<input type="radio" value="1" name="multifeatured_module[module_id][status]" checked="checked">ON</label>
+								<label onclick="toggleStatus('off', '${id}', '${ts}', '${tn}', '${ds}', '${dn}')" class="btn btn-default btn-off">
+								<input type="radio" value="0" name="multifeatured_module[module_id][status]">OFF</label>
+								`);
+							}
+							location.reload();
+						});
+						swalWithBootstrapButtons.fire(
+							{
+								title:'เปลี่ยนสถานะสำเร็จ',
+								icon:'success',
+								confirmButtonText: 'ตกลง'
+							}
+						)
+						location.reload();
+					}
+				} else if ( result.dismiss === Swal.DismissReason.cancel ) {
+					if(status=="on")
+					{
+						$(`#status${id}`).html(`
+						<label onclick="toggleStatus('on', '${id}', '${ts}', '${tn}', '${ds}', '${dn}')" class="btn btn-default btn-on">
+						<input type="radio" value="1" name="multifeatured_module[module_id][status]">ON</label>
+						<label class="btn btn-default btn-off active">
+						<input type="radio" value="0" name="multifeatured_module[module_id][status]" checked="checked">OFF</label>
+						`);
+					}
+					else 
+					{
+						$(`#status${id}`).html(`
+						<label class="btn btn-default btn-on active">
+						<input type="radio" value="1" name="multifeatured_module[module_id][status]" checked="checked">ON</label>
+						<label onclick="toggleStatus('off', '${id}', '${ts}', '${tn}', '${ds}', '${dn}')" class="btn btn-default btn-off">
+						<input type="radio" value="0" name="multifeatured_module[module_id][status]">OFF</label>
+						`);
+					}
+
+					swalWithBootstrapButtons.fire(
+						{
+							title:'ยกเลิกสำเร็จ',
+							icon:'error',
+							confirmButtonText: 'ตกลง'
+						}
+					)
+				} // end cancel
+			})
+		} // เวลาไม่ได้อยู่ใยช่วง
+
 	} // end toggleStatus
 
 	$(document).ready(function () {

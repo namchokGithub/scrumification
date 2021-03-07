@@ -185,6 +185,25 @@ class Data_manager extends CI_Model
         return $this->db->query($sql)->result_array();
 	} // End get_activity
 
+    /**
+     * Update time activity
+     *
+	 * @Author	Namchok Singhachai
+	 * @Create Date	7-03-2564
+     * @return mixed
+     */
+    public function updateTimeActity($id, $timeStart, $timeEnd, $dateStart, $dateEnd)
+    {
+		$sql = "UPDATE `activity` SET\n"
+            . "activity.time_start = '$timeStart',\n"
+            . "activity.time_end = '$timeEnd',\n"
+            . "activity.date_start = '$dateStart',\n"
+            . "activity.date_end = '$dateEnd',\n"
+            . "activity.status = '1'\n"
+            . "WHERE activity.id = $id";
+        return $this->db->query($sql);
+    }
+
     //**-------------------------------------------------------------------------------------- */
 
     /**

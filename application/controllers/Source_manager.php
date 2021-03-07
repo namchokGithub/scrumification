@@ -403,6 +403,23 @@ class Source_manager extends BaseController
 		echo json_encode($data);
 	} // End get_activity_with_member
 
+	/**
+     * Update time activity
+     *
+	 * @Author	Namchok Singhachai
+	 * @Create Date	7-03-2564
+     * @return mixed
+     */
+    public function updateTimeActity()
+    {
+		$id = $this->input->post("id");
+		$timeStart = $this->input->post("timeStart");
+		$timeEnd = $this->input->post("timeEnd");
+		$dateStart = $this->input->post("dateStart");
+		$dateEnd = $this->input->post("dateEnd");
+        return $this->DM->updateTimeActity($id, $timeStart, $timeEnd, $dateStart, $dateEnd);
+    }
+
 	//**-------------------------------------------------------------------------------------- */
 
 	/**

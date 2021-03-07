@@ -32,7 +32,7 @@
                 <a>
                     <i class="fa fa-user text-info"></i>
                     <span class="Role_name">
-                        <!-- <?php //echo empty($Profile[1]["name"])? "No Role": implode(" , ",$Profile[1]["name"]); ?> -->
+                        <!-- <?php //echo empty($Profile[1][0]["name"])? "No Role": implode(" , ",$Profile[1][0]["name"]); ?> -->
                     </span>
                 </a>
             </div>

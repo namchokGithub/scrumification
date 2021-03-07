@@ -216,7 +216,7 @@
                                     </script>
                                     <p>
                                         <?php echo $Profile[0]; ?>
-                                        <small><?php echo empty($Profile[1])? "No Role": implode(" , ",$Profile[1]); ?></small>
+                                        <small><?php echo empty($Profile[1][0])? "No Role": implode(" , ",$Profile[1][0]); ?></small>
                                     </p>
                                 </li> -->
 
@@ -252,7 +252,7 @@
                     <div class="modal-body">
                         <div class="row" id="list_role">
                             <?php 
-							if(empty($Profile[1])){?>
+							if(empty($Profile[1][0])){?>
                             <div class="col-lg-4 col-xs-6">
                                 <!-- small box -->
                                 <div class="small-box bg-yellow">
@@ -269,7 +269,7 @@
                                 </div>
                             </div>
                             <?php }
-							foreach($Profile[1] as $Role){ ?>
+							foreach($Profile[1][0] as $Role){ ?>
                             <div class="col-lg-4 col-xs-6">
                                 <!-- small box -->
                                 <div class="small-box bg-yellow">
@@ -303,7 +303,7 @@
              * @Author	Jiranuwat Jaiyen       
              * @Create Date	22-03-2563
              */
-            var role_set = JSON.parse('<?php echo json_encode($Profile[1]); ?>');
+            var role_set = JSON.parse('<?php echo json_encode($Profile[1][0]); ?>');
             $("p:contains('" + getCookie("Role") + "')").closest(".inner").append("<p>Activated</p>");
             $.ajax({
                 url: "<?php echo site_url('Home/calulate_point/'); ?>",
