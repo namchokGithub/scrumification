@@ -4,11 +4,6 @@
  - @Author	Jiranuwat Jaiyen 
  - @Create Date 22-03-2563
 -->
-<div class="panel">
-	<div class="panel-body">
-		<span id="testtime"></span>
-	</div>
-</div>
 
 <div class="panel panel-primary">
     <div  class="panel-heading" style=" font-size: 28px; "><i class="fa fa-calendar"></i> Activity Lists</div>

@@ -12,9 +12,63 @@
 				<tr>
 					<th>ลำดับ</th>
 					<th>กลุ่ม</th>
+					<th>รูปภาพ</th>
+					<th>สี</th>
+					<th>ข้อมูล</th>
+					<th>สมาชิก</th>
 				</tr>
 			</thead>
 		</table>
+	</div>
+</div>
+
+<!-- edit -->
+<div id="modalEdit" class="modal fade in" tabindex="-1" role="dialog" style=" display: none;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header bg-blue">
+				<h3 style="padding-top: 1rem;padding-left: 1rem;display: inline" class="modal-title">หน้าแก้ไขข้อมูล</h3>
+				<button style="margin: initial;opacity:0.75" type="button" class="close" data-dismiss="modal" aria-label="ยกเลิก">
+					<span aria-hidden="true" style=" font-size: 34px; font-weight: 700; ">×</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form name="altEditor-edit-form" id="altEditor-edit-form" role="form">
+					<div style="margin-left: initial;margin-right: initial;" class="form-group row" id="group_name_edit">
+						<div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding-top:4px;">
+							<label for="group_name_edit">ชื่อกลุ่ม:</label>
+						</div>
+						<div class="col-sm-8 col-md-8 col-lg-8">
+							<input type="text" id="group_name" pattern=".*" title="" name="ชื่อกลุ่ม" placeholder="ชื่อกลุ่ม" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
+						</div>
+						<div style="clear:both;"></div>
+					</div>
+					<div style="margin-left: initial;margin-right: initial;" class="form-group row" id="image_edit">
+						<div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding-top:4px;">
+							<label for="image_edit">รูปภาพ:</label>
+						</div>
+						<div class="col-sm-8 col-md-8 col-lg-8">
+							<input type="text" id="image" pattern=".*" title="" name="รูปภาพ" placeholder="รูปภาพ" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
+						</div>
+						<div style="clear:both;"></div>
+					</div>
+					<div style="margin-left: initial;margin-right: initial;" class="form-group row" id="color_edit">
+						<div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding-top:4px;">
+							<label for="color_edit">สี:</label>
+						</div>
+						<div class="col-sm-8 col-md-8 col-lg-8">
+							<input type="color" id="color" name="colore" value="">
+							<input type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="" id="hexcolor"></input>
+						</div>
+						<div style="clear:both;"></div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" data-content="remove" class="btn btn-danger " data-dismiss="modal" style="margin-right: 75%;">ยกเลิก</button>
+				<button type="submit" form="altEditor-delete" data-content="remove" class="btn btn-success" id="EditRowBtn">บันทึก</button>
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -35,42 +89,124 @@
 								<th>ลำดับ</th>
 								<th>ชื่อ-นามสกุล</th>
 								<th>ชื่อผู้ใช้งาน</th>
-								<th>หน้าที่</th>
+								<th>ตำแหน่ง</th>
 							</tr>
 					</table>
 				</div>
 				<div class="modal-footer">
-					<!-- <button type="button" data-content="remove" class="btn btn-danger " data-dismiss="modal" style="margin-right: 75%;">ยกเลิก</button>
-					<button type="submit" form="altEditor-add-form" data-content="remove" class="btn btn-success" id="addRowBtn">บันทึก</button> -->
+					
 				</div>
 			</div>
 	</div>
 </div>
 
+<!-- Detail -->
+<div id="modal_view" class="modal fade in" tabindex="-1" role="dialog" style=" display: none;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header bg-blue">
+				<h3 style="padding-top: 1rem;padding-left: 1rem;display: inline" class="modal-title">หน้าแสดงข้อมูล</h3>
+				<button style="margin: initial;opacity:0.75" type="button" class="close" data-dismiss="modal" aria-label="ยกเลิก">
+					<span aria-hidden="true" style=" font-size: 34px; font-weight: 700; ">×</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div style="margin-left: initial;margin-right: initial;" class="form-group row" >
+					<div style="margin-left: initial;margin-right: initial;" class="form-group row">
+						<div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding-top:4px;">
+							<label>ชื่อกลุ่ม:</label>
+						</div>
+						<div class="col-sm-8 col-md-8 col-lg-8">
+							<span id="group_name_view"></span>
+						</div>
+						<div style="clear:both;"></div>
+					</div>
+					<div style="margin-left: initial;margin-right: initial;" class="form-group row" >
+						<div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding-top:4px;">
+							<label>รูปภาพ:</label>
+						</div>
+						<div class="col-sm-8 col-md-8 col-lg-8">
+							<div id="img_view" style="width: 120px !important;height: 120px !important;"></div>
+						</div>
+						<div style="clear:both;"></div>
+					</div>
+					<div style="margin-left: initial;margin-right: initial;" class="form-group row">
+						<div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding-top:4px;">
+							<label>สี:</label>
+						</div>
+						<div class="col-sm-8 col-md-8 col-lg-8">
+							<div id="color_view"></div>
+							<div><span id="color_code"></span> </div>
+						</div>
+						<div style="clear:both;"></div>
+					</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 <script>
+	$(document).ready(function () {
+		$('#color').on('input', function() {
+			$('#hexcolor').val(this.value);
+		});
+		$('#hexcolor').on('input', function() {
+			$('#color').val(this.value);
+		});
+		// $('#hexcolor').on('change', function() {
+		// 	$('#color').val(this.value);
+		// });
+	});
 
 	function numberWithCommas(x) {
 		var raw_number = parseInt(x);
 		return raw_number.toLocaleString();
 	}
+
 	var columnDefs = [
-		{  title: "ลำดับ",
-                data: 1,
-                type:"hidden",
-                disabled:"true",
-                render: function (data, type, row, meta) {
-					console.log(row)
-                    if (data == null || !(data in Options_role)) return null;
-                    return 2;
-                },
-                width: "10%",
-				className: "text-center"
+		{  
+			title: "ลำดับ",
+			data: 1,
+			type:"hidden",
+			disabled:"true",
+			render: function (data, type, row, meta) {
+				// console.log(row)
+				if (data == null || !(data in Options_role)) return null;
+				return 2;
+			},
+			width: "10%",
+			className: "text-center"
 		},
-		{ data: "group_name"}
+		{ data: "group_name"},
+		{ 
+		  data: "image_path",
+		  visible: false
+		},
+		{ 
+		  data: "color",
+		  visible: false
+		},
+		{
+		  targets: -1,
+          data: null,
+          defaultContent: '<center><button id="btn_view" class="btn btn-primary btn-md"><i class="fa fa-info-circle"></i></button></center>',
+		  width: "20%",
+
+		},
+		{
+		  targets: -1,
+          data: null,
+          defaultContent: '<center><button id="btn_member" class="btn btn-info btn-md"><i class="fa fa-user"></i></button></center>',
+		  width: "20%",
+		}
 	];
+
 	var myTable;
+	var topic_name = "roles"
+
 	// local URL's are not allowed
-	var url_get = "<?php echo site_url("Source_manager/get_name_group/");?>"
+	var url_get = "<?php echo site_url("Source_manager/get_data_by_group/");?>"
+	var url_edit = "<?php echo site_url("Source_manager/edit_data/"); ?>" + topic_name;
 
 	/**
 	 * Setup User Interface.
@@ -100,14 +236,16 @@
 		select: 'single', // enable single row selection
 		responsive: true, // enable responsiveness
 		altEditor: false, // Enable altEditor ****
-		buttons: [{
+		buttons: [
+			{
 				extend: 'selected', // Bind to Selected row
-				text: '<i class="fa fa-user"></i> สมาชิก',
+				text: '<i class="fa fa-edit"></i> แก้ไขชุดข้อมูล',
 				name: 'edit', // DO NOT change name
-				"className": 'btn btn-info btn-lg',
+				"className": 'btn btn-warning btn-lg',
 				action: function ( e, dt, node, config ) {
-					$("#modal_member").modal();
-				}
+					$("#modalEdit").modal('show');
+					$('#hexcolor').val($('#color').val());
+           		}
 			}
 		]
 	});
@@ -115,49 +253,86 @@
 		myTable.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
 			cell.innerHTML = `${i+1}.`;
 		});
-		}).draw();
+	}).draw();
 	
-	let group_id;
+	let group_data;
 	$('#example tbody').on('click','tr', function(){
 		group_id = myTable.row(this).id();
-		// console.log(group_id);
+		group_data = myTable.row(this).data();
+		// console.log(group_data);
 	});
 	
-	var myTb;
-	var columnDefs = [
-		{  title: "ลำดับ",
-			data: 1,
-			type:"hidden",
-			disabled:"true",
-			render: function (data, type, row, meta) {
-				if (data == null) return null;
-					return 2;
-				},
-			width: "10%",
-			className: "text-center"
-		},
-		{ title: "ชื่อ-นามสกุล",
-			data: "name" 
-		},
-		{ title: "Username",
-			data: "username" 
-		},
-		{ title: "หน้าที่",
-			data: "role" 
-		}
-	];	
-	
+		
 	/**
-	 * Setup Modal Interface.
+	 * Setup detail interface.
+	 *
+	 * @Author	Thutsaneeya Chanrong       
+	 * @Create Date	05-03-2564
+	 */
+	$('#example tbody').on( 'click', '#btn_view', function () {
+
+		var data = myTable.row( $(this).parents('tr') ).data();
+		// console.log("data:", data["id"])
+		let id = parseInt(data["id"]);
+		let c = id-1;
+		// console.log(c);
+
+		console.log(data)
+
+		$('#group_name_view').text(data["group_name"]);
+		$('#img_view').css("background-image", `url(${window.location.origin+"/gami_ossd/"+data["image_path"]})`);
+		
+			
+		$('#color_view').css("background-color",data["color"]);
+		$('#color_code').text(data["color"]);
+
+		$("#modal_view").modal();
+
+	});
+
+	/**
+	 * Setup member interface.
 	 *
 	 * @Author	Thutsaneeya Chanrong       
 	 * @Create Date	12-02-2564
 	 */
-	$('#example_wrapper > div.dt-buttons > button').on('click', function (){
+	$('#example tbody').on( 'click', '#btn_member', function () {
+		var myTb;
+		var columnDefsMember = [
+			{  title: "ลำดับ",
+				data: 1,
+				type:"hidden",
+				disabled:"true",
+				render: function (data, type, row, meta) {
+					if (data == null) return null;
+						return 2;
+					},
+				width: "10%",
+				className: "text-center"
+			},
+			{ title: "ชื่อ-นามสกุล",
+				data: "name" 
+			},
+			{ title: "ชื่อผู้ใช้งาน",
+				data: "username" 
+			},
+			{ title: "ตำแหน่ง",
+				data: "code" ,
+				render: function (data, type, row, meta) {
+					if (data == "" || data == null) 
+						return row.display_name;
+					else
+						return data;
+				}
+			}
+		];	
+		var group_id = myTable.row( $(this).parents('tr') ).id();
+  		console.log("DATA:" , group_id)
 
-		var url_get_member = '<?php echo site_url("Source_manager/get_member_by_group/");?>'+ `${group_id.toString()}`
+		// myTable.ajax.reload();
+		var url_get_member = '<?php echo site_url("Source_manager/get_member_by_group/");?>'+ `${group_id}`
+		// console.log('AAAAAAAAAAA');
 
-		// console.log(group_id);
 		myTb = $('#example1').DataTable({
 			"sPaginationType": "full_numbers",
 			"destroy": true,
@@ -165,7 +340,7 @@
 				"url": url_get_member,
 				"dataSrc": ""
 			},
-			columns: columnDefs, // columns from above
+			columns: columnDefsMember, // columns from above
 			initComplete: function(settings, json) {
 				$(".btn").removeClass("dt-button");
 			},
@@ -186,17 +361,94 @@
 				cell.innerHTML = `${i+1}.`;
 			});
 		}).draw();
+		myTb.ajax.reload();
+		$("#modal_member").modal();
+
+    } );
+
+	/**
+	 * Setup edit interface.
+	 *
+	 * @Author	Thutsaneeya Chanrong       
+	 * @Create Date	04-03-2564
+	 */
+	$('#example_wrapper > div.dt-buttons > button.buttons-selected.btn.btn-warning.btn-lg').on('click', function () {
+		$('#group_name').val(group_data["group_name"]);
+		$('#image').val(group_data["image_path"]);
+		$('#color').val(group_data["color"]);
+		$('#hexcolor').val($('#color').val());
 	});
+	
+	/**
+	 * Edit group data
+	 *
+	 * @Author	Thutsaneeya Chanrong       
+	 * @Create Date	04-03-2564
+	 */
+	$('#EditRowBtn').on('click', function () {
+
+		var timestamp = new Date()
+		var strDate = timestamp.getFullYear()+"-"+(timestamp.getMonth()+1)+"-"+timestamp.getDate()+" "+timestamp.getHours()+":"+timestamp.getMinutes()+":"+timestamp.getSeconds();
+		console.log(strDate)
+
+		let rowdata = {
+
+			color: $('#color').val(),
+			name: $('#group_name').val(),
+			id :	group_data["id"],
+			image_path: $('#image').val(),
+			updated_at: strDate
+	
+		}
+		// console.log("rowdata",rowdata);
+		$.ajax({
+			// a tipycal url would be /{id} with type='POST'
+			url: url_edit,
+			type: 'POST',
+			async: false,
+			data: rowdata,
+			success: function() { 
+				myTable.ajax.reload(); // Reload data table
+				toastr['success']("ดำเนินการเสร็จสิ้น")
+			},
+			error: (er)=>{console.log(er)}
+		});
+		$('#modalEdit').modal('hide'); // Close modal
+		// location.reload();
+	});
+	
 </script>
 
 <style>
+
+	#color_view { 
+		border: thin solid black; 
+		width:20px; 
+		height:20px; 
+		/* background-color: yellow;  */
+		word-wrap: break-word; /* words won't go from the boundry */ 
+		margin: 10px 20px auto; 
+		/* top, left, bottom*/ 
+		margin: 0px;
+		padding: 5px 5px 5px; 
+		float: left; 
+	} 
+	#img_view{
+		width: 250px;
+		background-position-x: center;
+    	height: 210px;
+   		background-size: contain;
+    	background-repeat: no-repeat;
+    	/* background-repeat-y: no-repeat;
+    	background-repeat-x: no-repeat; */
+	}
 	#edit_dialog{
 		width: 800px;
 	}
 
 	#color {
-		width: 50px;
-		height: 40px;
+		width: 40px;
+		height: 30px;
 	}
 
 	div,h3,span{

@@ -459,10 +459,10 @@
 			}
 
 			raw_data.sort(compare);
-			console.log('------ Raw data --------')
-			console.log(raw_data)
-			console.log('---- Data bar chart ------')
-			console.log(data_bar_chart)
+			// console.log('------ Raw data --------')
+			// console.log(raw_data)
+			// console.log('---- Data bar chart ------')
+			// console.log(data_bar_chart)
 			
 			for (var i = 0; i < raw_data.length; i++){
 				data_bar_chart[0].data[i].y = parseInt(raw_data[i].point)	

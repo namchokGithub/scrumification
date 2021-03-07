@@ -15,17 +15,17 @@
 				<tr>
 					<th>ลำดับ</th>
 					<th>ชื่อ - นามสกุล</th>
-					<th>Username</th>
-					<th>Password</th>
-					<th>หน้าที่</th>
+					<th>ชื่อผู้ใช้งาน</th>
+					<th>รหัสผ่าน</th>
+					<th>ตำแหน่ง</th>
 				</tr>
 			</thead>
 			<tbody>
 			</tbody>
 		</table>
 	</div>
-
 </div>
+
 <!-- Import -->
 <div id="modal_import" class="modal fade in" tabindex="-1" role="dialog" style=" display: none;">
 	<div class="modal-dialog">
@@ -46,6 +46,7 @@
 							<div class="custom-file mb-3">
 								<input type="file" name="csv_file" id="csv-file" accept=".csv" style="overflow:hidden" class="form-control  form-control-sm custom-file-input">
 								<label  style="color:red">**ต้องเป็นไฟล์นามสกุล .csv และมีคอลัมน์ name, username, password, code </label>
+								<a  href="#modal_img" id="pop" data-toggle="modal" style=" text-decoration: underline;  font-weight: bold;"> ตัวอย่าง</a>
 							</div>
 						</div>
 					</div>
@@ -55,34 +56,45 @@
 						<tr>
 							<th>ลำดับ</th>
 							<th>ชื่อ-นามสกุล</th>
-							<th>Username</th>
-							<th>Password</th>
-							<th>หน้าที่</th>
+							<th>ชื่อผู้ใช้งาน</th>
+							<th>รหัสผ่าน</th>
+							<th>ตำแหน่ง</th>
 						</tr>
 					</thead>
 					<tbody id="tbody"></tbody>
 				</table>
 			</div>
 			<div class="modal-footer">
-				<!-- <div class="row"> -->
-					<!-- <div class="col-md-4 "> -->
-						<button id="btn_close_imort_2"type="button" data-content="remove" class="btn btn-danger " data-dismiss="modal" style="margin-right: 75%;">ยกเลิก</button>
-
-						<!-- <button id="btn_close_imort_2" type="button" data-content="remove" class="btn btn-danger pull-left" data-dismiss="modal">ยกเลิก</button> -->
-					<!-- </div> -->
-					<!-- <div class="col-md-8"> -->
-						<!-- <div class="row"> -->
-							<!-- <div class="col-md-11"> -->
-								<!-- <div id="loadDiv" class="loader pull-right" style="margin: 3px 44px;"></div> -->
-							<!-- </div> -->
-							<!-- <div class="col-md-1" > -->
-								<button type="submit" id="btn_import" class="col-md btn btn-success pull-right"> บันทึก </button>
-							<!-- </div> -->
-						</div>
-					</div>
-				</div>
+				<button id="btn_close_imort_2"type="button" data-content="remove" class="btn btn-danger " data-dismiss="modal" style="margin-right: 75%;">ยกเลิก</button>
+				<button type="submit" id="btn_import" class="col-md btn btn-success pull-right"> บันทึก </button>
 			</div>
+		</div>
+	</div>
+</div>
 
+<!-- Img -->
+<div id="modal_img" class="modal fade in" tabindex="-1" role="dialog" style=" display: none;">
+	<div class="modal-dialog">
+		<div class="modal-content" style="width: 700px;">
+			<div class="modal-header bg-blue">
+				<h3 style="padding-top: 1rem;padding-left: 1rem;display: inline" class="modal-title">ตัวอย่างไฟล์ข้อมูล</h3>
+				<button  style="margin: initial;opacity:0.75" type="button" class="close" data-dismiss="modal" aria-label="ยกเลิก">
+					<span aria-hidden="true" style=" font-size: 34px; font-weight: 700; ">×</span>
+				</button>
+			</div>
+			<div class="modal-body">
+			<div class="card" style="text-align: -webkit-center;cursor: pointer;">
+			<div>
+				<label  style="color:red">ไฟล์สำหรับอัปโหลดเข้าสู่ระบบ ต้องเป็นไฟล์นามสกุล .csv และมีคอลัมน์ name, username, password, code เท่านั้น</label>
+				<img id="myImg" src="<?php echo base_url('assets/dist/img/example/Group 208.png'); ?>"style="max-height:245px;">
+			</div>
+		</div>
+			</div>
+			<div class="modal-footer">
+			</div>
+		</div>
+	</div>
+</div>
 <!-- Del -->
 <div id="modal_del" class="modal fade in" tabindex="-1" role="dialog" style=" display: none;">
 	<div class="modal-dialog">
@@ -101,37 +113,33 @@
 						</div>
 						<div class="col-sm-8 col-md-8 col-lg-8">
 							<input type="text" id="name_del" pattern=".*" title="" name="ชื่อ - นามสกุล" placeholder="ชื่อ - นามสกุล" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="" disabled="">
-							<!-- <label id="namelabel_del" class="errorLabel"></label> -->
 						</div>
 						<div style="clear:both;"></div>
 					</div>
 					<div style="margin-left: initial;margin-right: initial;" class="form-group row" id="alteditor-row-username_del">
 						<div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding-top:4px;">
-							<label for="username_del">Username:</label>
+							<label for="username_del">ชื่อผู้ใช้งาน:</label>
 						</div>
 						<div class="col-sm-8 col-md-8 col-lg-8">
-							<input type="text" id="username_del" pattern=".*" title="" name="Username" placeholder="Username" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="" disabled="">
-								<!-- <label id="usernamelabel_del" class="errorLabel"></label> -->
+							<input type="text" id="username_del" pattern=".*" title="" name="Username" placeholder="ชื่อผู้ใช้งาน" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="" disabled="">
 						</div>
 						<div style="clear:both;"></div>
 					</div>
-					<div style="margin-left: initial;margin-right: initial;" class="form-group row" id="alteditor-row-password_del">
+					<input type="hidden" id="password_del" pattern=".*" title="" name="Password" placeholder="Password" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="" disabled="">
+					<!-- <div style="margin-left: initial;margin-right: initial;" class="form-group row" id="alteditor-row-password_del">
 						<div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding-top:4px;">
 							<label for="password_del">Password:</label>
 						</div>
 						<div class="col-sm-8 col-md-8 col-lg-8">
-							<input type="text" id="password_del" pattern=".*" title="" name="Password" placeholder="Password" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="" disabled="">
-								<!-- <label id="passwordlabel_del" class="errorLabel"></label> -->
 						</div>
 						<div style="clear:both;"></div>
-					</div>
+					</div> -->
 					<div style="margin-left: initial;margin-right: initial;" class="form-group row" id="alteditor-row-code_del">
 						<div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding-top:4px;">
-							<label for="code_del">หน้าที่:</label>
+							<label for="code_del">ตำแหน่ง:</label>
 						</div>
 						<div class="col-sm-8 col-md-8 col-lg-8">
-							<input type="text" id="code_del" pattern=".*" title="" name="หน้าที่" placeholder="หน้าที่" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="" disabled="">
-								<!-- <label id="codelabel_del" class="errorLabel"></label> -->
+							<input type="text" id="code_del" pattern=".*" title="" name="หน้าที่" placeholder="ตำแหน่ง" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="" disabled="">
 						</div>
 						<div style="clear:both;"></div>
 					</div>
@@ -144,6 +152,7 @@
 		</div>
 	</div>
 </div>
+
 <!-- Edit -->
 <div id="modalEdit" class="modal fade in" tabindex="-1" role="dialog" style=" display: none;">
 	<div class="modal-dialog">
@@ -162,37 +171,34 @@
 						</div>
 						<div class="col-sm-8 col-md-8 col-lg-8">
 							<input type="text" id="name_edit" pattern=".*" title="" name="ชื่อ - นามสกุล" placeholder="ชื่อ - นามสกุล" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
-								<!-- <label id="namelabel_edit" class="errorLabel"></label> -->
 						</div>
 						<div style="clear:both;"></div>
 					</div>
 					<div style="margin-left: initial;margin-right: initial;" class="form-group row" id="alteditor-row-username_edit">
 						<div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding-top:4px;">
-							<label for="username_edit">Username:</label>
+							<label for="username_edit">ชื่อผู้ใช้งาน:</label>
 						</div>
 						<div class="col-sm-8 col-md-8 col-lg-8">
-							<input type="text" id="username_edit" pattern=".*" title="" name="Username" placeholder="Username" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
-								<!-- <label id="usernamelabel_edit" class="errorLabel"></label> -->
+							<input type="text" id="username_edit" pattern=".*" title="" name="Username" placeholder="ชื่อผู้ใช้งาน" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
 						</div>
 						<div style="clear:both;"></div>
 					</div>
-					<div style="margin-left: initial;margin-right: initial;" class="form-group row" id="alteditor-row-password_edit">
+					<input type="hidden" id="password_edit" pattern=".*" title="" name="Password" placeholder="Password" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
+					<!-- <div style="margin-left: initial;margin-right: initial;" class="form-group row" id="alteditor-row-password_edit">
 						<div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding-top:4px;">
 							<label for="password_edit">Password:</label>
 						</div>
 						<div class="col-sm-8 col-md-8 col-lg-8">
-							<input type="text" id="password_edit" pattern=".*" title="" name="Password" placeholder="Password" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
-								<!-- <label id="passwordlabel_edit" class="errorLabel"></label> -->
+							<input type="hidden" id="password_edit" pattern=".*" title="" name="Password" placeholder="Password" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
 						</div>
 						<div style="clear:both;"></div>
-					</div>
+					</div> -->
 					<div style="margin-left: initial;margin-right: initial;" class="form-group row" id="alteditor-row-code_edit">
 						<div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding-top:4px;">
-							<label for="code_edit">หน้าที่:</label>
+							<label for="code_edit">ตำแหน่ง:</label>
 						</div>
 						<div class="col-sm-8 col-md-8 col-lg-8">
-							<input type="text" id="code_edit" pattern=".*" title="" name="หน้าที่" placeholder="หน้าที่" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
-								<!-- <label id="codelabel_edit" class="errorLabel"></label> -->
+							<input type="text" id="code_edit" pattern=".*" title="" name="หน้าที่" placeholder="ตำแหน่ง" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
 						</div>
 						<div style="clear:both;"></div>
 					</div>
@@ -205,6 +211,7 @@
 		</div>
 	</div>
 </div>
+
 <!-- Add -->
 <div id="modal_input" class="modal fade in"  tabindex="-1"  role="dialog" style="display: none;">
 	<div class="modal-dialog">
@@ -226,48 +233,47 @@
 						<label id="namelabel" class="errorLabel"></label>
 					</div>
 					<div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding-top:4px;">
-						<label for="username">Username:</label>
+						<label for="username">ชื่อผู้ใช้งาน:</label>
 					</div>
 					<div class="col-sm-8 col-md-8 col-lg-8">
-						<input type="text" id="username" pattern=".*" title="" name="Username" placeholder="Username" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
+						<input type="text" id="username" pattern=".*" title="" name="Username" placeholder="ชื่อผู้ใช้งาน" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
 						<label id="usernamelabel" class="errorLabel"></label>
 					</div>
 					<div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding-top:4px;">
-						<label for="password">Password:</label>
+						<label for="password">รหัสผ่าน:</label>
 					</div>
 					<div class="col-sm-8 col-md-8 col-lg-8">
-						<input type="text" id="password" pattern=".*" title="" name="Password" placeholder="Password" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
+						<input type="text" id="password" pattern=".*" title="" name="Password" placeholder="รหัสผ่าน" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
 						<label id="passwordlabel" class="errorLabel"></label>
 					</div>
 					<div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding-top:4px;">
-						<label for="code">หน้าที่:</label>
+						<label for="code">ตำแหน่ง:</label>
 					</div>
 					<div class="col-sm-8 col-md-8 col-lg-8">
-						<input type="text" id="code" pattern=".*" title="" name="หน้าที่" placeholder="หน้าที่" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
+						<input type="text" id="code" pattern=".*" title="" name="หน้าที่" placeholder="ตำแหน่ง" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
 						<label id="codelabel" class="errorLabel"></label>
 					</div>
 					<div class="content">
 					<button id="btn_add_user_to_table"type="button" class="btn btn-info" style="float:right;">เพิ่ม</button>
-					</div><br>
-					</form>	
-					<table id="example1" class="table table-striped table-bordered no-footer dataTable" style="width:100%">
-						<thead id="header">
-							<tr>
-								<th>ลำดับ</th>
-								<th>ชื่อ-นามสกุล</th>
-								<th>Username</th>
-								<th>Password</th>
-								<th>หน้าที่</th>
-								<th>ดำเนินการ</th>
-							</tr>
-						</thead>
-						<tbody id="tbody_01"></tbody>
-					</table>
-				</div>
-				<div class="modal-footer">
-					<button id="btn_close_add_2"type="button" data-content="remove" class="btn btn-danger " data-dismiss="modal" style="margin-right: 75%;">ยกเลิก</button>
-					<button type="submit" form="altEditor-add-form" data-content="remove" class="btn btn-success" id="addRowBtn" >บันทึก</button>
-				</div>
+				</div><br>
+				</form>	
+				<table id="example1" class="table table-striped table-bordered no-footer dataTable" style="width:100%">
+					<thead id="header">
+						<tr>
+							<th>ลำดับ</th>
+							<th>ชื่อ-นามสกุล</th>
+							<th>ชื่อผู้ใช้งาน</th>
+							<th>รหัสผ่าน</th>
+							<th>หน้าที่</th>
+							<th>ดำเนินการ</th>
+						</tr>
+					</thead>
+					<tbody id="tbody_01"></tbody>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button id="btn_close_add_2"type="button" data-content="remove" class="btn btn-danger " data-dismiss="modal" style="margin-right: 75%;">ยกเลิก</button>
+				<button type="submit" form="altEditor-add-form" data-content="remove" class="btn btn-success" id="addRowBtn" >บันทึก</button>
 			</div>
 		</div>
 	</div>
@@ -299,13 +305,13 @@
                 width: "10%",
 				className: "text-center"
 		},
-		{ data: "name" },
+		{ title:"ชื่อผู้ใช้งาน", data: "name" },
 		{ data: "username" },
 		{ 
-		  data: "password",
-		  visible: false
+			title:"ชื่อผู้ใช้งาน", data: "password",
+			visible: false,  disabled:"true",
 		},
-		{ data: "code",
+		{ title:"ตำแหน่ง", data: "code",
 			render: function(data, type, row, meta) {
 				if (data == null || data == "") return "สมาชิก";
 				return data;
@@ -356,7 +362,6 @@
 				"className": 'btn btn-info btn-lg',
 				action: () => {
 					$("#modal_input").modal();
-					// Validationform();
 				}
 			},
 			{
@@ -383,9 +388,7 @@
 				name: 'import', // DO NOT change name
 				"className": 'btn btn-info btn-lg',
 				action: function ( e, dt, node, config ) {
-						//  $("#test1").modal();
 					$("#modal_import").modal();
-						//console.log('IMPORT!!!');
            		 }
 			}
 		]
@@ -397,22 +400,21 @@
 	 * @Author	Thutsaneeya Chanrong       
 	 * @Create Date	28-01-2564
 	 */
-	myTable.on( 'order.dt search.dt', function () {
+	myTable.on('order.dt search.dt', function () {
         	myTable.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
             	cell.innerHTML = `${i+1}.`;
         	});
    		 }).draw();
 	
-	/**
-	 * Setup import file.
-	 *
-	 * @Author	Thutsaneeya Chanrong    
-	 * @Create Date	01-03-2564
-	 * @return mixed
-	 */
 	$(document).ready(function () {
 		$('#loadDiv').hide();
-
+		/**
+		 * Setup import file.
+		 *
+		 * @Author	Thutsaneeya Chanrong    
+		 * @Create Date	01-03-2564
+		 * @return mixed
+		 */
 		$('#upload').on('change', function(e) {
             e.preventDefault(); // don't send form as it
 			$.ajax({
@@ -503,12 +505,13 @@
 	 */
 	$(document).ready(function () {
 		$('#btn_add_user_to_table').on('click',function () {  
+
 			var name = $("#name").val();
 			var username = $("#username").val();
 			var password = $("#password").val();
 			var roles = $("#code").val();
 			var rowcount = $('#tbody_01').children().length;
-			// console.log(name);
+
 				$('#tbody_01').append(`
 					<tr>
 						<td><center>${rowcount + 1}</center></td>
@@ -597,11 +600,15 @@
 				username: $(`#tbody_01 > tr:nth-child(${i}) > td:nth-child(3)`).text(),
 			}
 			$.ajax({
-				url: url_add,
+				url: "<?php echo site_url("Source_manager/add_user_with_role/"); ?>" + "users",
 				type: 'POST',
 				async: false,
-				data: rowdata,
-				success: function() { 
+				data: {
+					"rowdata": rowdata,
+					"role_id": 1
+				},
+				success: function(res) { 
+					console.log(res)
 					// toastr['success']("ดำเนินการเสร็จสิ้น")
 				},
 				error: (er)=>{console.log(er)}
@@ -624,14 +631,18 @@
 	 */
 	$('#EditRowBtn').on('click', function () {  
 
+		var timestamp = new Date()
+		var strDate = timestamp.getFullYear()+"-"+(timestamp.getMonth()+1)+"-"+timestamp.getDate()+" "+timestamp.getHours()+":"+timestamp.getMinutes()+":"+timestamp.getSeconds();
+
 		let rowdata = {
 			id :	user_id["id"],
 			code: $('#code_edit').val(),
 			name: $('#name_edit').val(),
 			password: $('#password_edit').val(),
 			username: $('#username_edit').val(),
+			updated_at: strDate
 		}
-		console.log("rowdata",rowdata);
+		// console.log("rowdata",rowdata);
 		$.ajax({
 			// a tipycal url would be /{id} with type='POST'
 			url: url_edit,
@@ -694,7 +705,8 @@
 	$('#btn_import').on('click', function () {
 		addMany()
 	});
-	 function addMany() {
+
+	function addMany() {
 		// $('#loadDiv').show()
 		for(let i = 1; i <= $('#tbody').children().length; i++){
 		
@@ -711,17 +723,10 @@
 			type: 'POST',
 			async: false,
 			data: rowdata,
-			// beforeSend: function () { // Before we send the request, remove the .hidden class from the spinner and default to inline-block.
-			// 	$('#loadDiv').show()
-			// 	console.log("AAAAAAAAAAAAAAA")
-			// },
 			success: function() { 
 				console.log("success");
 			//  toastr['success']("ดำเนินการเสร็จสิ้น")
 			},
-			// complete: function () { // Set our complete callback, adding the .hidden class and hiding the spinner.
-			// 	$('#loadDiv').hide()
-			// },
 			error: (er)=>{
 				console.log(er)}
 			});
@@ -775,11 +780,20 @@
 
 		})
 	 });
-	 
 </script>
 
 <style>
-
+	a:link {
+		color: red;
+	}a:hover {
+		color: hotpink;
+	}
+	a:visited {
+		color: blue;
+	}
+	a:active {
+		color: pink;
+	}
 	#edit_dialog{
 		width: 800px;
 	}
@@ -787,7 +801,6 @@
 		width: 50px;
 		height: 40px;
 	}
-
 	div,h3,span{
 		font-family: prompt !important
 	}

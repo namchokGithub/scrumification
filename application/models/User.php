@@ -490,7 +490,7 @@ class User extends CI_Model
     public function find_by_role($id)
     {
         return $this->db
-            ->select("users.id as id,users.username ,users.name as user_name ,roles.name as role_name,code as secon_role")
+            ->select("users.id as id,users.username ,users.name as user_name ,roles.display_name ,roles.name as role_name,code as secon_role")
             ->from("roles")
             ->join("roles_users", "roles.id = roles_users.role_id", "inner")
             ->join("users", "users.id = roles_users.user_id", "inner")

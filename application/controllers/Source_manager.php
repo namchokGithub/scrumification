@@ -145,6 +145,25 @@ class Source_manager extends BaseController
     }
 
 	/**
+     * Insert Data with role.
+     *
+	 * @Author	Jiranuwat Jaiyen       
+	 * @Create Date	22-03-2563
+	 * @return mixed
+     */
+    public function add_user_with_role($name_table)
+    {
+		$data = $this->input->post("rowdata");
+		$role_id = $this->input->post("role_id");
+		unset($data['addRowBtn']);
+		unset($data['undefined']);
+		var_dump($data);
+		var_dump($role_id);
+        // $this->DM->add_data($name_table,$data);
+		// echo json_encode($data);
+    }
+
+	/**
      * Insert Role Data.
      *
 	 * @Author	Jiranuwat Jaiyen       
@@ -518,5 +537,17 @@ class Source_manager extends BaseController
 		$this->load->view("manager/v_Achievement_Report",$data);
 		$this->load->view('includes/footer');
 	}
+
+	/**
+     * Get data by group.
+     *
+	 * @Author	 Thutsaneeya Chanrong
+	 * @Create Date 10-02-2564
+     * @return Json Data
+     */
+	public function get_data_by_group()
+    {
+        echo json_encode($this->DM->get_data_by_group());
+    }
 }
 ?>

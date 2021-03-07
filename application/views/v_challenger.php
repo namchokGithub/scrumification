@@ -39,7 +39,7 @@
 				<?php if($row["secon_role"] !== null ){ ?>
 				<span class="users-list-date" style="font-size: 17px;"><?php echo $row["secon_role"]; ?></span>
 				<?php }else{ ?>
-				<span class="users-list-date" style="font-size: 17px;"><?php echo $row["role_name"]; ?></span>
+				<span class="users-list-date" style="font-size: 17px;"><?php echo $row["display_name"]; ?></span>
 				<?php } ?>
 			</li>
 		<?php } ?>

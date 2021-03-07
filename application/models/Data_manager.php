@@ -261,7 +261,7 @@ class Data_manager extends CI_Model
             ->select(
                       "users.name As name, 
                       users.username As username,
-                      roles.name As role"
+                      roles.name As role, display_name, users.code"
                     )
             ->from("roles_users")
             ->join("roles", "roles_users.role_id = roles.id", "LEFT")
@@ -269,5 +269,21 @@ class Data_manager extends CI_Model
             ->where("roles_users.role_id Like '$roles_user_id'")
             ->get()->result_array();
     } // End get_member_by_group
+
+    /**
+     * Get data by group.
+     *
+	 * @Author	Thutsaneeya Chanong     
+	 * @Create Date	11-02-2564
+     * @return mixed
+     */
+    public function get_data_by_group()
+    {
+        return $this->db
+            ->select ("roles.id, replace(roles.name, 'สมาชิกมกุล', 'Cluster') as group_name, image_path, color, display_name")
+            ->from("roles")
+            ->where("name Like 'สมาชิกมกุล %' or name Like 'Cluster %' or name Like 'มกุล'")
+            ->get()->result_array();
+    } // End get_data_by_group
 }
 ?>
