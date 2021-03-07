@@ -95,6 +95,7 @@
 		</div>
 	</div>
 </div>
+
 <!-- Del -->
 <div id="modal_del" class="modal fade in" tabindex="-1" role="dialog" style=" display: none;">
 	<div class="modal-dialog">
@@ -253,9 +254,23 @@
 						<input type="text" id="code" pattern=".*" title="" name="หน้าที่" placeholder="ตำแหน่ง" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
 						<label id="codelabel" class="errorLabel"></label>
 					</div>
+					<div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding-top:4px;">
+						<label for="code">บทบาท:</label>
+					</div>
+					<div class="col-sm-8 col-md-8 col-lg-8">
+						<div class="form-group">
+							<select id="select_roles" class="form-control">
+								<option disabled>เลือก</option>
+								<?php foreach($roles as $row){?>
+									<option value="<?php echo $row["id"]; ?>"><?php echo $row["display_name"]; ?></option>
+								<?php } ?>
+							</select>
+						</div>
+						<label id="codelabel" class="errorLabel"></label>
+					</div>
 					<div class="content">
-					<button id="btn_add_user_to_table"type="button" class="btn btn-info" style="float:right;">เพิ่ม</button>
-				</div><br>
+						<button id="btn_add_user_to_table"type="button" class="btn btn-info" style="float:right;margin-bottom: 10px;">เพิ่ม</button>
+					</div><br>
 				</form>	
 				<table id="example1" class="table table-striped table-bordered no-footer dataTable" style="width:100%">
 					<thead id="header">
@@ -265,6 +280,7 @@
 							<th>ชื่อผู้ใช้งาน</th>
 							<th>รหัสผ่าน</th>
 							<th>หน้าที่</th>
+							<th>บทบาท</th>
 							<th>ดำเนินการ</th>
 						</tr>
 					</thead>
@@ -401,10 +417,10 @@
 	 * @Create Date	28-01-2564
 	 */
 	myTable.on('order.dt search.dt', function () {
-        	myTable.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-            	cell.innerHTML = `${i+1}.`;
-        	});
-   		 }).draw();
+		myTable.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+			cell.innerHTML = `${i+1}.`;
+		});
+	}).draw();
 	
 	$(document).ready(function () {
 		$('#loadDiv').hide();
@@ -504,7 +520,7 @@
 	 * @Create Date	25-01-2564
 	 */
 	$(document).ready(function () {
-		$('#btn_add_user_to_table').on('click',function () {  
+		$('#btn_add_user_to_table').on('click', () =>{  
 
 			var name = $("#name").val();
 			var username = $("#username").val();
@@ -512,16 +528,21 @@
 			var roles = $("#code").val();
 			var rowcount = $('#tbody_01').children().length;
 
-				$('#tbody_01').append(`
-					<tr>
-						<td><center>${rowcount + 1}</center></td>
-						<td>${name}</td>
-						<td>${username}</td>
-						<td>${password}</td>
-						<td>${roles}</td>
-						<td><center><button id="btn_del"type="button" class="btn btn-danger")>ลบ</button></center></td>
-					</tr>
-				`);
+			var roles_text = $( "#select_roles option:selected" ).text();
+			var roles_value = $( "#select_roles option:selected" ).val();
+
+			$('#tbody_01').append(`
+				<tr>
+					<td><center>${rowcount + 1}</center></td>
+					<td>${name}</td>
+					<td>${username}</td>
+					<td>${password}</td>
+					<td>${roles}</td>
+					<td>${roles_text}</td>
+					<input type="hidden" value="${roles_value}" name="roles_id">
+					<td><center><button id="btn_del"type="button" class="btn btn-danger">ลบ</button></center></td>
+				</tr>
+			`);
 			//Reset form after click add button
 			$('#altEditor-add-form').trigger("reset");
 			$('#example1').show();//Show table
@@ -605,7 +626,7 @@
 				async: false,
 				data: {
 					"rowdata": rowdata,
-					"role_id": 1
+					"role_id": 1 // $(`#tbody_01 > tr:nth-child(0) > input[type=hidden]`).val()
 				},
 				success: function(res) { 
 					console.log(res)

@@ -91,12 +91,19 @@ class Source_manager extends BaseController
 		{
 			$detail['header'] = "Achievement Report";
 		}
+		else if($name == "Users")
+		{
+			$detail['header'] = "Users manangement";
+			$data['roles'] = $this->get_roles(); 
+			// $data['roles'] = $this->get_data('roles'); 
+			/***----------- */
+		}
 		else 
 		{
 			$detail['header'] = $name;
 		}
 		
-		$data['temp_data404']= "404";
+		$data['temp_data404'] = "404";
 
 		$scripts['temp_scripts'] = '';
 		$this->output("manager/v_".$name, $data, $scripts, $detail);
@@ -126,6 +133,16 @@ class Source_manager extends BaseController
     {
 		$data = $this->input->post();
         echo json_encode($this->DM->get_data($name_table,$data));
+    }
+	/**
+     * Select roles.
+     *
+	 * @Author	Jiranuwat Jaiyen       
+	 * @Create Date	22-03-2563
+     */
+	public function get_roles()
+    {
+        return $this->DM->get_roles();
     }
 	
 	/**
@@ -157,9 +174,15 @@ class Source_manager extends BaseController
 		$role_id = $this->input->post("role_id");
 		unset($data['addRowBtn']);
 		unset($data['undefined']);
-		var_dump($data);
-		var_dump($role_id);
         // $this->DM->add_data($name_table,$data);
+
+		// Get id from username 
+		// $users_id =  $this->DM->get_id_by_name($name);
+
+		// Asign roles
+		// $this->DM->assing_role($name);
+
+		var_dump($role_id);
 		// echo json_encode($data);
     }
 

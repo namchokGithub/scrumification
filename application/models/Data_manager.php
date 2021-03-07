@@ -30,6 +30,21 @@ class Data_manager extends CI_Model
     {
 		return array_reverse($this->db->get_where($name_table,$data)->result());
     }
+
+    /**
+     * Select roles.
+     *
+	 * @Author	Jiranuwat Jaiyen       
+	 * @Create Date	22-03-2563
+     * @return Json Data
+     */
+	public function get_roles()
+    {
+        $sql = "SELECT *
+                FROM `roles`
+            ";
+        return $this->db->query($sql)->result_array();
+    }
 	
 	/**
      * Insert Data.
