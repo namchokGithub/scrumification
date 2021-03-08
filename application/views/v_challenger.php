@@ -6,6 +6,38 @@
  - @Update Namchok Singhachai
 -->
 
+<style>
+	img.img-profile {
+		object-fit: cover !important; 
+		object-position: center !important;
+		margin: 7px 0px !important;
+		width: 200px !important;
+		height: 200px !important;
+	}
+	@media only screen and (max-width: 321px) {
+		img.img-profile  {
+			/* object-position: center !important; */
+			margin: 7px 0px !important;
+			width: 80px !important;
+			height: 80px !important;
+		}
+	}
+	@media only screen and (max-width: 768px) {
+		img.img-profile  {
+			/* object-position: center !important; */
+			margin: 7px 0px !important;
+			width: 85px !important;
+			height: 100px !important;
+		}
+		.users-list>li {
+			width: 25%;
+			float: left;
+			padding: 0px !important;
+			text-align: center;
+		}
+	}
+</style>
+
 <div class="panel panel-primary">
 	<div  class="panel-heading" style=" font-size: 28px; ">Cluster Profile</div>
 	<div class="panel-body">
@@ -33,7 +65,7 @@
 		<ul class="users-list clearfix">
 		<?php foreach($User_list as $row){?>
 			<li class="col-md-4 col-xs-6">
-				<img src="<?php echo base_url('assets/dist/img/user/'.$row['username'].'.jpg');?>" alt="User Image" onerror="this.onerror=null;this.src='<?php echo base_url('assets/dist/img/user/unknown-who.jpg'); ?>';" style="object-fit: cover; object-position: center;margin: 7px 0px;width: 200px;height: 200px;">
+				<img class="img-profile" src="<?php echo base_url('assets/dist/img/user/'.$row['username'].'.jpg');?>" alt="User Image" onerror="this.onerror=null;this.src='<?php echo base_url('assets/dist/img/user/unknown-who.jpg'); ?>';" style="">
 				<span class="users-list-name" style="margin-top: 15px;font-size: 22px;"><?php echo $row["username"] ?></span>
 				<span class="users-list-name" href="#<?php echo $row["user_name"] ?>" style="font-size: 17px;" ><?php echo $row["user_name"] ?></span>
 				<?php if($row["secon_role"] !== null ){ ?>

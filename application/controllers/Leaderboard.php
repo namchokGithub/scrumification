@@ -68,17 +68,17 @@ class Leaderboard extends BaseController
      */
     public function update_status_show()
     {	
-		if(!hasRole(['ScrumMaster'])){
-			redirect('home');
-		} // Check role
+      if(!hasRole(['ScrumMaster']) && !hasRole(['Administrator'])){
+        redirect('home');
+      } // Check role
 
-		$data = $this->input->post();
-		// var_dump($data);
-		if($data['is_checked'] =="true"){
+      $data = $this->input->post();
+      // var_dump($data);
+      if($data['is_checked'] =="true"){
             $this->DM->edit_data("show_topic", array("id"=>"1","page"=>"LeaderBoard","status"=>"1"));
-		}
-		else{
+      }
+      else{
             $this->DM->edit_data("show_topic", array("id"=>"1","page"=>"LeaderBoard","status"=>"0"));
-		}
+      }
     } // End update_status_show
 }

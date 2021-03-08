@@ -72,7 +72,7 @@ class Data_manager extends CI_Model
     public function edit_data($name_table,$data)
     {
         return $this->db->update($name_table, $data , array('id' => $data['id']));
-    }
+    }   
 
     /**
      * Edit Data with two id.

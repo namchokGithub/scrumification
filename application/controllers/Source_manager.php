@@ -24,7 +24,7 @@ class Source_manager extends BaseController
 	
 		$this->load->model("Data_manager","DM");
 		$this->load->model("User","US");
-		if(!hasRole(['ScrumMaster'])){
+		if(!hasRole(['ScrumMaster']) && !hasRole(['Administrator'])){
 			redirect('home');
 		}
 	}
@@ -275,6 +275,26 @@ class Source_manager extends BaseController
 		$this->User->add($data);
 		echo json_encode($data);
 	}
+	
+    /**
+     * Edit Data user.
+     *
+	 * @Author	Jiranuwat Jaiyen       
+	 * @Create Date	22-03-2563
+     * @return mixed
+     */
+    public function edit_user($name_table)
+    {
+		$data = $this->input->post();
+		unset($data['1']);
+		unset($data['x']);
+		unset($data['editRowBtn']);
+		unset($data['editRowBtn']);
+		unset($data['undefined']);
+		$data["password"] = password_hash($data["password"], PASSWORD_BCRYPT);
+        $this->DM->edit_data($name_table, $data);
+		echo json_encode($data);
+    }
 	
     /**
      * Edit Data.

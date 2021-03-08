@@ -170,7 +170,7 @@
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="user user-menu non-hover">
                             <a href="#" class="dropdown-toggle">
-								<img src="<?php echo base_url('assets/dist/img/user/'.$Profile[2].'.jpg'); ?>" class="user-image" alt="User Image" onerror="this.onerror=null;this.src='<?php echo base_url('assets/dist/img/user/unknown-who.jpg'); ?>';">
+								<img style="" src="<?php echo base_url('assets/dist/img/user/'.$Profile[2].'.jpg'); ?>" class="user-image" alt="User Image" onerror="this.onerror=null;this.src='<?php echo base_url('assets/dist/img/user/unknown-who.jpg'); ?>';">
 								<span class="hidden-xs"><?php echo $Profile[0]; ?></span>
 							  </a>
                         </li>
@@ -303,7 +303,7 @@
              * @Author	Jiranuwat Jaiyen       
              * @Create Date	22-03-2563
              */
-            var role_set = JSON.parse('<?php echo json_encode($Profile[1][0]); ?>');
+            var role_set = JSON.parse('<?php echo json_encode($Profile); ?>');
             $("p:contains('" + getCookie("Role") + "')").closest(".inner").append("<p>Activated</p>");
             $.ajax({
                 url: "<?php echo site_url('Home/calulate_point/'); ?>",

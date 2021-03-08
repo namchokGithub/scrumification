@@ -304,10 +304,10 @@ class Auth
     public function userRoles2()
     {
         return $this->CI->db
-                ->select("roles.*, code as secon_role")
+                ->select("roles.name, roles.id, code as secon_role")
                 ->from("roles")
                 ->join("roles_users", "roles.id = roles_users.role_id", "inner")
-                ->join("users", "users.id = roles_users.user_id", "inner")
+                ->join("users", "users.id = roles_users.user_id", "left")
                 ->where(array("roles_users.user_id" => $this->userID(),"roles.status" => 1, "roles.deleted_at" => null))
                 ->get()->result_array();
         // return array_map(function ($item) {
@@ -319,6 +319,19 @@ class Auth
         //     ->join("users", "users.id = roles_users.user_id", "inner")
         //     ->where(array("roles_users.user_id" => $this->userID(),"roles.status" => 1, "roles.deleted_at" => null))
         //     ->get()->result_array());
+    }
+
+    /**
+     * Get second role
+     * @return array
+     */
+    public function get_second_role()
+    {
+        return $this->CI->db
+                ->select("CASE WHEN users.code IS NULL THEN '1' ELSE users.code END as Second_role")
+                ->from("users")
+                ->where(array("users.id" => $this->userID()))
+                ->get()->result_array();
     }
 
     /**

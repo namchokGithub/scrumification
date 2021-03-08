@@ -88,7 +88,7 @@ class Achievement extends BaseController
 			echo json_encode($data);
 			return ;
 		}
-		if(hasRole(['ScrumMaster'])){
+		if(hasRole(['ScrumMaster']) || hasRole(['Administrator'])){
 			$target = $target_id;
 		}
 		else
@@ -132,7 +132,7 @@ class Achievement extends BaseController
      */
 	public function get_Point($target_id = 9999){
 		$Secon_role = $this->User->can_Activity();
-		if(hasRole(['ScrumMaster'])){
+		if(hasRole(['ScrumMaster']) || hasRole(['Administrator'])){
 			$target = $target_id;
 		}
 		else if($this->User->can_add_Activity_by_role_id($target_id)){
@@ -150,7 +150,7 @@ class Achievement extends BaseController
      * @return Json Data
      */
 	public function get_Inventory($target_id = 9999){
-		if(hasRole(['ScrumMaster'])){
+		if(hasRole(['ScrumMaster']) || hasRole(['Administrator'])){
 			$target = $target_id;
 		}
 		else if($this->User->can_add_Activity_by_role_id($target_id)){

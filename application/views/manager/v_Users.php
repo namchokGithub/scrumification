@@ -186,16 +186,17 @@
 						</div>
 						<div style="clear:both;"></div>
 					</div>
-					<input type="hidden" id="password_edit" pattern=".*" title="" name="Password" placeholder="Password" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
-					<!-- <div style="margin-left: initial;margin-right: initial;" class="form-group row" id="alteditor-row-password_edit">
+					<!-- <input type="hidden" id="password_edit" pattern=".*" title="" name="Password" placeholder="Password" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value=""> -->
+					<div style="margin-left: initial;margin-right: initial;" class="form-group row" id="alteditor-row-password_edit">
 						<div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding-top:4px;">
 							<label for="password_edit">Password:</label>
 						</div>
 						<div class="col-sm-8 col-md-8 col-lg-8">
-							<input type="hidden" id="password_edit" pattern=".*" title="" name="Password" placeholder="Password" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
+							<input type="password" id="password_edit" pattern=".*" title="" name="Password" placeholder="Password" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
+							<!-- <input type="hidden" id="password_edit_old" pattern=".*" title="" name="หน้าที่" placeholder="ตำแหน่ง" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value=""> -->
 						</div>
 						<div style="clear:both;"></div>
-					</div> -->
+					</div>
 					<div style="margin-left: initial;margin-right: initial;" class="form-group row" id="alteditor-row-code_edit">
 						<div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding-top:4px;">
 							<label for="code_edit">ตำแหน่ง:</label>
@@ -332,6 +333,7 @@
 		},
 		{ title:"ตำแหน่ง", data: "code",
 			render: function(data, type, row, meta) {
+				console.log(row)
 				if (data == null || data == "") return "สมาชิก";
 				return data;
 			}
@@ -342,7 +344,7 @@
 	// local URL's are not allowed
 	var url_get = "<?php echo site_url("Source_manager/get_data/"); ?>" + topic_name;
 	var url_add = "<?php echo site_url("Source_manager/add_user/"); ?>" + topic_name;
-	var url_edit = "<?php echo site_url("Source_manager/edit_data/"); ?>" + topic_name;
+	var url_edit = "<?php echo site_url("Source_manager/edit_user/"); ?>" + topic_name;
 	var url_delete = "<?php echo site_url("Source_manager/delete_data/"); ?>" + topic_name;
 	
 	/**
@@ -413,12 +415,6 @@
 		]
 	});
 
-	/**
-	 *  Add number column to datatable
-	 *
-	 * @Author	Thutsaneeya Chanrong       
-	 * @Create Date	28-01-2564
-	 */
 	myTable.on('order.dt search.dt', function () {
 		myTable.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
 			cell.innerHTML = `${i+1}.`;
@@ -598,7 +594,7 @@
 
 	/**
 	 * 
-	 * Set up modal edit form
+	 * *Set up modal edit form
 	 * @Author	Thutsaneeya Chanrong       
 	 * @Create Date	04-02-2564
 	 */
@@ -606,13 +602,13 @@
 			// set value in edit form
 			$('#name_edit').val(user_id["name"]);
 			$('#username_edit').val(user_id["username"]);
-			$('#password_edit').val(user_id["password"]);
+			// $('#password_edit_old').val(user_id["password"]);
 			$('#code_edit').val(user_id["code"]);
 	});
 
 	/**
 	 * 
-	 * Set up modal delete form
+	 * *Set up modal delete form
 	 * @Author	Thutsaneeya Chanrong       
 	 * @Create Date	04-02-2564
 	 */
@@ -626,7 +622,7 @@
 	
 	/**
 	 * 
-	 * Insert data
+	 * *Insert data
 	 * @Author	Thutsaneeya Chanrong       
 	 * @Create Date	03-02-2564
 	 */
@@ -676,7 +672,7 @@
 	
 	/**
 	 * 
-	 * Update data
+	 * *Update data
 	 * @Author	Thutsaneeya Chanrong       
 	 * @Create Date	04-02-2564
 	 */
@@ -694,6 +690,7 @@
 			updated_at: strDate
 		}
 		// console.log("rowdata",rowdata);
+
 		$.ajax({
 			// a tipycal url would be /{id} with type='POST'
 			url: url_edit,

@@ -71,7 +71,7 @@
 <div class="panel panel-primary">
     <div  class="panel-heading" style=" font-size: 28px; ">Trade Zone</div>
     <div class="panel-body">
-		<?php if($Profile[1][0]["name"] == "ScrumMaster"){ ?>
+		<?php if($Profile[1][0] == "ScrumMaster" || $Profile[1][0] == "Administrator"){ ?>
 			<div class="col-md-9 col-sm-12  col-xs-12"style="font-size: x-large;font-weight: 700;" id="user_point">ยอดเงินทั้งหมด $$$$$ $E</div>
 			<div class="col-md-3 col-sm-12  col-xs-12 min-align" style="font-size: x-large;font-weight: 600; ">
 				<select id="select-opt" style=" margin-bottom: 5px; ">
@@ -377,7 +377,7 @@ countdown.setLabels(
 	}
 	//* ----------------------------------------- End group_inventory -------------------------------------------------------
 
-<?php if(!isset($Secon_target[0])&&( $Role_can[0]["secon_role"] == "ประธานมกุล" || $Profile_role[0] == "ScrumMaster")){ ?>
+<?php if(!isset($Secon_target[0])&&( $Role_can[0]["secon_role"] == "ประธานมกุล" || $Profile_role[0] == "ScrumMaster" || $Profile[1][0] == "Administrator")){ ?>
 
 	/**
 	* function to submit buy item.

@@ -332,8 +332,7 @@ class User extends CI_Model
      * @return mixed
      */
     public function all_Activity()
-    {
-		
+    {	
         return $this->db
             ->select("*" ,FALSE)
             ->from("activity")

@@ -34,11 +34,14 @@ class BaseController extends CI_Controller
         $this->auth->authenticate();
 
 		$scripts['Profile'][0] = $this->auth->user();
-		$scripts['Profile'][1] = $this->auth->userRoles2();
+		$scripts['Profile'][1] = $this->auth->userRoles();
 		$scripts['Profile'][2]= $this->auth->userName();
 		$detail['Profile'][0]= $this->auth->user();
-		$detail['Profile'][1]= $this->auth->userRoles2();
+		$detail['Profile'][1]= $this->auth->userRoles();
 		$detail['Profile'][2]= $this->auth->userName();
+		$scripts['text'] = $this->auth->get_second_role();
+		$detail['text'] = $this->auth->get_second_role();
+		// $detail['Second_role'] = $this->auth->get_second_role();
 		
 		$this->load->view('includes/header',$scripts);
 		$this->load->view('includes/sidebar',$detail);

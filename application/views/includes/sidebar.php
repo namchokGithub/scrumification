@@ -11,8 +11,8 @@
     .imageProfile {
         object-fit: cover; 
         object-position: center;
-        min-width: 30px !important; 
-        min-height: 30px !important; 
+        width: 50px !important; 
+        height: 50px !important; 
     }
 </style>
 
@@ -149,45 +149,52 @@
      * @Author	Jiranuwat Jaiyen       
      * @Create Date	22-03-2563
      */
-    if (getCookie("User") !== "<?php echo empty($Profile[2])? 'No User ':$Profile[1][0]["name"]; ?>") {
-        setCookie("User", "<?php echo empty($Profile[1][0]["name"])? 'No User ':$Profile[1][0]["name"]; ?>", 999);
-        setCookie("Role", "<?php echo empty($Profile[1][0]["name"])? 'No Role ':$Profile[1][0]["name"]; ?>", 999);
+    console.log(`<?php var_dump($Profile[1][0])?>`);
+    if (getCookie("User") !== `<?php echo empty($Profile[2])? 'No User ':$Profile[1][0]; ?>`) {
+        setCookie("User", "<?php echo empty($Profile[1][0])? 'No User ':$Profile[0]; ?>", 999);
+        setCookie("Role", "<?php echo empty($Profile[1][0])? 'No Role ':$Profile[1][0]; ?>", 999);
     }
     if (getCookie("Role") == "") {
-        setCookie("Role", "<?php echo empty($Profile[1][0]["name"])? 'No Role ':$Profile[1][0]["name"]; ?>", 999);
+        setCookie("Role", "<?php echo empty($Profile[1][0])? 'No Role ':$Profile[1][0]; ?>", 999);
     }
     if (getCookie("Role") == "ScrumMaster" || getCookie("Role") == "Administrator") {
         $(".ScrumMaster").show();
     } else {
         $(".ScrumMaster").hide();
     }
+    /**////////////////////////////////////////////// */
     $(".Role_name").text(getCookie("Role"))
-    // console.log("length", $("span:contains('<?php echo $header; ?>')").length, $("a[id='<?php echo $header; ?>']").length)
-    // console.log("role", getCookie("Role"), "a[id='<?php echo $header; ?>']")
+    /**////////////////////////////////////////////// */
+    // console.log("length", $("span:contains('<?php //echo $header; ?>')").length, $("a[id='<?php //echo $header; ?>']").length)
+    // console.log("role", getCookie("Role"), "a[id='<?php //echo $header; ?>']")
     if ($("a[id='<?php echo $header; ?>']").length) {
         $("a[id='<?php echo $header; ?>']").closest("li").addClass("active");
     } else {
-        // console.log("length", $("span:contains('<?php echo $header; ?>')").length)
-        // $("span:contains('<?php echo $header; ?>')").closest("li").addClass("active");
+        // console.log("length", $("span:contains('<?php //echo $header; ?>')").length)
+        // $("span:contains('<?php //echo $header; ?>')").closest("li").addClass("active");
     }
 
     $(document).ready(function () {
-        let checkLeader = `<?php echo $Profile[1][0]["secon_role"] ;?>`;
-        if(checkLeader != '') {
-            $('.Role_name').text(`<?php echo $Profile[1][0]["secon_role"] ; ?>`);
+        let checkLeader = `<?php if(isset($text[0]["Second_role"])) echo $text[0]["Second_role"]; else echo "";?>`;
+        console.log(checkLeader)
+        if(checkLeader != '1' && checkLeader != "" && checkLeader != " ") {
+            $('.Role_name').text(checkLeader);
         } else {
-            $('.Role_name').text(`<?php echo $Profile[1][0]["name"] ; ?>`);
+            let role_name = `<?php echo $Profile[1][0]; ?>`;
+            if(role_name.search("Cluster") != -1) role_name = role_name.replace(/Cluster/, "สมาชิกมกุล");
+            // console.log(role_name)
+            $('.Role_name').text(role_name);
         }
-
+       // console.log(`<?php //var_dump( $text[0]["Second_role"]);?>`)
         // console.log($('#Player_name').text().replace(/\s/g, ''));
         let namePlayer = `<?php echo $Profile[0];?>`;
         let nai = "นาย"
         let nangsaew = "นางสาว"
-
+        // console.log(namePlayer)
         if(!namePlayer.search('นาย')) {
-            $('#Player_name').text(namePlayer.substring(namePlayer.search('นาย') + nai.length, namePlayer.indexOf('(', 0)));
+            $('#Player_name').text(namePlayer.substring(3));
         } if (!namePlayer.search('นางสาว')) {
-            $('#Player_name').text(namePlayer.substring(namePlayer.search('นางสาว') + nangsaew.length, namePlayer.indexOf('(', 0)));
+            $('#Player_name').text(namePlayer.substring(namePlayer.search('นางสาว') + nangsaew.length));
             // console.log(namePlayer.substring(namePlayer.search('นางสาว') + nangsaew.length, namePlayer.indexOf('(', 0)))
         }
     });
