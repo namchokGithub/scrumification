@@ -211,7 +211,7 @@
 		
 	// 	$.ajax({
 	// 		type: "GET",
-	// 		url: "<?php echo site_url("Source_manager/get_activity_with_member");?>" + "/" + date + "/" + group,
+	// 		url: "<?php //echo site_url("Source_manager/get_activity_with_member");?>" + "/" + date + "/" + group,
 	// 		dataType: "JSON",
 	// 		success: function (res) {
 	// 			tableMember = res.Member

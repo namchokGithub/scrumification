@@ -59,7 +59,7 @@ Submit delete work
 
 *** Test Cases ***
 SCM-Work-TC1-01
-    [Documentation]     การเพิ่มกิจกรรม
+    [Documentation]     การเพิ่มงาน
     [Tags]    PASS
     GIVEN Open web browser
     WHEN Login with "59160161" "59160161"
@@ -70,7 +70,7 @@ SCM-Work-TC1-01
     [Teardown]    Close Browser
 
 SCM-Work-TC1-02
-    [Documentation]     การแก้ไขกิจกรรม
+    [Documentation]     การแก้ไขงาน
     [Tags]    PASS
     GIVEN Open web browser
     WHEN Login with "59160161" "59160161"
@@ -81,7 +81,7 @@ SCM-Work-TC1-02
     [Teardown]    Close Browser
 
 SCM-Work-TC1-03
-    [Documentation]     การลบกิจกรรม
+    [Documentation]     การลบงาน
     [Tags]    PASS
     GIVEN Open web browser
     WHEN Login with "59160161" "59160161"

@@ -430,22 +430,22 @@ class Source_manager extends BaseController
 		echo json_encode($this->DM->get_log_shop_request());
     } // End get_log_shop
 
-	/**
-     * Get activity report with member
-     *
-	 * @Author	Namchok Singhachai
-	 * @Create Date	12-02-2564
-     * @return mixed
-     */
-	public function get_activity_with_member($dateStart = "2021-01-01", $dateEnd = "2021-12-31", $group)
-	{	
-		$data["SprintPlanning"] = $this->DM->get_activity_by_group("2", $group, $dateStart, $dateEnd);
-		$data["SprintReview"] = $this->DM->get_activity_by_group("3", $group, $dateStart, $dateEnd); 	
-		$data["SprintRetrospect"] = $this->DM->get_activity_by_group("4", $group, $dateStart, $dateEnd); 	
-		$data["DailyScrum"] = $this->DM->get_activity_by_group("17", $group, $dateStart, $dateEnd);
-		$data["Member"] = $this->User->find_by_role($group);
-		echo json_encode($data);
-	} // End get_activity_with_member
+	// /**
+    //  * Get activity report with member
+    //  *
+	//  * @Author	Namchok Singhachai
+	//  * @Create Date	12-02-2564
+    //  * @return mixed
+    //  */
+	// public function get_activity_with_member($dateStart = "2021-01-01", $dateEnd = "2021-12-31", $group)
+	// {	
+	// 	$data["SprintPlanning"] = $this->DM->get_activity_by_group("2", $group, $dateStart, $dateEnd);
+	// 	$data["SprintReview"] = $this->DM->get_activity_by_group("3", $group, $dateStart, $dateEnd); 	
+	// 	$data["SprintRetrospect"] = $this->DM->get_activity_by_group("4", $group, $dateStart, $dateEnd); 	
+	// 	$data["DailyScrum"] = $this->DM->get_activity_by_group("17", $group, $dateStart, $dateEnd);
+	// 	$data["Member"] = $this->User->find_by_role($group);
+	// 	echo json_encode($data);
+	// } // End get_activity_with_member
 
 	/**
      * Update time activity
