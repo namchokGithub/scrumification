@@ -321,8 +321,8 @@
                 width: "10%",
 				className: "text-center"
 		},
-		{ title:"ชื่อผู้ใช้งาน", data: "name" },
-		{ data: "username" },
+		{ title:"ชื่อ - นามสกุล", data: "name" },
+		{ title:"ชื่อผู้ใช้งาน",data: "username" },
 		{ 
 			title:"ชื่อผู้ใช้งาน", data: "password",
 			visible: false,  disabled:"true",

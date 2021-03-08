@@ -157,6 +157,8 @@ class Source_manager extends BaseController
 		$data = $this->input->post();
 		unset($data['addRowBtn']);
 		unset($data['undefined']);
+		unset($data['1']);
+		unset($data['x']);
         $this->DM->add_data($name_table,$data);
 		echo json_encode($data);
     }
@@ -285,6 +287,7 @@ class Source_manager extends BaseController
     public function edit_data($name_table)
     {
 		$data = $this->input->post();
+		unset($data['1']);
 		unset($data['x']);
 		unset($data['editRowBtn']);
 		unset($data['editRowBtn']);
