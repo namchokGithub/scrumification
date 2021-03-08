@@ -68,8 +68,16 @@ function numberWithCommas(x) {
 			}
 		},
 		{ data: "total" },
-		{ data: "time_start",datetimepicker: { timepicker: true, format : "Y/m/d H:i"}},
-		{ data: "time_end",datetimepicker: { timepicker: true, format : "Y/m/d H:i"} }
+		{ data: "time_start",datetimepicker: { timepicker: true, format : "Y/m/d H:i"},
+			render: function (data, type, row, meta) {
+				return DateThai(data);
+			}
+		},
+		{ data: "time_end",datetimepicker: { timepicker: true, format : "Y/m/d H:i"},
+			render: function (data, type, row, meta) {
+				return DateThai(data);
+			}
+		}
 	];
   var myTable;
   var topic_name = "shop";
@@ -86,46 +94,46 @@ function numberWithCommas(x) {
 	 * @Author	Jiranuwat Jaiyen       
 	 * @Create Date	22-03-2563
      */
-  myTable = $('#example').DataTable({
-    "sPaginationType": "full_numbers",
-        ajax: 
-		 {
-            "url": url_get,
-            "dataSrc": ""
-        },
-    columns: columnDefs,  // columns from above
-	initComplete: function (settings, json) {
-        $(".btn").removeClass("dt-button");
-    },
-    rowId: 'id',
-	"columnDefs": [ {
-				"searchable": false,
-				"orderable": false,
-				"targets": 0
-			} ],
-	"order": [[ 1, 'asc' ]],
-    dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
-    select: 'single',     // enable single row selection
-    responsive: true,     // enable responsiveness
-    altEditor: true,      // Enable altEditor ****
-    buttons: [{
-      text: '<i class="fa fa-plus-square"></i> เพิ่มชุดข้อมูล',
-      name: 'add',     // DO NOT change name
-	  "className": 'btn btn-info btn-lg' 
-    },
-    {
-      extend: 'selected', // Bind to Selected row
-      text: '<i class="fa fa-edit"></i> แก้ไขชุดข้อมูล',
-      name: 'edit',        // DO NOT change name
-	  "className": 'btn btn-warning btn-lg' 
-    },
-    {
-      extend: 'selected', // Bind to Selected row
-      text: '<i class="fa fa-trash"></i> ลบชุดข้อมูล',
-      name: 'delete',     // DO NOT change name
-	  "className": 'btn btn-danger btn-lg' 
-   }],
-        onAddRow: function(datatable, rowdata, success, error) {
+	myTable = $('#example').DataTable({
+		"sPaginationType": "full_numbers",
+			ajax: 
+			{
+				"url": url_get,
+				"dataSrc": ""
+			},
+		columns: columnDefs,  // columns from above
+		initComplete: function (settings, json) {
+			$(".btn").removeClass("dt-button");
+		},
+		rowId: 'id',
+		"columnDefs": [ {
+					"searchable": false,
+					"orderable": false,
+					"targets": 0
+				} ],
+		"order": [[ 1, 'asc' ]],
+		dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
+		select: 'single',     // enable single row selection
+		responsive: true,     // enable responsiveness
+		altEditor: true,      // Enable altEditor ****
+		buttons: [{
+			text: '<i class="fa fa-plus-square"></i> เพิ่มชุดข้อมูล',
+			name: 'add',     // DO NOT change name
+			"className": 'btn btn-info btn-lg' 
+			},
+			{
+			extend: 'selected', // Bind to Selected row
+			text: '<i class="fa fa-edit"></i> แก้ไขชุดข้อมูล',
+			name: 'edit',        // DO NOT change name
+			"className": 'btn btn-warning btn-lg' 
+			},
+			{
+			extend: 'selected', // Bind to Selected row
+			text: '<i class="fa fa-trash"></i> ลบชุดข้อมูล',
+			name: 'delete',     // DO NOT change name
+			"className": 'btn btn-danger btn-lg' 
+		}],
+		onAddRow: function(datatable, rowdata, success, error) {
 			$('.errorLabel').css("color", 'red');
 			if($('#name').val() == '' || $('#point').val() == '' || $('#total').val() == ''
 							|| $('#time_start').val() == '' || $('#time_end').val() == '') {
@@ -165,8 +173,8 @@ function numberWithCommas(x) {
 				});
 				datatable.s.dt.ajax.reload();
 			}
-        },
-        onEditRow: function(datatable, rowdata, success, error) {
+		},
+		onEditRow: function(datatable, rowdata, success, error) {
 			$('.errorLabel').css("color", 'red');
 			if($('#name').val() == '' || $('#point').val() == '' || $('#total').val() == ''
 							|| $('#time_start').val() == '' || $('#time_end').val() == '') {
@@ -206,28 +214,47 @@ function numberWithCommas(x) {
 				});
 				datatable.s.dt.ajax.reload();
 			}
-        },
-        onDeleteRow: function(datatable, rowdata, success, error) {
+		},
+		onDeleteRow: function(datatable, rowdata, success, error) {
 			rowdata['id'] = datatable.s.dt.rows( { selected: true } ).data()[0]['id']
-            $.ajax({
-                // a tipycal url would be /{id} with type='DELETE'
-                url: url_delete,
-                type: 'POST',
+			$.ajax({
+				// a tipycal url would be /{id} with type='DELETE'
+				url: url_delete,
+				type: 'POST',
 				async :false,
-                data: rowdata,
-                success: success,
-                error: error
-            });
+				data: rowdata,
+				success: success,
+				error: error
+			});
 			datatable.s.dt.ajax.reload();
-        }
-  }); // End Create datatables
+		}
+	}); // End Create datatables
 
   	// Set index of column
 	myTable.on( 'order.dt search.dt', function () {
 		myTable.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
 			cell.innerHTML = `${i+1}.`;
 		});
-	}).draw(); 
+	}).draw();
+
+	function DateThai($strDate)
+	{
+		let dateStr = new Date($strDate);
+
+		strYear = dateStr.getFullYear()+543;
+		strMonth= dateStr.getMonth()+1;
+		strDate= dateStr.getDate();
+		strHour= dateStr.getHours();
+		strMinute= dateStr.getMinutes();
+		strSeconds= dateStr.getSeconds();
+		strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
+		strMonthThai=strMonthCut[strMonth];
+		console.log(strHour)
+		if(strHour<10) strHour = '0'+strHour;
+		if(strMinute<10) strMinute = '0'+strMinute;
+		return `วันที่ ${strDate} ${strMonthThai} ${strYear} เวลา ${strHour}:${strMinute} นาที`;
+	}
+	 
 </script>
 
 <style>
