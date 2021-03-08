@@ -300,5 +300,35 @@ class Data_manager extends CI_Model
             ->where("name Like 'สมาชิกมกุล %' or name Like 'Cluster %' or name Like 'มกุล'")
             ->get()->result_array();
     } // End get_data_by_group
+
+    /**
+     * Get id by name
+     *
+	 * @Author	Thutsaneeya Chanong     
+	 * @Create Date	08-03-2564
+     * @return mixed
+     */
+    public function get_id_by_user($name)
+    {
+        $sql = "SELECT users.id FROM `users` WHERE users.name like '$name'";
+
+        return $this->db->query($sql);
+    } // End get_id_by_name
+
+    /**
+     * Add user with role
+     *
+	 * @Author	Thutsaneeya Chanong     
+	 * @Create Date	08-03-2564
+     * @return mixed
+     */
+    public function add_user_with_role($role_id,$users_id)
+    {
+
+        $sql = "INSERT INTO `roles_users` (role_id, user_id) VALUES ('$role_id', '$users_id')";
+
+        return $this->db->query($sql);
+
+    } // End add_user_with_role
 }
 ?>

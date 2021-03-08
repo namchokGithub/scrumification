@@ -45,8 +45,10 @@
 						<div class="col-sm-8 col-md-8 col-lg-8">
 							<div class="custom-file mb-3">
 								<input type="file" name="csv_file" id="csv-file" accept=".csv" style="overflow:hidden" class="form-control  form-control-sm custom-file-input">
-								<label  style="color:red">**ต้องเป็นไฟล์นามสกุล .csv และมีคอลัมน์ name, username, password, code </label>
-								<a  href="#modal_img" id="pop" data-toggle="modal" style=" text-decoration: underline;  font-weight: bold;"> ตัวอย่าง</a>
+								<label  style="color:red">
+									**ต้องเป็นไฟล์นามสกุล .csv และมีคอลัมน์ name, username, password, code 
+									<a href="#modal_img" id="pop" data-toggle="modal" style=" text-decoration: underline;  font-weight: bold;"> ตัวอย่าง</a>
+								</label>
 							</div>
 						</div>
 					</div>
@@ -86,7 +88,7 @@
 			<div class="card" style="text-align: -webkit-center;cursor: pointer;">
 			<div>
 				<label  style="color:red">ไฟล์สำหรับอัปโหลดเข้าสู่ระบบ ต้องเป็นไฟล์นามสกุล .csv และมีคอลัมน์ name, username, password, code เท่านั้น</label>
-				<img id="myImg" src="<?php echo base_url('assets/dist/img/example/Group 208.png'); ?>"style="max-height:245px;">
+				<img id="myImg" src="<?php echo base_url('assets/dist/img/example/csv_example.png'); ?>"style="max-height:245px;">
 			</div>
 		</div>
 			</div>
@@ -216,7 +218,7 @@
 <!-- Add -->
 <div id="modal_input" class="modal fade in"  tabindex="-1"  role="dialog" style="display: none;">
 	<div class="modal-dialog">
-		<div class="modal-content" style="width: 700px;">
+		<div class="modal-content" style="width: 800px;">
 			<div class="modal-header bg-blue">
 				<h3 style="padding-top: 1rem;padding-left: 1rem;display: inline" class="modal-title">หน้าเพิ่มข้อมูล</h3>
 				<button id="btn_close_add_1"style="margin: initial;opacity:0.75" type="button" class="close" data-dismiss="modal" aria-label="ยกเลิก">
@@ -231,28 +233,28 @@
 					</div>
 					<div class="col-sm-8 col-md-8 col-lg-8">
 						<input type="text" id="name" pattern=".*" title="" name="ชื่อ - นามสกุล" placeholder="ชื่อ - นามสกุล" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
-						<label id="namelabel" class="errorLabel"></label>
+						<label id="namelabel" class="text-danger errorLabel"></label>
 					</div>
 					<div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding-top:4px;">
 						<label for="username">ชื่อผู้ใช้งาน:</label>
 					</div>
 					<div class="col-sm-8 col-md-8 col-lg-8">
 						<input type="text" id="username" pattern=".*" title="" name="Username" placeholder="ชื่อผู้ใช้งาน" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
-						<label id="usernamelabel" class="errorLabel"></label>
+						<label id="usernamelabel" class="text-danger errorLabel"></label>
 					</div>
 					<div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding-top:4px;">
 						<label for="password">รหัสผ่าน:</label>
 					</div>
 					<div class="col-sm-8 col-md-8 col-lg-8">
 						<input type="text" id="password" pattern=".*" title="" name="Password" placeholder="รหัสผ่าน" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
-						<label id="passwordlabel" class="errorLabel"></label>
+						<label id="passwordlabel" class="text-danger errorLabel"></label>
 					</div>
 					<div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding-top:4px;">
 						<label for="code">ตำแหน่ง:</label>
 					</div>
 					<div class="col-sm-8 col-md-8 col-lg-8">
 						<input type="text" id="code" pattern=".*" title="" name="หน้าที่" placeholder="ตำแหน่ง" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
-						<label id="codelabel" class="errorLabel"></label>
+						<label id="codelabel" class="text-danger errorLabel">กรณีที่ตำแหน่งเป็นประธานมกุลและรองประธานมกุลต้องกรอกข้อมูล</label>
 					</div>
 					<div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding-top:4px;">
 						<label for="code">บทบาท:</label>
@@ -265,8 +267,8 @@
 									<option value="<?php echo $row["id"]; ?>"><?php echo $row["display_name"]; ?></option>
 								<?php } ?>
 							</select>
+							<label id="rolelabel" class="text-danger errorLabel"></label>
 						</div>
-						<label id="codelabel" class="errorLabel"></label>
 					</div>
 					<div class="content">
 						<button id="btn_add_user_to_table"type="button" class="btn btn-info" style="float:right;margin-bottom: 10px;">เพิ่ม</button>
@@ -282,6 +284,7 @@
 							<th>หน้าที่</th>
 							<th>บทบาท</th>
 							<th>ดำเนินการ</th>
+							<!-- <th>role_id</th> -->
 						</tr>
 					</thead>
 					<tbody id="tbody_01"></tbody>
@@ -341,6 +344,7 @@
 	var url_add = "<?php echo site_url("Source_manager/add_user/"); ?>" + topic_name;
 	var url_edit = "<?php echo site_url("Source_manager/edit_data/"); ?>" + topic_name;
 	var url_delete = "<?php echo site_url("Source_manager/delete_data/"); ?>" + topic_name;
+	
 	/**
 	 * Setup User Interface.
 	 *
@@ -350,7 +354,6 @@
 	 * @Update Thutsaneeya Chanrong
 	 * @Create Date 13-01-2564
 	 */
-
 	myTable = $('#example').DataTable({
 		"sPaginationType": "full_numbers",
 		ajax: {
@@ -464,12 +467,12 @@
 						},
 						{ 
 						  data: "code",
-						  visible: false
+						  visible: true
 						}
                     ]; // End set columndefs
 
                     myTable = $('#studentUploadCheck').DataTable({
-                        "sPaginationType": "full_numbers",
+                        "paging": false,
 						"destroy": true,
                         data,
                         columns: columnDefs,  // columns from above
@@ -519,34 +522,49 @@
 	 * @Author	Thutsaneeya Chanrong       
 	 * @Create Date	25-01-2564
 	 */
+
 	$(document).ready(function () {
 		$('#btn_add_user_to_table').on('click', () =>{  
 
-			var name = $("#name").val();
-			var username = $("#username").val();
-			var password = $("#password").val();
-			var roles = $("#code").val();
-			var rowcount = $('#tbody_01').children().length;
+			if($("#username").val() == "" || $("#name").val() == "" || $("#password").val() == "" 
+					|| $("#select_roles option:selected").val() == ""){
+					
+					if($("#name").val() == "") $('#namelabel').text('กรุณากรอกชื่อ-นามสกุล');	
+					if($("#username").val() == "") $('#usernamelabel').text('กรุณากรอกชื่อผู้ใช้งาน');
+					if($("#password").val() == "") $('#passwordlabel').text('กรุณากรอกรหัสผ่าน');
+					if($("#select_roles option:selected").val() == "") $('#rolelabel').text('กรุณากรอกบทบาท');
 
-			var roles_text = $( "#select_roles option:selected" ).text();
-			var roles_value = $( "#select_roles option:selected" ).val();
+			} else if($("#username").val() != "" && $("#name").val() != "" && $("#password").val() != "" 
+						&& $("#select_roles option:selected").val() != "") {
 
-			$('#tbody_01').append(`
-				<tr>
-					<td><center>${rowcount + 1}</center></td>
-					<td>${name}</td>
-					<td>${username}</td>
-					<td>${password}</td>
-					<td>${roles}</td>
-					<td>${roles_text}</td>
-					<input type="hidden" value="${roles_value}" name="roles_id">
-					<td><center><button id="btn_del"type="button" class="btn btn-danger">ลบ</button></center></td>
-				</tr>
-			`);
-			//Reset form after click add button
-			$('#altEditor-add-form').trigger("reset");
-			$('#example1').show();//Show table
-			$('#addRowBtn').attr('disabled',false);
+				var name = $("#name").val();
+				var username = $("#username").val();
+				var password = $("#password").val();
+				var code = $("#code").val();
+				var rowcount = $('#tbody_01').children().length;
+
+				var roles_text = $( "#select_roles option:selected" ).text();
+				var roles_value = $( "#select_roles option:selected" ).val();
+				console.log(roles_value)
+				$('#tbody_01').append(`
+					<tr>
+						<td><center>${rowcount + 1}</center></td>
+						<td>${name}</td>
+						<td>${username}</td>
+						<td>${password}</td>
+						<td>${code}</td>
+						<td>${roles_text}</td>
+						// <input id="test" type="hidden" value="${roles_value}" name="roles_id">
+						<td><center><button id="btn_del"type="button" class="btn btn-danger">ลบ</button></center></td>
+						<td style="display:none;"><input type="hidden"value="${roles_value}" name="roles_id"></td>
+					</tr>
+				`);
+				//Reset form after click add button
+				$('#altEditor-add-form').trigger("reset");
+
+				$('#example1').show();//Show table
+				$('#addRowBtn').attr('disabled',false);
+			}
 
 		});
 	});
@@ -605,6 +623,7 @@
 		$('#password_del').val(user_id["password"]);
 		$('#code_del').val(user_id["code"]);
 	}); 
+	
 	/**
 	 * 
 	 * Insert data
@@ -612,21 +631,32 @@
 	 * @Create Date	03-02-2564
 	 */
 	$('#addRowBtn').on('click', function () {
+
 		let rowdata;
+		var timestamp = new Date()
+		var strDate = timestamp.getFullYear()+"-"+(timestamp.getMonth()+1)+"-"+timestamp.getDate()+" "+timestamp.getHours()+":"+timestamp.getMinutes()+":"+timestamp.getSeconds();
+
 		for(let i = 1; i <= $('#tbody_01').children().length; i++){
 			rowdata = {
 				code: $(`#tbody_01 > tr:nth-child(${i}) > td:nth-child(5)`).text(),
 				name: $(`#tbody_01 > tr:nth-child(${i}) > td:nth-child(2)`).text(),
 				password: $(`#tbody_01 > tr:nth-child(${i}) > td:nth-child(4)`).text(),
 				username: $(`#tbody_01 > tr:nth-child(${i}) > td:nth-child(3)`).text(),
+				created_at: strDate
 			}
+
+			role_id =  $(`#tbody_01 > tr:nth-child(${i}) > td:nth-child(9) > input[type=hidden]`).val()
+
+			// console.log(rowdata)
+			// console.log(role_id)
+
 			$.ajax({
 				url: "<?php echo site_url("Source_manager/add_user_with_role/"); ?>" + "users",
 				type: 'POST',
 				async: false,
 				data: {
 					"rowdata": rowdata,
-					"role_id": 1 // $(`#tbody_01 > tr:nth-child(0) > input[type=hidden]`).val()
+					"role_id": role_id
 				},
 				success: function(res) { 
 					console.log(res)
@@ -640,7 +670,7 @@
 		$('#example1 tbody tr').remove(); // Clear table insert
 		$('#addRowBtn').attr('disabled',true);
 		$('#example1').hide();
-		 $('#modal_input').modal('hide'); //Close
+		$('#modal_input').modal('hide'); //Close
 		// window.location.reload(true);
 	});
 	
@@ -691,14 +721,16 @@
 	$('#DelRowBtn').on('click', function (){
 
 		let rowdata;
-		console.log("delete");
-		
+		var timestamp = new Date()
+		var strDate = timestamp.getFullYear()+"-"+(timestamp.getMonth()+1)+"-"+timestamp.getDate()+" "+timestamp.getHours()+":"+timestamp.getMinutes()+":"+timestamp.getSeconds();
+
 		rowdata = {
 			id : user_id["id"],
 			code: $('#code_del').val(),
 			name: $('#name_del').val(),
 			password: $('#password_del').val(),
 			username: $('#username_del').val(),
+			deleted_at: strDate
 		}
 		$.ajax({
 				// a tipycal url would be /{id} with type='DELETE'
@@ -714,7 +746,7 @@
 
 		$('#modal_del').modal('hide'); //Close modal
 		dt.ajax.reload(); // Reload data table
-		
+
 	});
 
 	/**

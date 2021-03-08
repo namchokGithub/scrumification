@@ -176,16 +176,15 @@ class Source_manager extends BaseController
 		$role_id = $this->input->post("role_id");
 		unset($data['addRowBtn']);
 		unset($data['undefined']);
-        // $this->DM->add_data($name_table,$data);
+        $this->DM->add_data($name_table,$data);
 
 		// Get id from username 
-		// $users_id =  $this->DM->get_id_by_name($name);
+		$users_id =  $this->DM->get_id_by_user($data["name"])->row();
+	
+		// Asign roles$users_id
+		$this->DM->add_user_with_role($role_id,$users_id->id);
 
-		// Asign roles
-		// $this->DM->assing_role($name);
-
-		var_dump($role_id);
-		// echo json_encode($data);
+		echo json_encode($data);
     }
 
 	/**
