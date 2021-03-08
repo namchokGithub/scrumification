@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.1.2 (Python 3.8.1 on win32)" generated="20210308 10:00:44.848" rpa="false">
+<suite id="s1" name="Work" source="C:\xampp\htdocs\gami_ossd\Test\มอดูลจัดการงานที่รับผิดชอบ\work.robot">
+<test id="s1-t1" name="SCM-Work-TC1-01">
+<kw name="GIVEN Open web browser">
+<kw name="Open Browser" library="Selenium2Library">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>${url}</arg>
+<arg>chrome</arg>
+</arguments>
+<msg timestamp="20210308 10:00:45.035" level="INFO">Opening browser 'chrome' to base url 'https://localhost/gami_ossd/index.php'.</msg>
+<status status="PASS" starttime="20210308 10:00:45.035" endtime="20210308 10:00:47.073"></status>
+</kw>
+<kw name="Maximize Browser Window" library="Selenium2Library">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20210308 10:00:47.073" endtime="20210308 10:00:47.196"></status>
+</kw>
+<status status="PASS" starttime="20210308 10:00:45.035" endtime="20210308 10:00:47.196"></status>
+</kw>
+<kw name="WHEN Login with &quot;59160161&quot; &quot;59160161&quot;">
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>xpath=//*[@id="details-button"]</arg>
+</arguments>
+<msg timestamp="20210308 10:00:47.197" level="INFO">Clicking element 'xpath=//*[@id="details-button"]'.</msg>
+<status status="PASS" starttime="20210308 10:00:47.197" endtime="20210308 10:00:47.250"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>xpath=//*[@id="proceed-link"]</arg>
+</arguments>
+<msg timestamp="20210308 10:00:47.250" level="INFO">Clicking element 'xpath=//*[@id="proceed-link"]'.</msg>
+<status status="PASS" starttime="20210308 10:00:47.250" endtime="20210308 10:00:48.265"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>${login_input_username}</arg>
+<arg>${username}</arg>
+</arguments>
+<msg timestamp="20210308 10:00:48.266" level="INFO">Typing text '59160161' into text field 'xpath=//*[@id="inputEmail"]'.</msg>
+<status status="PASS" starttime="20210308 10:00:48.265" endtime="20210308 10:00:48.336"></status>
+</kw>
+<kw name="Input Password" library="Selenium2Library">
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>${login_input_password}</arg>
+<arg>${password}</arg>
+</arguments>
+<msg timestamp="20210308 10:00:48.336" level="INFO">Typing password into text field 'xpath=//*[@id="inputPassword"]'.</msg>
+<status status="PASS" starttime="20210308 10:00:48.336" endtime="20210308 10:00:48.414"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>1s</arg>
+</arguments>
+<msg timestamp="20210308 10:00:49.423" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20210308 10:00:48.414" endtime="20210308 10:00:49.423"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>${login_btn}</arg>
+</arguments>
+<msg timestamp="20210308 10:00:49.423" level="INFO">Clicking element 'xpath=//*[@id="loginForm"]/button'.</msg>
+<status status="PASS" starttime="20210308 10:00:49.423" endtime="20210308 10:00:50.885"></status>
+</kw>
+<status status="PASS" starttime="20210308 10:00:47.197" endtime="20210308 10:00:50.885"></status>
+</kw>
+<kw name="AND Go to work management page">
+<kw name="Go To" library="Selenium2Library">
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<arguments>
+<arg>https://localhost/gami_ossd/index.php/Source_manager/index/Work</arg>
+</arguments>
+<msg timestamp="20210308 10:00:50.885" level="INFO">Opening url 'https://localhost/gami_ossd/index.php/Source_manager/index/Work'</msg>
+<status status="PASS" starttime="20210308 10:00:50.885" endtime="20210308 10:00:51.334"></status>
+</kw>
+<status status="PASS" starttime="20210308 10:00:50.885" endtime="20210308 10:00:51.334"></status>
+</kw>
+<kw name="AND Add work">
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>xpath=//*[@id="example_wrapper"]/div[1]/button[1]</arg>
+</arguments>
+<msg timestamp="20210308 10:00:51.335" level="INFO">Clicking element 'xpath=//*[@id="example_wrapper"]/div[1]/button[1]'.</msg>
+<status status="PASS" starttime="20210308 10:00:51.335" endtime="20210308 10:00:51.388"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>1s</arg>
+</arguments>
+<msg timestamp="20210308 10:00:52.403" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20210308 10:00:51.388" endtime="20210308 10:00:52.403"></status>
+</kw>
+<status status="PASS" starttime="20210308 10:00:51.334" endtime="20210308 10:00:52.403"></status>
+</kw>
+<kw name="AND Input name work &quot;New work&quot;">
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>xpath=//*[@id="name"]</arg>
+<arg>${name}</arg>
+</arguments>
+<msg timestamp="20210308 10:00:52.405" level="INFO">Typing text 'New work' into text field 'xpath=//*[@id="name"]'.</msg>
+<status status="PASS" starttime="20210308 10:00:52.404" endtime="20210308 10:00:52.484"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>1s</arg>
+</arguments>
+<msg timestamp="20210308 10:00:53.495" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20210308 10:00:52.485" endtime="20210308 10:00:53.495"></status>
+</kw>
+<status status="PASS" starttime="20210308 10:00:52.404" endtime="20210308 10:00:53.495"></status>
+</kw>
+<kw name="THEN Submit add work">
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>xpath=//*[@id="addRowBtn"]</arg>
+</arguments>
+<msg timestamp="20210308 10:00:53.497" level="INFO">Clicking element 'xpath=//*[@id="addRowBtn"]'.</msg>
+<status status="PASS" starttime="20210308 10:00:53.497" endtime="20210308 10:00:54.134"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>1s</arg>
+</arguments>
+<msg timestamp="20210308 10:00:55.147" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20210308 10:00:54.134" endtime="20210308 10:00:55.147"></status>
+</kw>
+<status status="PASS" starttime="20210308 10:00:53.497" endtime="20210308 10:00:55.147"></status>
+</kw>
+<kw name="Close Browser" library="Selenium2Library" type="teardown">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20210308 10:00:55.148" endtime="20210308 10:00:57.314"></status>
+</kw>
+<doc>การเพิ่มกิจกรรม</doc>
+<tags>
+<tag>PASS</tag>
+</tags>
+<status status="PASS" starttime="20210308 10:00:45.034" endtime="20210308 10:00:57.314" critical="yes"></status>
+</test>
+<test id="s1-t2" name="SCM-Work-TC1-02">
+<kw name="GIVEN Open web browser">
+<kw name="Open Browser" library="Selenium2Library">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>${url}</arg>
+<arg>chrome</arg>
+</arguments>
+<msg timestamp="20210308 10:00:57.317" level="INFO">Opening browser 'chrome' to base url 'https://localhost/gami_ossd/index.php'.</msg>
+<status status="PASS" starttime="20210308 10:00:57.317" endtime="20210308 10:00:59.339"></status>
+</kw>
+<kw name="Maximize Browser Window" library="Selenium2Library">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20210308 10:00:59.339" endtime="20210308 10:00:59.468"></status>
+</kw>
+<status status="PASS" starttime="20210308 10:00:57.317" endtime="20210308 10:00:59.468"></status>
+</kw>
+<kw name="WHEN Login with &quot;59160161&quot; &quot;59160161&quot;">
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>xpath=//*[@id="details-button"]</arg>
+</arguments>
+<msg timestamp="20210308 10:00:59.470" level="INFO">Clicking element 'xpath=//*[@id="details-button"]'.</msg>
+<status status="PASS" starttime="20210308 10:00:59.470" endtime="20210308 10:00:59.517"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>xpath=//*[@id="proceed-link"]</arg>
+</arguments>
+<msg timestamp="20210308 10:00:59.518" level="INFO">Clicking element 'xpath=//*[@id="proceed-link"]'.</msg>
+<status status="PASS" starttime="20210308 10:00:59.517" endtime="20210308 10:01:00.509"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>${login_input_username}</arg>
+<arg>${username}</arg>
+</arguments>
+<msg timestamp="20210308 10:01:00.509" level="INFO">Typing text '59160161' into text field 'xpath=//*[@id="inputEmail"]'.</msg>
+<status status="PASS" starttime="20210308 10:01:00.509" endtime="20210308 10:01:00.583"></status>
+</kw>
+<kw name="Input Password" library="Selenium2Library">
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>${login_input_password}</arg>
+<arg>${password}</arg>
+</arguments>
+<msg timestamp="20210308 10:01:00.583" level="INFO">Typing password into text field 'xpath=//*[@id="inputPassword"]'.</msg>
+<status status="PASS" starttime="20210308 10:01:00.583" endtime="20210308 10:01:00.667"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>1s</arg>
+</arguments>
+<msg timestamp="20210308 10:01:01.677" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20210308 10:01:00.667" endtime="20210308 10:01:01.678"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>${login_btn}</arg>
+</arguments>
+<msg timestamp="20210308 10:01:01.678" level="INFO">Clicking element 'xpath=//*[@id="loginForm"]/button'.</msg>
+<status status="PASS" starttime="20210308 10:01:01.678" endtime="20210308 10:01:02.606"></status>
+</kw>
+<status status="PASS" starttime="20210308 10:00:59.469" endtime="20210308 10:01:02.606"></status>
+</kw>
+<kw name="AND Go to work management page">
+<kw name="Go To" library="Selenium2Library">
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<arguments>
+<arg>https://localhost/gami_ossd/index.php/Source_manager/index/Work</arg>
+</arguments>
+<msg timestamp="20210308 10:01:02.607" level="INFO">Opening url 'https://localhost/gami_ossd/index.php/Source_manager/index/Work'</msg>
+<status status="PASS" starttime="20210308 10:01:02.607" endtime="20210308 10:01:02.764"></status>
+</kw>
+<status status="PASS" starttime="20210308 10:01:02.607" endtime="20210308 10:01:02.765"></status>
+</kw>
+<kw name="AND Edit work">
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>1s</arg>
+</arguments>
+<msg timestamp="20210308 10:01:03.768" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20210308 10:01:02.765" endtime="20210308 10:01:03.768"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>xpath=//*[@id="example"]/tbody/tr[1]</arg>
+</arguments>
+<msg timestamp="20210308 10:01:03.768" level="INFO">Clicking element 'xpath=//*[@id="example"]/tbody/tr[1]'.</msg>
+<status status="PASS" starttime="20210308 10:01:03.768" endtime="20210308 10:01:03.810"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>1s</arg>
+</arguments>
+<msg timestamp="20210308 10:01:04.814" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20210308 10:01:03.810" endtime="20210308 10:01:04.814"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>xpath=//*[@id="example_wrapper"]/div[1]/button[2]</arg>
+</arguments>
+<msg timestamp="20210308 10:01:04.814" level="INFO">Clicking element 'xpath=//*[@id="example_wrapper"]/div[1]/button[2]'.</msg>
+<status status="PASS" starttime="20210308 10:01:04.814" endtime="20210308 10:01:04.857"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>1s</arg>
+</arguments>
+<msg timestamp="20210308 10:01:05.872" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20210308 10:01:04.857" endtime="20210308 10:01:05.872"></status>
+</kw>
+<status status="PASS" starttime="20210308 10:01:02.765" endtime="20210308 10:01:05.872"></status>
+</kw>
+<kw name="AND Input name work &quot;New work XeditX&quot;">
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>xpath=//*[@id="name"]</arg>
+<arg>${name}</arg>
+</arguments>
+<msg timestamp="20210308 10:01:05.874" level="INFO">Typing text 'New work XeditX' into text field 'xpath=//*[@id="name"]'.</msg>
+<status status="PASS" starttime="20210308 10:01:05.873" endtime="20210308 10:01:05.969"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>1s</arg>
+</arguments>
+<msg timestamp="20210308 10:01:06.979" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20210308 10:01:05.969" endtime="20210308 10:01:06.979"></status>
+</kw>
+<status status="PASS" starttime="20210308 10:01:05.873" endtime="20210308 10:01:06.979"></status>
+</kw>
+<kw name="THEN Submit edit work">
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>xpath=//*[@id="editRowBtn"]</arg>
+</arguments>
+<msg timestamp="20210308 10:01:06.980" level="INFO">Clicking element 'xpath=//*[@id="editRowBtn"]'.</msg>
+<status status="PASS" starttime="20210308 10:01:06.980" endtime="20210308 10:01:07.636"></status>
+</kw>
+<status status="PASS" starttime="20210308 10:01:06.980" endtime="20210308 10:01:07.636"></status>
+</kw>
+<kw name="Close Browser" library="Selenium2Library" type="teardown">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20210308 10:01:07.637" endtime="20210308 10:01:09.780"></status>
+</kw>
+<doc>การแก้ไขกิจกรรม</doc>
+<tags>
+<tag>PASS</tag>
+</tags>
+<status status="PASS" starttime="20210308 10:00:57.315" endtime="20210308 10:01:09.781" critical="yes"></status>
+</test>
+<test id="s1-t3" name="SCM-Work-TC1-03">
+<kw name="GIVEN Open web browser">
+<kw name="Open Browser" library="Selenium2Library">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>${url}</arg>
+<arg>chrome</arg>
+</arguments>
+<msg timestamp="20210308 10:01:09.784" level="INFO">Opening browser 'chrome' to base url 'https://localhost/gami_ossd/index.php'.</msg>
+<status status="PASS" starttime="20210308 10:01:09.784" endtime="20210308 10:01:11.808"></status>
+</kw>
+<kw name="Maximize Browser Window" library="Selenium2Library">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20210308 10:01:11.809" endtime="20210308 10:01:11.932"></status>
+</kw>
+<status status="PASS" starttime="20210308 10:01:09.783" endtime="20210308 10:01:11.932"></status>
+</kw>
+<kw name="WHEN Login with &quot;59160161&quot; &quot;59160161&quot;">
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>xpath=//*[@id="details-button"]</arg>
+</arguments>
+<msg timestamp="20210308 10:01:11.933" level="INFO">Clicking element 'xpath=//*[@id="details-button"]'.</msg>
+<status status="PASS" starttime="20210308 10:01:11.933" endtime="20210308 10:01:11.977"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>xpath=//*[@id="proceed-link"]</arg>
+</arguments>
+<msg timestamp="20210308 10:01:11.977" level="INFO">Clicking element 'xpath=//*[@id="proceed-link"]'.</msg>
+<status status="PASS" starttime="20210308 10:01:11.977" endtime="20210308 10:01:13.031"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>${login_input_username}</arg>
+<arg>${username}</arg>
+</arguments>
+<msg timestamp="20210308 10:01:13.032" level="INFO">Typing text '59160161' into text field 'xpath=//*[@id="inputEmail"]'.</msg>
+<status status="PASS" starttime="20210308 10:01:13.031" endtime="20210308 10:01:13.102"></status>
+</kw>
+<kw name="Input Password" library="Selenium2Library">
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>${login_input_password}</arg>
+<arg>${password}</arg>
+</arguments>
+<msg timestamp="20210308 10:01:13.103" level="INFO">Typing password into text field 'xpath=//*[@id="inputPassword"]'.</msg>
+<status status="PASS" starttime="20210308 10:01:13.103" endtime="20210308 10:01:13.183"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>1s</arg>
+</arguments>
+<msg timestamp="20210308 10:01:14.185" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20210308 10:01:13.183" endtime="20210308 10:01:14.185"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>${login_btn}</arg>
+</arguments>
+<msg timestamp="20210308 10:01:14.185" level="INFO">Clicking element 'xpath=//*[@id="loginForm"]/button'.</msg>
+<status status="PASS" starttime="20210308 10:01:14.185" endtime="20210308 10:01:15.642"></status>
+</kw>
+<status status="PASS" starttime="20210308 10:01:11.933" endtime="20210308 10:01:15.642"></status>
+</kw>
+<kw name="AND Go to work management page">
+<kw name="Go To" library="Selenium2Library">
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<arguments>
+<arg>https://localhost/gami_ossd/index.php/Source_manager/index/Work</arg>
+</arguments>
+<msg timestamp="20210308 10:01:15.643" level="INFO">Opening url 'https://localhost/gami_ossd/index.php/Source_manager/index/Work'</msg>
+<status status="PASS" starttime="20210308 10:01:15.643" endtime="20210308 10:01:16.196"></status>
+</kw>
+<status status="PASS" starttime="20210308 10:01:15.642" endtime="20210308 10:01:16.196"></status>
+</kw>
+<kw name="AND Delete work">
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>1s</arg>
+</arguments>
+<msg timestamp="20210308 10:01:17.212" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20210308 10:01:16.197" endtime="20210308 10:01:17.213"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>xpath=//*[@id="example"]/tbody/tr[1]</arg>
+</arguments>
+<msg timestamp="20210308 10:01:17.213" level="INFO">Clicking element 'xpath=//*[@id="example"]/tbody/tr[1]'.</msg>
+<status status="PASS" starttime="20210308 10:01:17.213" endtime="20210308 10:01:17.253"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>1s</arg>
+</arguments>
+<msg timestamp="20210308 10:01:18.260" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20210308 10:01:17.253" endtime="20210308 10:01:18.260"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>xpath=//*[@id="example_wrapper"]/div[1]/button[3]</arg>
+</arguments>
+<msg timestamp="20210308 10:01:18.260" level="INFO">Clicking element 'xpath=//*[@id="example_wrapper"]/div[1]/button[3]'.</msg>
+<status status="PASS" starttime="20210308 10:01:18.260" endtime="20210308 10:01:18.305"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>1s</arg>
+</arguments>
+<msg timestamp="20210308 10:01:19.309" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20210308 10:01:18.305" endtime="20210308 10:01:19.309"></status>
+</kw>
+<status status="PASS" starttime="20210308 10:01:16.197" endtime="20210308 10:01:19.309"></status>
+</kw>
+<kw name="THEN Submit delete work">
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>xpath=//*[@id="deleteRowBtn"]</arg>
+</arguments>
+<msg timestamp="20210308 10:01:19.310" level="INFO">Clicking element 'xpath=//*[@id="deleteRowBtn"]'.</msg>
+<status status="PASS" starttime="20210308 10:01:19.310" endtime="20210308 10:01:19.974"></status>
+</kw>
+<status status="PASS" starttime="20210308 10:01:19.310" endtime="20210308 10:01:19.974"></status>
+</kw>
+<kw name="Close Browser" library="Selenium2Library" type="teardown">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20210308 10:01:19.974" endtime="20210308 10:01:23.010"></status>
+</kw>
+<doc>การลบกิจกรรม</doc>
+<tags>
+<tag>PASS</tag>
+</tags>
+<status status="PASS" starttime="20210308 10:01:09.782" endtime="20210308 10:01:23.011" critical="yes"></status>
+</test>
+<status status="PASS" starttime="20210308 10:00:44.849" endtime="20210308 10:01:23.013"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="3" fail="0">Critical Tests</stat>
+<stat pass="3" fail="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="3" fail="0">PASS</stat>
+</tag>
+<suite>
+<stat pass="3" fail="0" id="s1" name="Work">Work</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

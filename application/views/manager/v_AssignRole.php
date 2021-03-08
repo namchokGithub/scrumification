@@ -150,7 +150,46 @@
 				text: '<i class="fa fa-trash"></i> ลบชุดข้อมูล',
 				name: 'delete',     // DO NOT change name
 				"className": 'btn btn-danger btn-lg' 
-			}]
+			}],
+			onAddRow: function(datatable, rowdata, success, error) {
+				// console.log(datatable, rowdata, success, error)
+				$.ajax({
+					// a tipycal url would be / with type='PUT'
+					url: url_add,
+					type: 'POST',
+					async :false,
+					data: rowdata,
+					success:success,
+					error: error
+				});
+				datatable.s.dt.ajax.reload();
+			},
+			onEditRow: function(datatable, rowdata, success, error) {
+				rowdata['id'] = datatable.s.dt.rows( { selected: true } ).data()[0]['id']
+				$.ajax({
+					// a tipycal url would be /{id} with type='POST'
+					url: url_edit,
+					type: 'POST',
+					async :false,
+					data: rowdata,
+					success: success,
+					error: error
+				});
+				datatable.s.dt.ajax.reload();
+			},
+			onDeleteRow: function(datatable, rowdata, success, error) {
+				rowdata['id'] = datatable.s.dt.rows( { selected: true } ).data()[0]['id']
+				$.ajax({
+					// a tipycal url would be /{id} with type='DELETE'
+					url: url_delete,
+					type: 'POST',
+					async :false,
+					data: rowdata,
+					success: success,
+					error: error
+				});
+				datatable.s.dt.ajax.reload();
+			}
 		}); // End mytable
 
 		// Set index of column
