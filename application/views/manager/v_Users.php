@@ -174,6 +174,7 @@
 						</div>
 						<div class="col-sm-8 col-md-8 col-lg-8">
 							<input type="text" id="name_edit" pattern=".*" title="" name="ชื่อ - นามสกุล" placeholder="ชื่อ - นามสกุล" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
+							<label id="name_edit-label" class="text-danger errorLabel"></label>
 						</div>
 						<div style="clear:both;"></div>
 					</div>
@@ -183,6 +184,7 @@
 						</div>
 						<div class="col-sm-8 col-md-8 col-lg-8">
 							<input type="text" id="username_edit" pattern=".*" title="" name="Username" placeholder="ชื่อผู้ใช้งาน" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
+							<label id="username_edit-label" class="text-danger errorLabel"></label>
 						</div>
 						<div style="clear:both;"></div>
 					</div>
@@ -193,7 +195,7 @@
 						</div>
 						<div class="col-sm-8 col-md-8 col-lg-8">
 							<input type="password" id="password_edit" pattern=".*" title="" name="Password" placeholder="Password" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
-							<!-- <input type="hidden" id="password_edit_old" pattern=".*" title="" name="หน้าที่" placeholder="ตำแหน่ง" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value=""> -->
+							<label id="password_edit-label" class="text-danger errorLabel"></label>
 						</div>
 						<div style="clear:both;"></div>
 					</div>
@@ -203,6 +205,7 @@
 						</div>
 						<div class="col-sm-8 col-md-8 col-lg-8">
 							<input type="text" id="code_edit" pattern=".*" title="" name="หน้าที่" placeholder="ตำแหน่ง" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
+							<label id="codelabel" class="text-danger errorLabel">กรณีที่ตำแหน่งเป็นประธานมกุลและรองประธานมกุลต้องกรอกข้อมูล</label>
 						</div>
 						<div style="clear:both;"></div>
 					</div>
@@ -333,7 +336,7 @@
 		},
 		{ title:"ตำแหน่ง", data: "code",
 			render: function(data, type, row, meta) {
-				console.log(row)
+				// console.log(row)
 				if (data == null || data == "") return "สมาชิก";
 				return data;
 			}
@@ -391,6 +394,7 @@
 				name: 'edit', // DO NOT change name
 				"className": 'btn btn-warning btn-lg',
 				action: function ( e, dt, node, config ) {
+					$('#password_edit').val('')
 					$("#modalEdit").modal('show');
 
            		 }
@@ -681,32 +685,50 @@
 		var timestamp = new Date()
 		var strDate = timestamp.getFullYear()+"-"+(timestamp.getMonth()+1)+"-"+timestamp.getDate()+" "+timestamp.getHours()+":"+timestamp.getMinutes()+":"+timestamp.getSeconds();
 
-		let rowdata = {
-			id :	user_id["id"],
-			code: $('#code_edit').val(),
-			name: $('#name_edit').val(),
-			password: $('#password_edit').val(),
-			username: $('#username_edit').val(),
-			updated_at: strDate
-		}
-		// console.log("rowdata",rowdata);
 
-		$.ajax({
-			// a tipycal url would be /{id} with type='POST'
-			url: url_edit,
-			type: 'POST',
-			async: false,
-			data: rowdata,
-			success: function() { 
-				toastr['success']("ดำเนินการเสร็จสิ้น")
-			},
-			error: (er)=>{console.log(er)}
-		});
+		if($('#name_edit').val() == '' || $('#username_edit').val() == '' || $('#password_edit').val() == '') {
+			if($('#name_edit').val() == '') {$('#name_edit-label').text("กรุณาบันทึกชื่อนามสกุล");}
+			if($('#username_edit').val() == '') {$('#username_edit-label').text("กรุณาบันทึกชื่อผู้ใช้งาน");}
+			if($('#password_edit').val() == '') {$('#password_edit-label').text("กรุณาบันทึกรหัสผ่าน");}
 
-		dt.ajax.reload(); // Reload data table
-		$('#modalEdit').modal('hide'); // Close modal
-		$('#altEditor-edit-form');
+			$('#name_edit').on('change', ()=>{
+				if($('#name_edit').val() != '') {$('#name_edit-label').text('');}
+			})
+			$('#username_edit').on('change', ()=>{
+				if($('#username_edit').val() != '') {$('#username_edit-label').text('');}
+			})
+			$('#password_edit').on('change', ()=>{
+				if($('#password_edit').val() != '') {$('#password_edit-label').text('');}
+			})
 
+		} else if ($('#name_edit').val() != '' && $('#username_edit').val() != '' && $('#password_edit').val() != '') {
+						// console.log('yess')
+			let rowdata = {
+				id :	user_id["id"],
+				code: $('#code_edit').val(),
+				name: $('#name_edit').val(),
+				password: $('#password_edit').val(),
+				username: $('#username_edit').val(),
+				updated_at: strDate
+			}
+			console.log("rowdata ",rowdata);
+
+			$.ajax({
+				// a tipycal url would be /{id} with type='POST'
+				url: url_edit,
+				type: 'POST',
+				async: false,
+				data: rowdata,
+				success: function() { 
+					toastr['success']("ดำเนินการเสร็จสิ้น")
+				},
+				error: (er)=>{console.log(er)}
+			});
+
+			dt.ajax.reload(); // Reload data table
+			$('#modalEdit').modal('hide'); // Close modal
+			$('#altEditor-edit-form');
+		} // End if check value
 	})
 
 	/**
@@ -833,6 +855,9 @@
 </script>
 
 <style>
+	.text-danger {
+		color: #ff0000 !important;
+	}
 	a:link {
 		color: red;
 	}a:hover {

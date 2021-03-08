@@ -318,6 +318,6 @@
                         console.log("Update Point!!");
                     }
                 });
-            }, 10000); // time in milliseconds
+            }, 100000); // time in milliseconds
         </script>
         <!-- =============================================== -->

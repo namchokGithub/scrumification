@@ -485,63 +485,62 @@ countdown.setLabels(
 	*/
 	function UseItem(item,item_name){
 		console.log('targetID: ' + target_id)
-		console.log('targetID: ' + $("#select-opt").val())
-			Swal.fire({
-				title: 'คุณต้องการใช้งาน <br>"'+item_name+'"?',
-				imageUrl: '<?php echo base_url('assets/dist/img/item/UseItem.png'); ?>',
-				imageWidth: 100,
-				imageHeight: 100,
-				imageAlt: 'Custom image',
-				showCancelButton: true,
-				confirmButtonText: 'ยืนยัน',
-				cancelButtonText: 'ยกเลิก',
-				showLoaderOnConfirm: true,
-				preConfirm: (count) => {
-				return fetch('<?php echo site_url("achievement/UseItem"); ?>/'+item+'/'+ $("#select-opt").val())
-					.then(response => {
-					if (!response.ok) {
-						throw new Error(response.statusText)
-					}
-					return response.json()
-					})
-					.catch(error => {
-						Swal.showValidationMessage(
-							`Request failed: ${error}`
-						)
-					})
-				},
-				allowOutsideClick: () => !Swal.isLoading()
-			}).then((result) => {
-				if (result.value) {
-					console.log(result)
-					if(result.value['type'] == "Comple"){
-					console.log(result.value)
-					Swal.fire({
-						icon: 'success',
-						title: 'ส่งคำขอใช้งานสินค้าเสร็จสิ้น',
-						showConfirmButton: false,
-						timer: 1500
-					})
-					}
-					else if(result.value['type'] == "Item"){
-					Swal.fire({
-						icon: 'error',
-						title: 'จำนวนสินค้าที่ต้องการใช้งานไม่เพียงพอ',
-						showConfirmButton: false,
-						timer: 1500
-					})
-					}
-					else{
-					Swal.fire({
-						icon: 'error',
-						title: 'เกิดข้อผิดพลาดในการใช้งาน',
-						showConfirmButton: false,
-						timer: 1500
-					})
-					}
+		Swal.fire({
+			title: 'คุณต้องการใช้งาน <br>"'+item_name+'"?',
+			imageUrl: '<?php echo base_url('assets/dist/img/item/UseItem.png'); ?>',
+			imageWidth: 100,
+			imageHeight: 100,
+			imageAlt: 'Custom image',
+			showCancelButton: true,
+			confirmButtonText: 'ยืนยัน',
+			cancelButtonText: 'ยกเลิก',
+			showLoaderOnConfirm: true,
+			preConfirm: (count) => {
+			return fetch('<?php echo site_url("achievement/UseItem"); ?>/'+item+'/'+ target_id)
+				.then(response => {
+				if (!response.ok) {
+					throw new Error(response.statusText)
 				}
-				Setup_ui()
-			})
+				return response.json()
+				})
+				.catch(error => {
+					Swal.showValidationMessage(
+						`Request failed: ${error}`
+					)
+				})
+			},
+			allowOutsideClick: () => !Swal.isLoading()
+		}).then((result) => {
+			if (result.value) {
+				// console.log(result)
+				if(result.value['type'] == "Comple"){
+				// console.log(result.value)
+				Swal.fire({
+					icon: 'success',
+					title: 'ส่งคำขอใช้งานสินค้าเสร็จสิ้น',
+					showConfirmButton: false,
+					timer: 1500
+				})
+				}
+				else if(result.value['type'] == "Item"){
+				Swal.fire({
+					icon: 'error',
+					title: 'จำนวนสินค้าที่ต้องการใช้งานไม่เพียงพอ',
+					showConfirmButton: false,
+					timer: 1500
+				})
+				}
+				else{
+				Swal.fire({
+					icon: 'error',
+					title: 'เกิดข้อผิดพลาดในการใช้งาน',
+					showConfirmButton: false,
+					timer: 1500
+				})
+				}
+			}
+			Setup_ui()
+		})
 	}
 	//* ----------------------------------------- End UseItem -------------------------------------------------------
 

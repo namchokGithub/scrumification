@@ -18,6 +18,10 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
 
+	$(document).ready(function () {
+		$('input').attr('autocomplete', 'off');
+	});
+
 	var myTable;
 	var topic_name = "activity";
 	// local URL's are not allowed
@@ -161,16 +165,44 @@
 		}],
 		onAddRow: function(datatable, rowdata, success, error) {
 			console.log(datatable, rowdata, success, error)
-			$.ajax({
-				// a tipycal url would be / with type='PUT'
-				url: url_add,
-				type: 'POST',
-				async :false,
-				data: rowdata,
-				success:success,
-				error: error
-			});
-			datatable.s.dt.ajax.reload();
+
+			if($('#name').val() == '' || $('#time_start').val() == '' || $('#time_end').val() == '' 
+				|| $('#date_start').val() == '' || $('#date_end').val()== '' ) {
+				if($('#name').val() == '') {$('#namelabel').text("กรุณาบันทึกชื่อกิจกรรม");}
+				if($('#time_start').val() == '') {$('#time_startlabel').text("กรุณาบันทึกเวลเริ่มต้นกิจกรรม");}
+				if($('#time_end').val() == '') {$('#time_endlabel').text("กรุณาบันทึกเวลาสิ้นสุดกิจกรรม");}
+				if($('#date_start').val() == '') {$('#date_startlabel').text("กรุณาบันทึกวันที่เริ่มกิจกรรม");}
+				if($('#date_end').val() == '') {$('#date_endlabel').text("กรุณาบันทึกวันที่สิ้นสุดกิจกรรม");}
+
+				$('#name').on('change', ()=>{
+					if($('#name').val() != '') {$('#namelabel').text('');}
+				})
+				$('#time_end').on('change', ()=>{
+					if($('#time_end').val() != '') {$('#time_endlabel').text('');}
+				})
+				$('#time_start').on('change', ()=>{
+					if($('#time_start').val() != '') {$('#time_startlabel').text('');}
+				})
+				$('#date_start').on('change', ()=>{
+					if($('#date_start').val() != '') {$('#date_startlabel').text('');}
+				})
+				$('#date_end').on('change', ()=>{
+					if($('#date_end').val() != '') {$('#date_endlabel').text('');}
+				})
+			} else if ($('#name').val() != '' && $('#time_start').val() !='' && $('#time_end').val() !=''
+						&& $('#date_start').val() != '' && $('#date_end').val() != '') {
+							// console.log('yess')
+				$.ajax({
+					// a tipycal url would be / with type='PUT'
+					url: url_add,
+					type: 'POST',
+					async :false,
+					data: rowdata,
+					success:success,
+					error: error
+				});
+				datatable.s.dt.ajax.reload();
+			}
 		},
 		onEditRow: function(datatable, rowdata, success, error) {
 			rowdata['id'] = datatable.s.dt.rows( { selected: true } ).data()[0]['id']
@@ -455,13 +487,12 @@
 		} // เวลาไม่ได้อยู่ใยช่วง
 
 	} // end toggleStatus
-
-	$(document).ready(function () {
-		
-	});
 </script>
 
 <style>
+	.errorLabel {
+		color: red !important;
+	}
 	.swal2-cancel {
 		margin-right: 10px !important;
 	}

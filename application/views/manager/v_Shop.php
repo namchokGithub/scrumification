@@ -58,7 +58,7 @@ function numberWithCommas(x) {
 		},
 		{
 			data: "type",
-			title: "type",
+			title: "ประเภท",
 			type : "select",
 			options : Options,
 			select2 : { width: "100%"},
@@ -126,30 +126,86 @@ function numberWithCommas(x) {
 	  "className": 'btn btn-danger btn-lg' 
    }],
         onAddRow: function(datatable, rowdata, success, error) {
-			console.log(datatable, rowdata, success, error)
-            $.ajax({
-                // a tipycal url would be / with type='PUT'
-                url: url_add,
-                type: 'POST',
-				async :false,
-                data: rowdata,
-                success:success,
-                error: error
-            });
-			datatable.s.dt.ajax.reload();
+			$('.errorLabel').css("color", 'red');
+			if($('#name').val() == '' || $('#point').val() == '' || $('#total').val() == ''
+							|| $('#time_start').val() == '' || $('#time_end').val() == '') {
+				if($('#name').val() == '') {$('#namelabel').text("กรุณาบันทึกชื่อ");}
+				if($('#point').val() == '') {$('#pointlabel').text("กรุณาบันทึกคะแนน");}
+				if($('#total').val() == '') {$('#totallabel').text("กรุณาบันทึกจำนวน");}
+				if($('#time_start').val() == '') {$('#time_startlabel').text("กรุณาบันทึกเวลาเริ่มต้น");}
+				if($('#time_end').val() == '') {$('#time_endlabel').text("กรุณาบันทึกเวลาสิ้นสุด");}
+
+				$('#name').on('change', ()=>{
+					if($('#name').val() != '') {$('#namelabel').text('');}
+				})
+				$('#point').on('change', ()=>{
+					if($('#point').val() != '') {$('#pointlabel').text('');}
+				})
+				$('#total').on('change', ()=>{
+					if($('#total').val() != '') {$('#totallabel').text('');}
+				})
+				$('#time_start').on('change', ()=>{
+					if($('#time_start').val() != '') {$('#time_startlabel').text('');}
+				})
+				$('#time_end').on('change', ()=>{
+					if($('#time_end').val() != '') {$('#time_endlabel').text('');}
+				})
+
+			} else if ($('#name').val() != '' && $('#point').val() != '' && $('#total').val() != ''
+							&& $('#time_start').val() != '' && $('#time_end').val() != '') {
+				// console.log(datatable, rowdata, success, error)
+				$.ajax({
+					// a tipycal url would be / with type='PUT'
+					url: url_add,
+					type: 'POST',
+					async :false,
+					data: rowdata,
+					success:success,
+					error: error
+				});
+				datatable.s.dt.ajax.reload();
+			}
         },
         onEditRow: function(datatable, rowdata, success, error) {
-			rowdata['id'] = datatable.s.dt.rows( { selected: true } ).data()[0]['id']
-            $.ajax({
-                // a tipycal url would be /{id} with type='POST'
-                url: url_edit,
-                type: 'POST',
-				async :false,
-                data: rowdata,
-                success: success,
-                error: error
-            });
-			datatable.s.dt.ajax.reload();
+			$('.errorLabel').css("color", 'red');
+			if($('#name').val() == '' || $('#point').val() == '' || $('#total').val() == ''
+							|| $('#time_start').val() == '' || $('#time_end').val() == '') {
+				if($('#name').val() == '') {$('#namelabel').text("กรุณาบันทึกชื่อ");}
+				if($('#point').val() == '') {$('#pointlabel').text("กรุณาบันทึกคะแนน");}
+				if($('#total').val() == '') {$('#totallabel').text("กรุณาบันทึกจำนวน");}
+				if($('#time_start').val() == '') {$('#time_startlabel').text("กรุณาบันทึกเวลาเริ่มต้น");}
+				if($('#time_end').val() == '') {$('#time_endlabel').text("กรุณาบันทึกเวลาสิ้นสุด");}
+
+				$('#name').on('change', ()=>{
+					if($('#name').val() != '') {$('#namelabel').text('');}
+				})
+				$('#point').on('change', ()=>{
+					if($('#point').val() != '') {$('#pointlabel').text('');}
+				})
+				$('#total').on('change', ()=>{
+					if($('#total').val() != '') {$('#totallabel').text('');}
+				})
+				$('#time_start').on('change', ()=>{
+					if($('#time_start').val() != '') {$('#time_startlabel').text('');}
+				})
+				$('#time_end').on('change', ()=>{
+					if($('#time_end').val() != '') {$('#time_endlabel').text('');}
+				})
+
+			} else if ($('#name').val() != '' && $('#point').val() != '' && $('#total').val() != ''
+							&& $('#time_start').val() != '' && $('#time_end').val() != '') {
+				rowdata['id'] = datatable.s.dt.rows( { selected: true } ).data()[0]['id']
+				$.ajax({
+					// a tipycal url would be /{id} with type='POST'
+					url: url_edit,
+					type: 'POST',
+					async :false,
+					data: rowdata,
+					success: success,
+					error: error
+				});
+				datatable.s.dt.ajax.reload();
+			}
         },
         onDeleteRow: function(datatable, rowdata, success, error) {
 			rowdata['id'] = datatable.s.dt.rows( { selected: true } ).data()[0]['id']

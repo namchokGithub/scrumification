@@ -88,30 +88,50 @@
 			"className": 'btn btn-danger btn-lg' 
 		}],
 		onAddRow: function(datatable, rowdata, success, error) {
-			console.log(datatable, rowdata, success, error)
-			$.ajax({
-				// a tipycal url would be / with type='PUT'
-				url: url_add,
-				type: 'POST',
-				async :false,
-				data: rowdata,
-				success:success,
-				error: error
-			});
-			datatable.s.dt.ajax.reload();
+			$('.errorLabel').css("color", 'red');
+			if($('#name_indi').val() == '') {
+				$('#name_indilabel').text("กรุณาบันทึกชื่อ");
+				
+				$('#name_indi').on('change', ()=>{
+					if($('#name_indi').val() != '') {$('#name_indilabel').text('');}
+				})
+
+			} else if ($('#name_indi').val() != '') {
+				// console.log(datatable, rowdata, success, error)
+				$.ajax({
+					// a tipycal url would be / with type='PUT'
+					url: url_add,
+					type: 'POST',
+					async :false,
+					data: rowdata,
+					success:success,
+					error: error
+				});
+				datatable.s.dt.ajax.reload();
+			}
 		},
 		onEditRow: function(datatable, rowdata, success, error) {
-			rowdata['id'] = datatable.s.dt.rows( { selected: true } ).data()[0]['id']
-			$.ajax({
-				// a tipycal url would be /{id} with type='POST'
-				url: url_edit,
-				type: 'POST',
-				async :false,
-				data: rowdata,
-				success: success,
-				error: error
-			});
-			datatable.s.dt.ajax.reload();
+			$('.errorLabel').css("color", 'red');
+			if($('#name_indi').val() == '') {
+				$('#name_indilabel').text("กรุณาบันทึกชื่อ");
+				
+				$('#name_indi').on('change', ()=>{
+					if($('#name_indi').val() != '') {$('#name_indilabel').text('');}
+				})
+
+			} else if ($('#name_indi').val() != '') {
+				rowdata['id'] = datatable.s.dt.rows( { selected: true } ).data()[0]['id']
+				$.ajax({
+					// a tipycal url would be /{id} with type='POST'
+					url: url_edit,
+					type: 'POST',
+					async :false,
+					data: rowdata,
+					success: success,
+					error: error
+				});
+				datatable.s.dt.ajax.reload();
+			}
 		},
 		onDeleteRow: function(datatable, rowdata, success, error) {
 			rowdata['id'] = datatable.s.dt.rows( { selected: true } ).data()[0]['id']

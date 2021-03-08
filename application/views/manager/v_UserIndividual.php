@@ -151,7 +151,7 @@
 				  name: 'delete',     // DO NOT change name
 				  "className": 'btn btn-danger btn-lg' 
 			   }],
-				onAddRow: function(datatable, rowdata, success, error) {
+				onAddRow: function(datatable, rowdata, success, error) {		
 					// console.log(datatable, rowdata, success, error)
 					$.ajax({
 						// a tipycal url would be / with type='PUT'
@@ -162,7 +162,7 @@
 						success:success,
 						error: error
 					});
-					datatable.s.dt.ajax.reload();
+					datatable.s.dt.ajax.reload();					
 				},
 				onEditRow: function(datatable, rowdata, success, error) {
 					rowdata['id'] = datatable.s.dt.rows( { selected: true } ).data()[0]['id']

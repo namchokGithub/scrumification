@@ -156,31 +156,61 @@
 				"className": 'btn btn-danger btn-lg' 
 			}],
 			onAddRow: function(datatable, rowdata, success, error) {
-				// console.log(datatable, rowdata, success, error)
-				console.log(rowdata)
-				$.ajax({
-					// a tipycal url would be / with type='PUT'
-					url: url_add,
-					type: 'POST',
-					async :false,
-					data: rowdata,
-					success: success,
-					error: (e)=>{console.log(e)}
-				})
-				datatable.s.dt.ajax.reload();
+				$('.errorLabel').css("color", 'red');
+				if($('#name').val() == '' || $('#description').val() == '') {
+					if($('#name').val() == '') {$('#namelabel').text("กรุณาบันทึกชื่อบทบาท");}
+					if($('#description').val() == '') {$('#descriptionlabel').text("กรุณาบันทึกคำอธิบาย");}
+
+					$('#name').on('change', ()=>{
+						if($('#name').val() != '') {$('#namelabel').text('');}
+					})
+					$('#description').on('change', ()=>{
+						if($('#description').val() != '') {$('#descriptionlabel').text('');}
+					})
+
+				} else if ($('#name').val() != '' && $('#description').val() != '') {
+					console.log('yess')
+					// // console.log(datatable, rowdata, success, error)
+					// console.log(rowdata)
+					$.ajax({
+						// a tipycal url would be / with type='PUT'
+						url: url_add,
+						type: 'POST',
+						async :false,
+						data: rowdata,
+						success: success,
+						error: (e)=>{console.log(e)}
+					})
+					datatable.s.dt.ajax.reload();
+				} // End if check value
 			},
 			onEditRow: function(datatable, rowdata, success, error) {
-				rowdata['id'] = datatable.s.dt.rows( { selected: true } ).data()[0]['id']
-				$.ajax({
-					// a tipycal url would be /{id} with type='POST'
-					url: url_edit,
-					type: 'POST',
-					async :false,
-					data: rowdata,
-					success: success,
-					error: error
-				});
-				datatable.s.dt.ajax.reload();
+				$('.errorLabel').css("color", 'red');
+				if($('#name').val() == '' || $('#description').val() == '') {
+					if($('#name').val() == '') {$('#namelabel').text("กรุณาบันทึกชื่อบทบาท");}
+					if($('#description').val() == '') {$('#descriptionlabel').text("กรุณาบันทึกคำอธิบาย");}
+
+					$('#name').on('change', ()=>{
+						if($('#name').val() != '') {$('#namelabel').text('');}
+					})
+					$('#description').on('change', ()=>{
+						if($('#description').val() != '') {$('#descriptionlabel').text('');}
+					})
+
+				} else if ($('#name').val() != '' && $('#description').val() != '') {
+					console.log('yess')
+					rowdata['id'] = datatable.s.dt.rows( { selected: true } ).data()[0]['id']
+					$.ajax({
+						// a tipycal url would be /{id} with type='POST'
+						url: url_edit,
+						type: 'POST',
+						async :false,
+						data: rowdata,
+						success: success,
+						error: error
+					});
+					datatable.s.dt.ajax.reload();
+				} // End if check value
 			},
 			onDeleteRow: function(datatable, rowdata, success, error) {
 				rowdata['id'] = datatable.s.dt.rows( { selected: true } ).data()[0]['id']
@@ -211,222 +241,224 @@
 	 * @Author	Jiranuwat Jaiyen       
 	 * @Create Date	22-03-2563
      */
-	function Set_Roles_Relations() {
-		var Options_roles = {};
-		var Options_roles_data = {};
-		$.ajax({
-			// a tipycal url would be /{id} with type='POST'
-			url: url_get_option_roles,
-			dataType: "json",
-			async:false,
-			success: function(a){
-				// console.log(a)
-				for(var i=0 ;i<a.length;i++){
-					Options_roles[a[i].id] = a[i].name;			
-					Options_roles_data[a[i].id] = a[i];	
-					// console.log(Options_roles_data[i])		
-				}
-				let k=1;
-				console.log(Options_roles_data[k].name)		
-			},
-			error: function(err){
-				console.log(err)
-			}
-		})
-		var columnDefs = [
-			{
-				title: "ลำดับ",
-				data: 1,
-				type:"hidden",
-				disabled:"true",
-				render: function (data, type, row, meta) {
-					if (data == null) return null;
-					return 2;
-				},
-				width: "10%",
-				className: "text-center"
-			},
-			{ 
-				data: "id",
-				type : "select",
-				options : Options_roles,
-				select2 : { width: "100%" },
-				render: function (data, type, row, meta) {
-					if (data == null || !(data in Options_roles)) return null;
-					return Options_roles[data];
-				}
-			},
-			{ 
-				data: "id",
-				type : "select",
-				options : Options_roles,
-				select2 : { width: "100%" },
-				render: function (data, type, row, meta) {
-					let html = `<div class="text-center"> <select name="cars" id="cars">`;
-					let tempName = "";
-						for(let id in Options_roles_data)
-						{
-							html += `<option value="`+Options_roles_data[id].id+`">${Options_roles_data[id].name}</option>`;
-						}
-						// for(i=1;i<=Object.size(Options_roles_data);i++)
-						// {
-						// 	html += `<option value="`+Options_roles_data.id+`">${Options_roles_data.name}</option>`;
-						// }
-						html += `</select></div>`;
-					return html;
-				}
-			}
-		]; // End set columndefs
+	// function Set_Roles_Relations() {
+	// 	var Options_roles = {};
+	// 	var Options_roles_data = {};
+	// 	$.ajax({
+	// 		// a tipycal url would be /{id} with type='POST'
+	// 		url: url_get_option_roles,
+	// 		dataType: "json",
+	// 		async:false,
+	// 		success: function(a){
+	// 			// console.log(a)
+	// 			for(var i=0 ;i<a.length;i++){
+	// 				Options_roles[a[i].id] = a[i].name;			
+	// 				Options_roles_data[a[i].id] = a[i];	
+	// 				// console.log(Options_roles_data[i])		
+	// 			}
+	// 			let k=1;
+	// 			console.log(Options_roles_data[k].name)		
+	// 		},
+	// 		error: function(err){
+	// 			console.log(err)
+	// 		}
+	// 	})
+	// 	var columnDefs = [
+	// 		{
+	// 			title: "ลำดับ",
+	// 			data: 1,
+	// 			type:"hidden",
+	// 			disabled:"true",
+	// 			render: function (data, type, row, meta) {
+	// 				if (data == null) return null;
+	// 				return 2;
+	// 			},
+	// 			width: "10%",
+	// 			className: "text-center"
+	// 		},
+	// 		{ 
+	// 			data: "id",
+	// 			type : "select",
+	// 			options : Options_roles,
+	// 			select2 : { width: "100%" },
+	// 			render: function (data, type, row, meta) {
+	// 				if (data == null || !(data in Options_roles)) return null;
+	// 				return Options_roles[data];
+	// 			}
+	// 		},
+	// 		{ 
+	// 			data: "id",
+	// 			type : "select",
+	// 			options : Options_roles,
+	// 			select2 : { width: "100%" },
+	// 			render: function (data, type, row, meta) {
+	// 				let html = `<div class="text-center"> <select name="cars" id="cars">`;
+	// 				let tempName = "";
+	// 					for(let id in Options_roles_data)
+	// 					{
+	// 						html += `<option value="`+Options_roles_data[id].id+`">${Options_roles_data[id].name}</option>`;
+	// 					}
+	// 					// for(i=1;i<=Object.size(Options_roles_data);i++)
+	// 					// {
+	// 					// 	html += `<option value="`+Options_roles_data.id+`">${Options_roles_data.name}</option>`;
+	// 					// }
+	// 					html += `</select></div>`;
+	// 				return html;
+	// 			}
+	// 		}
+	// 	]; // End set columndefs
 
-		myTableRolesRelation = $('#example2').DataTable({
-			"sPaginationType": "full_numbers",
-			ajax: 
-			{
-				"url": url_get,
-				"dataSrc": ""
-			},
-			columns: columnDefs,  // columns from above
-			initComplete: function (settings, json) {
-				$(".btn").removeClass("dt-button");
-			},
-			rowId: 'id',
-			"columnDefs": [ {
-					"searchable": false,
-					"orderable": false,
-					"targets": 0
-				} ],
-			"order": [[ 1, 'asc' ]],
-			dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
-			select: 'single',     // enable single row selection
-			responsive: true,     // enable responsiveness
-			altEditor: false,      // Enable altEditor ****
-			buttons: [{
-					text: '<i class="fa fa-plus-square"></i> เพิ่มชุดข้อมูล',
-					name: 'add',     // DO NOT change name
-					"className": 'btn btn-info btn-lg',
-					action: ()=> {
-						$('#altDelete').modal();
-					}
-				},
-				{
-					extend: 'selected', // Bind to Selected row
-					text: '<i class="fa fa-edit"></i> แก้ไขชุดข้อมูล',
-					name: 'edit',        // DO NOT change name
-					"className": 'btn btn-warning btn-lg' ,
-					action: ()=> {
-						$('#altDelete').modal();
-					}
-				},
-				{
-					extend: 'selected', // Bind to Selected row
-					text: '<i class="fa fa-trash"></i> ลบชุดข้อมูล',
-					name: 'delete',     // DO NOT change name
-					"className": 'btn btn-danger btn-lg' ,
-					action: ()=> {
-						$('#altDelete').modal();
-					}
-			}]
-		}); // End create table
+	// 	// myTableRolesRelation = $('#example2').DataTable({
+	// 	// 	"sPaginationType": "full_numbers",
+	// 	// 	ajax: 
+	// 	// 	{
+	// 	// 		"url": url_get,
+	// 	// 		"dataSrc": ""
+	// 	// 	},
+	// 	// 	columns: columnDefs,  // columns from above
+	// 	// 	initComplete: function (settings, json) {
+	// 	// 		$(".btn").removeClass("dt-button");
+	// 	// 	},
+	// 	// 	rowId: 'id',
+	// 	// 	"columnDefs": [ {
+	// 	// 			"searchable": false,
+	// 	// 			"orderable": false,
+	// 	// 			"targets": 0
+	// 	// 		} ],
+	// 	// 	"order": [[ 1, 'asc' ]],
+	// 	// 	dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
+	// 	// 	select: 'single',     // enable single row selection
+	// 	// 	responsive: true,     // enable responsiveness
+	// 	// 	altEditor: false,      // Enable altEditor ****
+	// 	// 	buttons: [{
+	// 	// 			text: '<i class="fa fa-plus-square"></i> เพิ่มชุดข้อมูล',
+	// 	// 			name: 'add',     // DO NOT change name
+	// 	// 			"className": 'btn btn-info btn-lg',
+	// 	// 			action: ()=> {
+	// 	// 				$('#altDelete').modal();
+	// 	// 			}
+	// 	// 		},
+	// 	// 		{
+	// 	// 			extend: 'selected', // Bind to Selected row
+	// 	// 			text: '<i class="fa fa-edit"></i> แก้ไขชุดข้อมูล',
+	// 	// 			name: 'edit',        // DO NOT change name
+	// 	// 			"className": 'btn btn-warning btn-lg' ,
+	// 	// 			action: ()=> {
+	// 	// 				$('#altDelete').modal();
+	// 	// 			}
+	// 	// 		},
+	// 	// 		{
+	// 	// 			extend: 'selected', // Bind to Selected row
+	// 	// 			text: '<i class="fa fa-trash"></i> ลบชุดข้อมูล',
+	// 	// 			name: 'delete',     // DO NOT change name
+	// 	// 			"className": 'btn btn-danger btn-lg' ,
+	// 	// 			action: ()=> {
+	// 	// 				$('#altDelete').modal();
+	// 	// 			}
+	// 	// 	}]
+	// 	// }); // End create table
 
-		// Set index of column
-		myTableRolesRelation.on( 'order.dt search.dt', function () {
-			myTableRolesRelation.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-				cell.innerHTML = `${i+1}.`;
-			});
-		}).draw(); 
-	} // End Set_Roles
+	// 	// Set index of column
+	// 	// myTableRolesRelation.on( 'order.dt search.dt', function () {
+	// 	// 	myTableRolesRelation.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+	// 	// 		cell.innerHTML = `${i+1}.`;
+	// 	// 	});
+	// 	// }).draw(); 
+	// } // End Set_Roles
 </script>
 
 <style>
-
-div,h3,span{
-	font-family: prompt !important
-}
-.btn-info {
-	background-color: #245dc1 !important;
-	border-color: #245dc1 !important;
-}
-.dt-buttons{
-	margin-bottom : 10px
-}
-table , td ,tr ,th {
-	border: 0.5px solid #979595 !important;
-	border-collapse: collapse; 
-}
-table { 
-	width: 750px; 
-	border-collapse: collapse; 
-	margin:50px auto;
+	.errorLabel .text-danger {
+		color: #ff0000 !important;
 	}
-
-/* Zebra striping */
-tr:nth-of-type(odd) { 
-	background: #eee; 
+	div,h3,span{
+		font-family: prompt !important
 	}
-
-th { 
-	background: #3498db; 
-	color: white; 
-	font-weight: bold; 
-	text-align: center; 
+	.btn-info {
+		background-color: #245dc1 !important;
+		border-color: #245dc1 !important;
 	}
-
-td, th { 
-	padding: 10px; 
-	font-size: 18px;
+	.dt-buttons{
+		margin-bottom : 10px
 	}
-
-/* 
-Max width before this PARTICULAR table gets nasty
-This query will take effect for any screen smaller than 760px
-and also iPads specifically.
-*/
-@media 
-only screen and (max-width: 760px),
-(min-device-width: 768px) and (max-device-width: 1024px)  {
-
+	table , td ,tr ,th {
+		border: 0.5px solid #979595 !important;
+		border-collapse: collapse; 
+	}
 	table { 
-	  	width: 100%; 
-	}
+		width: 750px; 
+		border-collapse: collapse; 
+		margin:50px auto;
+		}
 
-	/* Force table to not be like tables anymore */
-	table, thead, tbody, th, td, tr { 
-		display: block; 
-	}
-	
-	/* Hide table headers (but not display: none;, for accessibility) */
-	thead tr { 
-		position: absolute;
-		top: -9999px;
-		left: -9999px;
-	}
-	
-	tr { border: 1px solid #ccc; }
-	
-	td { 
-		/* Behave  like a "row" */
-		border: none;
-		border-bottom: 1px solid #eee; 
-		position: relative;
-		padding-left: 50%; 
-	}
+	/* Zebra striping */
+	tr:nth-of-type(odd) { 
+		background: #eee; 
+		}
 
-	td:before { 
-		/* Now like a table header */
-		position: absolute;
-		/* Top/left values mimic padding */
-		top: 6px;
-		left: 6px;
-		width: 45%; 
-		padding-right: 10px; 
-		white-space: nowrap;
-		/* Label the data */
-		content: attr(data-column);
+	th { 
+		background: #3498db; 
+		color: white; 
+		font-weight: bold; 
+		text-align: center; 
+		}
 
-		color: #000;
-		font-weight: bold;
+	td, th { 
+		padding: 10px; 
+		font-size: 18px;
+		}
+
+	/* 
+	Max width before this PARTICULAR table gets nasty
+	This query will take effect for any screen smaller than 760px
+	and also iPads specifically.
+	*/
+	@media 
+	only screen and (max-width: 760px),
+	(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+		table { 
+			width: 100%; 
+		}
+
+		/* Force table to not be like tables anymore */
+		table, thead, tbody, th, td, tr { 
+			display: block; 
+		}
+		
+		/* Hide table headers (but not display: none;, for accessibility) */
+		thead tr { 
+			position: absolute;
+			top: -9999px;
+			left: -9999px;
+		}
+		
+		tr { border: 1px solid #ccc; }
+		
+		td { 
+			/* Behave  like a "row" */
+			border: none;
+			border-bottom: 1px solid #eee; 
+			position: relative;
+			padding-left: 50%; 
+		}
+
+		td:before { 
+			/* Now like a table header */
+			position: absolute;
+			/* Top/left values mimic padding */
+			top: 6px;
+			left: 6px;
+			width: 45%; 
+			padding-right: 10px; 
+			white-space: nowrap;
+			/* Label the data */
+			content: attr(data-column);
+
+			color: #000;
+			font-weight: bold;
+		}
+
 	}
-
-}
-#alteditor-row-type { margin-bottom: 35px; }
+	#alteditor-row-type { margin-bottom: 35px; }
 </style>

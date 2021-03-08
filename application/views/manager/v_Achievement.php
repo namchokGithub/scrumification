@@ -141,30 +141,66 @@ function numberWithCommas(x) {
 				"className": 'btn btn-danger btn-lg' 
 			}],
 			onAddRow: function(datatable, rowdata, success, error) {
-				console.log(datatable, rowdata, success, error)
-				$.ajax({
-					// a tipycal url would be / with type='PUT'
-					url: url_add,
-					type: 'POST',
-					async :false,
-					data: rowdata,
-					success:success,
-					error: error
-				});
-				datatable.s.dt.ajax.reload();
+				// console.log(datatable, rowdata, success, error)
+				$('.errorLabel').css("color", 'red');
+				if($('#name').val() == '' || $('#detail').val() == '' || $('#point').val() == '') {
+					if($('#name').val() == '') {$('#namelabel').text("กรุณาบันทึกชื่อ");}
+					if($('#detail').val() == '') {$('#detaillabel').text("กรุณาบันทึกรายละเอียด");}
+					if($('#point').val() == '') {$('#pointlabel').text("กรุณาบันทึกคะแนน");}
+
+					$('#name').on('change', ()=>{
+						if($('#name').val() != '') {$('#namelabel').text('');}
+					})
+					$('#detail').on('change', ()=>{
+						if($('#detail').val() != '') {$('#detaillabel').text('');}
+					})
+					$('#point').on('change', ()=>{
+						if($('#point').val() != '') {$('#pointlabel').text('');}
+					})
+
+				} else if ($('#name').val() != '' && $('#detail').val() != '' && $('#point').val() != '') {
+					$.ajax({
+						// a tipycal url would be / with type='PUT'
+						url: url_add,
+						type: 'POST',
+						async :false,
+						data: rowdata,
+						success:success,
+						error: error
+					});
+					datatable.s.dt.ajax.reload();
+				}
 			},
 			onEditRow: function(datatable, rowdata, success, error) {
-				rowdata['id'] = datatable.s.dt.rows( { selected: true } ).data()[0]['id']
-				$.ajax({
-					// a tipycal url would be /{id} with type='POST'
-					url: url_edit,
-					type: 'POST',
-					async :false,
-					data: rowdata,
-					success: success,
-					error: error
-				});
-				datatable.s.dt.ajax.reload();
+				$('.errorLabel').css("color", 'red');
+				if($('#name').val() == '' || $('#detail').val() == '' || $('#point').val() == '') {
+					if($('#name').val() == '') {$('#namelabel').text("กรุณาบันทึกชื่อ");}
+					if($('#detail').val() == '') {$('#detaillabel').text("กรุณาบันทึกรายละเอียด");}
+					if($('#point').val() == '') {$('#pointlabel').text("กรุณาบันทึกคะแนน");}
+
+					$('#name').on('change', ()=>{
+						if($('#name').val() != '') {$('#namelabel').text('');}
+					})
+					$('#detail').on('change', ()=>{
+						if($('#detail').val() != '') {$('#detaillabel').text('');}
+					})
+					$('#point').on('change', ()=>{
+						if($('#point').val() != '') {$('#pointlabel').text('');}
+					})
+
+				} else if ($('#name').val() != '' && $('#detail').val() != '' && $('#point').val() != '') {
+					rowdata['id'] = datatable.s.dt.rows( { selected: true } ).data()[0]['id']
+					$.ajax({
+						// a tipycal url would be /{id} with type='POST'
+						url: url_edit,
+						type: 'POST',
+						async :false,
+						data: rowdata,
+						success: success,
+						error: error
+					});
+					datatable.s.dt.ajax.reload();
+				}
 			},
 			onDeleteRow: function(datatable, rowdata, success, error) {
 				rowdata['id'] = datatable.s.dt.rows( { selected: true } ).data()[0]['id']

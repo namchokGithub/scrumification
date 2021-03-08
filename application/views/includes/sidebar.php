@@ -182,6 +182,7 @@
         } else {
             let role_name = `<?php echo $Profile[1][0]; ?>`;
             if(role_name.search("Cluster") != -1) role_name = role_name.replace(/Cluster/, "สมาชิกมกุล");
+            if(role_name.search("มกุล") != -1) role_name = role_name.replace(/มกุล/, "สมาชิกมกุล");
             // console.log(role_name)
             $('.Role_name').text(role_name);
         }

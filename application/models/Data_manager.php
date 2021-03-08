@@ -256,9 +256,9 @@ class Data_manager extends CI_Model
     public function get_name_group()
     {
         return $this->db
-            ->select ("roles.id, replace(roles.name, 'สมาชิกมกุล', 'Cluster') as group_name")
+            ->select ("roles.id, roles.name as group_name")
             ->from("roles")
-            ->where("name Like 'สมาชิกมกุล %'")
+            ->where("name Like 'มกุล %'")
             ->get()->result_array();
     } // End get_name_group
 
@@ -295,9 +295,9 @@ class Data_manager extends CI_Model
     public function get_data_by_group()
     {
         return $this->db
-            ->select ("roles.id, replace(roles.name, 'สมาชิกมกุล', 'Cluster') as group_name, image_path, color, display_name")
+            ->select ("roles.id, roles.name as group_name, image_path, color, display_name")
             ->from("roles")
-            ->where("name Like 'สมาชิกมกุล %' or name Like 'Cluster %' or name Like 'มกุล'")
+            ->where("name Like 'มกุล %'")
             ->get()->result_array();
     } // End get_data_by_group
 

@@ -40,6 +40,7 @@
 						</div>
 						<div class="col-sm-8 col-md-8 col-lg-8">
 							<input type="text" id="group_name" pattern=".*" title="" name="ชื่อกลุ่ม" placeholder="ชื่อกลุ่ม" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
+							<label id="group_name-label" class="text-danger errorLabel"></label>
 						</div>
 						<div style="clear:both;"></div>
 					</div>
@@ -49,6 +50,7 @@
 						</div>
 						<div class="col-sm-8 col-md-8 col-lg-8">
 							<input type="text" id="image" pattern=".*" title="" name="รูปภาพ" placeholder="รูปภาพ" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
+							<label id="image-label" class="text-danger errorLabel"></label>
 						</div>
 						<div style="clear:both;"></div>
 					</div>
@@ -59,6 +61,7 @@
 						<div class="col-sm-8 col-md-8 col-lg-8">
 							<input type="color" id="color" name="colore" value="">
 							<input type="text" pattern="^#+([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$" value="" id="hexcolor"></input>
+							<label id="color-label" class="text-danger errorLabel"></label>
 						</div>
 						<div style="clear:both;"></div>
 					</div>
@@ -389,38 +392,56 @@
 
 		var timestamp = new Date()
 		var strDate = timestamp.getFullYear()+"-"+(timestamp.getMonth()+1)+"-"+timestamp.getDate()+" "+timestamp.getHours()+":"+timestamp.getMinutes()+":"+timestamp.getSeconds();
-		console.log(strDate)
+		// console.log(strDate)
 
-		let rowdata = {
+		if($('#group_name').val() == '' || $('#image').val() == '' || $('#color').val() == '') {
+			if($('#group_name').val() == '') {$('#group_name-label').text("กรุณาบันทึกชื่อ");}
+			if($('#image').val() == '') {$('#image-label').text("กรุณาบันทึกที่อยู่ไฟล์");}
+			if($('#color').val() == '') {$('#color-label').text("กรุณาบันทึกสี");}
 
-			color: $('#color').val(),
-			name: $('#group_name').val(),
-			id :	group_data["id"],
-			image_path: $('#image').val(),
-			updated_at: strDate
-	
-		}
-		// console.log("rowdata",rowdata);
-		$.ajax({
-			// a tipycal url would be /{id} with type='POST'
-			url: url_edit,
-			type: 'POST',
-			async: false,
-			data: rowdata,
-			success: function() { 
-				myTable.ajax.reload(); // Reload data table
-				toastr['success']("ดำเนินการเสร็จสิ้น")
-			},
-			error: (er)=>{console.log(er)}
-		});
-		$('#modalEdit').modal('hide'); // Close modal
-		// location.reload();
+			$('#group_name').on('change', ()=>{
+				if($('#group_name').val() != '') {$('#group_name-label').text('');}
+			})
+			$('#image').on('change', ()=>{
+				if($('#image').val() != '') {$('#image-label').text('');}
+			})
+			$('#color').on('change', ()=>{
+				if($('#color').val() != '') {$('#color-label').text('');}
+			})
+
+		} else if ($('#group_name').val() != '' && $('#time_end').val() != '' && $('#color').val() != '') {
+						console.log('yess')
+			let rowdata = {
+				color: $('#color').val(),
+				name: $('#group_name').val(),
+				id :	group_data["id"],
+				image_path: $('#image').val(),
+				updated_at: strDate
+			}
+			// console.log("rowdata",rowdata);
+			$.ajax({
+				// a tipycal url would be /{id} with type='POST'
+				url: url_edit,
+				type: 'POST',
+				async: false,
+				data: rowdata,
+				success: function() { 
+					myTable.ajax.reload(); // Reload data table
+					toastr['success']("ดำเนินการเสร็จสิ้น")
+				},
+				error: (er)=>{console.log(er)}
+			});
+			$('#modalEdit').modal('hide'); // Close modal
+			location.reload();
+		} // End if check value
 	});
 	
 </script>
 
 <style>
-
+	.text-danger {
+		color: #ff0000 !important;
+	}
 	#color_view { 
 		border: thin solid black; 
 		width:20px; 

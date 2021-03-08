@@ -75,129 +75,129 @@
 
 		// Define column
 		var columnDefs = [
-					{
-						title: "ลำดับ",
-						data: 1,
-						type:"hidden",
-						disabled:"true",
-						render: function (data, type, row, meta) {
-							if (data == null || !(data in Options_role)) return null;
-							return 2;
-						},
-						width: "10%",
-						className: "text-center"
-					},
-					{
-						title: "ตำแหน่ง",
-						data: "role_id",
-						type : "select",
-						options : Options_role,
-						select2 : { width: "100%"},
-						render: function (data, type, row, meta) {
-							if (data == null || !(data in Options_role)) return null;
-							return Options_role[data];
-						}
-					},
-					{
-						title: "ชื่อของรางวัล",
-						data: "achievement_id",
-						type : "select",
-						options : Options_achievement,
-						select2 : { width: "100%"},
-						render: function (data, type, row, meta) {
-							if (data == null || !(data in Options_achievement)) return null;
-							return Options_achievement[data];
-						}
-					},
-				];
+			{
+				title: "ลำดับ",
+				data: 1,
+				type:"hidden",
+				disabled:"true",
+				render: function (data, type, row, meta) {
+					if (data == null || !(data in Options_role)) return null;
+					return 2;
+				},
+				width: "10%",
+				className: "text-center"
+			},
+			{
+				title: "ตำแหน่ง",
+				data: "role_id",
+				type : "select",
+				options : Options_role,
+				select2 : { width: "100%"},
+				render: function (data, type, row, meta) {
+					if (data == null || !(data in Options_role)) return null;
+					return Options_role[data];
+				}
+			},
+			{
+				title: "ชื่อของรางวัล",
+				data: "achievement_id",
+				type : "select",
+				options : Options_achievement,
+				select2 : { width: "100%"},
+				render: function (data, type, row, meta) {
+					if (data == null || !(data in Options_achievement)) return null;
+					return Options_achievement[data];
+				}
+			},
+		];
 			  
-				myTable = $('#example').DataTable({
-						"sPaginationType": "full_numbers",
-						ajax: 
-						{
-							"url": url_get,
-							"dataSrc": ""
-						},
-						columns: columnDefs,  // columns from above
-						"columnDefs": [ {
-							"searchable": false,
-							"orderable": false,
-							"targets": 0
-						} ],
-						"order": [[ 1, 'asc' ]],
-						initComplete: function (settings, json) {
-							$(".btn").removeClass("dt-button");
-						},
-						rowId: 'id',
-						// order:[],
-						dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
-						select: 'single',     // enable single row selection
-						responsive: true,     // enable responsiveness
-						altEditor: true,      // Enable altEditor ****
-						buttons: [{
-								text: '<i class="fa fa-plus-square"></i> เพิ่มชุดข้อมูล',
-								name: 'add',     // DO NOT change name
-									"className": 'btn btn-info btn-lg' 
-							},
-							{
-								extend: 'selected', // Bind to Selected row
-								text: '<i class="fa fa-edit"></i> แก้ไขชุดข้อมูล',
-								name: 'edit',        // DO NOT change name
-									"className": 'btn btn-warning btn-lg' 
-							},
-							{
-								extend: 'selected', // Bind to Selected row
-								text: '<i class="fa fa-trash"></i> ลบชุดข้อมูล',
-								name: 'delete',     // DO NOT change name
-								"className": 'btn btn-danger btn-lg' 
-						}],
-						onAddRow: function(datatable, rowdata, success, error) {
-							console.log(datatable, rowdata, success, error)
-							$.ajax({
-								// a tipycal url would be / with type='PUT'
-								url: url_add,
-								type: 'POST',
-								async :false,
-								data: rowdata,
-								success:success,
-								error: error
-							});
-							datatable.s.dt.ajax.reload();
-						},
-						onEditRow: function(datatable, rowdata, success, error) {
-							rowdata['id'] = datatable.s.dt.rows( { selected: true } ).data()[0]['id']
-							$.ajax({
-								// a tipycal url would be /{id} with type='POST'
-								url: url_edit,
-								type: 'POST',
-								async :false,
-								data: rowdata,
-								success: success,
-								error: error
-							});
-							datatable.s.dt.ajax.reload();
-						},
-						onDeleteRow: function(datatable, rowdata, success, error) {
-							rowdata['id'] = datatable.s.dt.rows( { selected: true } ).data()[0]['id']
-							$.ajax({
-								// a tipycal url would be /{id} with type='DELETE'
-								url: url_delete,
-								type: 'POST',
-								async :false,
-								data: rowdata,
-								success: success,
-								error: error
-							});
-							datatable.s.dt.ajax.reload();
-						}
+		myTable = $('#example').DataTable({
+			"sPaginationType": "full_numbers",
+			ajax: 
+			{
+				"url": url_get,
+				"dataSrc": ""
+			},
+			columns: columnDefs,  // columns from above
+			"columnDefs": [ {
+				"searchable": false,
+				"orderable": false,
+				"targets": 0
+			} ],
+			"order": [[ 1, 'asc' ]],
+			initComplete: function (settings, json) {
+				$(".btn").removeClass("dt-button");
+			},
+			rowId: 'id',
+			// order:[],
+			dom: 'Bfrtip',        // element order: NEEDS BUTTON CONTAINER (B) ****
+			select: 'single',     // enable single row selection
+			responsive: true,     // enable responsiveness
+			altEditor: true,      // Enable altEditor ****
+			buttons: [{
+					text: '<i class="fa fa-plus-square"></i> เพิ่มชุดข้อมูล',
+					name: 'add',     // DO NOT change name
+						"className": 'btn btn-info btn-lg' 
+				},
+				{
+					extend: 'selected', // Bind to Selected row
+					text: '<i class="fa fa-edit"></i> แก้ไขชุดข้อมูล',
+					name: 'edit',        // DO NOT change name
+						"className": 'btn btn-warning btn-lg' 
+				},
+				{
+					extend: 'selected', // Bind to Selected row
+					text: '<i class="fa fa-trash"></i> ลบชุดข้อมูล',
+					name: 'delete',     // DO NOT change name
+					"className": 'btn btn-danger btn-lg' 
+			}],
+			onAddRow: function(datatable, rowdata, success, error) {
+				// console.log(datatable, rowdata, success, error)
+				$.ajax({
+					// a tipycal url would be / with type='PUT'
+					url: url_add,
+					type: 'POST',
+					async :false,
+					data: rowdata,
+					success:success,
+					error: error
 				});
-				// End myTable.Datable()
+				datatable.s.dt.ajax.reload();
+			},
+			onEditRow: function(datatable, rowdata, success, error) {
+				rowdata['id'] = datatable.s.dt.rows( { selected: true } ).data()[0]['id']
+				$.ajax({
+					// a tipycal url would be /{id} with type='POST'
+					url: url_edit,
+					type: 'POST',
+					async :false,
+					data: rowdata,
+					success: success,
+					error: error
+				});
+				datatable.s.dt.ajax.reload();
+			},
+			onDeleteRow: function(datatable, rowdata, success, error) {
+				rowdata['id'] = datatable.s.dt.rows( { selected: true } ).data()[0]['id']
+				$.ajax({
+					// a tipycal url would be /{id} with type='DELETE'
+					url: url_delete,
+					type: 'POST',
+					async :false,
+					data: rowdata,
+					success: success,
+					error: error
+				});
+				datatable.s.dt.ajax.reload();
+			}
+		});
+		// End myTable.Datable()
 
-				myTable.on( 'order.dt search.dt', function () {
-					myTable.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-						cell.innerHTML = `${i+1}.`;
-					});
-				}).draw();
+		myTable.on( 'order.dt search.dt', function () {
+			myTable.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+				cell.innerHTML = `${i+1}.`;
+			});
+		}).draw();
 	}
 	set_Data()
 </script>
