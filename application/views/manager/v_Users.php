@@ -170,17 +170,19 @@
 				<form name="altEditor-edit-form" id="altEditor-edit-form" role="form">
 					<div style="margin-left: initial;margin-right: initial;" class="form-group row" id="alteditor-row-name_edit">
 						<div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding-top:4px;">
-							<label for="name_edit">ชื่อ - นามสกุล:</label>
+							<label for="name_edit">ชื่อ - นามสกุล <span class="text-danger errorLabel">*</span></label>
 						</div>
 						<div class="col-sm-8 col-md-8 col-lg-8">
-							<input type="text" id="name_edit" pattern=".*" title="" name="ชื่อ - นามสกุล" placeholder="ชื่อ - นามสกุล" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
+							<input type="text" id="name_edit" pattern=".*" title="" name="ชื่อ - นามสกุล" 
+							placeholder="ชื่อ - นามสกุล" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" 
+							style="overflow:hidden" class="form-control  form-control-sm" value="">
 							<label id="name_edit-label" class="text-danger errorLabel"></label>
 						</div>
 						<div style="clear:both;"></div>
 					</div>
 					<div style="margin-left: initial;margin-right: initial;" class="form-group row" id="alteditor-row-username_edit">
 						<div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding-top:4px;">
-							<label for="username_edit">ชื่อผู้ใช้งาน:</label>
+							<label for="username_edit">ชื่อผู้ใช้งาน <span class="text-danger errorLabel">*</span></label>
 						</div>
 						<div class="col-sm-8 col-md-8 col-lg-8">
 							<input type="text" id="username_edit" pattern=".*" title="" name="Username" placeholder="ชื่อผู้ใช้งาน" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
@@ -191,7 +193,7 @@
 					<!-- <input type="hidden" id="password_edit" pattern=".*" title="" name="Password" placeholder="Password" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value=""> -->
 					<div style="margin-left: initial;margin-right: initial;" class="form-group row" id="alteditor-row-password_edit">
 						<div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding-top:4px;">
-							<label for="password_edit">Password:</label>
+							<label for="password_edit">รหัสผ่าน <span class="text-danger errorLabel">*</span></label>
 						</div>
 						<div class="col-sm-8 col-md-8 col-lg-8">
 							<input type="password" id="password_edit" pattern=".*" title="" name="Password" placeholder="Password" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
@@ -201,11 +203,11 @@
 					</div>
 					<div style="margin-left: initial;margin-right: initial;" class="form-group row" id="alteditor-row-code_edit">
 						<div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding-top:4px;">
-							<label for="code_edit">ตำแหน่ง:</label>
+							<label for="code_edit">ตำแหน่ง</label>
 						</div>
 						<div class="col-sm-8 col-md-8 col-lg-8">
 							<input type="text" id="code_edit" pattern=".*" title="" name="หน้าที่" placeholder="ตำแหน่ง" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
-							<label id="codelabel" class="text-danger errorLabel">กรณีที่ตำแหน่งเป็นประธานมกุลและรองประธานมกุลต้องกรอกข้อมูล</label>
+							<label id="codelabel" style="margin-top: 3px"class="text-danger errorLabel">กรณีที่ตำแหน่งเป็นประธานมกุลและรองประธานมกุลต้องกรอกข้อมูล</label>
 						</div>
 						<div style="clear:both;"></div>
 					</div>
@@ -233,35 +235,35 @@
 				<form name="altEditor-add-form" id="altEditor-add-form" role="form">
 					<div style="margin-left: initial;margin-right: initial;" class="form-group row" id="alteditor-row-name">
 					<div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding-top:4px;">
-						<label for="name">ชื่อ - นามสกุล:</label>
+						<label for="name">ชื่อ - นามสกุล <span class="text-danger errorLabel">*</span></label>
 					</div>
 					<div class="col-sm-8 col-md-8 col-lg-8">
 						<input type="text" id="name" pattern=".*" title="" name="ชื่อ - นามสกุล" placeholder="ชื่อ - นามสกุล" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
 						<label id="namelabel" class="text-danger errorLabel"></label>
 					</div>
 					<div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding-top:4px;">
-						<label for="username">ชื่อผู้ใช้งาน:</label>
+						<label for="username">ชื่อผู้ใช้งาน <span class="text-danger errorLabel">*</span></label>
 					</div>
 					<div class="col-sm-8 col-md-8 col-lg-8">
 						<input type="text" id="username" pattern=".*" title="" name="Username" placeholder="ชื่อผู้ใช้งาน" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
 						<label id="usernamelabel" class="text-danger errorLabel"></label>
 					</div>
 					<div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding-top:4px;">
-						<label for="password">รหัสผ่าน:</label>
+						<label for="password">รหัสผ่าน <span class="text-danger errorLabel">*</span></label>
 					</div>
 					<div class="col-sm-8 col-md-8 col-lg-8">
 						<input type="text" id="password" pattern=".*" title="" name="Password" placeholder="รหัสผ่าน" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
 						<label id="passwordlabel" class="text-danger errorLabel"></label>
 					</div>
 					<div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding-top:4px;">
-						<label for="code">ตำแหน่ง:</label>
+						<label for="code">ตำแหน่ง</label>
 					</div>
 					<div class="col-sm-8 col-md-8 col-lg-8">
 						<input type="text" id="code" pattern=".*" title="" name="หน้าที่" placeholder="ตำแหน่ง" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
-						<label id="codelabel" class="text-danger errorLabel">กรณีที่ตำแหน่งเป็นประธานมกุลและรองประธานมกุลต้องกรอกข้อมูล</label>
+						<label id="codelabel" style="margin-top: 3px" class="text-danger errorLabel">กรณีที่ตำแหน่งเป็นประธานมกุลและรองประธานมกุลต้องกรอกข้อมูล</label>
 					</div>
 					<div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding-top:4px;">
-						<label for="code">บทบาท:</label>
+						<label for="code">บทบาท</label>
 					</div>
 					<div class="col-sm-8 col-md-8 col-lg-8">
 						<div class="form-group">
@@ -285,7 +287,7 @@
 							<th>ชื่อ-นามสกุล</th>
 							<th>ชื่อผู้ใช้งาน</th>
 							<th>รหัสผ่าน</th>
-							<th>หน้าที่</th>
+							<th>ตำแหน่ง</th>
 							<th>บทบาท</th>
 							<th>ดำเนินการ</th>
 							<!-- <th>role_id</th> -->
@@ -322,7 +324,7 @@
                 type:"hidden",
                 disabled:"true",
                 render: function (data, type, row, meta) {
-                    if (data == null || !(data in Options_role)) return null;
+                    if (data == null) return null;
                     return 2;
                 },
                 width: "10%",
@@ -346,6 +348,7 @@
 	var topic_name = "users";
 	// local URL's are not allowed
 	var url_get = "<?php echo site_url("Source_manager/get_data/"); ?>" + topic_name;
+	var url_user_get = "<?php echo site_url("Source_manager/get_user_data/"); ?>" + topic_name;
 	var url_add = "<?php echo site_url("Source_manager/add_user/"); ?>" + topic_name;
 	var url_edit = "<?php echo site_url("Source_manager/edit_user/"); ?>" + topic_name;
 	var url_delete = "<?php echo site_url("Source_manager/delete_data/"); ?>" + topic_name;
@@ -362,7 +365,7 @@
 	myTable = $('#example').DataTable({
 		"sPaginationType": "full_numbers",
 		ajax: {
-			"url": url_get,
+			"url": url_user_get,
 			"dataSrc": ""
 		},
 		columns: columnDefs, // columns from above
@@ -517,7 +520,7 @@
 	$('#btn_import').attr('disabled',true);
 	
 	/**
-	 *  Append row in example1 table
+	 * *Append row in example1 table
 	 *
 	 * @Author	Thutsaneeya Chanrong       
 	 * @Create Date	25-01-2564
@@ -529,10 +532,10 @@
 			if($("#username").val() == "" || $("#name").val() == "" || $("#password").val() == "" 
 					|| $("#select_roles option:selected").val() == ""){
 					
-					if($("#name").val() == "") $('#namelabel').text('กรุณากรอกชื่อ-นามสกุล');	
-					if($("#username").val() == "") $('#usernamelabel').text('กรุณากรอกชื่อผู้ใช้งาน');
-					if($("#password").val() == "") $('#passwordlabel').text('กรุณากรอกรหัสผ่าน');
-					if($("#select_roles option:selected").val() == "") $('#rolelabel').text('กรุณากรอกบทบาท');
+				if($("#name").val() == "") $('#namelabel').text('กรุณากรอกชื่อ-นามสกุล');	
+				if($("#username").val() == "") $('#usernamelabel').text('กรุณากรอกชื่อผู้ใช้งาน');
+				if($("#password").val() == "") $('#passwordlabel').text('กรุณากรอกรหัสผ่าน');
+				if($("#select_roles option:selected").val() == "") $('#rolelabel').text('กรุณากรอกบทบาท');
 
 			} else if($("#username").val() != "" && $("#name").val() != "" && $("#password").val() != "" 
 						&& $("#select_roles option:selected").val() != "") {
@@ -545,7 +548,8 @@
 
 				var roles_text = $( "#select_roles option:selected" ).text();
 				var roles_value = $( "#select_roles option:selected" ).val();
-				console.log(roles_value)
+				// console.log(roles_value)
+				if(code=='') code = '-';
 				$('#tbody_01').append(`
 					<tr>
 						<td><center>${rowcount + 1}</center></td>
@@ -554,7 +558,6 @@
 						<td>${password}</td>
 						<td>${code}</td>
 						<td>${roles_text}</td>
-						// <input id="test" type="hidden" value="${roles_value}" name="roles_id">
 						<td><center><button id="btn_del"type="button" class="btn btn-danger">ลบ</button></center></td>
 						<td style="display:none;"><input type="hidden"value="${roles_value}" name="roles_id"></td>
 					</tr>
@@ -635,17 +638,21 @@
 		let rowdata;
 		var timestamp = new Date()
 		var strDate = timestamp.getFullYear()+"-"+(timestamp.getMonth()+1)+"-"+timestamp.getDate()+" "+timestamp.getHours()+":"+timestamp.getMinutes()+":"+timestamp.getSeconds();
-
 		for(let i = 1; i <= $('#tbody_01').children().length; i++){
+			let code = $(`#tbody_01 > tr:nth-child(${i}) > td:nth-child(5)`).text();
+			// console.log(code)
+			if(code == '-') code = null;
+			// console.log(code)
 			rowdata = {
-				code: $(`#tbody_01 > tr:nth-child(${i}) > td:nth-child(5)`).text(),
+				code: code,
 				name: $(`#tbody_01 > tr:nth-child(${i}) > td:nth-child(2)`).text(),
 				password: $(`#tbody_01 > tr:nth-child(${i}) > td:nth-child(4)`).text(),
 				username: $(`#tbody_01 > tr:nth-child(${i}) > td:nth-child(3)`).text(),
-				created_at: strDate
+				created_at: strDate,
+				updated_at: strDate
 			}
-
-			role_id =  $(`#tbody_01 > tr:nth-child(${i}) > td:nth-child(9) > input[type=hidden]`).val()
+			// #tbody_01 > tr > td:nth-child(8) > input[type=hidden]
+			role_id =  $(`#tbody_01 > tr:nth-child(${i}) > td:nth-child(8) > input[type=hidden]`).val()
 
 			// console.log(rowdata)
 			// console.log(role_id)
@@ -733,7 +740,7 @@
 
 	/**
 	 * 
-	 * Delete data
+	 * *Delete data
 	 * @Author	Thutsaneeya Chanrong       
 	 * @Create Date	04-02-2564
 	 */

@@ -34,16 +34,16 @@ class Leaderboard extends BaseController
      */
     public function index()
     {
-		$scripts['scripts'][0] = 'assets/bower_components/toastr/toastr.min.js';
-		$scripts['css'][0] = "assets/bower_components/toastr/toastr.min.css";
-		$data['point_list'] = $this->User->get_all_point();
-		$data['individual_list'] = $this->User->get_all_individual();
-		$data['Profile']= $this->auth->userRoles();
-		$data['is_show'] = $this->DM->get_data("show_topic",array("page"=>"LeaderBoard"));
-		
-		$scripts['temp_scripts'] = '';
-		$detail['header'] = "Leaderboard";
-    	$this->output('v_leaderboard', $data, $scripts, $detail);
+      $scripts['scripts'][0] = 'assets/bower_components/toastr/toastr.min.js';
+      $scripts['css'][0] = "assets/bower_components/toastr/toastr.min.css";
+      $data['point_list'] = $this->User->get_all_point();
+      $data['individual_list'] = $this->User->get_all_individual();
+      $data['Profile']= $this->auth->userRoles();
+      $data['is_show'] = $this->DM->get_data("show_topic",array("page"=>"LeaderBoard"));
+      
+      $scripts['temp_scripts'] = '';
+      $detail['header'] = "Leaderboard";
+        $this->output('v_leaderboard', $data, $scripts, $detail);
     } // End index
 	
 	/**
@@ -81,4 +81,8 @@ class Leaderboard extends BaseController
             $this->DM->edit_data("show_topic", array("id"=>"1","page"=>"LeaderBoard","status"=>"0"));
       }
     } // End update_status_show
+
+    public function getTeamColor() {
+      echo json_encode($this->DM->getTeamColor());
+    }
 }

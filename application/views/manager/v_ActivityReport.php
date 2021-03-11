@@ -55,8 +55,8 @@
 		<div class="pull-right" style="font-size: x-large; font-weight: 200; color: black; margin: auto;">
 			<span style="color: white; margin-right: 6px">ปี</span>
 			<select id="select-opt" style=" margin-bottom: 5px;">
-				<option value="2563" diabled>--- เลือกปี ---</option>
-				<?php for($i=2554;$i<2565;$i++){?>
+				<option value="2564" diabled>--- เลือกปี ---</option>
+				<?php for($i=2560;$i<2565;$i++){?>
 				<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
 				<?php } ?>
 			</select>
@@ -82,7 +82,7 @@
 	 * Author: Namchok Singhachai
 	 * Date: 12/02/2020
 	 */
-	async function loadChart(date = "2020-01-01/2020-12-31")
+	async function loadChart(date = "2021-01-01/2021-12-31")
 	{
 		var SprintPlanning;
 		var dataSP = [];

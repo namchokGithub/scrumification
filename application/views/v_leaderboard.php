@@ -432,21 +432,46 @@
 	 * @Update Namchok Singhachai
 	 * @return mixed
 	 */
-	function set_data_chart(){
-		let colorTeam = [
-			{"id":1,"color":"#00bffe"},
-			{"id":2,"color":"#00ff01"},
-			{"id":3,"color":"#191971"},
-			{"id":4,"color":"#9282c9"},
-			{"id":5,"color":"#ff4500"},
-			{"id":6,"color":"#6796b4"},
-			{"id":7,"color":"#ff841a"},
-			{"id":8,"color":"#bf1441"},
-			{"id":9,"color":"#ffc59d"},
-			{"id":10,"color":"#ef3536"},
+	async function set_data_chart(){
+
+		let colorHex;
+		let colorTeam;
+
+		colorTeam = [
+			{"id":1,"color":"#a6a6a6"},
+			{"id":2,"color":"#a6a6a6"},
+			{"id":3,"color":"#a6a6a6"},
+			{"id":4,"color":"#a6a6a6"},
+			{"id":5,"color":"#a6a6a6"},
+			{"id":6,"color":"#a6a6a6"},
+			{"id":7,"color":"#a6a6a6"},
+			{"id":8,"color":"#a6a6a6"},
+			{"id":9,"color":"#a6a6a6"},
+			{"id":10,"color":"#a6a6a6"},
 		]; // For set team color
 
-		$.get("<?php echo site_url("Leaderboard/get_all_point/"); ?>", function(data, status){
+		await $.ajax({
+			type: "GET",
+			url: "<?php echo site_url("Leaderboard/getTeamColor"); ?>",
+			dataType: "JSON",
+			success: function (res) {
+				colorTeam = [
+					{"id":1,"color":`${res[0]['color']}`},
+					{"id":2,"color":`${res[1]['color']}`},
+					{"id":3,"color":`${res[2]['color']}`},
+					{"id":4,"color":`${res[3]['color']}`},
+					{"id":5,"color":`${res[4]['color']}`},
+					{"id":6,"color":`${res[5]['color']}`},
+					{"id":7,"color":`${res[6]['color']}`},
+					{"id":8,"color":`${res[7]['color']}`},
+					{"id":9,"color":`${res[8]['color']}`},
+					{"id":10,"color":`${res[9]['color']}`},
+				]; // For set team color
+			}
+		});
+
+
+		await $.get("<?php echo site_url("Leaderboard/get_all_point/"); ?>", function(data, status){
 			raw_data = JSON.parse(data);
 			function compare( a, b ) {
 			if ( parseInt(a.id) < parseInt(b.id) ){
@@ -480,7 +505,7 @@
 			data_bar_chart[0].data[7].color = colorTeam[7]["color"];
 			data_bar_chart[0].data[8].color = colorTeam[8]["color"];
 			data_bar_chart[0].data[9].color = colorTeam[9]["color"];
-			console.log(data_bar_chart)
+			// console.log(data_bar_chart)
 			
 			var indices = findIndicesOfMax(data_bar_chart[0].data, 3);
 

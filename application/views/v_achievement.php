@@ -9,7 +9,7 @@
 <style>
 
 	.imgOpacity {
-		opacity: 0.2;
+		opacity: 0.7;
 	}
 
 	table , tr ,td {
@@ -52,7 +52,7 @@
 	}
 
 	.requestItemColor {
-		color: #ddd !important;
+		color: #ababab !important;
 	}
 
 	.min-align {
@@ -290,7 +290,7 @@ countdown.setLabels(
 	function Set_inventory(){
 		$.get(`<?php echo site_url("Achievement/get_Inventory/"); ?>`+target_id, function(data, status){
 			raw_data = JSON.parse(data);	
-			console.log(raw_data)
+			// console.log(raw_data)
 			$("#theinventory").empty()
 
 			let imgOpacity = ""
@@ -393,22 +393,26 @@ countdown.setLabels(
 			imageWidth: 100,
 			imageHeight: 100,
 			imageAlt: 'Custom image',
-			input: 'number',
-			inputValue: 1,
-			inputAttributes: {
-			  autocapitalize: 'off',
-			  min: 1,
-			  max: 20,
-			  step: 1
-			},
+			html: `<input name="numberOfItem" autocapitalize="off" min="1" max="20" step="1" class="swal2-input" placeholder="จำนวน" type="number" style="margin-right: 3px" value="1"> ชิ้น`,
+			// input: 'number',
+			// inputValue: 1,
+			// inputAttributes: {
+			//   autocapitalize: 'off',
+			//   min: 1,
+			//   max: 20,
+			//   step: 1
+			// },
 			showCancelButton: true,
 			confirmButtonText: 'ยืนยัน',
 			cancelButtonText: 'ยกเลิก',
 			showLoaderOnConfirm: true,
 			preConfirm: (count) => {
+				// console.log('count')
+				// console.log(count)
+				count = $('input[name="numberOfItem"]').val();
+				// console.log(count)
 				return fetch(`<?php echo site_url("achievement/buyitem"); ?>/${item}/${count}/${target_id}`)
 				.then(response => {
-					
 				  if (!response.ok) {
 					throw new Error(response.statusText)
 				  }
@@ -422,8 +426,9 @@ countdown.setLabels(
 				})
 			},
 			allowOutsideClick: () => !Swal.isLoading()
-		  }).then((result) => {
+		  }).then((result, numberOfItem) => {
 			if (result.value) {
+				// console.log('result')
 				console.log(result)
 				if(result.value['type'] == "Comple"){
 				  console.log(result.value)

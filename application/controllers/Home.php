@@ -38,6 +38,7 @@ class Home extends BaseController
 		$data['Data_list'] = $this->User->all_Activity();
 		$data['userRoles'] = $this->auth->userWiseRoles();
 		$data['checkItem'] = "";
+		// var_dump($data['userRoles']); die;
 		if($data['userRoles'][0] != null)
 			$dataConfirm = $this->User->findItemConfirmed($data['userRoles'][0]);
 
@@ -69,7 +70,7 @@ class Home extends BaseController
 		/**
 		 *    กรณีลำดับไอดีตำแหน่งอยู่ไม่ได้อยู่ในช่วงมกุล จะถูกตรวจสอบ โดย ถ้าไอดีมากกว่า จะถูกนำไปลบระยะห่างของมกุล 
 		 */
-		if($data['userRoles'][0] >13){
+		if($data['userRoles'][0] > 13){
 			$data['userRoles'][0] = $data['userRoles'][0] - 11;
 		}
 

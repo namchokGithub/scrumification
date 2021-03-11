@@ -17,6 +17,7 @@ class Data_manager extends CI_Model
     {
         parent::__construct();
     }
+
 	/**
      * Select Data.
      *
@@ -29,6 +30,24 @@ class Data_manager extends CI_Model
 	public function get_data($name_table,$data)
     {
 		return array_reverse($this->db->get_where($name_table,$data)->result());
+    }
+
+    /**
+     * Select User Data.
+     *
+	 * @Author	Namchok Singhachai
+	 * @Create Date	12-03-2564
+     * @param $name_table
+     * @param $data
+     * @return mixed
+     */
+	public function get_user_data($name_table,$data)
+    {
+		$sql = "SELECT *
+                FROM `users`
+                ORDER BY 'id' DESC
+            ";
+        return $this->db->query($sql)->result_array();
     }
 
     /**
@@ -330,5 +349,21 @@ class Data_manager extends CI_Model
         return $this->db->query($sql);
 
     } // End add_user_with_role
+
+    /**
+     * Get color by group.
+     *
+	 * @Author	Namchok Singhachai
+	 * @Create Date	10-03-2564
+     * @return mixed
+     */
+    public function getTeamColor()
+    {
+        return $this->db
+            ->select ("color")
+            ->from("roles")
+            ->where("roles.name Like 'มกุล %' or name Like 'ทีม %'")
+            ->get()->result_array();
+    } // End getTeamColor
 }
 ?>

@@ -46,15 +46,13 @@
 			url: url_get_option_user,
 			dataType: "json",
 			async:false,
-			success: function(a){
-				for(var i=0 ;i<a.length;i++){
-				if(a[i].id >=380 && a[i].id <=454){
-					Options_user[a[i].id] = a[i].name;		
-				}
-							
+			success: function(res){
+				for(var i=0 ;i<res.length;i++){
+					Options_user[res[i].id] = res[i].name;
 				}
 			},
-			error: function(){
+			error: function(res){
+				console.log(res)
 			}
 		})
 

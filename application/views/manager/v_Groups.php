@@ -11,10 +11,10 @@
 			<thead>
 				<tr>
 					<th>ลำดับ</th>
-					<th>กลุ่ม</th>
-					<th>รูปภาพ</th>
+					<th>ชื่อกลุ่ม</th>
 					<th>สี</th>
-					<th>ข้อมูล</th>
+					<th>รูปภาพ</th>
+					<!-- <th>ข้อมูล</th> -->
 					<th>สมาชิก</th>
 				</tr>
 			</thead>
@@ -36,10 +36,10 @@
 				<form name="altEditor-edit-form" id="altEditor-edit-form" role="form">
 					<div style="margin-left: initial;margin-right: initial;" class="form-group row" id="group_name_edit">
 						<div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding-top:4px;">
-							<label for="group_name_edit">ชื่อกลุ่ม:</label>
+							<label for="group_name_edit">ชื่อกลุ่ม :</label>
 						</div>
 						<div class="col-sm-8 col-md-8 col-lg-8">
-							<input type="text" id="group_name" pattern=".*" title="" name="ชื่อกลุ่ม" placeholder="ชื่อกลุ่ม" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
+							<input disabled type="text" id="group_name" pattern=".*" title="" name="ชื่อกลุ่ม" placeholder="ชื่อกลุ่ม" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
 							<label id="group_name-label" class="text-danger errorLabel"></label>
 						</div>
 						<div style="clear:both;"></div>
@@ -50,7 +50,7 @@
 						</div>
 						<div class="col-sm-8 col-md-8 col-lg-8">
 							<input type="text" id="image" pattern=".*" title="" name="รูปภาพ" placeholder="รูปภาพ" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
-							<label id="image-label" class="text-danger errorLabel"></label>
+							<label id="image-label" class="text-danger errorLabel">* แก้ไข Path ของรูปให้ตรงกับข้อมูลในระบบ</label>
 						</div>
 						<div style="clear:both;"></div>
 					</div>
@@ -148,6 +148,7 @@
 	</div>
 </div>
 
+<script src="<?php echo base_url('assets/dist/js/tinycolor.js'); ?>"></script>
 <script>
 	$(document).ready(function () {
 		$('#color').on('input', function() {
@@ -156,9 +157,6 @@
 		$('#hexcolor').on('input', function() {
 			$('#color').val(this.value);
 		});
-		// $('#hexcolor').on('change', function() {
-		// 	$('#color').val(this.value);
-		// });
 	});
 
 	function numberWithCommas(x) {
@@ -166,43 +164,13 @@
 		return raw_number.toLocaleString();
 	}
 
-	var columnDefs = [
-		{  
-			title: "ลำดับ",
-			data: 1,
-			type:"hidden",
-			disabled:"true",
-			render: function (data, type, row, meta) {
-				// console.log(row)
-				if (data == null || !(data in Options_role)) return null;
-				return 2;
-			},
-			width: "10%",
-			className: "text-center"
-		},
-		{ data: "group_name"},
-		{ 
-		  data: "image_path",
-		  visible: false
-		},
-		{ 
-		  data: "color",
-		  visible: false
-		},
-		{
-		  targets: -1,
-          data: null,
-          defaultContent: '<center><button id="btn_view" class="btn btn-primary btn-md"><i class="fa fa-info-circle"></i></button></center>',
-		  width: "20%",
-
-		},
-		{
-		  targets: -1,
-          data: null,
-          defaultContent: '<center><button id="btn_member" class="btn btn-info btn-md"><i class="fa fa-user"></i></button></center>',
-		  width: "20%",
+	function checkColor(color){
+		if(tinycolor(color).isDark()) {
+			return '#fff';
+		} else {
+			return '#000';
 		}
-	];
+	}
 
 	var myTable;
 	var topic_name = "roles"
@@ -217,6 +185,54 @@
 	 * @Author	Thutsaneeya Chanrong       
 	 * @Create Date	11-02-2564
 	 */
+	var columnDefs = [
+		{  
+			title: "ลำดับ",
+			data: 1,
+			type:"hidden",
+			disabled:"true",
+			render: function (data, type, row, meta) {
+				// console.log(row)
+				if (data == null || !(data in Options_role)) return null;
+				return 2;
+			},
+			width: "10%",
+			className: "text-center"
+		},
+		{ 
+			title: "ชื่อกลุ่ม", data: "group_name"
+		},
+		{ 
+			title: "รูปภาพ", data: "image_path" ,
+			render: function (data, type, row, meta) {
+				// console.log(`url(${window.location.origin}/gami_ossd/${data}`)
+				return `<img width="35" height="35" src="${window.location.origin}/gami_ossd/${data}" alt="">`;
+			},
+			width: "20%",
+			className: "text-center"
+		},
+		{ 
+			title: "สีประจำกลุ่ม", data: "color" ,
+			render: function (data, type, row, meta) {
+				return `<h5 style="background-color: ${data};border: 4px solid ${data};color: ${checkColor(data)};">${data}</h5>`;
+			},
+			width: "20%",
+			className: "text-center"
+		},
+		// {
+		//   targets: -1,
+        //   data: null,
+        //   defaultContent: '<center><button id="btn_view" class="btn btn-primary btn-md"><i class="fa fa-info-circle"></i></button></center>',
+		//   width: "20%",
+
+		// },
+		{
+		  targets: -1,
+          data: null,
+          defaultContent: '<center><button id="btn_member" class="btn btn-info btn-md"><i class="fa fa-users"></i></button></center>',
+		  width: "20%",
+		}
+	];
 	myTable = $('#example').DataTable({
 		"sPaginationType": "full_numbers",
 		ajax: {
@@ -224,7 +240,6 @@
 			"dataSrc": ""
 		},
 		columns: columnDefs, // columns from above
-
 		initComplete: function(settings, json) {
 			$(".btn").removeClass("dt-button");
 		},
@@ -252,7 +267,7 @@
 			}
 		]
 	});
-	myTable.on( 'order.dt search.dt', function () {
+	myTable.on('order.dt search.dt', function () {
 		myTable.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
 			cell.innerHTML = `${i+1}.`;
 		});
@@ -262,12 +277,10 @@
 	$('#example tbody').on('click','tr', function(){
 		group_id = myTable.row(this).id();
 		group_data = myTable.row(this).data();
-		// console.log(group_data);
 	});
 	
-		
 	/**
-	 * Setup detail interface.
+	 * *Setup detail interface.
 	 *
 	 * @Author	Thutsaneeya Chanrong       
 	 * @Create Date	05-03-2564
@@ -294,7 +307,7 @@
 	});
 
 	/**
-	 * Setup member interface.
+	 * *Setup member interface.
 	 *
 	 * @Author	Thutsaneeya Chanrong       
 	 * @Create Date	12-02-2564
@@ -370,7 +383,7 @@
     } );
 
 	/**
-	 * Setup edit interface.
+	 * *Setup edit interface.
 	 *
 	 * @Author	Thutsaneeya Chanrong       
 	 * @Create Date	04-03-2564
@@ -383,7 +396,7 @@
 	});
 	
 	/**
-	 * Edit group data
+	 * *Edit group data
 	 *
 	 * @Author	Thutsaneeya Chanrong       
 	 * @Create Date	04-03-2564
@@ -432,7 +445,8 @@
 				error: (er)=>{console.log(er)}
 			});
 			$('#modalEdit').modal('hide'); // Close modal
-			location.reload();
+			// location.reload();
+			myTable.ajax.reload();
 		} // End if check value
 	});
 	

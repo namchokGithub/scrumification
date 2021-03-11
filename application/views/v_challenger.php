@@ -67,7 +67,13 @@
 				<span class="users-list-name" style="margin-top: 15px;font-size: 22px;"><?php echo $row["username"] ?></span>
 				<span class="users-list-name" href="#<?php echo $row["user_name"] ?>" style="font-size: 17px;" ><?php echo $row["user_name"] ?></span>
 				<?php if($row["secon_role"] !== null ){ ?>
-				<span class="users-list-date" style="font-size: 17px;"><?php echo $row["secon_role"]; ?></span>
+					<?php if($row["secon_role"] == "ประธานมกุล" ){ ?>
+						<b><span class="users-list-date" style="font-size: 17px;">⭐️<?php echo $row["secon_role"]; ?></span></b>
+					<?php } else if($row["secon_role"] == "") { ?>
+						<span class="users-list-date" style="font-size: 17px;"><?php echo $row["display_name"]; ?></span>
+					<?php } else { ?>
+						<span class="users-list-date" style="font-size: 17px;"><?php echo $row["secon_role"]; ?></span>
+					<?php } ?>
 				<?php }else{ ?>
 				<span class="users-list-date" style="font-size: 17px;"><?php echo $row["display_name"]; ?></span>
 				<?php } ?>

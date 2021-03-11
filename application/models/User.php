@@ -229,7 +229,7 @@ class User extends CI_Model
 		$PostQopen = new DateTime($raw_data->time_start);
         $PostQClose = new DateTime($raw_data->time_end);
                               
-        $sql="INSERT INTO `log_shop` (`role_id`, `shop_id`, `total`, `created_at`, `updated_at`) VALUES ('".$data['target']."', '".$data['item_id']."', '".$data['count']."', NOW(), NOW())ON DUPLICATE KEY UPDATE updated_at = NOW(), total=total+".$data['count'];
+        $sql="INSERT INTO `log_shop` (`role_id`, `shop_id`, `total`, `created_at`, `updated_at`) VALUES ('".$data['target']."', '".$data['item_id']."', '".$data['count']."', NOW(), NOW())ON DUPLICATE KEY UPDATE log_shop.status = '0', updated_at = NOW(), total=total+".$data['count'];
         
         $update_sql="update shop set total = total-".$data['count']." where id = ".$data['item_id'];
         

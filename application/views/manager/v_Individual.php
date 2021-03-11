@@ -12,11 +12,13 @@
 				<tr>
 					<th>ชื่อ</th>
 					<th>ชื่อรางวัล</th>
+					<th>ชื่อรางวัล</th>
 				</tr>
 			</thead>
 		</table>
 	</div>
 </div>
+
 <script>
  	var Options = { "1" : "Common Item", "2" : "Daily Item" , "3" : "Special Item" };
  	var columnDefs = [
@@ -26,13 +28,14 @@
 			type:"hidden",
 			disabled:"true",
 			render: function (data, type, row, meta) {
-				if (data == null || !(data in Options_role)) return null;
+				if (data == null) return null;
 				return 2;
 			},
 			width: "10%",
 			className: "text-center"
 		},
-		{ data: "name_indi" }
+		{ title: "ชื่อรางวัล", data: "name_indi" },
+		{ title: "คำอธิบาย", data: "detail_indi" }
 	];
 	var myTable;
 	var topic_name = "individual";
@@ -89,14 +92,18 @@
 		}],
 		onAddRow: function(datatable, rowdata, success, error) {
 			$('.errorLabel').css("color", 'red');
-			if($('#name_indi').val() == '') {
+			if($('#name_indi').val() == '' || $('#detail_indi').val() == '') {
 				$('#name_indilabel').text("กรุณาบันทึกชื่อ");
+				$('#detail_indilabel').text("กรุณาบันทึกรายละเอียด");
 				
 				$('#name_indi').on('change', ()=>{
 					if($('#name_indi').val() != '') {$('#name_indilabel').text('');}
 				})
+				$('#detail_indi').on('change', ()=>{
+					if($('#detail_indi').val() != '') {$('#detail_indilabel').text('');}
+				})
 
-			} else if ($('#name_indi').val() != '') {
+			} else if ($('#name_indi').val() != '' && $('#detail_indi').val() != '') {
 				// console.log(datatable, rowdata, success, error)
 				$.ajax({
 					// a tipycal url would be / with type='PUT'
@@ -157,97 +164,97 @@
 
 <style>
 
-div,h3,span{
-	font-family: prompt !important
-}
-.btn-info {
-	background-color: #245dc1 !important;
-	border-color: #245dc1 !important;
-}
-.dt-buttons{
-	margin-bottom : 10px
-}
-.number_formatter{
-	text-align: right;
+	div,h3,span{
+		font-family: prompt !important
 	}
-table , td ,tr ,th {
-	border: 0.5px solid #979595 !important;
-	border-collapse: collapse; 
-}
-table { 
-	width: 750px; 
-	border-collapse: collapse; 
-	margin:50px auto;
+	.btn-info {
+		background-color: #245dc1 !important;
+		border-color: #245dc1 !important;
 	}
-
-/* Zebra striping */
-tr:nth-of-type(odd) { 
-	background: #eee; 
+	.dt-buttons{
+		margin-bottom : 10px
 	}
-
-th { 
-	background: #3498db; 
-	color: white; 
-	text-align: center; 
-	font-weight: bold; 
+	.number_formatter{
+		text-align: right;
+		}
+	table , td ,tr ,th {
+		border: 0.5px solid #979595 !important;
+		border-collapse: collapse; 
 	}
-
-td, th { 
-	padding: 10px; 
-	font-size: 18px;
-	}
-
-/* 
-Max width before this PARTICULAR table gets nasty
-This query will take effect for any screen smaller than 760px
-and also iPads specifically.
-*/
-@media 
-only screen and (max-width: 760px),
-(min-device-width: 768px) and (max-device-width: 1024px)  {
-
 	table { 
-	  	width: 100%; 
-	}
+		width: 750px; 
+		border-collapse: collapse; 
+		margin:50px auto;
+		}
 
-	/* Force table to not be like tables anymore */
-	table, thead, tbody, th, td, tr { 
-		display: block; 
-	}
-	
-	/* Hide table headers (but not display: none;, for accessibility) */
-	thead tr { 
-		position: absolute;
-		top: -9999px;
-		left: -9999px;
-	}
-	
-	tr { border: 1px solid #ccc; }
-	
-	td { 
-		/* Behave  like a "row" */
-		border: none;
-		border-bottom: 1px solid #eee; 
-		position: relative;
-		padding-left: 50%; 
-	}
+	/* Zebra striping */
+	tr:nth-of-type(odd) { 
+		background: #eee; 
+		}
 
-	td:before { 
-		/* Now like a table header */
-		position: absolute;
-		/* Top/left values mimic padding */
-		top: 6px;
-		left: 6px;
-		width: 45%; 
-		padding-right: 10px; 
-		white-space: nowrap;
-		/* Label the data */
-		content: attr(data-column);
+	th { 
+		background: #3498db; 
+		color: white; 
+		text-align: center; 
+		font-weight: bold; 
+		}
 
-		color: #000;
-		font-weight: bold;
+	td, th { 
+		padding: 10px; 
+		font-size: 18px;
+		}
+
+	/* 
+	Max width before this PARTICULAR table gets nasty
+	This query will take effect for any screen smaller than 760px
+	and also iPads specifically.
+	*/
+	@media 
+	only screen and (max-width: 760px),
+	(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+		table { 
+			width: 100%; 
+		}
+
+		/* Force table to not be like tables anymore */
+		table, thead, tbody, th, td, tr { 
+			display: block; 
+		}
+		
+		/* Hide table headers (but not display: none;, for accessibility) */
+		thead tr { 
+			position: absolute;
+			top: -9999px;
+			left: -9999px;
+		}
+		
+		tr { border: 1px solid #ccc; }
+		
+		td { 
+			/* Behave  like a "row" */
+			border: none;
+			border-bottom: 1px solid #eee; 
+			position: relative;
+			padding-left: 50%; 
+		}
+
+		td:before { 
+			/* Now like a table header */
+			position: absolute;
+			/* Top/left values mimic padding */
+			top: 6px;
+			left: 6px;
+			width: 45%; 
+			padding-right: 10px; 
+			white-space: nowrap;
+			/* Label the data */
+			content: attr(data-column);
+
+			color: #000;
+			font-weight: bold;
+		}
+
 	}
-
-}
-#alteditor-row-type { margin-bottom: 35px; }
+	#alteditor-row-type { margin-bottom: 35px; }
 </style>

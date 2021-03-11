@@ -134,6 +134,20 @@ class Source_manager extends BaseController
 		$data = $this->input->post();
         echo json_encode($this->DM->get_data($name_table,$data));
     }
+
+	/**
+     * Select User Data.
+     *
+	 * @Author	Namchok Singhachai     
+	 * @Create Date	12-03-2564
+     * @return Json Data
+     */
+	public function get_user_data($name_table)
+    {
+		$data = $this->input->post();
+        echo json_encode($this->DM->get_user_data($name_table,$data));
+    }
+
 	/**
      * Select roles.
      *
@@ -176,6 +190,7 @@ class Source_manager extends BaseController
 		$role_id = $this->input->post("role_id");
 		unset($data['addRowBtn']);
 		unset($data['undefined']);
+		$data["password"] = password_hash($data["password"], PASSWORD_BCRYPT);
         $this->DM->add_data($name_table,$data);
 
 		// Get id from username 
@@ -272,6 +287,7 @@ class Source_manager extends BaseController
 		$data = $this->input->post();
 		unset($data['addRowBtn']);
 		unset($data['undefined']);
+		$data["password"] = password_hash($data["password"], PASSWORD_BCRYPT);
 		$this->User->add($data);
 		echo json_encode($data);
 	}
