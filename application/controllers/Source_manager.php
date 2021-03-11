@@ -325,6 +325,7 @@ class Source_manager extends BaseController
     public function delete_data($name_table)
     {
 		$data = $this->input->post();
+		unset($data['1']);
         return $this->DM->delete_data($name_table, $data);
     }
 

@@ -337,7 +337,7 @@
 		{ title:"ตำแหน่ง", data: "code",
 			render: function(data, type, row, meta) {
 				// console.log(row)
-				if (data == null || data == "") return "สมาชิก";
+				if (data == null  || data == "") return "สมาชิก";
 				return data;
 			}
 		}

@@ -297,7 +297,7 @@ class Data_manager extends CI_Model
         return $this->db
             ->select ("roles.id, roles.name as group_name, image_path, color, display_name")
             ->from("roles")
-            ->where("name Like 'มกุล %'")
+            ->where("name Like 'มกุล %' or name Like 'ทีม %'")
             ->get()->result_array();
     } // End get_data_by_group
 
