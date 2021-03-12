@@ -285,9 +285,11 @@ class Source_manager extends BaseController
     public function add_user($name_table)
     {
 		$data = $this->input->post();
+		// echo $data["password"];
+		$data["password"] = password_hash($data["password"], PASSWORD_BCRYPT);
 		unset($data['addRowBtn']);
 		unset($data['undefined']);
-		$data["password"] = password_hash($data["password"], PASSWORD_BCRYPT);
+		// echo $data["password"]; die;
 		$this->User->add($data);
 		echo json_encode($data);
 	}
@@ -423,16 +425,16 @@ class Source_manager extends BaseController
 			$this->DM->get_activity("4", "10", $dateStart, $dateEnd)
 		); 	
 		$data["DailyScrum"] = array(
-			$this->DM->get_activity("17", "1", $dateStart, $dateEnd),
-			$this->DM->get_activity("17", "2", $dateStart, $dateEnd),
-			$this->DM->get_activity("17", "3", $dateStart, $dateEnd),
-			$this->DM->get_activity("17", "4", $dateStart, $dateEnd),
-			$this->DM->get_activity("17", "5", $dateStart, $dateEnd),
-			$this->DM->get_activity("17", "6", $dateStart, $dateEnd),
-			$this->DM->get_activity("17", "7", $dateStart, $dateEnd),
-			$this->DM->get_activity("17", "8", $dateStart, $dateEnd),
-			$this->DM->get_activity("17", "9", $dateStart, $dateEnd),
-			$this->DM->get_activity("17", "10", $dateStart, $dateEnd)
+			$this->DM->get_activity("1", "1", $dateStart, $dateEnd),
+			$this->DM->get_activity("1", "2", $dateStart, $dateEnd),
+			$this->DM->get_activity("1", "3", $dateStart, $dateEnd),
+			$this->DM->get_activity("1", "4", $dateStart, $dateEnd),
+			$this->DM->get_activity("1", "5", $dateStart, $dateEnd),
+			$this->DM->get_activity("1", "6", $dateStart, $dateEnd),
+			$this->DM->get_activity("1", "7", $dateStart, $dateEnd),
+			$this->DM->get_activity("1", "8", $dateStart, $dateEnd),
+			$this->DM->get_activity("1", "9", $dateStart, $dateEnd),
+			$this->DM->get_activity("1", "10", $dateStart, $dateEnd)
 		); 	
 		echo json_encode($data);
 	} // End get_activity

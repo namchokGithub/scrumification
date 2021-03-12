@@ -51,6 +51,8 @@
 </style>
 <!-- End Style -->
 
+<?php //print_r($Data_list);?>
+
 <div class="panel panel-primary">
     <div class="panel-heading" style=" font-size: 28px; ">Activities of Group
         <?php echo $id-1; ?>
@@ -152,7 +154,7 @@
                                     <?php echo $row["user_name"] ?>
                                 </td>
                                 <td>
-                                    <?php if($row["secon_role"] !== null ){  echo $row["secon_role"]; } else{ echo substr($row["role_name"], 0, -1); } ?>
+                                    <?php if($row["secon_role"] != null ){  echo $row["secon_role"]; } else { echo "สมาชิก"; } ?>
                                 </td>
                                 <td onclick="checkin(<?php echo $row['id']; ?>)">
                                     <small class="label bg-gray color-palette time_out"><i class="fa fa-clock-o"></i> None </small>

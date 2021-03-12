@@ -210,10 +210,10 @@
 </div>
 <!-- End Panel Leaderboard -->
 
-<?php if($is_show[0]->status || $Profile[0] == "ScrumMaster"){ ?>
+<?php //if($is_show[0]->status == "Administrator" || $Profile[0] == "ScrumMaster"){ ?>
 <div class="panel panel-primary kanban">
     <div  class="panel-heading" style=" font-size: 28px; ">Camp Leader		
-		<?php if($Profile[0] == "ScrumMaster"){ ?>
+		<?php if($Profile[0] == "ScrumMaster" || $Profile[0] == "Administrator"){ ?>
 		<div style=" display: inline-flex; position: absolute; right: 30px; ">
 			<label class="switch">
 				<input type="checkbox" id = "button_topic_show" <?php echo $is_show[0]->status?"Checked":""; ?>>
@@ -253,7 +253,7 @@
     </div>
 	<!-- end panel body -->
 </div>
-<?php } ?>
+<?php //} ?>
 <!-- End panel Leader -->
 
 <script src="<?php echo base_url('assets/dist/js/highcharts.js'); ?>"></script>

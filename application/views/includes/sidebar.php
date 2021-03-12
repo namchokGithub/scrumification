@@ -176,7 +176,7 @@
 
     $(document).ready(function () {
         let checkLeader = `<?php if(isset($text[0]["Second_role"])) echo $text[0]["Second_role"]; else echo "";?>`;
-        console.log(checkLeader)
+        // console.log(checkLeader)
         if(checkLeader != '1' && checkLeader != "" && checkLeader != " ") {
             $('.Role_name').text(checkLeader);
         } else {

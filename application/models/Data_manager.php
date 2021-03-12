@@ -142,7 +142,7 @@ class Data_manager extends CI_Model
 	 * @Create Date	12-02-2564
      * @return mixed
      */
-	public function get_activity($activityId = "2", $groupId = "1", $dateStart = "2021-01-01", $dateEnd = "2021-12-31")
+	public function get_activity($activityId = "1", $groupId = "1", $dateStart = "2021-01-01", $dateEnd = "2021-12-31")
 	{
 		$sql = "SELECT Count(activity_checkin.user_id) as group$groupId
                 FROM `activity_checkin`
@@ -204,7 +204,7 @@ class Data_manager extends CI_Model
 	 * @Create Date	12-02-2564
      * @return mixed
      */
-	public function get_activity_by_group($activityId = "2", $groupId = "1", $dateStart = "2021-01-01", $dateEnd = "2021-12-31")
+	public function get_activity_by_group($activityId = "1", $groupId = "1", $dateStart = "2021-01-01", $dateEnd = "2021-12-31")
 	{
 		$sql = "SELECT Count(activity_checkin.user_id) as numberOfCheckin, users.id
                 FROM `users`
@@ -217,7 +217,7 @@ class Data_manager extends CI_Model
                 GROUP BY users.id
             ";
         return $this->db->query($sql)->result_array();
-	} // End get_activity
+	} // End get_activity_by_group
 
     /**
      * Update time activity

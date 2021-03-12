@@ -639,14 +639,14 @@
 		var timestamp = new Date()
 		var strDate = timestamp.getFullYear()+"-"+(timestamp.getMonth()+1)+"-"+timestamp.getDate()+" "+timestamp.getHours()+":"+timestamp.getMinutes()+":"+timestamp.getSeconds();
 		for(let i = 1; i <= $('#tbody_01').children().length; i++){
-			let code = $(`#tbody_01 > tr:nth-child(${i}) > td:nth-child(5)`).text();
+			let code = $(`#tbody_01 > tr:nth-child(${i}) > td:nth-child(4)`).text();
 			// console.log(code)
 			if(code == '-') code = null;
 			// console.log(code)
 			rowdata = {
 				code: code,
 				name: $(`#tbody_01 > tr:nth-child(${i}) > td:nth-child(2)`).text(),
-				password: $(`#tbody_01 > tr:nth-child(${i}) > td:nth-child(4)`).text(),
+				password: $(`#tbody_01 > tr:nth-child(${i}) > td:nth-child(3)`).text(),
 				username: $(`#tbody_01 > tr:nth-child(${i}) > td:nth-child(3)`).text(),
 				created_at: strDate,
 				updated_at: strDate
@@ -787,34 +787,39 @@
 
 	function addMany() {
 		// $('#loadDiv').show()
+		var timestamp = new Date()
+		var strDate = timestamp.getFullYear()+"-"+(timestamp.getMonth()+1)+"-"+timestamp.getDate()+" "+timestamp.getHours()+":"+timestamp.getMinutes()+":"+timestamp.getSeconds();
 		for(let i = 1; i <= $('#tbody').children().length; i++){
-		
-		rowdata = {
-			code: $(`#tbody > tr:nth-child(${i}) > td:nth-child(5)`).text(),
-			name: $(`#tbody > tr:nth-child(${i}) > td:nth-child(2)`).text(),
-			password: $(`#tbody > tr:nth-child(${i}) > td:nth-child(4)`).text(),
-			username: $(`#tbody > tr:nth-child(${i}) > td:nth-child(3)`).text(),
-		}
-		console.log(rowdata)
+			let code = $(`#tbody > tr:nth-child(${i}) > td:nth-child(4)`).text();
+			if(code == "สมาชิกในมกุล") code = null;
+			rowdata = {
+				code: code,
+				name: $(`#tbody > tr:nth-child(${i}) > td:nth-child(2)`).text(),
+				password: $(`#tbody > tr:nth-child(${i}) > td:nth-child(3)`).text(),
+				username: $(`#tbody > tr:nth-child(${i}) > td:nth-child(3)`).text(),
+				created_at: strDate,
+				updated_at: strDate
+			}
+			console.log(i)
+			console.log(rowdata)
 
-		 $.ajax({
-			url: url_add,
-			type: 'POST',
-			async: false,
-			data: rowdata,
-			success: function() { 
-				console.log("success");
-			//  toastr['success']("ดำเนินการเสร็จสิ้น")
-			},
-			error: (er)=>{
-				console.log(er)}
+			$.ajax({
+				url: url_add,
+				type: 'POST',
+				async: false,
+				data: rowdata,
+				success: function() { 
+					console.log("success");
+				},
+				error: (er)=>{console.log(er)}
 			});
 		}
 	
 		$('#modal_import').modal('hide'); //Close modal
-		toastr['success']("ดำเนินการเสร็จสิ้น")
+		toastr['success']("ดำเนินการเสร็จสิ้น");
 		window.location.reload(true);
-	 }
+		
+	} // End addMany 
 
 	/**
 	 * 

@@ -48,7 +48,7 @@
 			async:false,
 			success: function(a){
 				for(var i=0 ;i<a.length;i++){
-					if(a[i].id >=2 && a[i].id <=11){
+					if(a[i].id >=1 && a[i].id <=10){
 						Options_role[a[i].id] = a[i].name;	
 					}				
 				}
