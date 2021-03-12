@@ -378,7 +378,7 @@
                     "orderable": false,
                     "targets": 0
                 } ],
-            "order": [[ 1, 'asc' ]],
+		"order": [[ 1, 'asc' ]],
 		dom: 'Bfrtip', // element order: NEEDS BUTTON CONTAINER (B) ****
 		select: 'single', // enable single row selection
 		responsive: true, // enable responsiveness

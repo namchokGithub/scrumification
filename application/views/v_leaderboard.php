@@ -356,7 +356,7 @@
 			type: 'column'
 		},
 		title: {
-			text: 'Open Source Software Developers Camp #8'
+			text: 'Open Source Software Developers Camp #9'
 		},
 		// subtitle: {
 		//     text: 'Open Source Software Developers Camp'
@@ -526,7 +526,9 @@
 		});
 	} // End set_data_chart
 
-	set_data_chart();
-	setInterval(function(){ set_data_chart(); }, 5000);
+	$(document).ready(function () {
+		set_data_chart();
+		setInterval(function(){ set_data_chart(); console.log(1) }, 5000);
+	});
 
 </script>
