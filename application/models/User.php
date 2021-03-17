@@ -494,6 +494,7 @@ class User extends CI_Model
             ->join("roles_users", "roles.id = roles_users.role_id", "inner")
             ->join("users", "users.id = roles_users.user_id", "inner")
             ->where(array("roles_users.role_id" => $id,"roles.status" => 1))
+            ->order_by('users.username', 'ASC')
             ->get()->result_array();
     }
 

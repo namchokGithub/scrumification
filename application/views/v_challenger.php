@@ -53,7 +53,6 @@
 			<!-- Add the bg color to the header using any of the bg-* classes -->
 			<div class="widget-user-header " style="width: 250px;background: url('<?php echo base_url('assets/dist/img/cluster/cluster'.($cluster_id-1).'.png'); ?>') center center;background-position-x: center;height: 210px;background-size: contain;background-repeat: no-repeat; background-repeat-y: no-repeat; background-repeat-x: no-repeat;">
 			</div>
-
 				<div class="box-footer" style="text-align: center;font-size: 52px;padding-top: 0px;color: black;border: 0px !important;">Cluster <?php echo $cluster_id-1; ?><!-- /.row -->
 				</div>
 			</div>
@@ -62,22 +61,34 @@
 		<hr style="border-top: 1px solid #cdcccc;">
 		<ul class="users-list clearfix">
 		<?php foreach($User_list as $row){?>
+			<?php if($row["secon_role"] !== null && $row["secon_role"] == "ประธานมกุล"){ ?>
 			<li class="col-md-4 col-xs-6">
 			<img src="<?php echo base_url('assets/dist/img/user/'.$row['username'].'.jpg');?>" alt="User Image" onerror="this.onerror=null;this.src='<?php echo base_url('assets/dist/img/user/unknown-who.jpg'); ?>';" style="object-fit: cover; object-position: center;margin: 7px 0px;width: 200px;height: 200px;">
 				<span class="users-list-name" style="margin-top: 15px;font-size: 22px;"><?php echo $row["username"] ?></span>
 				<span class="users-list-name" href="#<?php echo $row["user_name"] ?>" style="font-size: 17px;" ><?php echo $row["user_name"] ?></span>
-				<?php if($row["secon_role"] !== null ){ ?>
-					<?php if($row["secon_role"] == "ประธานมกุล" ){ ?>
-						<b><span class="users-list-date" style="font-size: 17px;">⭐️<?php echo $row["secon_role"]; ?></span></b>
-					<?php } else if($row["secon_role"] == "") { ?>
-						<span class="users-list-date" style="font-size: 17px;"><?php echo $row["display_name"]; ?></span>
-					<?php } else { ?>
-						<span class="users-list-date" style="font-size: 17px;"><?php echo $row["secon_role"]; ?></span>
-					<?php } ?>
-				<?php }else{ ?>
-				<span class="users-list-date" style="font-size: 17px;"><?php echo $row["display_name"]; ?></span>
-				<?php } ?>
+				<b><span class="users-list-date" style="font-size: 17px;">⭐️<?php echo $row["secon_role"]; ?></span></b>
 			</li>
+			<?php } ?>
+		<?php } ?>
+		<?php foreach($User_list as $row){?>
+			<?php if($row["secon_role"] !== null && $row["secon_role"] != "ประธานมกุล" && $row["secon_role"] != ""){ ?>
+			<li class="col-md-4 col-xs-6">
+			<img src="<?php echo base_url('assets/dist/img/user/'.$row['username'].'.jpg');?>" alt="User Image" onerror="this.onerror=null;this.src='<?php echo base_url('assets/dist/img/user/unknown-who.jpg'); ?>';" style="object-fit: cover; object-position: center;margin: 7px 0px;width: 200px;height: 200px;">
+				<span class="users-list-name" style="margin-top: 15px;font-size: 22px;"><?php echo $row["username"] ?></span>
+				<span class="users-list-name" href="#<?php echo $row["user_name"] ?>" style="font-size: 17px;" ><?php echo $row["user_name"] ?></span>
+				<b><span class="users-list-date" style="font-size: 17px;"><?php echo $row["secon_role"]; ?></span></b>
+			</li>
+			<?php } ?>
+		<?php } ?>
+		<?php foreach($User_list as $row){?>
+			<?php if($row["secon_role"] != "ประธานมกุล" && $row["secon_role"] != "รองประธานมกุล"){ ?>
+			<li class="col-md-4 col-xs-6">
+			<img src="<?php echo base_url('assets/dist/img/user/'.$row['username'].'.jpg');?>" alt="User Image" onerror="this.onerror=null;this.src='<?php echo base_url('assets/dist/img/user/unknown-who.jpg'); ?>';" style="object-fit: cover; object-position: center;margin: 7px 0px;width: 200px;height: 200px;">
+				<span class="users-list-name" style="margin-top: 15px;font-size: 22px;"><?php echo $row["username"] ?></span>
+				<span class="users-list-name" href="#<?php echo $row["user_name"] ?>" style="font-size: 17px;" ><?php echo $row["user_name"] ?></span>
+				<b><span class="users-list-date" style="font-size: 17px;"><?php echo $row["display_name"]; ?></span></b>
+			</li>
+			<?php } ?>
 		<?php } ?>
 		</ul>
   	</div>

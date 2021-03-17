@@ -174,6 +174,7 @@
 						</div>
 						<div class="col-sm-8 col-md-8 col-lg-8">
 							<input type="text" id="name_edit" pattern=".*" title="" name="ชื่อ - นามสกุล" placeholder="ชื่อ - นามสกุล" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
+							<label id="name_editlabel" class="text-danger errorLabel"></label>
 						</div>
 						<div style="clear:both;"></div>
 					</div>
@@ -183,22 +184,15 @@
 						</div>
 						<div class="col-sm-8 col-md-8 col-lg-8">
 							<input type="text" id="username_edit" pattern=".*" title="" name="Username" placeholder="ชื่อผู้ใช้งาน" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
+							<label id="username_editlabel" class="text-danger errorLabel"></label>
 						</div>
 						<div style="clear:both;"></div>
 					</div>
 					<input type="hidden" id="password_edit" pattern=".*" title="" name="Password" placeholder="Password" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
-					<!-- <div style="margin-left: initial;margin-right: initial;" class="form-group row" id="alteditor-row-password_edit">
-						<div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding-top:4px;">
-							<label for="password_edit">Password:</label>
-						</div>
-						<div class="col-sm-8 col-md-8 col-lg-8">
-							<input type="hidden" id="password_edit" pattern=".*" title="" name="Password" placeholder="Password" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
-						</div>
-						<div style="clear:both;"></div>
-					</div> -->
 					<div style="margin-left: initial;margin-right: initial;" class="form-group row" id="alteditor-row-code_edit">
 						<div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding-top:4px;">
 							<label for="code_edit">ตำแหน่ง:</label>
+							<label id="codelabel" class="text-danger errorLabel">(กรณีเป็นสมาชิกไม่ต้องระบุ)</label>
 						</div>
 						<div class="col-sm-8 col-md-8 col-lg-8">
 							<input type="text" id="code_edit" pattern=".*" title="" name="หน้าที่" placeholder="ตำแหน่ง" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
@@ -374,7 +368,7 @@
 	myTable = $('#example').DataTable({
 		"sPaginationType": "full_numbers",
 		ajax: {
-			"url": get_user_data,
+			"url": url_user_get,
 			"dataSrc": ""
 		},
 		columns: columnDefs, // columns from above
@@ -618,7 +612,7 @@
 			// set value in edit form
 			$('#name_edit').val(user_id["name"]);
 			$('#username_edit').val(user_id["username"]);
-			// $('#password_edit_old').val(user_id["password"]);
+			$('#password_edit').val(user_id["username"]);
 			$('#code_edit').val(user_id["code"]);
 	});
 
@@ -696,29 +690,24 @@
 	 * @Author	Thutsaneeya Chanrong       
 	 * @Create Date	04-02-2564
 	 */
-	$('#EditRowBtn').on('click', function () {  
-
+	$('#EditRowBtn').on('click', function () {
+		console.log('click')
 		var timestamp = new Date()
 		var strDate = timestamp.getFullYear()+"-"+(timestamp.getMonth()+1)+"-"+timestamp.getDate()+" "+timestamp.getHours()+":"+timestamp.getMinutes()+":"+timestamp.getSeconds();
-
-
-		if($('#name_edit').val() == '' || $('#username_edit').val() == '' || $('#password_edit').val() == '') {
-			if($('#name_edit').val() == '') {$('#name_edit-label').text("กรุณาบันทึกชื่อนามสกุล");}
-			if($('#username_edit').val() == '') {$('#username_edit-label').text("กรุณาบันทึกชื่อผู้ใช้งาน");}
-			if($('#password_edit').val() == '') {$('#password_edit-label').text("กรุณาบันทึกรหัสผ่าน");}
+		if($('#password_edit').val() == '') { toastr['error']("กรุณาบันทึกข้อมูล") }
+		else if($('#name_edit').val() == '' || $('#username_edit').val() == '') {
+			if($('#name_edit').val() == '') {$('#name_editlabel').text("กรุณาบันทึกชื่อนามสกุล");}
+			if($('#username_edit').val() == '') {$('#username_editlabel').text("กรุณาบันทึกชื่อผู้ใช้งาน");}
 
 			$('#name_edit').on('change', ()=>{
-				if($('#name_edit').val() != '') {$('#name_edit-label').text('');}
+				if($('#name_edit').val() != '') {$('#name_editlabel').text('');}
 			})
 			$('#username_edit').on('change', ()=>{
-				if($('#username_edit').val() != '') {$('#username_edit-label').text('');}
+				if($('#username_edit').val() != '') {$('#username_editlabel').text('');}
 			})
-			$('#password_edit').on('change', ()=>{
-				if($('#password_edit').val() != '') {$('#password_edit-label').text('');}
-			})
-
+			toastr['warning']("กรุณาบันทึกข้อมูล")
 		} else if ($('#name_edit').val() != '' && $('#username_edit').val() != '' && $('#password_edit').val() != '') {
-						// console.log('yess')
+			
 			let rowdata = {
 				id :	user_id["id"],
 				code: $('#code_edit').val(),
