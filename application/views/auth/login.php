@@ -153,7 +153,7 @@
                                 </div>
                                 <label for="username" class="sr-only">ชื่อผู้ใช้งาน</label>
                                 <?= form_error('username', '<div class="err">', '</div>'); ?>
-                                    <input style="margin-right: -5px !important;" type="text" id="inputEmail" class="form-control" placeholder="ชื่อผู้ใช้งาน" value="<?= set_value('username'); ?>" name="username" autofocus>
+                                    <input autocomplete="off" style="margin-right: -5px !important;" type="text" id="inputEmail" class="form-control" placeholder="ชื่อผู้ใช้งาน" value="<?= set_value('username'); ?>" name="username" autofocus>
                             </div>
 
                             <div class="input-group">

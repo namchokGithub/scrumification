@@ -85,7 +85,7 @@ class MainReward extends BaseController
      */
 	public function add_Activity($id=0,$user_id=0){
 		$action = 1;
-		if(hasRole(['ScrumMaster'])){
+		if(hasRole(['ScrumMaster']) || hasRole(['Administrator'])){
 			$action = 0;
 		}
 		if($this->User->can_add_Activity($user_id)){

@@ -22,6 +22,7 @@
 				<tr>
 					<th>ลำดับ</th>
 					<th>ชื่อรางวัล</th>
+					<th>คะแนน</th>
 					<th>วันที่</th>
 				</tr>
 			</thead>
@@ -75,6 +76,7 @@
 				className: "text-center"
 		},
 		{ data: "achievement_name" },
+		{ data: "achievement_point"},
         { 
 			data: "created_at",
 			render: function(data, type, row, meta) {

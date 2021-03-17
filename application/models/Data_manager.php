@@ -256,7 +256,8 @@ class Data_manager extends CI_Model
                      log_achievement.role_id, 
                      log_achievement.achievement_id, 
                      log_achievement.created_at, 
-                     achievement.name as achievement_name "
+                     achievement.name as achievement_name,
+                     achievement.point as achievement_point  "
                     )
             ->from("log_achievement")
             ->join("roles", "log_achievement.role_id = roles.id", "LEFT")
