@@ -9,9 +9,9 @@
 		Achievement Report of Cluster  <?php echo $group-1; ?> 
 		<div class="pull-right" style="font-size: x-large; font-weight: 200; color: black; margin: auto;">
 			<select id="select-opt">
-				<option value="">เลือกกลุ่ม</option>
+				<option value="">เลือกมกุล</option>
 				<?php for($i=1;$i<11;$i++){?>
-				<option value="<?php echo site_url('Source_manager/AchievementReport/'.$i); ?>">Cluster <?php echo $i-1; ?></option>
+				<option value="<?php echo site_url('Source_manager/AchievementReport/'.$i); ?>">มกุล <?php echo $i-1; ?></option>
 				<?php } ?>
 			</select>
 		</div>

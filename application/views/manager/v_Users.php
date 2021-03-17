@@ -558,7 +558,7 @@
 						<td><center>${rowcount + 1}</center></td>
 						<td>${name}</td>
 						<td>${username}</td>
-						<td>${password}</td>
+						<td>********</td>
 						<td>${code}</td>
 						<td>${roles_text}</td>
 						<td><center><button id="btn_del"type="button" class="btn btn-danger">ลบ</button></center></td>
@@ -642,7 +642,7 @@
 		var timestamp = new Date()
 		var strDate = timestamp.getFullYear()+"-"+(timestamp.getMonth()+1)+"-"+timestamp.getDate()+" "+timestamp.getHours()+":"+timestamp.getMinutes()+":"+timestamp.getSeconds();
 		for(let i = 1; i <= $('#tbody_01').children().length; i++){
-			let code = $(`#tbody_01 > tr:nth-child(${i}) > td:nth-child(4)`).text();
+			let code = $(`#tbody_01 > tr:nth-child(${i}) > td:nth-child(5)`).text();
 			// console.log(code)
 			if(code == '-') code = null;
 			// console.log(code)
@@ -657,7 +657,7 @@
 			// #tbody_01 > tr > td:nth-child(8) > input[type=hidden]
 			role_id =  $(`#tbody_01 > tr:nth-child(${i}) > td:nth-child(8) > input[type=hidden]`).val()
 
-			// console.log(rowdata)
+			console.log(rowdata)
 			// console.log(role_id)
 
 			$.ajax({

@@ -15,7 +15,7 @@
 		<i class="fa fa-users"></i> Activity Report of <span id="group-name"></span>
 		<div class="pull-right" style="font-size: x-large; font-weight: 200; color: black; margin: auto;">
 			<select id="select-opt-year-table-report">
-				<option value="" disabled selected>เลือกกลุ่ม</option>
+				<option value="" disabled selected>เลือกมกุล</option>
 				<?php for($i=1;$i<11;$i++){?> 
 					<option value="<?php echo site_url('challenger/index/'.($i)); ?>">Cluster <?php echo $i-1; ?></option>
 				<?php } ?>

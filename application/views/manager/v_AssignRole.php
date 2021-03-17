@@ -12,7 +12,7 @@
 				<tr>
 					<th>ลำดับ</th>
 					<th>ชื่อ</th>
-					<th>ตำแหน่ง</th>
+					<th>บทบาท</th>
 				</tr>
 			</thead>
 		</table>
@@ -24,6 +24,19 @@
 	
 	$(document).ready(function () {
 		set_Data()
+
+		$('#example_wrapper > div.dt-buttons > button.btn.btn-info.btn-lg').on('click', function () {
+			$('div.modal-header.bg-blue > h3').text("หน้าเพิ่มบทบาท");
+		});
+
+		$('#example_wrapper > div.dt-buttons > button.btn.btn-warning.btn-lg').on('click', function () {
+			$('div.modal-header.bg-blue > h3').text("หน้าแก้ไขบทบาท");
+		});
+
+		$('#example_wrapper > div.dt-buttons > button.btn.btn-danger.btn-lg').on('click', function () {
+			$('div.modal-header.bg-blue > h3').text("หน้าลบบทบาท");
+		});
+
 	});
 
 	/**
@@ -46,6 +59,7 @@
 		var url_get_option_roles = "<?php echo site_url("Source_manager/get_data/");?>roles";
 		var Options_user = {};
 		var Options_roles = {};
+
 		var columnDefs = [
 			{
 				title: "ลำดับ",
@@ -89,7 +103,7 @@
 			async:false,
 			success: function(a){
 				for(var i=0 ;i<a.length;i++){
-				Options_roles[a[i].id] = a[i].name;			
+					Options_roles[a[i].id] = a[i].display_name;			
 				}
 			},
 			error: function(err){
@@ -137,7 +151,7 @@
 			buttons: [{
 				text: '<i class="fa fa-plus-square"></i> เพิ่มชุดข้อมูล',
 				name: 'add',     // DO NOT change name
-				"className": 'btn btn-info btn-lg' 
+				"className": 'btn btn-info btn-lg'
 			},
 			{
 				extend: 'selected', // Bind to Selected row

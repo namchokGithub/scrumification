@@ -75,9 +75,9 @@
 			<div class="col-md-9 col-sm-12  col-xs-12"style="font-size: x-large;font-weight: 700;" id="user_point">ยอดเงินทั้งหมด $$$$$ $E</div>
 			<div class="col-md-3 col-sm-12  col-xs-12 min-align" style="font-size: x-large;font-weight: 600; ">
 				<select id="select-opt" style=" margin-bottom: 5px; ">
-					<option value="1">เลือกกลุ่ม</option>
+					<option value="1">เลือกมกุล</option>
 					<?php for($i=1;$i<11;$i++){?>
-					<option value="<?php echo $i; ?>">Cluster <?php echo $i-1; ?></option>
+					<option value="<?php echo $i; ?>">มกุล <?php echo $i-1; ?></option>
 					<?php } ?>
 				</select>
 			</div>
