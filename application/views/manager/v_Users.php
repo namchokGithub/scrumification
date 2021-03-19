@@ -244,7 +244,7 @@
 							<label for="password">รหัสผ่าน:</label>
 						</div>
 						<div class="col-sm-8 col-md-8 col-lg-8">
-							<input type="text" id="password" pattern=".*" title="" name="Password" placeholder="รหัสผ่าน" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
+							<input type="password" id="password" pattern=".*" title="" name="Password" placeholder="รหัสผ่าน" data-special="" data-errormsg="" data-uniquemsg="" data-unique="false" style="overflow:hidden" class="form-control  form-control-sm" value="">
 							<label id="passwordlabel" class="text-danger errorLabel"></label>
 						</div>
 					</div>

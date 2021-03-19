@@ -85,7 +85,8 @@
 					let dateThai = DateThai(data)
 					return dateThai
 				};
-			}
+			},
+			width: "30%"
 		}
 	];
 
