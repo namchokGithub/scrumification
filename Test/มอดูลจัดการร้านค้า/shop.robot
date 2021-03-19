@@ -59,14 +59,14 @@ Submit add shop
 
 Edit shop
     sleep                       1s
-    Click Element       xpath=//*[@id="example"]/tbody/tr[9]
+    Click Element       xpath=//*[@id="example"]/tbody/tr[6]
     sleep                       1s
     Click Element       xpath=//*[@id="example_wrapper"]/div[1]/button[2]
     sleep                       1s
 
 Delete shop
     sleep                       1s
-    Click Element       xpath=//*[@id="example"]/tbody/tr[9]
+    Click Element       xpath=//*[@id="example"]/tbody/tr[6]
     sleep                       1s
     Click Element       xpath=//*[@id="example_wrapper"]/div[1]/button[3]
     sleep                       1s
@@ -118,4 +118,100 @@ SCM-Shop-TC1-03
     AND Go to shop management page
     AND Delete shop
     THEN Submit delete shop
+    [Teardown]    Close Browser
+
+SCM-Shop-TC2-01
+    [Documentation]     การเพิ่มไอเทมพิเศษไม่ใส่ชื่อไอเทม
+    [Tags]    FAIL
+    GIVEN Open web browser
+    WHEN Login with "59160161" "59160161"
+    AND Go to shop management page
+    AND Add shop
+    AND Input name shop ""
+    AND Input point shop "10"
+    AND Input type shop "1"
+    AND Input total shop "10"
+    AND Input date start shop "2021/03/08 16:26"
+    AND Input date end shop "2022/03/08 16:26"
+    THEN Submit add shop
+    [Teardown]    Close Browser
+
+SCM-Shop-TC2-02
+    [Documentation]     การเพิ่มไอเทมพิเศษไม่ใส่คะแนน
+    [Tags]    FAIL
+    GIVEN Open web browser
+    WHEN Login with "59160161" "59160161"
+    AND Go to shop management page
+    AND Add shop
+    AND Input name shop "ไอเทมพิเศษ"
+    AND Input point shop ""
+    AND Input type shop "1"
+    AND Input total shop "10"
+    AND Input date start shop "2021/03/08 16:26"
+    AND Input date end shop "2022/03/08 16:26"
+    THEN Submit add shop
+    [Teardown]    Close Browser
+
+SCM-Shop-TC2-03
+    [Documentation]     การเพิ่มไอเทมพิเศษไม่ใส่เวลาเริ่มต้น
+    [Tags]    FAIL
+    GIVEN Open web browser
+    WHEN Login with "59160161" "59160161"
+    AND Go to shop management page
+    AND Add shop
+    AND Input name shop "ไอเทมพิเศษ"
+    AND Input point shop "10"
+    AND Input type shop "1"
+    AND Input total shop "10"
+    AND Input date start shop ""
+    AND Input date end shop "2022/03/08 16:26"
+    THEN Submit add shop
+    [Teardown]    Close Browser
+
+SCM-Shop-TC2-04
+    [Documentation]     การเพิ่มไอเทมพิเศษไม่ใส่เวลาสิ้นสุด
+    [Tags]    FAIL
+    GIVEN Open web browser
+    WHEN Login with "59160161" "59160161"
+    AND Go to shop management page
+    AND Add shop
+    AND Input name shop "ไอเทมพิเศษ"
+    AND Input point shop "10"
+    AND Input type shop "1"
+    AND Input total shop "10"
+    AND Input date start shop "2021/03/08 16:26"
+    AND Input date end shop ""
+    THEN Submit add shop
+    [Teardown]    Close Browser
+
+SCM-Shop-TC2-05
+    [Documentation]     การเพิ่มไอเทมพิเศษไม่ใส่จำนวน
+    [Tags]    FAIL
+    GIVEN Open web browser
+    WHEN Login with "59160161" "59160161"
+    AND Go to shop management page
+    AND Add shop
+    AND Input name shop "ไอเทมพิเศษ"
+    AND Input point shop "10"
+    AND Input type shop "1"
+    AND Input total shop ""
+    AND Input date start shop "2021/03/08 16:26"
+    AND Input date end shop "2022/03/08 16:26"
+    THEN Submit add shop
+    [Teardown]    Close Browser
+
+SCM-Shop-TC2-06
+    [Documentation]     การเพิ่มไอเทมพิเศษไม่ใส่ข้อมูล
+    [Tags]    FAIL
+    GIVEN Open web browser
+    WHEN Login with "59160161" "59160161"
+    AND Go to shop management page
+    AND Add shop
+    AND Input name shop ""
+    AND Input point shop ""
+    AND Input type shop "1"
+    AND Input total shop ""
+    AND Input date start shop ""
+    AND Input date end shop ""
+    THEN Submit add shop
     [Teardown]    Close Browser

@@ -73,8 +73,101 @@ Submit edit activity
 Submit delete activity
     Click Element       xpath=//*[@id="deleteRowBtn"]
 
+Check text "${text}"
+    Wait Until Page Contains     ${text}
+
 *** Test Cases ***
 SCM-activity-TC1-01
+    [Documentation]     การเพิ่มกิจกรรมกรณีไม่ใส่ข้อมูล
+    [Tags]    FAIL
+    GIVEN Open web browser
+    WHEN Login with "60160169" "60160169"
+    AND Go to activity page
+    AND Add activity
+    AND Input name activity ""
+    AND Input time start activity ""
+    AND Input time end activity ""
+    AND Input date start activity ""
+    AND Input date end activity ""
+    THEN Submit add activity
+    [Teardown]    Close Browser
+
+SCM-activity-TC1-02
+    [Documentation]     การเพิ่มกิจกรรมกรณีไม่ใส่ชื่อข้อมูล
+    [Tags]    FAIL
+    GIVEN Open web browser
+    WHEN Login with "60160169" "60160169"
+    AND Go to activity page
+    AND Add activity
+    AND Input name activity ""
+    AND Input time start activity "07:00"
+    AND Input time end activity "09:00"
+    AND Input date start activity "2020/01/03"
+    AND Input date end activity "2021/01/03"
+    THEN Submit add activity
+    [Teardown]    Close Browser
+
+SCM-activity-TC1-03
+    [Documentation]     การเพิ่มกิจกรรมกรณีไม่ใส่เวลาเริ่มต้น
+    [Tags]    FAIL
+    GIVEN Open web browser
+    WHEN Login with "60160169" "60160169"
+    AND Go to activity page
+    AND Add activity
+    AND Input name activity "New activity"
+    AND Input time start activity ""
+    AND Input time end activity "09:00"
+    AND Input date start activity "2020/01/03"
+    AND Input date end activity "2021/01/03"
+    THEN Submit add activity
+    [Teardown]    Close Browser
+
+SCM-activity-TC1-04
+    [Documentation]     การเพิ่มกิจกรรมกรณีไม่ใส่เวลาสิ้นสุด
+    [Tags]    FAIL
+    GIVEN Open web browser
+    WHEN Login with "60160169" "60160169"
+    AND Go to activity page
+    AND Add activity
+    AND Input name activity "New activity"
+    AND Input time start activity "07:00"
+    AND Input time end activity ""
+    AND Input date start activity "2020/01/03"
+    AND Input date end activity "2021/01/03"
+    THEN Submit add activity
+    [Teardown]    Close Browser
+
+SCM-activity-TC1-05
+    [Documentation]     การเพิ่มกิจกรรมกรณีไม่ใส่วันที่เริ่มต้น
+    [Tags]    FAIL
+    GIVEN Open web browser
+    WHEN Login with "60160169" "60160169"
+    AND Go to activity page
+    AND Add activity
+    AND Input name activity "New activity"
+    AND Input time start activity "07:00"
+    AND Input time end activity "09:00"
+    AND Input date start activity ""
+    AND Input date end activity "2021/01/03"
+    THEN Submit add activity
+    [Teardown]    Close Browser
+
+SCM-activity-TC1-06
+    [Documentation]     การเพิ่มกิจกรรมกรณีไม่ใส่วันที่สิ้นสุด
+    [Tags]    FAIL
+    GIVEN Open web browser
+    WHEN Login with "60160169" "60160169"
+    AND Go to activity page
+    AND Add activity
+    AND Input name activity "New activity"
+    AND Input time start activity "07:00"
+    AND Input time end activity "09:00"
+    AND Input date start activity "2020/01/03"
+    AND Input date end activity ""
+    THEN Submit add activity
+    [Teardown]    Close Browser
+
+SCM-activity-TC2-01
     [Documentation]     การเพิ่มกิจกรรม
     [Tags]    PASS
     GIVEN Open web browser
@@ -89,7 +182,7 @@ SCM-activity-TC1-01
     THEN Submit add activity
     [Teardown]    Close Browser
 
-SCM-activity-TC1-02
+SCM-activity-TC2-02
     [Documentation]     การแก้ไขกิจกรรม
     [Tags]    PASS
     GIVEN Open web browser
@@ -104,7 +197,7 @@ SCM-activity-TC1-02
     THEN Submit edit activity
     [Teardown]    Close Browser
 
-SCM-activity-TC1-03
+SCM-activity-TC2-03
     [Documentation]     การลบกิจกรรม
     [Tags]    PASS
     GIVEN Open web browser

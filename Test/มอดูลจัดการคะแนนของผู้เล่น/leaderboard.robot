@@ -29,10 +29,28 @@ Check page "${text}"
 
 *** Test Cases ***
 SCM-Report-TC1-01
-    [Documentation]     การแสดงประวัติกิจกรรมถูกต้อง
+    [Documentation]     การแสดงประวัติกิจกรรมถูกต้องของ Scrum master
     [Tags]    PASS
     GIVEN Open web browser
     WHEN Login with "59160161" "59160161"
+    AND Go to leaderboard page
+    THEN Check page "Open Source Software Developers"
+    [Teardown]    Close Browser
+
+SCM-Report-TC1-02
+    [Documentation]     การแสดงประวัติกิจกรรมถูกต้องของพี่เลี้ยง
+    [Tags]    PASS
+    GIVEN Open web browser
+    WHEN Login with "60160350" "60160350"
+    AND Go to leaderboard page
+    THEN Check page "Open Source Software Developers"
+    [Teardown]    Close Browser
+
+SCM-Report-TC1-03
+    [Documentation]     การแสดงประวัติกิจกรรมถูกต้องของผู้เล่น
+    [Tags]    PASS
+    GIVEN Open web browser
+    WHEN Login with "62160324" "62160324"
     AND Go to leaderboard page
     THEN Check page "Open Source Software Developers"
     [Teardown]    Close Browser

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 3.1.2 (Python 3.8.1 on win32)" generated="20210308 09:53:41.105" rpa="false">
+<robot generator="Robot 3.1.2 (Python 3.8.1 on win32)" generated="20210319 11:59:45.778" rpa="false">
 <suite id="s1" name="Report" source="C:\xampp\htdocs\gami_ossd\Test\มอดูลแสดงประวัติกิจกรรม\report.robot">
 <test id="s1-t1" name="SCM-Report-TC1-01">
 <kw name="GIVEN Open web browser">
@@ -9,14 +9,14 @@
 <arg>${url}</arg>
 <arg>chrome</arg>
 </arguments>
-<msg timestamp="20210308 09:53:41.312" level="INFO">Opening browser 'chrome' to base url 'https://localhost/gami_ossd/index.php'.</msg>
-<status status="PASS" starttime="20210308 09:53:41.312" endtime="20210308 09:53:43.389"></status>
+<msg timestamp="20210319 11:59:45.972" level="INFO">Opening browser 'chrome' to base url 'https://localhost/gami_ossd/index.php'.</msg>
+<status status="PASS" starttime="20210319 11:59:45.971" endtime="20210319 11:59:48.013"></status>
 </kw>
 <kw name="Maximize Browser Window" library="Selenium2Library">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" starttime="20210308 09:53:43.389" endtime="20210308 09:53:43.511"></status>
+<status status="PASS" starttime="20210319 11:59:48.013" endtime="20210319 11:59:48.133"></status>
 </kw>
-<status status="PASS" starttime="20210308 09:53:41.312" endtime="20210308 09:53:43.511"></status>
+<status status="PASS" starttime="20210319 11:59:45.971" endtime="20210319 11:59:48.133"></status>
 </kw>
 <kw name="WHEN Login with &quot;59160161&quot; &quot;59160161&quot;">
 <kw name="Click Element" library="Selenium2Library">
@@ -24,16 +24,16 @@
 <arguments>
 <arg>xpath=//*[@id="details-button"]</arg>
 </arguments>
-<msg timestamp="20210308 09:53:43.513" level="INFO">Clicking element 'xpath=//*[@id="details-button"]'.</msg>
-<status status="PASS" starttime="20210308 09:53:43.512" endtime="20210308 09:53:43.565"></status>
+<msg timestamp="20210319 11:59:48.134" level="INFO">Clicking element 'xpath=//*[@id="details-button"]'.</msg>
+<status status="PASS" starttime="20210319 11:59:48.134" endtime="20210319 11:59:48.180"></status>
 </kw>
 <kw name="Click Element" library="Selenium2Library">
 <doc>Click the element identified by ``locator``.</doc>
 <arguments>
 <arg>xpath=//*[@id="proceed-link"]</arg>
 </arguments>
-<msg timestamp="20210308 09:53:43.566" level="INFO">Clicking element 'xpath=//*[@id="proceed-link"]'.</msg>
-<status status="PASS" starttime="20210308 09:53:43.565" endtime="20210308 09:53:44.526"></status>
+<msg timestamp="20210319 11:59:48.181" level="INFO">Clicking element 'xpath=//*[@id="proceed-link"]'.</msg>
+<status status="PASS" starttime="20210319 11:59:48.181" endtime="20210319 11:59:49.231"></status>
 </kw>
 <kw name="Input Text" library="Selenium2Library">
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
@@ -41,8 +41,8 @@
 <arg>${login_input_username}</arg>
 <arg>${username}</arg>
 </arguments>
-<msg timestamp="20210308 09:53:44.526" level="INFO">Typing text '59160161' into text field 'xpath=//*[@id="inputEmail"]'.</msg>
-<status status="PASS" starttime="20210308 09:53:44.526" endtime="20210308 09:53:44.602"></status>
+<msg timestamp="20210319 11:59:49.231" level="INFO">Typing text '59160161' into text field 'xpath=//*[@id="inputEmail"]'.</msg>
+<status status="PASS" starttime="20210319 11:59:49.231" endtime="20210319 11:59:49.296"></status>
 </kw>
 <kw name="Input Password" library="Selenium2Library">
 <doc>Types the given password into the text field identified by ``locator``.</doc>
@@ -50,26 +50,26 @@
 <arg>${login_input_password}</arg>
 <arg>${password}</arg>
 </arguments>
-<msg timestamp="20210308 09:53:44.602" level="INFO">Typing password into text field 'xpath=//*[@id="inputPassword"]'.</msg>
-<status status="PASS" starttime="20210308 09:53:44.602" endtime="20210308 09:53:44.686"></status>
+<msg timestamp="20210319 11:59:49.297" level="INFO">Typing password into text field 'xpath=//*[@id="inputPassword"]'.</msg>
+<status status="PASS" starttime="20210319 11:59:49.297" endtime="20210319 11:59:49.370"></status>
 </kw>
 <kw name="Sleep" library="BuiltIn">
 <doc>Pauses the test executed for the given time.</doc>
 <arguments>
 <arg>1s</arg>
 </arguments>
-<msg timestamp="20210308 09:53:45.695" level="INFO">Slept 1 second</msg>
-<status status="PASS" starttime="20210308 09:53:44.686" endtime="20210308 09:53:45.695"></status>
+<msg timestamp="20210319 11:59:50.377" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20210319 11:59:49.370" endtime="20210319 11:59:50.377"></status>
 </kw>
 <kw name="Click Element" library="Selenium2Library">
 <doc>Click the element identified by ``locator``.</doc>
 <arguments>
 <arg>${login_btn}</arg>
 </arguments>
-<msg timestamp="20210308 09:53:45.695" level="INFO">Clicking element 'xpath=//*[@id="loginForm"]/button'.</msg>
-<status status="PASS" starttime="20210308 09:53:45.695" endtime="20210308 09:53:47.064"></status>
+<msg timestamp="20210319 11:59:50.377" level="INFO">Clicking element 'xpath=//*[@id="loginForm"]/button'.</msg>
+<status status="PASS" starttime="20210319 11:59:50.377" endtime="20210319 11:59:51.933"></status>
 </kw>
-<status status="PASS" starttime="20210308 09:53:43.512" endtime="20210308 09:53:47.065"></status>
+<status status="PASS" starttime="20210319 11:59:48.134" endtime="20210319 11:59:51.933"></status>
 </kw>
 <kw name="AND Go to report page">
 <kw name="Go To" library="Selenium2Library">
@@ -77,53 +77,255 @@
 <arguments>
 <arg>https://localhost/gami_ossd/index.php/Source_manager/index/ActivityReport</arg>
 </arguments>
-<msg timestamp="20210308 09:53:47.065" level="INFO">Opening url 'https://localhost/gami_ossd/index.php/Source_manager/index/ActivityReport'</msg>
-<status status="PASS" starttime="20210308 09:53:47.065" endtime="20210308 09:53:47.559"></status>
+<msg timestamp="20210319 11:59:51.934" level="INFO">Opening url 'https://localhost/gami_ossd/index.php/Source_manager/index/ActivityReport'</msg>
+<status status="PASS" starttime="20210319 11:59:51.934" endtime="20210319 11:59:52.568"></status>
 </kw>
-<status status="PASS" starttime="20210308 09:53:47.065" endtime="20210308 09:53:47.559"></status>
+<status status="PASS" starttime="20210319 11:59:51.934" endtime="20210319 11:59:52.568"></status>
 </kw>
 <kw name="THEN Choose year &quot;2564&quot;">
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>1s</arg>
+</arguments>
+<msg timestamp="20210319 11:59:53.585" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20210319 11:59:52.569" endtime="20210319 11:59:53.585"></status>
+</kw>
 <kw name="Select From List By Value" library="Selenium2Library">
 <doc>Selects options from selection list ``locator`` by ``values``.</doc>
 <arguments>
 <arg>xpath=//*[@id="select-opt"]</arg>
 <arg>${year}</arg>
 </arguments>
-<msg timestamp="20210308 09:53:47.561" level="INFO">Selecting options from selection list 'xpath=//*[@id="select-opt"]' by value 2564.</msg>
-<status status="PASS" starttime="20210308 09:53:47.560" endtime="20210308 09:53:47.630"></status>
+<msg timestamp="20210319 11:59:53.585" level="INFO">Selecting options from selection list 'xpath=//*[@id="select-opt"]' by value 2564.</msg>
+<status status="PASS" starttime="20210319 11:59:53.585" endtime="20210319 11:59:53.626"></status>
+</kw>
+<status status="PASS" starttime="20210319 11:59:52.568" endtime="20210319 11:59:53.626"></status>
+</kw>
+<kw name="Close Browser" library="Selenium2Library" type="teardown">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20210319 11:59:53.627" endtime="20210319 11:59:55.765"></status>
+</kw>
+<doc>การแสดงประวัติกิจกรรมถูกต้องผู้ใช้งานที่เป็น Scrum master</doc>
+<tags>
+<tag>PASS</tag>
+</tags>
+<status status="PASS" starttime="20210319 11:59:45.969" endtime="20210319 11:59:55.766" critical="yes"></status>
+</test>
+<test id="s1-t2" name="SCM-Report-TC1-02">
+<kw name="GIVEN Open web browser">
+<kw name="Open Browser" library="Selenium2Library">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>${url}</arg>
+<arg>chrome</arg>
+</arguments>
+<msg timestamp="20210319 11:59:55.771" level="INFO">Opening browser 'chrome' to base url 'https://localhost/gami_ossd/index.php'.</msg>
+<status status="PASS" starttime="20210319 11:59:55.771" endtime="20210319 11:59:57.806"></status>
+</kw>
+<kw name="Maximize Browser Window" library="Selenium2Library">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20210319 11:59:57.806" endtime="20210319 11:59:57.928"></status>
+</kw>
+<status status="PASS" starttime="20210319 11:59:55.771" endtime="20210319 11:59:57.928"></status>
+</kw>
+<kw name="WHEN Login with &quot;60160350&quot; &quot;60160350&quot;">
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>xpath=//*[@id="details-button"]</arg>
+</arguments>
+<msg timestamp="20210319 11:59:57.929" level="INFO">Clicking element 'xpath=//*[@id="details-button"]'.</msg>
+<status status="PASS" starttime="20210319 11:59:57.929" endtime="20210319 11:59:57.972"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>xpath=//*[@id="proceed-link"]</arg>
+</arguments>
+<msg timestamp="20210319 11:59:57.973" level="INFO">Clicking element 'xpath=//*[@id="proceed-link"]'.</msg>
+<status status="PASS" starttime="20210319 11:59:57.972" endtime="20210319 11:59:59.000"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>${login_input_username}</arg>
+<arg>${username}</arg>
+</arguments>
+<msg timestamp="20210319 11:59:59.000" level="INFO">Typing text '60160350' into text field 'xpath=//*[@id="inputEmail"]'.</msg>
+<status status="PASS" starttime="20210319 11:59:59.000" endtime="20210319 11:59:59.065"></status>
+</kw>
+<kw name="Input Password" library="Selenium2Library">
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>${login_input_password}</arg>
+<arg>${password}</arg>
+</arguments>
+<msg timestamp="20210319 11:59:59.065" level="INFO">Typing password into text field 'xpath=//*[@id="inputPassword"]'.</msg>
+<status status="PASS" starttime="20210319 11:59:59.065" endtime="20210319 11:59:59.134"></status>
 </kw>
 <kw name="Sleep" library="BuiltIn">
 <doc>Pauses the test executed for the given time.</doc>
 <arguments>
 <arg>1s</arg>
 </arguments>
-<msg timestamp="20210308 09:53:48.642" level="INFO">Slept 1 second</msg>
-<status status="PASS" starttime="20210308 09:53:47.630" endtime="20210308 09:53:48.642"></status>
+<msg timestamp="20210319 12:00:00.148" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20210319 11:59:59.134" endtime="20210319 12:00:00.148"></status>
 </kw>
-<status status="PASS" starttime="20210308 09:53:47.560" endtime="20210308 09:53:48.642"></status>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>${login_btn}</arg>
+</arguments>
+<msg timestamp="20210319 12:00:00.148" level="INFO">Clicking element 'xpath=//*[@id="loginForm"]/button'.</msg>
+<status status="PASS" starttime="20210319 12:00:00.148" endtime="20210319 12:00:01.726"></status>
+</kw>
+<status status="PASS" starttime="20210319 11:59:57.929" endtime="20210319 12:00:01.726"></status>
+</kw>
+<kw name="AND Go to report page">
+<kw name="Go To" library="Selenium2Library">
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<arguments>
+<arg>https://localhost/gami_ossd/index.php/Source_manager/index/ActivityReport</arg>
+</arguments>
+<msg timestamp="20210319 12:00:01.726" level="INFO">Opening url 'https://localhost/gami_ossd/index.php/Source_manager/index/ActivityReport'</msg>
+<status status="PASS" starttime="20210319 12:00:01.726" endtime="20210319 12:00:02.556"></status>
+</kw>
+<status status="PASS" starttime="20210319 12:00:01.726" endtime="20210319 12:00:02.556"></status>
+</kw>
+<kw name="THEN Check no page &quot;Activity Report&quot;">
+<kw name="Wait Until Page Does Not Contain" library="Selenium2Library">
+<doc>Waits until ``text`` disappears from the current page.</doc>
+<arguments>
+<arg>${text}</arg>
+</arguments>
+<status status="PASS" starttime="20210319 12:00:02.557" endtime="20210319 12:00:02.574"></status>
+</kw>
+<status status="PASS" starttime="20210319 12:00:02.557" endtime="20210319 12:00:02.574"></status>
 </kw>
 <kw name="Close Browser" library="Selenium2Library" type="teardown">
 <doc>Closes the current browser.</doc>
-<status status="PASS" starttime="20210308 09:53:48.642" endtime="20210308 09:53:50.804"></status>
+<status status="PASS" starttime="20210319 12:00:02.575" endtime="20210319 12:00:04.735"></status>
 </kw>
-<doc>การแสดงประวัติกิจกรรมถูกต้อง</doc>
+<doc>การแสดงประวัติกิจกรรมถูกต้องผู้ใช้งานที่เป็นพี่เลี้ยง</doc>
 <tags>
 <tag>PASS</tag>
 </tags>
-<status status="PASS" starttime="20210308 09:53:41.310" endtime="20210308 09:53:50.805" critical="yes"></status>
+<status status="PASS" starttime="20210319 11:59:55.767" endtime="20210319 12:00:04.735" critical="yes"></status>
 </test>
-<status status="PASS" starttime="20210308 09:53:41.106" endtime="20210308 09:53:50.807"></status>
+<test id="s1-t3" name="SCM-Report-TC1-03">
+<kw name="GIVEN Open web browser">
+<kw name="Open Browser" library="Selenium2Library">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>${url}</arg>
+<arg>chrome</arg>
+</arguments>
+<msg timestamp="20210319 12:00:04.740" level="INFO">Opening browser 'chrome' to base url 'https://localhost/gami_ossd/index.php'.</msg>
+<status status="PASS" starttime="20210319 12:00:04.739" endtime="20210319 12:00:06.778"></status>
+</kw>
+<kw name="Maximize Browser Window" library="Selenium2Library">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20210319 12:00:06.778" endtime="20210319 12:00:06.906"></status>
+</kw>
+<status status="PASS" starttime="20210319 12:00:04.739" endtime="20210319 12:00:06.906"></status>
+</kw>
+<kw name="WHEN Login with &quot;62160324&quot; &quot;62160324&quot;">
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>xpath=//*[@id="details-button"]</arg>
+</arguments>
+<msg timestamp="20210319 12:00:06.908" level="INFO">Clicking element 'xpath=//*[@id="details-button"]'.</msg>
+<status status="PASS" starttime="20210319 12:00:06.907" endtime="20210319 12:00:06.952"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>xpath=//*[@id="proceed-link"]</arg>
+</arguments>
+<msg timestamp="20210319 12:00:06.952" level="INFO">Clicking element 'xpath=//*[@id="proceed-link"]'.</msg>
+<status status="PASS" starttime="20210319 12:00:06.952" endtime="20210319 12:00:08.030"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>${login_input_username}</arg>
+<arg>${username}</arg>
+</arguments>
+<msg timestamp="20210319 12:00:08.031" level="INFO">Typing text '62160324' into text field 'xpath=//*[@id="inputEmail"]'.</msg>
+<status status="PASS" starttime="20210319 12:00:08.030" endtime="20210319 12:00:08.094"></status>
+</kw>
+<kw name="Input Password" library="Selenium2Library">
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>${login_input_password}</arg>
+<arg>${password}</arg>
+</arguments>
+<msg timestamp="20210319 12:00:08.094" level="INFO">Typing password into text field 'xpath=//*[@id="inputPassword"]'.</msg>
+<status status="PASS" starttime="20210319 12:00:08.094" endtime="20210319 12:00:08.162"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>1s</arg>
+</arguments>
+<msg timestamp="20210319 12:00:09.165" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20210319 12:00:08.162" endtime="20210319 12:00:09.165"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>${login_btn}</arg>
+</arguments>
+<msg timestamp="20210319 12:00:09.165" level="INFO">Clicking element 'xpath=//*[@id="loginForm"]/button'.</msg>
+<status status="PASS" starttime="20210319 12:00:09.165" endtime="20210319 12:00:10.386"></status>
+</kw>
+<status status="PASS" starttime="20210319 12:00:06.907" endtime="20210319 12:00:10.386"></status>
+</kw>
+<kw name="AND Go to report page">
+<kw name="Go To" library="Selenium2Library">
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<arguments>
+<arg>https://localhost/gami_ossd/index.php/Source_manager/index/ActivityReport</arg>
+</arguments>
+<msg timestamp="20210319 12:00:10.387" level="INFO">Opening url 'https://localhost/gami_ossd/index.php/Source_manager/index/ActivityReport'</msg>
+<status status="PASS" starttime="20210319 12:00:10.387" endtime="20210319 12:00:10.534"></status>
+</kw>
+<status status="PASS" starttime="20210319 12:00:10.387" endtime="20210319 12:00:10.534"></status>
+</kw>
+<kw name="THEN Check no page &quot;Activity Report&quot;">
+<kw name="Wait Until Page Does Not Contain" library="Selenium2Library">
+<doc>Waits until ``text`` disappears from the current page.</doc>
+<arguments>
+<arg>${text}</arg>
+</arguments>
+<status status="PASS" starttime="20210319 12:00:10.535" endtime="20210319 12:00:10.547"></status>
+</kw>
+<status status="PASS" starttime="20210319 12:00:10.534" endtime="20210319 12:00:10.547"></status>
+</kw>
+<kw name="Close Browser" library="Selenium2Library" type="teardown">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20210319 12:00:10.548" endtime="20210319 12:00:12.695"></status>
+</kw>
+<doc>การแสดงประวัติกิจกรรมถูกต้องผู้ใช้งานที่เป็นผู้เล่น</doc>
+<tags>
+<tag>PASS</tag>
+</tags>
+<status status="PASS" starttime="20210319 12:00:04.737" endtime="20210319 12:00:12.696" critical="yes"></status>
+</test>
+<status status="PASS" starttime="20210319 11:59:45.779" endtime="20210319 12:00:12.697"></status>
 </suite>
 <statistics>
 <total>
-<stat pass="1" fail="0">Critical Tests</stat>
-<stat pass="1" fail="0">All Tests</stat>
+<stat pass="3" fail="0">Critical Tests</stat>
+<stat pass="3" fail="0">All Tests</stat>
 </total>
 <tag>
-<stat pass="1" fail="0">PASS</stat>
+<stat pass="3" fail="0">PASS</stat>
 </tag>
 <suite>
-<stat pass="1" fail="0" id="s1" name="Report">Report</stat>
+<stat pass="3" fail="0" id="s1" name="Report">Report</stat>
 </suite>
 </statistics>
 <errors>

@@ -69,6 +69,17 @@ SCM-Work-TC1-01
     THEN Submit add work
     [Teardown]    Close Browser
 
+SCM-Work-TC2-01
+    [Documentation]     การเพิ่มงานโดยไม่ใส่ชื่อ
+    [Tags]    FAIL
+    GIVEN Open web browser
+    WHEN Login with "59160161" "59160161"
+    AND Go to work management page
+    AND Add work
+    AND Input name work ""
+    THEN Submit add work
+    [Teardown]    Close Browser
+
 SCM-Work-TC1-02
     [Documentation]     การแก้ไขงาน
     [Tags]    PASS
